@@ -15,7 +15,9 @@ st.title("Mapa Příležitostí")
 # Sidebar for selecting variables
 st.sidebar.header("Nastavení Grafu")
 
-USD_to_czk = st.sidebar.number_input("Kurz USD vůči CZK",value=23.368092)
+# Prumer CNB za rok 2022
+USD_to_czk = 23.360
+
 color_discrete_map = {
     'A02. Doprava': '#d6568c',
     'A03. Budovy': '#274001',
