@@ -263,13 +263,8 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
 HS_select = st.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
-# Create a button in the sidebar that clears the cache
-if st.sidebar.button('Obnovit Data'):
-    load_data.clear()  # This will clear the cache for the load_data function
-    st.sidebar.write("Sušenky vyčištěny!")
-debug = st.sidebar.toggle('Debug')
+
 # Initialize the hover_data dictionary with default values of False for x, y, and markersize
-#hover_data = {col: True for col in hover_info}
 hover_data = {}
 
 # Columns without decimals, which should also have thousands separators
@@ -384,14 +379,10 @@ if HS_select == []:
     col1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1000000000),'miliard CZK' )
     col2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
     col3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
-    if debug:
-        st.dataframe(filtered_df)
 else:
     col1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'])/1000000),'milionů CZK' )
     col2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
     col3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
-    if debug:
-        st.dataframe(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)])
 
 
 mybuff = StringIO()
