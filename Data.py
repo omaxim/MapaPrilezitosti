@@ -16,7 +16,6 @@ col1.title("Mapa Příležitostí")
 
 # Sidebar for selecting variables
 col2.title("")
-col2.divider()
 col2.subheader("Nastavení Grafu")
 
 # Prumer CNB za rok 2022
