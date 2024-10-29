@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="favicon.png",
     layout="wide"
 )
-st.logo('logo.svg')
+st.sidebar.logo('logo.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
 
