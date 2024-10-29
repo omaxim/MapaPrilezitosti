@@ -123,6 +123,7 @@ def load_data():
                                'rca':'Výhoda CZ 2022',
                                'EUTopExporter':'EU Největší Exportér 2022',
                                'CZ_Nazev':'Název',
+                               'ubiquity':'Počet zemí s výhodou vyšší než 1',
                                'CountryExport2030':'CZ 2030 Export CZK',
                                'EUExport2030':'EU 2030 Export CZK',
                                'CountryExport_25_30':'CZ Celkový Export 25-30 CZK',
