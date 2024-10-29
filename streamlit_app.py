@@ -15,7 +15,7 @@ col0,col1, col2,colx = st.columns([1,3, 1,1])
 col1.title("Mapa Příležitostí")
 
 # Sidebar for selecting variables
-col2.header("Nastavení Grafu")
+col2.subheader("Nastavení Grafu")
 
 # Prumer CNB za rok 2022
 USD_to_czk = 23.360
