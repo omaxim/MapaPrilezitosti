@@ -11,9 +11,10 @@ st.set_page_config(
 )
 st.logo('logo.svg')
 st.title("Mapa Příležitostí")
+col1, col2 = st.columns([3, 1])
 
 # Sidebar for selecting variables
-st.sidebar.header("Nastavení Grafu")
+col2.header("Nastavení Grafu")
 
 # Prumer CNB za rok 2022
 USD_to_czk = 23.360
@@ -202,47 +203,47 @@ hover_display_data = [
 ]
 
 # Sidebar selection boxes using display names
-x_axis      = st.sidebar.selectbox("Vyber osu X:", plot_display_names, index=4)
-y_axis      = st.sidebar.selectbox("Vyber osu Y:", plot_display_names, index=5)
-markersize  = st.sidebar.selectbox("Velikost dle:", plot_display_names, index=9)
+x_axis      = col2.selectbox("Vyber osu X:", plot_display_names, index=4)
+y_axis      = col2.selectbox("Vyber osu Y:", plot_display_names, index=5)
+markersize  = col2.selectbox("Velikost dle:", plot_display_names, index=9)
 
 
 # Apply filters to dataframe
 filtered_df = df.copy()
 
-filtrovat_dle_skupin = st.sidebar.toggle("Filtrovat dle skupin",value=False)
+filtrovat_dle_skupin = col2.toggle("Filtrovat dle skupin",value=False)
 
 if filtrovat_dle_skupin:
-    color       = st.sidebar.selectbox("Barva dle:", ji_display_names,index = 1)
+    color       = col2.selectbox("Barva dle:", ji_display_names,index = 1)
     skupiny = df['Skupina'].unique()
-    Skupina = st.sidebar.multiselect('Skupina',skupiny,default=skupiny[0])
+    Skupina = col2.multiselect('Skupina',skupiny,default=skupiny[0])
     podskupiny = df['Podskupina'][df['Skupina'].isin(Skupina)].unique()
-    Podskupina = st.sidebar.multiselect('Podskupina',podskupiny,default=podskupiny)
+    Podskupina = col2.multiselect('Podskupina',podskupiny,default=podskupiny)
     filtered_df = filtered_df[filtered_df['Skupina'].isin(Skupina)]
     filtered_df = filtered_df[filtered_df['Podskupina'].isin(Podskupina)]
 else:
     color       = 'Skupina'
 
 
-hover_info  = st.sidebar.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název',x_axis,y_axis])
-st.sidebar.divider()
+hover_info  = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název',x_axis,y_axis])
+col2.divider()
 # Filter section
 if 'filters' not in st.session_state:
     st.session_state.filters = []
 
-col1, col2 = st.sidebar.columns(2)
-with col1:
+subcol1, subcol2 = col2.columns(2)
+with subcol1:
     if st.button("Číselný filtr"):
         st.session_state.filters.append({'column': None, 'range': None})
-with col2:
+with subcol2:
     if st.button("Odstranit filtry"):
         st.session_state.filters = []
 
 # Display existing filters using display names
 for i, filter in enumerate(st.session_state.filters):
-    filter_col= st.sidebar.selectbox(f"Filtr {i+1}", plot_display_names, key=f"filter_col_{i}")
+    filter_col= col2.selectbox(f"Filtr {i+1}", plot_display_names, key=f"filter_col_{i}")
     filter_min, filter_max = df[filter_col].min(), df[filter_col].max()
-    filter_range = st.sidebar.slider(f"Filtr {i+1}", float(filter_min), float(filter_max), (float(filter_min), float(filter_max)), key=f"filter_range_{i}")
+    filter_range = col2.slider(f"Filtr {i+1}", float(filter_min), float(filter_max), (float(filter_min), float(filter_max)), key=f"filter_range_{i}")
     st.session_state.filters[i]['column'] = filter_col
     st.session_state.filters[i]['range'] = filter_range
 
@@ -261,7 +262,7 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
-HS_select = st.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
+HS_select = col1.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 
 # Initialize the hover_data dictionary with default values of False for x, y, and markersize
 hover_data = {}
@@ -372,16 +373,16 @@ fig.update_layout(
     )       
 )
 
-st.plotly_chart(fig)
-col1, col2, col3 = st.columns(3)
+col1.plotly_chart(fig)
+mcol1, mcol2, mcol3 = st.columns(3)
 if HS_select == []:
-    col1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1000000000),'miliard CZK' )
-    col2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
-    col3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1000000000),'miliard CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
 else:
-    col1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'])/1000000),'milionů CZK' )
-    col2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
-    col3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'])/1000000),'milionů CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
 
 
 mybuff = StringIO()
