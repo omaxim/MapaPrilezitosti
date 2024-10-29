@@ -15,6 +15,7 @@ col0,col1, colx,col2, = st.columns([1,3, 1,1])
 col1.title("Mapa Příležitostí")
 
 # Sidebar for selecting variables
+st.markdown("***")
 col2.divider()
 col2.subheader("Nastavení Grafu")
 
