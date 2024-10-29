@@ -11,7 +11,7 @@ st.set_page_config(
     layout="wide"
 )
 st.logo('logo.svg')
-col0,col1, colx,col2, = st.columns([1,3, 1,1])
+col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
 
 # Sidebar for selecting variables
