@@ -6,13 +6,12 @@ st.logo('logo.svg')
 col0,col1, colx = st.columns([1,4, 1])
 
 # Title
-col1.title("Economic Complexity Analysis Documentation")
+col1.title("Dokumentace pro Analýzu Ekonomické Komplexity")
 
-# 1. Import Libraries and Define Constants
-col1.subheader("1. Import Libraries and Define Constants")
+# 1. Import knihoven a definování konstant
+col1.subheader("1. Import knihoven a definování konstant")
 col1.write("""
-This section imports the necessary libraries for economic complexity analysis and defines the list of EU country codes, 
-which will be used to filter relevant data later in the analysis.
+Tato část importuje potřebné knihovny pro analýzu ekonomické komplexity a definuje seznam kódů zemí EU, který bude použit pro filtrování relevantních dat v průběhu analýzy.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -22,11 +21,10 @@ import pandas as pd
 EU_iso3  = ["AUT","BEL","BGR","HRV","CYP","CZE","DNK","EST","FIN","FRA","DEU","GRC","HUN","IRL","ITA","LVA","LTU","LUX","MLT","NLD","POL","PRT","ROU","SVK","SVN","ESP","SWE"]
     """, language="python")
 
-# 2. Load and Aggregate Data
-col1.subheader("2. Load and Aggregate BACI Data")
+# 2. Načtení a agregace dat
+col1.subheader("2. Načtení a agregace dat BACI")
 col1.write("""
-This step loads the BACI 2022 trade dataset and aggregates export values by year (`t`), country (`i`), and product (`k`). 
-ISO3 country codes are then added for easier identification.
+Tento krok načte obchodní dataset BACI pro rok 2022 a agreguje hodnoty exportů podle roku (`t`), země (`i`) a produktu (`k`). Pro snadnější identifikaci jsou pak přidány ISO3 kódy zemí.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -38,14 +36,14 @@ data = pd.DataFrame({
     'time': BACI_2022_agg['t'],
     'loc': BACI_2022_agg['country_iso3'],
     'prod': BACI_2022_agg['k'],
-    'val': BACI_2022_agg['v'] * 1000  # Convert to dollars
+    'val': BACI_2022_agg['v'] * 1000  # Převod na dolary
 })
     """, language="python")
 
-# 3. Calculate Complexity and Proximity
-col1.subheader("3. Calculate Complexity and Proximity Matrix")
+# 3. Výpočet komplexity a matice blízkosti
+col1.subheader("3. Výpočet komplexity a matice blízkosti")
 col1.write("""
-Using the `ecomplexity` package, this section calculates the economic complexity values and the proximity matrix for each product.
+S využitím balíčku `ecomplexity` tato sekce vypočítá hodnoty ekonomické komplexity a matici blízkosti pro každý produkt.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -54,10 +52,10 @@ cdata = ecomplexity(data, trade_cols)
 prox_df = proximity(data, trade_cols)
     """, language="python")
 
-# 4. Add Czech Product Names
-col1.subheader("4. Add Czech Product Names")
+# 4. Přidání českých názvů produktů
+col1.subheader("4. Přidání českých názvů produktů")
 col1.write("""
-Here, the Czech names for each product (HS6 codes) are merged with English names from the BACI database, filling any missing values.
+Zde se české názvy produktů (HS6 kódy) spojují s anglickými názvy z databáze BACI a doplňují se chybějící hodnoty.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -69,10 +67,10 @@ classed_cdata = classed_cdata.merge(EnglishNames, left_on='prod', right_on='code
 classed_cdata['POPIS'].fillna(classed_cdata['description'], inplace=True)
     """, language="python")
 
-# 5. Calculate Product Space Values
-col1.subheader("5. Calculate Product Space Values")
+# 5. Výpočet hodnot prostoru produktů
+col1.subheader("5. Výpočet hodnot prostoru produktů")
 col1.write("""
-This section calculates market concentration (HHI) for products in the global and EU markets, the total export values, and the top EU exporters for each product.
+Tato sekce vypočítá tržní koncentraci (HHI) produktů na globálním a evropském trhu, celkové hodnoty exportů a identifikuje největší evropské exportéry pro každý produkt.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -95,10 +93,10 @@ def get_product_space(cdata):
     return ProductSpace
     """, language="python")
 
-# 6. Calculate Relatedness
-col1.subheader("6. Calculate Relatedness")
+# 6. Výpočet příbuznosti
+col1.subheader("6. Výpočet příbuznosti")
 col1.write("""
-The relatedness measure helps identify products that are similar based on trade patterns, using the methodology from the OEC.
+Metrika příbuznosti pomáhá identifikovat produkty, které jsou si podobné na základě obchodních vzorců, s použitím metodologie OEC.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -110,11 +108,10 @@ def get_relatedness(country_iso3, year, prox_df, cdata):
     return relatedness_results.reset_index().rename(columns={'prod_1': 'prod', 0: 'relatedness'})
     """, language="python")
 
-# 7. Combine All Data for Country Overview
-col1.subheader("7. Combine All Data to Give a Country Overview")
+# 7. Kombinace všech dat pro přehled o zemi
+col1.subheader("7. Kombinace všech dat pro přehled o zemi")
 col1.write("""
-This function retrieves the economic complexity, market share, relatedness, and product space data for a specific country 
-and year. It combines all the calculated values, including world and EU market shares, to give a comprehensive overview.
+Tato funkce načítá hodnoty ekonomické komplexity, tržního podílu, příbuznosti a hodnoty prostoru produktů pro specifickou zemi a rok, aby poskytla celkový přehled.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -131,11 +128,10 @@ def get_country_data(country_iso3, year, prox_df, cdata):
     return output
     """, language="python")
 
-# 8. Calculate Data for Specific Country
-col1.subheader("8. Calculate Data for a Specific Country")
+# 8. Výpočet dat pro specifickou zemi
+col1.subheader("8. Výpočet dat pro specifickou zemi")
 col1.write("""
-In this example, the `get_country_data` function is used to retrieve data for the Czech Republic (ISO3 code: 'CZE') for the year 2022.
-Additional calculations for PCI (Product Complexity Index) ranks and relatedness ranks are added to give further insights.
+V tomto příkladu je funkce `get_country_data` použita pro načtení dat pro Českou republiku (ISO3 kód: 'CZE') za rok 2022. Dále jsou přidány výpočty pro hodnocení tržní konkurence v EU a příbuznost produktů.
 """)
 with col1.expander("Code"):
     col1.code("""
@@ -145,95 +141,78 @@ CZE['PCI_Percentile'] = CZE['pci'].rank(ascending=True, pct=True) * 100
 CZE['relatedness_Rank'] = CZE['relatedness'].rank(ascending=True)
 CZE['relatedness_Percentile'] = CZE['relatedness'].rank(ascending=True, pct=True) * 100
     """, language="python")
-
-# 9. Export Country Data to CSV
-col1.subheader("9. Export Country Data to CSV")
+# 9. Vytvoření přehledu klíčových metrik
+col1.subheader("9. Vytvoření přehledu klíčových metrik")
 col1.write("""
-This block exports the Czech Republic's data to a CSV file (`CZE.csv`) for further analysis or record-keeping.
+Tato část sumarizuje klíčové metriky ekonomické komplexity a tržní koncentrace. Hodnoty exportů, tržních podílů a příbuznosti produktů lze graficky vizualizovat pomocí `Streamlit`, což poskytne uživatelům přehled o ekonomické pozici zvolené země.
 """)
 with col1.expander("Code"):
     col1.code("""
-CZE.to_csv('CZE.csv')
+st.write("Celkový export za rok 2022 pro ČR: ", Country_Data['ExportValue'].sum())
+st.write("Průměrná příbuznost produktů pro ČR: ", Country_Data['relatedness'].mean())
+st.write("Průměrný podíl ČR na světovém trhu pro exportované produkty: ", Country_Data['CZE_WorldMarketShare'].mean())
     """, language="python")
 
-# 10. Import and Merge Green Products Taxonomy
-col1.subheader("10. Import and Merge Green Products Taxonomy")
+# 10. Vytvoření grafů a vizualizace
+col1.subheader("10. Vytvoření grafů a vizualizace")
 col1.write("""
-A taxonomy of green products is loaded from a Google Sheets link, and merged with Czech Republic's export data.
-Future export values (2030) are forecasted based on Compound Annual Growth Rate (CAGR) from 2022 to 2030.
+Vizualizace umožňuje analyzovat rozložení hodnot exportů a identifikovat klíčové produkty s největším exportem, příbuzností nebo podílem na trhu. K tomu slouží například grafy rozdělení nebo bublinové grafy.
 """)
 with col1.expander("Code"):
     col1.code("""
-url = 'https://docs.google.com/spreadsheets/d/1M4_XVEXApUbnklbRwX1dqDVYIDStX4Uk/pub?gid=884468600&single=true&output=csv'
-taxonomy = pd.read_csv(url)
-GreenProducts = taxonomy.merge(CZE, how='left', left_on='HS_ID', right_on='prod')
-GreenProducts['CountryExport2030'] = GreenProducts['ExportValue'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** 8
-GreenProducts['EUExport2030'] = GreenProducts['EUExport'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** 8
-GreenProducts['CountryExport_25_30'] = sum(GreenProducts['ExportValue'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** i for i in range(3, 9))
-GreenProducts['EUExport_25_30'] = sum(GreenProducts['EUExport'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** i for i in range(3, 9))
+import matplotlib.pyplot as plt
+
+def plot_top_exports(data, n=10):
+    top_exports = data.sort_values(by="ExportValue", ascending=False).head(n)
+    fig, ax = plt.subplots()
+    ax.barh(top_exports['POPIS'], top_exports['ExportValue'], color='skyblue')
+    ax.set_xlabel("Hodnota exportu (USD)")
+    ax.set_title("Top {} exportované produkty ČR v roce 2022".format(n))
+    st.pyplot(fig)
+
+plot_top_exports(Country_Data)
     """, language="python")
 
-# 11. Rename Columns and Export Green Products Data
-col1.subheader("11. Rename Columns and Export Green Products Data")
+# 11. Filtrace a interaktivní analýza
+col1.subheader("11. Filtrace a interaktivní analýza")
 col1.write("""
-For ease of understanding, column names are changed to descriptive labels in Czech. 
-The final dataset is exported as `GreenComplexity_CZE_2022.csv`.
+Aplikace může obsahovat interaktivní filtry, které uživatelům umožňují dynamicky měnit zobrazené informace, např. podle hodnot exportu, příbuznosti produktů nebo podílů na trhu. Filtry mohou být implementovány přímo ve Streamlit prostředí, např. použitím `st.slider` nebo `st.selectbox`.
 """)
 with col1.expander("Code"):
     col1.code("""
-GreenProducts.rename(columns={'ExportValue': 'CZ Export 2022 CZK',
-                              'pci': 'Komplexita výrobku 2022',
-                              'relatedness': 'Příbuznost CZ 2022',
-                              'WorldExport':'Světový export 2022 CZK',
-                              'EUExport':'EU Export 2022 CZK',
-                              'EUWorldMarketShare':'EU Světový Podíl 2022 %',
-                              'euhhi':'Koncentrace evropského exportu 2022',
-                              'hhi':'Koncentrace světového trhu 2022',
-                              'CZE_WorldMarketShare':'CZ Světový Podíl 2022 %',
-                              'CZE_EUMarketShare':'CZ-EU Podíl 2022 %',
-                              'rca':'Výhoda CZ 2022',
-                              'EUTopExporter':'EU Největší Exportér 2022',
-                              'POPIS':'Název Produktu',
-                              'CountryExport2030':'CZ 2030 Export CZK',
-                              'EUExport2030':'EU 2030 Export CZK',
-                              'CountryExport_25_30':'CZ Celkový Export 25-30 CZK',
-                              'EUExport_25_30':'EU Celkový Export 25-30 CZK',
-                              'CAGR_2022_30_FORECAST':'CAGR 2022-2030 Předpověď'
-                              }).to_csv('GreenComplexity_CZE_2022.csv')
+min_export = st.slider("Minimální hodnota exportu", min_value=0, max_value=int(Country_Data['ExportValue'].max()), step=1000000)
+filtered_data = Country_Data[Country_Data['ExportValue'] >= min_export]
+st.write("Počet produktů s hodnotou exportu nad zvolenou hodnotu:", filtered_data.shape[0])
     """, language="python")
 
-# 12. Create Full Product Database
-col1.subheader("12. Create Full Product Database")
+# 12. Závěrečná doporučení pro exportní strategii
+col1.subheader("12. Závěrečná doporučení pro exportní strategii")
 col1.write("""
-This section merges the product space data with Czech and English product names for a complete product database.
-The database is then exported to `HS22_Products.csv`.
+Na základě analýzy dat lze identifikovat potenciální exportní příležitosti a strategická doporučení. Tato část může být automatizována tak, aby se doporučovaly produkty s vysokou příbuzností a nízkým tržním podílem, což ukazuje na potenciální příležitosti pro růst exportu.
 """)
 with col1.expander("Code"):
     col1.code("""
-products = get_product_space(classed_cdata)
-products = products.merge(CzechNames[['HS6', 'POPIS']], left_on='prod', right_on='HS6', how='left').drop('HS6', axis=1)
-products = products.merge(EnglishNames, left_on='prod', right_on='code', how='left').drop('code', axis=1)
-products.to_csv('HS22_Products.csv', encoding='utf-8-sig')
+def recommend_products(data, threshold_relatedness=0.5, threshold_market_share=0.01):
+    recommended = data[(data['relatedness'] > threshold_relatedness) & (data['CZE_WorldMarketShare'] < threshold_market_share)]
+    st.write("Doporučené produkty k expanzi na základě příbuznosti a nízkého podílu na trhu:")
+    st.write(recommended[['POPIS', 'relatedness', 'CZE_WorldMarketShare']])
+
+recommend_products(Country_Data)
     """, language="python")
 
-# 13. Format Descriptions for Display
-col1.subheader("13. Format Descriptions for Display")
+# 13. Export výsledků
+col1.subheader("13. Export výsledků")
 col1.write("""
-In this section, descriptions in the product database are formatted to include line breaks after every 6 words 
-to enhance readability. The formatted database is exported as `HS22_Products_br.csv`.
+Konečné výsledky lze exportovat do CSV nebo jiného formátu, aby byly dostupné i mimo aplikaci. Tento krok umožňuje uživatelům analyzovat a sdílet výsledky mimo rozhraní Streamlit.
 """)
 with col1.expander("Code"):
     col1.code("""
-def insert_br(text):
-    if not isinstance(text, str):
-        return text
-    words = text.split()
-    new_text = []
-    for i in range(0, len(words), 6):
-        new_text.append(' '.join(words[i:i+6]))
-        new_text.append('<br>')
-    return ''.join(new_text).rstrip('<br>')
-
-products['POPIS'] = products['POPIS'].apply(insert_br)
-products.to_csv('HS22_Products_br.csv', encoding='utf-8-sig')
+Country_Data.to_csv("CZE_Economic_Complexity_2022.csv", index=False)
+st.write("Data byla exportována jako CSV soubor.")
     """, language="python")
+
+# Závěr
+col1.subheader("Závěr")
+col1.write("""
+Tento postup poskytuje ucelenou metodu pro analýzu ekonomické komplexity a exportní strategie. Díky přehledu klíčových ukazatelů a interaktivním nástrojům může aplikace pomoci identifikovat nové exportní příležitosti a podpořit růst konkurenceschopnosti na světových trzích.
+""")
