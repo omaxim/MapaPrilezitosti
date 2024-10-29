@@ -388,7 +388,7 @@ else:
 mybuff = StringIO()
 fig.write_html(mybuff, include_plotlyjs='cdn')
 html_bytes = mybuff.getvalue().encode()
-st.download_button(
+col1.download_button(
     label = "Stáhnout HTML",
     data = html_bytes,
     file_name = "plot.html",
