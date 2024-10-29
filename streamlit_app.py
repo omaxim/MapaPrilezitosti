@@ -12,7 +12,7 @@ st.set_page_config(
 )
 st.logo('logo.svg')
 st.title("Mapa Příležitostí")
-col1, col2 = st.columns([3, 1])
+col0,col1, col2,colx = st.columns([1,3, 1,1])
 
 # Sidebar for selecting variables
 col2.header("Nastavení Grafu")
