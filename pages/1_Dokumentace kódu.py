@@ -6,7 +6,7 @@ st.logo('logo.svg')
 col0,col1, colx = st.columns([1,4, 1])
 
 # Title
-col1.title("Dokumentace pro Analýzu Ekonomické Komplexity")
+col1.title("Analýza Ekonomické Komplexity")
 
 # 1. Import knihoven a definování konstant
 col1.subheader("1. Import knihoven a definování konstant")
