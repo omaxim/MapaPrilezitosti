@@ -125,7 +125,6 @@ def load_data():
                                'CAGR_2022_30_FORECAST':'CAGR 2022-2030 Předpověď'
                                })
     df                          = df[df.Included == "IN"]
-    df['stejna velikost']       = 0.02
     df['CZ-EU Podíl 2022 %']      = 100 * df['CZ-EU Podíl 2022 %'] 
     df['EU Světový Podíl 2022 %'] = 100 * df['EU Světový Podíl 2022 %'] 
     df['CZ Světový Podíl 2022 %'] = 100 * df['CZ Světový Podíl 2022 %'] 
@@ -168,8 +167,7 @@ plot_display_names = [
     'CZ Celkový Export 25-30 CZK',
     'EU 2030 Export CZK',
     'EU Celkový Export 25-30 CZK',
-    'CAGR 2022-2030 Předpověď',
-    'Stejná Velikost'
+    'CAGR 2022-2030 Předpověď'
 ]
 
 hover_display_data = [
