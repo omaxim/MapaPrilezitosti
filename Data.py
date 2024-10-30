@@ -268,6 +268,8 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 HS_select = col1.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 
+
+
 # Initialize the hover_data dictionary with default values of False for x, y, and markersize
 hover_data = {}
 
@@ -336,6 +338,22 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
+# Prepare hover tooltip specification
+tooltip = []
+for col, config in hover_data.items():
+    if config is True:
+        tooltip.append({"field": col, "type": "nominal"})
+    elif config is False:
+        continue
+    else:
+        format_str = config.get("format", "")
+        suffix = config.get("suffix", "")
+        tooltip.append({
+            "field": col,
+            "type": "quantitative" if "f" in format_str else "nominal",
+            "format": format_str + suffix  # Add suffix if exists
+        })
+
 # Generate a random color in hex format
 def generate_random_color():
     return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
@@ -347,7 +365,7 @@ selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lo
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
 
-# Define the Vega-Lite chart specification with minimum size scaling and responsive height
+# Vega-Lite chart specification
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -357,8 +375,8 @@ vega_chart_spec = {
             "field": color,
             "type": "nominal",
             "scale": {
-                "domain": list(filtered_colors),  # Show all filtered data in the legend
-                "range": color_range  # Use defined or generated colors
+                "domain": list(filtered_df[color].unique()),  # Show all filtered data in the legend
+                "range": ['#1f77b4', '#ff7f0e', '#2ca02c']  # Replace with your color range
             }
         },
         "size": {
@@ -367,7 +385,7 @@ vega_chart_spec = {
             "type": "quantitative",
             "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
         },
-        "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
+        "tooltip": tooltip
     },
     "config": {
         "legend": {
@@ -378,7 +396,6 @@ vega_chart_spec = {
     },
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
-
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
 
