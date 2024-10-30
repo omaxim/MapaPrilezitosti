@@ -339,7 +339,7 @@ hover_data.setdefault('Název', True)
 # Filters data based on HS selection
 selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
-# Define the Vega-Lite chart specification
+# Define the Vega-Lite chart specification with minimum size scaling
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -351,9 +351,10 @@ vega_chart_spec = {
             "scale": {"domain": list(color_discrete_map.keys()), "range": list(color_discrete_map.values())}
         },
         "size": {
-            "field": markersize if isinstance(markersize, str) else None,  # Use column-based size if `markersize` is a column
+            "field": markersize if isinstance(markersize, str) else None,
             "value": markersize if isinstance(markersize, (int, float)) else None,
-            "type": "quantitative"
+            "type": "quantitative",
+            "scale": {"range": [50, 300]}  # Adjust [min_size, max_size] to control minimum and maximum marker size
         },
         "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
     },
