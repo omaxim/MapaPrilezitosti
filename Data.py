@@ -390,7 +390,7 @@ vega_chart_spec = {
         "contains": "padding",
         "resize": True  # Optional: allow resizing if needed
     },
-    "height": {"step": 550}  # Set a minimum height for each mark, adjust the step as needed
+    "height": {"step": 2550}  # Set a minimum height for each mark, adjust the step as needed
 }
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
