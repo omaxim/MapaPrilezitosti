@@ -314,7 +314,7 @@ texthover = [
 ]
 
 
-# Iterate over the columns in hover_info
+# Iterate over the columns in hover_info to create the hover_data dictionary
 hover_data = {}
 for col in hover_info:
     # If the column is in no_decimal, format with no decimals and thousands separator
