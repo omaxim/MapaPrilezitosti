@@ -335,58 +335,40 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-# Define Vega chart properties
-def create_vega_chart(df, x_axis, y_axis, color, hover_data, markersize, color_map):
-    chart = {
-        "mark": {
-            "type": "point",
-            "tooltip": True,
-            "opacity": 0.7
-        },
-        "encoding": {
-            "x": {"field": x_axis, "type": "quantitative"},
-            "y": {"field": y_axis, "type": "quantitative"},
-            "color": {
-                "field": color,
-                "type": "nominal",
-                "scale": {"domain": list(color_map.keys()), "range": list(color_map.values())}
-            },
-            "size": {
-                "value": markersize  # Use fixed size for all points
-            } if isinstance(markersize, (int, float)) else {
-                "field": markersize,  # Use field-based sizing if markersize is a column name
-                "type": "quantitative",
-                "scale": {"range": [10, 100]}  # Set range for size scaling
-            },
-            "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
-        },
-        "config": {
-            "legend": {
-                "orient": "bottom",
-                "title": None,
-                "direction": "horizontal"
-            }
-        }
-    }
-    return chart
 
 # Filters data based on HS selection
 selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
-# Define Vega chart
-vega_chart = create_vega_chart(
-    df=selected_data,
-    x_axis=x_axis,
-    y_axis=y_axis,
-    color=color,
-    hover_data=hover_data,
-    markersize=markersize,  # Pass in markersize to be applied in the chart
-    color_map=color_discrete_map
-)
+# Define the Vega-Lite chart specification
+vega_chart_spec = {
+    "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
+    "encoding": {
+        "x": {"field": x_axis, "type": "quantitative"},
+        "y": {"field": y_axis, "type": "quantitative"},
+        "color": {
+            "field": color,
+            "type": "nominal",
+            "scale": {"domain": list(color_discrete_map.keys()), "range": list(color_discrete_map.values())}
+        },
+        "size": {
+            "field": markersize if isinstance(markersize, str) else None,  # Use column-based size if `markersize` is a column
+            "value": markersize if isinstance(markersize, (int, float)) else None,
+            "type": "quantitative"
+        },
+        "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
+    },
+    "config": {
+        "legend": {
+            "orient": "bottom",
+            "title": None,
+            "direction": "horizontal"
+        }
+    }
+}
 
-# Display the chart
+# Display the Vega-Lite chart in Streamlit
 col1 = st.container()
-col1.vega_lite_chart(vega_chart, use_container_width=True)
+col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
 
 # Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
@@ -411,7 +393,7 @@ html_output = f"""
 <body>
 <div id="vis"></div>
 <script type="text/javascript">
-    const spec = {vega_chart};
+    const spec = {vega_chart_spec};
     vegaEmbed('#vis', spec);
 </script>
 </body>
