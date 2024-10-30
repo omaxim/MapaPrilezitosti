@@ -383,7 +383,7 @@ vega_chart_spec = {
             "orient": "bottom",
             "title": None,
             "direction": "horizontal",
-            "labelLimit": 100,  # Maximum width for labels
+            "labelLimit": 10,  # Maximum width for labels
             "labelPadding": 5,
             "rowPadding": 5,
             "titlePadding": 5
