@@ -334,11 +334,13 @@ hover_data.setdefault(y_axis, False)
 hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
-
 # Filters data based on HS selection
 selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
 # Define the Vega-Lite chart specification with minimum size scaling and responsive height
+filtered_colors = [c for c in selected_data[color].unique() if c in color_discrete_map]
+filtered_color_range = [color_discrete_map[c] for c in filtered_colors]
+
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -348,8 +350,8 @@ vega_chart_spec = {
             "field": color,
             "type": "nominal",
             "scale": {
-                "domain": list(selected_data[color].unique()),  # Show only the filtered data in the legend
-                "range": [color_discrete_map[c] for c in selected_data[color].unique()]  # Match filtered colors
+                "domain": filtered_colors,  # Show only the filtered data in the legend
+                "range": filtered_color_range  # Match filtered colors
             }
         },
         "size": {
