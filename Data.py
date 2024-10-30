@@ -314,6 +314,20 @@ texthover = [
 ]
 
 
+import random
+import pandas as pd
+
+# Generate a random color in hex format
+def generate_random_color():
+    return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
+
+# Filters data based on HS selection
+selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
+
+# Check the selected data for validity
+print(f"Selected data shape: {selected_data.shape}")
+print(f"Selected data columns: {selected_data.columns.tolist()}")
+
 # Iterate over the columns in hover_info to create the hover_data dictionary
 hover_data = {}
 for col in hover_info:
@@ -338,26 +352,26 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-# Generate a random color in hex format
-def generate_random_color():
-    return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
-
-# Filters data based on HS selection
-selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
-
 # Ensure all unique values in the color field have an entry in color_discrete_map
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
 
+# Debug output to verify color mapping
+print(f"Filtered colors: {filtered_colors.tolist()}")
+print(f"Color range: {color_range}")
+
 # Generate tooltip fields based on hover_data with formatting as specified
 tooltip_fields = []
 for field, format_spec in hover_data.items():
-    if format_spec:  # If the field should be shown in the tooltip
+    # Ensure the field exists in the selected data
+    if field in selected_data.columns:
         tooltip_fields.append({
             "field": field,
-            "type": "quantitative" if filtered_df[field].dtype in ['float64', 'int64'] else "nominal",
+            "type": "quantitative" if selected_data[field].dtype in ['float64', 'int64'] else "nominal",
             "format": format_spec if isinstance(format_spec, str) else None
         })
+    else:
+        print(f"Warning: Field '{field}' not found in selected_data.")
 
 # Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
