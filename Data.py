@@ -338,7 +338,6 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-
 # Generate a random color in hex format
 def generate_random_color():
     return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
@@ -349,6 +348,13 @@ selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lo
 # Ensure all unique values in the color field have an entry in color_discrete_map
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
+
+# Define a function to create tooltip fields with default values for missing data
+def create_tooltip(hover_data):
+    return [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal", 
+             "title": h, "aggregate": "mean" if filtered_df[h].dtype in ['float64', 'int64'] else None,
+             "format": ".2f" if filtered_df[h].dtype in ['float64', 'int64'] else None} 
+            for h in hover_data]
 
 # Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
@@ -370,7 +376,7 @@ vega_chart_spec = {
             "type": "quantitative",
             "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
         },
-        "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
+        "tooltip": create_tooltip(hover_data)  # Updated tooltip definition
     },
     "config": {
         "legend": {
@@ -381,6 +387,7 @@ vega_chart_spec = {
     },
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
+
 
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
