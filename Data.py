@@ -4,6 +4,7 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
+import random
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
@@ -334,13 +335,19 @@ hover_data.setdefault(y_axis, False)
 hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
+
+# Generate a random color in hex format
+def generate_random_color():
+    return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
+
 # Filters data based on HS selection
 selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
-# Define the Vega-Lite chart specification with minimum size scaling and responsive height
-filtered_colors = [c for c in selected_data[color].unique() if c in color_discrete_map]
-filtered_color_range = [color_discrete_map[c] for c in filtered_colors]
+# Ensure all unique values in the color field have an entry in color_discrete_map
+filtered_colors = selected_data[color].unique()
+color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
 
+# Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -350,8 +357,8 @@ vega_chart_spec = {
             "field": color,
             "type": "nominal",
             "scale": {
-                "domain": filtered_colors,  # Show only the filtered data in the legend
-                "range": filtered_color_range  # Match filtered colors
+                "domain": list(filtered_colors),  # Show all filtered data in the legend
+                "range": color_range  # Use defined or generated colors
             }
         },
         "size": {
