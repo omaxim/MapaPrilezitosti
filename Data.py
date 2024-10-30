@@ -356,7 +356,7 @@ def create_tooltip(hover_data):
              "format": ".2f" if filtered_df[h].dtype in ['float64', 'int64'] else None} 
             for h in hover_data]
 
-# Define the Vega-Lite chart specification with minimum size scaling and responsive height
+# Define the Vega-Lite chart specification with responsive height and aspect ratio
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -388,9 +388,10 @@ vega_chart_spec = {
     "autosize": {
         "type": "fit",
         "contains": "padding",
-        "resize": True  # Optional: allow resizing if needed
+        "resize": True  # Allow resizing
     },
-    "height": {"step": 33550}  # Set a minimum height for each mark, adjust the step as needed
+    "height": 400,  # Fixed height to ensure taller display (adjust as needed)
+    "width": {"step": 150}  # Dynamic width based on the number of marks or data points
 }
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
