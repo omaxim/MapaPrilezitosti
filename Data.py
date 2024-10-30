@@ -335,66 +335,92 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
+# Define Vega chart properties
+def create_vega_chart(df, x_axis, y_axis, color, hover_data, markersize, color_map):
+    chart = {
+        "mark": {
+            "type": "point",
+            "tooltip": True,
+            "opacity": 0.7
+        },
+        "encoding": {
+            "x": {"field": x_axis, "type": "quantitative"},
+            "y": {"field": y_axis, "type": "quantitative"},
+            "color": {
+                "field": color,
+                "type": "nominal",
+                "scale": {"domain": list(color_map.keys()), "range": list(color_map.values())}
+            },
+            "size": {
+                "value": markersize  # Use fixed size for all points
+            } if isinstance(markersize, (int, float)) else {
+                "field": markersize,  # Use field-based sizing if markersize is a column name
+                "type": "quantitative",
+                "scale": {"range": [10, 100]}  # Set range for size scaling
+            },
+            "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
+        },
+        "config": {
+            "legend": {
+                "orient": "bottom",
+                "title": None,
+                "direction": "horizontal"
+            }
+        }
+    }
+    return chart
 
-if HS_select == []:
-    fig = px.scatter(filtered_df,
-                     x=x_axis,
-                     y=y_axis,
-                     color=color,
-                     color_discrete_map=color_discrete_map,  # Hard-code the colors
-                     labels={x_axis: x_axis, y_axis: y_axis},
-                     hover_data=hover_data,
-                     opacity=0.7,
-                     size=markersize,
-                     size_max=40)
-    
+# Filters data based on HS selection
+selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
-else:
-    fig = px.scatter(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],
-                     x=x_axis,
-                     y=y_axis,
-                     color=color,
-                     color_discrete_map=color_discrete_map,  # Hard-code the colors
-                     labels={x_axis: x_axis, y_axis: y_axis},
-                     hover_data=hover_data,
-                     opacity=0.7,
-                     size=markersize,
-                     size_max=40
-                     )
-
-fig.update_layout(
-    hoverlabel=dict(
-        font_family="verdana",
-        bgcolor="#008C00"
-    ),
-        legend=dict(
-        orientation="h",  # Horizontal legend
-        yanchor="top",    # Align the legend's top with the graph's bottom
-        y=-0.3,           # Push the legend further below (negative moves it below the plot)
-        xanchor="center", # Center the legend horizontally
-        x=0.5             # Position it at the center of the graph
-    )       
+# Define Vega chart
+vega_chart = create_vega_chart(
+    df=selected_data,
+    x_axis=x_axis,
+    y_axis=y_axis,
+    color=color,
+    hover_data=hover_data,
+    markersize=markersize,  # Pass in markersize to be applied in the chart
+    color_map=color_discrete_map
 )
 
-col1.plotly_chart(fig)
+# Display the chart
+col1 = st.container()
+col1.vega_lite_chart(vega_chart, use_container_width=True)
+
+# Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
-if HS_select == []:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1000000000),'miliard CZK' )
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+if not HS_select:
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1e9), 'miliard CZK')
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
 else:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'])/1000000),'milionů CZK' )
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(selected_data['CZ Export 2022 CZK'])/1e6), 'milionů CZK')
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(selected_data['CZ Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(selected_data['EU Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
 
+# Generate HTML download button for the Vega chart
+html_output = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+<div id="vis"></div>
+<script type="text/javascript">
+    const spec = {vega_chart};
+    vegaEmbed('#vis', spec);
+</script>
+</body>
+</html>
+"""
 
-mybuff = StringIO()
-fig.write_html(mybuff, include_plotlyjs='cdn')
-html_bytes = mybuff.getvalue().encode()
 col1.download_button(
-    label = "Stáhnout HTML",
-    data = html_bytes,
-    file_name = "plot.html",
+    label="Stáhnout HTML",
+    data=html_output.encode('utf-8'),
+    file_name="vega_chart.html",
     mime="text/html"
 )
-
