@@ -337,7 +337,6 @@ hover_data.setdefault(y_axis, False)
 hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
-
 # Prepare hover tooltip specification
 tooltip = []
 for col, config in hover_data.items():
