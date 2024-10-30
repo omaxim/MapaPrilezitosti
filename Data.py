@@ -382,13 +382,8 @@ vega_chart_spec = {
         "legend": {
             "orient": "bottom",
             "title": None,
-            "direction": "horizontal",
-            "labelLimit": 10,  # Maximum width for labels
-            "labelPadding": 5,
-            "rowPadding": 5,
-            "titlePadding": 5
-        
-    }
+            "direction": "vertical"
+        }
     },
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
