@@ -338,22 +338,7 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-# Prepare hover tooltip specification
-tooltip = []
-for col, config in hover_data.items():
-    if config is True:
-        tooltip.append({"field": col, "type": "nominal"})
-    elif config is False:
-        continue
-    else:
-        format_str = config.get("format", "")
-        suffix = config.get("suffix", "")
-        tooltip.append({
-            "field": col,
-            "type": "quantitative" if "f" in format_str else "nominal",
-            "format": format_str + suffix  # Add suffix if exists
-        })
-        
+
 # Generate a random color in hex format
 def generate_random_color():
     return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
