@@ -391,7 +391,7 @@ vega_chart_spec = {
         "resize": True  # Allow resizing
     },
     "height": 400,  # Fixed height to ensure taller display (adjust as needed)
-    "width": {"step": 150}  # Dynamic width based on the number of marks or data points
+    "width": {"step": 350}  # Dynamic width based on the number of marks or data points
 }
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
