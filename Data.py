@@ -393,7 +393,7 @@ vega_chart_spec = {
     "height": {"step": 2550}  # Set a minimum height for each mark, adjust the step as needed
 }
 # Display the Vega-Lite chart in Streamlit
-col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
+col1.vega_lite_chart(selected_data, vega_chart_spec)
 
 # Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
