@@ -381,8 +381,14 @@ vega_chart_spec = {
     "config": {
         "legend": {
             "orient": "bottom",
-            "title": None
-        }
+            "title": None,
+            "direction": "horizontal",
+            "labelLimit": 100,  # Maximum width for labels
+            "labelPadding": 5,
+            "rowPadding": 5,
+            "titlePadding": 5
+        
+    }
     },
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
