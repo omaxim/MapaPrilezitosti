@@ -315,21 +315,19 @@ texthover = [
     'EU Největší Exportér 2022'
 ]
 
-# Iterate over the columns in hover_info
+# Iterate over the columns in hover_info and set their formatting
 for col in hover_info:
-    # If the column is in no_decimal, format with no decimals and thousands separator
     if col in no_decimal:
-        hover_data[col] = ':,.0f'  # No decimals, thousands separator
-    # If the column is in three_sigfig, format with 3 decimal places
+        hover_data[col] = {"format": ":,.0f"}  # No decimals, thousands separator
     elif col in two_sigfig:
-        hover_data[col] = ':.2f'
+        hover_data[col] = {"format": ":.2f"}  # Format with 2 decimal places
     elif col in percentage:
-        hover_data[col] = ':.1f'  # Three decimal places, with percentage symbol
+        hover_data[col] = {"format": ":.1f", "suffix": "%"}  # One decimal place, percentage symbol
     elif col in texthover:
-        hover_data[col] = True
+        hover_data[col] = True  # Show text as it is
     else:
         hover_data[col] = False  # No formatting needed, just show the column
-    
+
 # Ensure x_axis, y_axis, and markersize default to False if not explicitly provided in hover_info
 hover_data.setdefault(markersize, False)
 hover_data.setdefault(x_axis, False)
@@ -337,6 +335,7 @@ hover_data.setdefault(y_axis, False)
 hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
+
 # Prepare hover tooltip specification
 tooltip = []
 for col, config in hover_data.items():
