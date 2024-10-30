@@ -346,14 +346,19 @@ for col, config in hover_data.items():
     elif config is False:
         continue
     else:
+        # Safely get the formatting information
         format_str = config.get("format", "")
         suffix = config.get("suffix", "")
+        
+        # Determine the type based on the format string
+        field_type = "quantitative" if "f" in format_str else "nominal"
+        
+        # Append tooltip configuration
         tooltip.append({
             "field": col,
-            "type": "quantitative" if "f" in format_str else "nominal",
+            "type": field_type,
             "format": format_str + suffix  # Add suffix if exists
         })
-
 # Generate a random color in hex format
 def generate_random_color():
     return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
