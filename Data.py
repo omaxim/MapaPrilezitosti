@@ -389,34 +389,9 @@ vega_chart_spec = {
 }
 
 
-# Add CSS style for square aspect ratio
-st.markdown(
-    """
-    <style>
-    .square {
-        position: relative;
-        width: 100%;
-        padding-top: 100%;  /* This makes the height equal to the width */
-        overflow: hidden;
-    }
-    .square > div {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# Display the Vega-Lite chart in Streamlit
+col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
 
-# Create a square container
-with st.container():
-    st.markdown('<div class="square">', unsafe_allow_html=True)
-    col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    
 # Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
 if not HS_select:
