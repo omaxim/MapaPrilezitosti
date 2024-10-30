@@ -315,19 +315,21 @@ texthover = [
     'EU Největší Exportér 2022'
 ]
 
-# Iterate over the columns in hover_info and set their formatting
+# Iterate over the columns in hover_info
 for col in hover_info:
+    # If the column is in no_decimal, format with no decimals and thousands separator
     if col in no_decimal:
-        hover_data[col] = {"format": ":,.0f"}  # No decimals, thousands separator
+        hover_data[col] = ':,.0f'  # No decimals, thousands separator
+    # If the column is in three_sigfig, format with 3 decimal places
     elif col in two_sigfig:
-        hover_data[col] = {"format": ":.2f"}  # Format with 2 decimal places
+        hover_data[col] = ':.2f'
     elif col in percentage:
-        hover_data[col] = {"format": ":.1f", "suffix": "%"}  # One decimal place, percentage symbol
+        hover_data[col] = ':.1f'  # Three decimal places, with percentage symbol
     elif col in texthover:
-        hover_data[col] = True  # Show text as it is
+        hover_data[col] = True
     else:
         hover_data[col] = False  # No formatting needed, just show the column
-
+    
 # Ensure x_axis, y_axis, and markersize default to False if not explicitly provided in hover_info
 hover_data.setdefault(markersize, False)
 hover_data.setdefault(x_axis, False)
@@ -344,19 +346,14 @@ for col, config in hover_data.items():
     elif config is False:
         continue
     else:
-        # Safely get the formatting information
         format_str = config.get("format", "")
         suffix = config.get("suffix", "")
-        
-        # Determine the type based on the format string
-        field_type = "quantitative" if "f" in format_str else "nominal"
-        
-        # Append tooltip configuration
         tooltip.append({
             "field": col,
-            "type": field_type,
+            "type": "quantitative" if "f" in format_str else "nominal",
             "format": format_str + suffix  # Add suffix if exists
         })
+        
 # Generate a random color in hex format
 def generate_random_color():
     return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
@@ -368,7 +365,7 @@ selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lo
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
 
-# Vega-Lite chart specification
+# Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -378,8 +375,8 @@ vega_chart_spec = {
             "field": color,
             "type": "nominal",
             "scale": {
-                "domain": list(filtered_df[color].unique()),  # Show all filtered data in the legend
-                "range": ['#1f77b4', '#ff7f0e', '#2ca02c']  # Replace with your color range
+                "domain": list(filtered_colors),  # Show all filtered data in the legend
+                "range": color_range  # Use defined or generated colors
             }
         },
         "size": {
@@ -388,7 +385,7 @@ vega_chart_spec = {
             "type": "quantitative",
             "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
         },
-        "tooltip": tooltip
+        "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
     },
     "config": {
         "legend": {
@@ -399,6 +396,7 @@ vega_chart_spec = {
     },
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
+
 # Display the Vega-Lite chart in Streamlit
 col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
 
