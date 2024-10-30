@@ -314,8 +314,6 @@ texthover = [
 ]
 
 
-import random
-import pandas as pd
 
 # Generate a random color in hex format
 def generate_random_color():
@@ -328,31 +326,30 @@ selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lo
 print(f"Selected data shape: {selected_data.shape}")
 print(f"Selected data columns: {selected_data.columns.tolist()}")
 
-# Iterate over the columns in hover_info to create the hover_data dictionary
+# Create hover data with field validation
 hover_data = {}
 for col in hover_info:
-    # If the column is in no_decimal, format with no decimals and thousands separator
     if col in no_decimal:
-        hover_data[col] = ':,.0f'  # No decimals, thousands separator
-    # If the column is in two_sigfig, format with 2 decimal places
+        hover_data[col] = ':,.0f'  # No decimals
     elif col in two_sigfig:
         hover_data[col] = ':.2f'
     elif col in percentage:
-        hover_data[col] = ':.1f'  # One decimal place, with percentage symbol
+        hover_data[col] = ':.1f'
     elif col in texthover:
-        hover_data[col] = True  # Show as text
+        hover_data[col] = True
     else:
-        hover_data[col] = False  # No formatting needed, just show the column
+        hover_data[col] = False
 
-# Ensure x_axis, y_axis, and markersize default to False if not explicitly provided in hover_info
+# Ensure that markersize, x_axis, and y_axis have valid defaults
+markersize = markersize if isinstance(markersize, str) else False
+x_axis = x_axis if x_axis in selected_data.columns else False
+y_axis = y_axis if y_axis in selected_data.columns else False
+
 hover_data.setdefault(markersize, False)
 hover_data.setdefault(x_axis, False)
 hover_data.setdefault(y_axis, False)
-hover_data.setdefault('Skupina', False)
-hover_data.setdefault('Podskupina', False)
-hover_data.setdefault('Název', True)
 
-# Ensure all unique values in the color field have an entry in color_discrete_map
+# Validate colors and generate the color range
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
 
@@ -360,10 +357,9 @@ color_range = [color_discrete_map.get(c, generate_random_color()) for c in filte
 print(f"Filtered colors: {filtered_colors.tolist()}")
 print(f"Color range: {color_range}")
 
-# Generate tooltip fields based on hover_data with formatting as specified
+# Validate tooltip fields
 tooltip_fields = []
 for field, format_spec in hover_data.items():
-    # Ensure the field exists in the selected data
     if field in selected_data.columns:
         tooltip_fields.append({
             "field": field,
@@ -373,7 +369,7 @@ for field, format_spec in hover_data.items():
     else:
         print(f"Warning: Field '{field}' not found in selected_data.")
 
-# Define the Vega-Lite chart specification with minimum size scaling and responsive height
+# Define the Vega-Lite chart specification
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -383,17 +379,16 @@ vega_chart_spec = {
             "field": color,
             "type": "nominal",
             "scale": {
-                "domain": list(filtered_colors),  # Show all filtered data in the legend
-                "range": color_range  # Use defined or generated colors
+                "domain": list(filtered_colors),
+                "range": color_range
             }
         },
         "size": {
             "field": markersize if isinstance(markersize, str) else None,
-            "value": markersize if isinstance(markersize, (int, float)) else None,
             "type": "quantitative",
-            "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
+            "scale": {"range": [50, 1300]}  # Ensure size range is valid
         },
-        "tooltip": tooltip_fields  # Apply tooltip configuration
+        "tooltip": tooltip_fields
     },
     "config": {
         "legend": {
@@ -402,7 +397,7 @@ vega_chart_spec = {
             "direction": "horizontal"
         }
     },
-    "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
+    "autosize": {"type": "fit", "contains": "padding"}
 }
 
 # Display the Vega-Lite chart in Streamlit
@@ -411,10 +406,10 @@ col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
 # Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
 if not HS_select:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1e9), 'miliard CZK')
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK']) / 1e9), 'miliard CZK')
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK']) / 1e9), "miliard CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK']) / 1e9), "miliard CZK")
 else:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(selected_data['CZ Export 2022 CZK'])/1e6), 'milionů CZK')
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(selected_data['CZ Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(selected_data['EU Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(selected_data['CZ Export 2022 CZK']) / 1e6), 'milionů CZK')
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(selected_data['CZ Celkový Export 25-30 CZK']) / 1e6), "milionů CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(selected_data['EU Celkový Export 25-30 CZK']) / 1e6), "milionů CZK")
