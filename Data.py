@@ -335,11 +335,10 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-
 # Filters data based on HS selection
 selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
 
-# Define the Vega-Lite chart specification with minimum size scaling
+# Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
     "encoding": {
@@ -348,13 +347,16 @@ vega_chart_spec = {
         "color": {
             "field": color,
             "type": "nominal",
-            "scale": {"domain": list(color_discrete_map.keys()), "range": list(color_discrete_map.values())}
+            "scale": {
+                "domain": list(selected_data[color].unique()),  # Show only the filtered data in the legend
+                "range": [color_discrete_map[c] for c in selected_data[color].unique()]  # Match filtered colors
+            }
         },
         "size": {
             "field": markersize if isinstance(markersize, str) else None,
             "value": markersize if isinstance(markersize, (int, float)) else None,
             "type": "quantitative",
-            "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] to control minimum and maximum marker size
+            "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
         },
         "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
     },
@@ -364,7 +366,8 @@ vega_chart_spec = {
             "title": None,
             "direction": "horizontal"
         }
-    }
+    },
+    "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
 
 # Display the Vega-Lite chart in Streamlit
