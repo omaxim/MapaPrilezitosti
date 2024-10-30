@@ -313,21 +313,23 @@ texthover = [
     'EU Největší Exportér 2022'
 ]
 
+
 # Iterate over the columns in hover_info
+hover_data = {}
 for col in hover_info:
     # If the column is in no_decimal, format with no decimals and thousands separator
     if col in no_decimal:
         hover_data[col] = ':,.0f'  # No decimals, thousands separator
-    # If the column is in three_sigfig, format with 3 decimal places
+    # If the column is in two_sigfig, format with 2 decimal places
     elif col in two_sigfig:
         hover_data[col] = ':.2f'
     elif col in percentage:
-        hover_data[col] = ':.1f'  # Three decimal places, with percentage symbol
+        hover_data[col] = ':.1f'  # One decimal place, with percentage symbol
     elif col in texthover:
-        hover_data[col] = True
+        hover_data[col] = True  # Show as text
     else:
         hover_data[col] = False  # No formatting needed, just show the column
-    
+
 # Ensure x_axis, y_axis, and markersize default to False if not explicitly provided in hover_info
 hover_data.setdefault(markersize, False)
 hover_data.setdefault(x_axis, False)
@@ -346,6 +348,16 @@ selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lo
 # Ensure all unique values in the color field have an entry in color_discrete_map
 filtered_colors = selected_data[color].unique()
 color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
+
+# Generate tooltip fields based on hover_data with formatting as specified
+tooltip_fields = []
+for field, format_spec in hover_data.items():
+    if format_spec:  # If the field should be shown in the tooltip
+        tooltip_fields.append({
+            "field": field,
+            "type": "quantitative" if filtered_df[field].dtype in ['float64', 'int64'] else "nominal",
+            "format": format_spec if isinstance(format_spec, str) else None
+        })
 
 # Define the Vega-Lite chart specification with minimum size scaling and responsive height
 vega_chart_spec = {
@@ -367,7 +379,7 @@ vega_chart_spec = {
             "type": "quantitative",
             "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
         },
-        "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
+        "tooltip": tooltip_fields  # Apply tooltip configuration
     },
     "config": {
         "legend": {
