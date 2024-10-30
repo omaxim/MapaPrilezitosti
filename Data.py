@@ -380,29 +380,3 @@ else:
     mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(selected_data['CZ Export 2022 CZK'])/1e6), 'milionů CZK')
     mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(selected_data['CZ Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
     mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(selected_data['EU Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
-
-# Generate HTML download button for the Vega chart
-html_output = f"""
-<!DOCTYPE html>
-<html>
-<head>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-</head>
-<body>
-<div id="vis"></div>
-<script type="text/javascript">
-    const spec = {vega_chart_spec};
-    vegaEmbed('#vis', spec);
-</script>
-</body>
-</html>
-"""
-
-col1.download_button(
-    label="Stáhnout HTML",
-    data=html_output.encode('utf-8'),
-    file_name="vega_chart.html",
-    mime="text/html"
-)
