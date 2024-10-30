@@ -354,7 +354,7 @@ vega_chart_spec = {
             "field": markersize if isinstance(markersize, str) else None,
             "value": markersize if isinstance(markersize, (int, float)) else None,
             "type": "quantitative",
-            "scale": {"range": [50, 300]}  # Adjust [min_size, max_size] to control minimum and maximum marker size
+            "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] to control minimum and maximum marker size
         },
         "tooltip": [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal"} for h in hover_data]
     },
