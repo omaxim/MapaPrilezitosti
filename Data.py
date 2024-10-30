@@ -388,7 +388,8 @@ vega_chart_spec = {
     "autosize": {"type": "fit", "contains": "padding"}  # Adjust height to fit the content responsively
 }
 
-# Add a CSS style to keep the container square
+
+# Add CSS style for square aspect ratio
 st.markdown(
     """
     <style>
@@ -409,11 +410,13 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
 # Create a square container
 with st.container():
     st.markdown('<div class="square">', unsafe_allow_html=True)
     col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
+    
 # Display metrics in columns
 mcol1, mcol2, mcol3 = col1.columns(3)
 if not HS_select:
