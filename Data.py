@@ -362,7 +362,7 @@ st.markdown(
     /* Target the Vega tooltip and set background color to #008C00 */
     .vega-tooltip {
         background-color: #008C00 !important;
-        color: white !important;  /* Adjust text color to white for readability */
+        color: #008C00 !important;  /* Adjust text color to white for readability */
         border-radius: 4px;
         padding: 8px;
     }
