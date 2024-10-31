@@ -356,6 +356,20 @@ def create_tooltip(hover_data):
              "format": ".2f" if filtered_df[h].dtype in ['float64', 'int64'] else None} 
             for h in hover_data]
 
+st.markdown(
+    """
+    <style>
+    /* Target the Vega tooltip and set background color to #008C00 */
+    .vega-tooltip {
+        background-color: #008C00 !important;
+        color: white !important;  /* Adjust text color to white for readability */
+        border-radius: 4px;
+        padding: 8px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Define the Vega-Lite chart specification with responsive height and aspect ratio
 vega_chart_spec = {
     "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
