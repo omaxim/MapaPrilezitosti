@@ -397,10 +397,6 @@ vega_chart_spec = {
             "orient": "right",
             "title": None,
             "direction": "vertical"
-        },
-        "tooltip": {
-            "background": "#008C00",  # Set the tooltip background color
-            "color": "white"           # Set text color for readability
         }
     },
     "autosize": {
