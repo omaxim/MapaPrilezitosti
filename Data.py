@@ -4,7 +4,6 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
-import random
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
@@ -268,8 +267,6 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 HS_select = col1.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 
-
-
 # Initialize the hover_data dictionary with default values of False for x, y, and markersize
 hover_data = {}
 
@@ -338,84 +335,66 @@ hover_data.setdefault('Skupina', False)
 hover_data.setdefault('Podskupina', False)
 hover_data.setdefault('Název', True)
 
-# Generate a random color in hex format
-def generate_random_color():
-    return f"#{''.join(random.choices('0123456789ABCDEF', k=6))}"
 
-# Filters data based on HS selection
-selected_data = filtered_df if not HS_select else filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]
+if HS_select == []:
+    fig = px.scatter(filtered_df,
+                     x=x_axis,
+                     y=y_axis,
+                     color=color,
+                     color_discrete_map=color_discrete_map,  # Hard-code the colors
+                     labels={x_axis: x_axis, y_axis: y_axis},
+                     hover_data=hover_data,
+                     opacity=0.7,
+                     size=markersize,
+                     size_max=40)
+    
 
-# Ensure all unique values in the color field have an entry in color_discrete_map
-filtered_colors = selected_data[color].unique()
-color_range = [color_discrete_map.get(c, generate_random_color()) for c in filtered_colors]
-
-# Define a function to create tooltip fields with default values for missing data
-def create_tooltip(hover_data):
-    return [{"field": h, "type": "quantitative" if filtered_df[h].dtype in ['float64', 'int64'] else "nominal", 
-             "title": h, "aggregate": "mean" if filtered_df[h].dtype in ['float64', 'int64'] else None,
-             "format": ".2f" if filtered_df[h].dtype in ['float64', 'int64'] else None} 
-            for h in hover_data]
-
-st.markdown(
-    """
-    <style>
-    /* Target the Vega tooltip and set background color to #008C00 */
-    .vega-tooltip {
-        background-color: #008C00 !important;
-        color: #008C00 !important;  /* Adjust text color to white for readability */
-        border-radius: 4px;
-        padding: 8px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-# Define the Vega-Lite chart specification with responsive height and aspect ratio
-vega_chart_spec = {
-    "mark": {"type": "circle", "tooltip": True, "opacity": 0.7},
-    "encoding": {
-        "x": {"field": x_axis, "type": "quantitative"},
-        "y": {"field": y_axis, "type": "quantitative"},
-        "color": {
-            "field": color,
-            "type": "nominal",
-            "scale": {
-                "domain": list(filtered_colors),  # Show all filtered data in the legend
-                "range": color_range  # Use defined or generated colors
-            }
-        },
-        "size": {
-            "field": markersize if isinstance(markersize, str) else None,
-            "value": markersize if isinstance(markersize, (int, float)) else None,
-            "type": "quantitative",
-            "scale": {"range": [50, 1300]}  # Adjust [min_size, max_size] for marker sizes
-        },
-        "tooltip": create_tooltip(hover_data)  # Updated tooltip definition
-    },
-    "config": {
-        "legend": {
-            "orient": "right",
-            "title": None,
-            "direction": "vertical"
-        }
-    },
-    "autosize": {
-        "type": "fit",
-        "contains": "padding",
-        "resize": True  # Allow resizing
-    },
-    "height": 500  # Fixed height to ensure taller display (adjust as needed)
-}
-# Display the Vega-Lite chart in Streamlit
-col1.vega_lite_chart(selected_data, vega_chart_spec, use_container_width=True)
-
-# Display metrics in columns
-mcol1, mcol2, mcol3 = col1.columns(3)
-if not HS_select:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1e9), 'miliard CZK')
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1e9), "miliard CZK")
 else:
-    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(selected_data['CZ Export 2022 CZK'])/1e6), 'milionů CZK')
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(selected_data['CZ Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(selected_data['EU Celkový Export 25-30 CZK'])/1e6), "milionů CZK")
+    fig = px.scatter(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],
+                     x=x_axis,
+                     y=y_axis,
+                     color=color,
+                     color_discrete_map=color_discrete_map,  # Hard-code the colors
+                     labels={x_axis: x_axis, y_axis: y_axis},
+                     hover_data=hover_data,
+                     opacity=0.7,
+                     size=markersize,
+                     size_max=40
+                     )
+
+fig.update_layout(
+    hoverlabel=dict(
+        font_family="verdana",
+        bgcolor="#008C00"
+    ),
+        legend=dict(
+        orientation="h",  # Horizontal legend
+        yanchor="top",    # Align the legend's top with the graph's bottom
+        y=-0.3,           # Push the legend further below (negative moves it below the plot)
+        xanchor="center", # Center the legend horizontally
+        x=0.5             # Position it at the center of the graph
+    )       
+)
+
+col1.plotly_chart(fig)
+mcol1, mcol2, mcol3 = col1.columns(3)
+if HS_select == []:
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df['CZ Export 2022 CZK'])/1000000000),'miliard CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+else:
+    mcol1.metric("Vybraný český export za rok 2022", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'])/1000000),'milionů CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+
+
+mybuff = StringIO()
+fig.write_html(mybuff, include_plotlyjs='cdn')
+html_bytes = mybuff.getvalue().encode()
+col1.download_button(
+    label = "Stáhnout HTML",
+    data = html_bytes,
+    file_name = "plot.html",
+    mime="text/html"
+)
+
