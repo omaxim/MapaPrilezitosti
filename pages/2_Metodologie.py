@@ -54,4 +54,4 @@ Celkový vzorec tedy počítá **průměrnou příbuznost** produktu \\( p \\) s
 
 Výpočet je normalizován sumou příbuzností \\( \phi_{pp'} \\) pro všechny produkty \\( p' \\), což zajistí, že výsledná hodnota zohledňuje příbuznost produktu \\( p \\) vůči celé produktové struktuře.
 """
-st.write(latex)
+st.markdown(latex)
