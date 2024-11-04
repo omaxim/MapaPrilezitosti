@@ -378,7 +378,7 @@ else:
 fig.update_layout(
     hoverlabel=dict(
         font_family="verdana",
-        bgcolor="#145b79",
+        bgcolor="#000000",
         font_color="#FFFFFF"
     ),
     legend=dict(
