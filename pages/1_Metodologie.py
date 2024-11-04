@@ -39,12 +39,13 @@ col1.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih
 col1.markdown("### 🔍 Výpočet příbuznosti produktů")
 col1.markdown("""
 Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC. Podrobný popis této metodiky je k dispozici na stránkách **OEC**.
-""")
 
-"""
+              
 Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
 
-"""
+              """)
+
+
 # LaTeX Formula with Explanation
 col1.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
