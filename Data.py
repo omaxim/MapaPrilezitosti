@@ -4,6 +4,8 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
+from streamlit_navigation_bar import st_navbar
+
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
