@@ -47,11 +47,11 @@ st.markdown(
     """
     Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá na základě následujícího vzorce:
 
-    - $$M_{cp'}$$: Hodnota v matici $$M$$, která je rovna 1, pokud daný produkt $$p'$$ má v zemi $$c$$ zjištěný **Revealed Comparative Advantage (RCA)** větší než 1. Pokud $$\text{RCA} \leq 1$$, hodnota je 0.
+    - $$M_{cp'}$$: Hodnota v matici $$M$$, která je rovna 1, pokud daný produkt $$p'$$ má v zemi $$c$$ zjištěný **Revealed Comparative Advantage (RCA)** větší než 1. Pokud $$\t{RCA} \leq 1$$, hodnota je 0.
   
     - $$\phi_{pp'}$$: Míra příbuznosti mezi produkty $$p$$ a $$p'$$. Tato hodnota vyjadřuje, jak jsou produkty $$p$$ a $$p'$$ vzájemně blízké v produktovém prostoru.
 
-    Celkový vzorec tedy počítá **průměrnou příbuznost** produktu $$p$$ s ostatními produkty $$p'$$, které jsou v zemi $$c$$ aktivní (tj. splňují podmínku $$\text{RCA} > 1$$).
+    Celkový vzorec tedy počítá **průměrnou příbuznost** produktu $$p$$ s ostatními produkty $$p'$$, které jsou v zemi $$c$$ aktivní (tj. splňují podmínku $$\t{RCA} > 1$$).
 
     Výpočet je normalizován sumou příbuzností $$\phi_{pp'}$$ pro všechny produkty $$p'$$, což zajistí, že výsledná hodnota zohledňuje příbuznost produktu $$p$$ vůči celé produktové struktuře.
     """,
