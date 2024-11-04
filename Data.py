@@ -10,27 +10,13 @@ st.set_page_config(
     page_icon="favicon.png",
     layout="wide"
 )
-st.markdown(
-        """
-        <style>
-        /* Change sidebar text color to white */
-        .css-1d391kg, .css-1d391kg * {
-            color: white !important;  /* This changes the sidebar text color */
-        }
-        
-        /* Change sidebar background to a darker color (optional) */
-        .css-1d391kg {
-            background-color: #333;  /* Dark background for better contrast */
-        }
-        
-        /* Keep main content text black */
-        .main {
-            color: black !important;  /* Ensures main content stays black */
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+st.markdown("""
+<style>
+    [data-testid=stSidebar] {
+        background-color: #ff000050;
+    }
+</style>
+""", unsafe_allow_html=True)
 st.logo('logo.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
