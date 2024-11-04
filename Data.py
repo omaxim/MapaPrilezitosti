@@ -21,6 +21,27 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .black-bar {
+        background-color: black;
+        height: 40px; /* Adjust height as needed */
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        text-align: center;
+        color: white;
+        line-height: 40px; /* Center the text vertically */
+        font-size: 16px;
+    }
+    </style>
+    <div class="black-bar">This is a black bar at the top</div>
+    """,
+    unsafe_allow_html=True
+)
 st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
