@@ -1,15 +1,5 @@
 import streamlit as st
-st.markdown(
-        """
-        <style>
-        /* Change sidebar text color to white */
-        .css-1d391kg nav, .css-1d391kg .css-18e3th9 { 
-            color: white !important; 
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+
 # Logo
 st.image('logo.svg')
 

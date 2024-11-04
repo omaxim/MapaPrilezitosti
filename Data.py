@@ -4,7 +4,17 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
-
+st.markdown(
+        """
+        <style>
+        /* Change sidebar text color to white */
+        .css-1d391kg nav, .css-1d391kg .css-18e3th9 { 
+            color: white !important; 
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png",
