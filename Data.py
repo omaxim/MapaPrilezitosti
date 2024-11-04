@@ -381,36 +381,40 @@ fig.update_layout(
         bgcolor="#000000",
         font_color="#FFFFFF"
     ),
-        legend=dict(
-        orientation="h",  # Horizontal legend
-        yanchor="top",    # Align the legend's top with the graph's bottom
-        y=-0.3,           # Push the legend further below (negative moves it below the plot)
-        xanchor="center", # Center the legend horizontally
-        x=0.5             # Position it at the center of the graph
-    )     ,
+    legend=dict(
+        orientation="h",          # Horizontal legend
+        yanchor="top",             # Align the legend's top with the graph's bottom
+        y=-0.3,                    # Push the legend further below
+        xanchor="center",          # Center the legend horizontally
+        x=0.5                      # Position it at the center of the graph
+    ),
     xaxis=dict(
         showgrid=False,
-        color='black',          # Set axis color to black
-        showline=True,           # Show axis line
-        linecolor='black',       # Line color
-        ticks='outside',         # Show ticks outside the axis line
-        tickcolor='black',       # Color of the ticks
-        tickwidth=2,             # Width of the ticks
-        ticklen=5                # Length of the ticks
-    )  ,
+        color='black',             # Set axis color to black
+        showline=True,             # Show axis line
+        linecolor='black',         # Line color
+        ticks='outside',           # Show ticks outside the axis line
+        tickcolor='black',         # Color of the ticks
+        tickwidth=2,               # Width of the ticks
+        ticklen=5,                 # Length of the ticks
+        tickfont=dict(color='black'),  # Set tick text color to black
+        title=dict(font=dict(color='black'))  # Set x-axis label color to black
+    ),
     yaxis=dict(
         showgrid=False,
         zeroline=False,
-        color='black',          # Set axis color to black
-        showline=True,           # Show axis line
-        linecolor='black',       # Line color
-        ticks='outside',         # Show ticks outside the axis line
-        tickcolor='black',       # Color of the ticks
-        tickwidth=2,             # Width of the ticks
-        ticklen=5                # Length of the ticks
-    ),
-    
+        color='black',             # Set axis color to black
+        showline=True,             # Show axis line
+        linecolor='black',         # Line color
+        ticks='outside',           # Show ticks outside the axis line
+        tickcolor='black',         # Color of the ticks
+        tickwidth=2,               # Width of the ticks
+        ticklen=5,                 # Length of the ticks
+        tickfont=dict(color='black'),  # Set tick text color to black
+        title=dict(font=dict(color='black'))  # Set y-axis label color to black
+    )
 )
+
 
 col1.plotly_chart(fig)
 mcol1, mcol2, mcol3 = col1.columns(3)
