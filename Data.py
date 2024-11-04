@@ -11,13 +11,7 @@ st.set_page_config(
     page_icon="favicon.ico",
     layout="wide"
 )
-st.markdown("""
-<style>
-    [data-testid=stSidebar] {
-        background-color: #0A2B4A;
-    }
-</style>
-""", unsafe_allow_html=True)
+
 st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")

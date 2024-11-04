@@ -1,13 +1,7 @@
 import streamlit as st
 st.logo('logo_web.svg',size='large')
 
-st.markdown("""
-<style>
-    [data-testid=stSidebar] {
-        background-color: #0A2B4A;
-    }
-</style>
-""", unsafe_allow_html=True)
+
 # Logo
 st.image('logo.svg')
 
