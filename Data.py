@@ -21,21 +21,27 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+# Add custom CSS for the black bar
 st.markdown(
     """
     <style>
+    /* Black bar styling */
+    .reportview-container .main .block-container {
+        padding-top: 70px; /* Adjust padding to fit under black bar */
+    }
     .black-bar {
         background-color: black;
-        height: 40px; /* Adjust height as needed */
+        color: white;
+        height: 50px;
         width: 100%;
         position: fixed;
         top: 0;
         left: 0;
         z-index: 1000;
-        text-align: center;
-        color: white;
-        line-height: 40px; /* Center the text vertically */
-        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
     }
     </style>
     <div class="black-bar">This is a black bar at the top</div>
