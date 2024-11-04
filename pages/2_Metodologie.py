@@ -28,7 +28,7 @@ Tento postup napodobuje přístup používaný v OEC, kde absolutní hodnoty kom
 # Kritika absolutních hodnot
 """
 ### Kritika absolutních hodnot
-Jasné určení absolutních hodnot komplexity je problematické a často kritizované. Tato aplikace se však zaměřuje na relativní komplexitu produktů, tedy percentil a pořadí příbuznosti vůči ostatním produktům v datasetu BACI.
+Jasné určení absolutních hodnot komplexity je problematické a často kritizované. Tato aplikace se však zaměřuje na relativní komplexitu produktů, tedy percentil a pořadí příbuznosti vůči ostatním produktům v datasetu BACI. Kritika ekonomických metod komplexity je dobře vzstižená v tomto [akademickém článku.](https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/)
 """
 
 # Výpočet příbuznosti produktů
@@ -37,14 +37,20 @@ Jasné určení absolutních hodnot komplexity je problematické a často kritiz
 Příbuznost produktů vůči české ekonomice je vypočítána stejným způsobem jako v OEC, který zveřejňuje podrobný popis této metodiky [na svých stránkách](https://oec.world/en/resources/methods).
 """
 
-# LaTeX vzorec
-st.latex(r"""Příbuznost_{cp}=\frac{\sum_{p'}{M_{cp'}\phi_{pp'}}}{\sum_{p'} \phi_{pp'}}""")
+# LaTeX vzorec s vysvětlením
+st.latex(r"""
+\text{Příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
+""")
 
-# Popis vzorce
-r"""
-Příbuznost pro produkt \\( p \\) v zemi \\( c \\) je počítána jako kontrakce v produktovém prostoru, kde:
-- \\( M_{cp'} \\) je matice s hodnotou 1, pokud \\( \text{RCA} > 1 \\), jinak 0,
-- \\( \phi_{pp'} \\) vyjadřuje příbuznost mezi produkty \\( p \\) a \\( p' \\).
+# Rozšířený popis vzorce
+"""
+Příbuznost produktu \\( p \\) v zemi \\( c \\) se vypočítá na základě následujícího vzorce:
 
-Celý výpočet je normalizován sumou příbuzností produktu \\( p \\) k ostatním produktům \\( p' \\).
+- \\( M_{cp'} \\): Hodnota v matici \\( M \\), která je rovna 1, pokud daný produkt \\( p' \\) má v zemi \\( c \\) zjištěný **Revealed Comparative Advantage (RCA)** větší než 1. Pokud \\( \text{RCA} \leq 1 \\), hodnota je 0.
+  
+- \\( \phi_{pp'} \\): Míra příbuznosti mezi produkty \\( p \\) a \\( p' \\). Tato hodnota vyjadřuje, jak jsou produkty \\( p \\) a \\( p' \\) vzájemně blízké v produktovém prostoru.
+
+Celkový vzorec tedy počítá **průměrnou příbuznost** produktu \\( p \\) s ostatními produkty \\( p' \\), které jsou v zemi \\( c \\) aktivní (tj. splňují podmínku \\( \text{RCA} > 1 \\)).
+
+Výpočet je normalizován sumou příbuzností \\( \phi_{pp'} \\) pro všechny produkty \\( p' \\), což zajistí, že výsledná hodnota zohledňuje příbuznost produktu \\( p \\) vůči celé produktové struktuře.
 """
