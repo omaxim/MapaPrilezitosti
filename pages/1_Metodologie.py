@@ -16,7 +16,7 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-st.logo('logo_black.png',size='large')
+st.logo('logo_web.svg',size='large')
 
 # Main Title
 st.markdown("# 📊 Metodologie")
