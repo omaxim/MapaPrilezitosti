@@ -3,57 +3,55 @@ import streamlit as st
 # Logo
 st.image('logo.svg')
 
-# Hlavní nadpis
-"""
-# Metodologie aplikace
-"""
+# Main Title
+st.markdown("# 📊 Metodologie aplikace")
 
-# Úvodní popis
-"""
-Tato aplikace vychází z harmonizovaného datasetu [BACI](https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37), který je každoročně publikován organizací CEPII. CEPII harmonizuje data z UN databáze Comtrade pomocí své metodologie, aby každý export odpovídal importu a předešlo se dvojímu započítání obchodních toků.
-"""
+# Introduction
+st.markdown("""
+Tato aplikace je založena na harmonizovaném datasetu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export odpovídal importu a nedocházelo k dvojímu započítání obchodních toků. 
+""")
 
-# Výpočet komplexity produktu
-"""
-## Výpočet komplexity produktu
-Pro výpočet komplexity produktu je použit [Python modul py-ecomplexity](https://github.com/cid-harvard/py-ecomplexity), který publikuje Centre for International Development při Harvardské univerzitě. Tento modul také slouží k výpočtu matice příbuznosti v produktovém prostoru. Vstupní data pro tento výpočet zahrnují celou databázi BACI.
-"""
+# Link to BACI dataset
+st.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
-# Podmínka pro aktivitu v dané zemi
-"""
-Pro test přítomnosti aktivity v konkrétní zemi je použita standardní podmínka RCA > 1.
-Tento postup napodobuje přístup používaný v OEC, kde absolutní hodnoty komplexity nemusí být přesně stejné jako zde, ale důležité jsou relativní vztahy mezi jednotlivými produkty.
-"""
+# Product Complexity Calculation
+st.markdown("## 📈 Výpočet komplexity produktu")
+st.markdown("""
+Pro výpočet komplexity produktu používáme **Python modul py-ecomplexity** od Centre for International Development při **Harvardské univerzitě**. Tento modul také umožňuje výpočet **matice příbuznosti** v produktovém prostoru. Data pro výpočet zahrnují celou databázi **BACI**.
+""")
+st.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
 
-# Kritika absolutních hodnot
-"""
-### Kritika absolutních hodnot
-Jasné určení absolutních hodnot komplexity je problematické a často kritizované. Tato aplikace se však zaměřuje na relativní komplexitu produktů, tedy percentil a pořadí příbuznosti vůči ostatním produktům v datasetu BACI. Kritika ekonomických metod komplexity je dobře vzstižená v tomto [akademickém článku.](https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/)
-"""
+# Condition for Country Activity
+st.markdown("""
+### 🌍 Podmínka aktivity v dané zemi
+Pro detekci ekonomické aktivity konkrétního produktu v zemi se používá kritérium **RCA > 1**. Tento postup je obdobný metodice používané v **OEC**, kde jsou důležité relativní vztahy mezi produkty, i když absolutní hodnoty komplexity se mohou mírně lišit.
+""")
 
-# Výpočet příbuznosti produktů
-"""
-## Výpočet příbuznosti produktů
-Příbuznost produktů vůči české ekonomice je vypočítána stejným způsobem jako v OEC, který zveřejňuje podrobný popis této metodiky [na svých stránkách](https://oec.world/en/resources/methods).
-"""
+# Critique of Absolute Values
+st.markdown("### 📉 Kritika absolutních hodnot")
+st.markdown("""
+Jednoznačné určení absolutních hodnot komplexity je často zpochybňované. Tato aplikace se však zaměřuje na **relativní komplexitu produktů** (percentil a pořadí v rámci datasetu BACI).
+""")
+st.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
 
-# LaTeX vzorec s vysvětlením
+# Product Relatedness Calculation
+st.markdown("## 🔍 Výpočet příbuznosti produktů")
+st.markdown("""
+Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC. Podrobný popis této metodiky je k dispozici na stránkách **OEC**.
+""")
+st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
+
+# LaTeX Formula with Explanation
 st.latex(r"""
 \text{Příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
 # Explanation with inline LaTeX
-st.markdown(
-    """
-    Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá na základě následujícího vzorce:
+st.markdown("""
+Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
 
-    - $$M_{cp'}$$: Hodnota v matici $$M$$, která je rovna 1, pokud daný produkt $$p'$$ má v zemi $$c$$ zjištěný **Revealed Comparative Advantage (RCA)** větší než 1. Pokud $$\t{RCA} \leq 1$$, hodnota je 0.
-  
-    - $$\phi_{pp'}$$: Míra příbuznosti mezi produkty $$p$$ a $$p'$$. Tato hodnota vyjadřuje, jak jsou produkty $$p$$ a $$p'$$ vzájemně blízké v produktovém prostoru.
+- **$$M_{cp'}$$**: Hodnota v matici $$M$$, která je rovna **1**, pokud produkt $$p'$$ v zemi $$c$$ vykazuje **RCA > 1** (tj. komparativní výhodu); jinak je rovna **0**.
+- **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty $$p$$ a $$p'$$, vyjadřující jejich blízkost v produktovém prostoru.
 
-    Celkový vzorec tedy počítá **průměrnou příbuznost** produktu $$p$$ s ostatními produkty $$p'$$, které jsou v zemi $$c$$ aktivní (tj. splňují podmínku $$\t{RCA} > 1$$).
-
-    Výpočet je normalizován sumou příbuzností $$\phi_{pp'}$$ pro všechny produkty $$p'$$, což zajistí, že výsledná hodnota zohledňuje příbuznost produktu $$p$$ vůči celé produktové struktuře.
-    """,
-    unsafe_allow_html=True
-)
+Celkový vzorec tedy počítá příbuznost produktu $$p$$ s produkty $$p'$$, které jsou v zemi $$c$$ aktivní (splňují podmínku **RCA > 1**). Výpočet je **normalizován**, což zajistí, že výsledek zohledňuje vztahy produktu $$p$$ vůči celé produktové struktuře.
+""", unsafe_allow_html=True)
