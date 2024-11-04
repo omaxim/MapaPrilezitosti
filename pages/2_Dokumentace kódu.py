@@ -1,9 +1,5 @@
 import streamlit as st
-st.set_page_config(
-    page_title="Mapa Příležitostí",
-    page_icon="favicon.ico",
-    layout="wide"
-)
+
 st.markdown("""
 <style>
     /* Set sidebar background color */
