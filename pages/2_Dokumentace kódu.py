@@ -4,6 +4,19 @@ st.set_page_config(
     page_icon="favicon.ico",
     layout="wide"
 )
+st.markdown("""
+<style>
+    /* Set sidebar background color */
+    [data-testid="stSidebar"] {
+        background-color: #000000;
+    }
+
+    /* Set sidebar text color */
+    [data-testid="stSidebar"] * {
+        color: #FFFFFF;
+    }
+</style>
+""", unsafe_allow_html=True)
 #st.set_page_config(
 #    page_title="Mapa Příležitostí",
 #    page_icon="favicon.png")
