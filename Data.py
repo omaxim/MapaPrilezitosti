@@ -22,32 +22,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 # Add custom CSS for the black bar
-st.markdown(
-    """
-    <style>
-    /* Black bar styling */
-    .reportview-container .main .block-container {
-        padding-top: 70px; /* Adjust padding to fit under black bar */
-    }
-    .black-bar {
-        background-color: black;
-        color: white;
-        height: 50px;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-    }
-    </style>
-    <div class="black-bar">This is a black bar at the top</div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 0rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
 st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
