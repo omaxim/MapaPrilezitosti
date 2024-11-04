@@ -4,6 +4,12 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
+
+st.set_page_config(
+    page_title="Mapa Příležitostí",
+    page_icon="favicon.png",
+    layout="wide"
+)
 st.markdown(
         """
         <style>
@@ -15,11 +21,6 @@ st.markdown(
         """,
         unsafe_allow_html=True
     )
-st.set_page_config(
-    page_title="Mapa Příležitostí",
-    page_icon="favicon.png",
-    layout="wide"
-)
 st.logo('logo.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
