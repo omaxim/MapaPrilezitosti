@@ -389,12 +389,27 @@ fig.update_layout(
         x=0.5             # Position it at the center of the graph
     )     ,
     xaxis=dict(
-        showgrid=False
+        showgrid=False,
+        color='black',          # Set axis color to black
+        showline=True,           # Show axis line
+        linecolor='black',       # Line color
+        ticks='outside',         # Show ticks outside the axis line
+        tickcolor='black',       # Color of the ticks
+        tickwidth=2,             # Width of the ticks
+        ticklen=5                # Length of the ticks
     )  ,
     yaxis=dict(
         showgrid=False,
-        zeroline=False
-    )
+        zeroline=False,
+        color='black',          # Set axis color to black
+        showline=True,           # Show axis line
+        linecolor='black',       # Line color
+        ticks='outside',         # Show ticks outside the axis line
+        tickcolor='black',       # Color of the ticks
+        tickwidth=2,             # Width of the ticks
+        ticklen=5                # Length of the ticks
+    ),
+    
 )
 
 col1.plotly_chart(fig)
