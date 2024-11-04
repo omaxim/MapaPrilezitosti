@@ -4,7 +4,6 @@ import plotly.express as px
 from io import StringIO
 import plotly.io as pio
 from PIL import Image
-from streamlit_navigation_bar import st_navbar
 
 
 st.set_page_config(
@@ -12,10 +11,6 @@ st.set_page_config(
     page_icon="favicon.ico",
     layout="wide"
 )
-pages = ["Data", "Code", "Metodologie", "Dev"]
-
-page = st_navbar(pages)
-st.write(page)
 st.markdown("""
 <style>
     [data-testid=stSidebar] {
