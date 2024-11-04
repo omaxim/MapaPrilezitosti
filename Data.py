@@ -14,8 +14,18 @@ st.markdown(
         """
         <style>
         /* Change sidebar text color to white */
-        .css-1d391kg nav, .css-1d391kg .css-18e3th9 { 
-            color: white !important; 
+        .css-1d391kg, .css-1d391kg * {
+            color: white !important;  /* This changes the sidebar text color */
+        }
+        
+        /* Change sidebar background to a darker color (optional) */
+        .css-1d391kg {
+            background-color: #333;  /* Dark background for better contrast */
+        }
+        
+        /* Keep main content text black */
+        .main {
+            color: black !important;  /* Ensures main content stays black */
         }
         </style>
         """,
