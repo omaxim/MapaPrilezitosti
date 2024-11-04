@@ -20,7 +20,7 @@ st.markdown("""
 #    page_title="Mapa Příležitostí",
 #    page_icon="favicon.png")
 
-st.logo('logo_web.svg')
+st.logo('logo_web.svg',size='large')
 
 # Title
 st.title("Analýza Ekonomické Komplexity")
