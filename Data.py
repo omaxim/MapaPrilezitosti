@@ -11,7 +11,13 @@ st.set_page_config(
     page_icon="favicon.ico",
     layout="wide"
 )
-
+change_text = """
+<style>
+div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
+div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "HS6 výběr"; visibility: visible;}
+</style>
+"""
+st.markdown(change_text, unsafe_allow_html=True)
 st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
