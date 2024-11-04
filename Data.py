@@ -7,7 +7,7 @@ from PIL import Image
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
-    page_icon="favicon.png",
+    page_icon="favicon.ico",
     layout="wide"
 )
 st.markdown("""
