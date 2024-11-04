@@ -17,7 +17,7 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-st.logo('logo_web.svg')
+st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa Příležitostí")
 

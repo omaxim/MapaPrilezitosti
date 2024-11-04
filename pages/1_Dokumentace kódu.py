@@ -9,7 +9,7 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-st.logo('logo.svg')
+st.logo('logo_web.svg',size='large')
 col0,col1, colx = st.columns([1,4, 1])
 
 # Title

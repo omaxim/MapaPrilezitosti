@@ -1,4 +1,6 @@
 import streamlit as st
+st.logo('logo_web.svg',size='large')
+
 st.markdown("""
 <style>
     [data-testid=stSidebar] {
