@@ -2,6 +2,13 @@ import streamlit as st
 #st.set_page_config(
 #    page_title="Mapa Příležitostí",
 #    page_icon="favicon.png")
+st.markdown("""
+<style>
+    [data-testid=stSidebar] {
+        background-color: #0A2B4A;
+    }
+</style>
+""", unsafe_allow_html=True)
 st.logo('logo.svg')
 col0,col1, colx = st.columns([1,4, 1])
 
