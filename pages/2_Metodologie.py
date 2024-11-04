@@ -13,7 +13,7 @@ Stejný modul je také použit pro výpočet matice příbuznosti v produktovém
 Tento postup blízce napodobuje přístup OEC, nicméně absolutní hodnoty komplexit se mohou lišit, co je důležité jsou relativní vztahy mezi produktu.
 Potíže v jasném definování absolutních hodnot komplexit jsou hlavní kritikou používání těchto metod, nicméně v tomto nástroji se soustředíme na percentil a žebíček příbuznosti, tedy relativí komplexitu a příbuznost vůči zbytku produktů v BACI.
 
-Pro výpočet příbuznosti produktů české ekonomice je použit stejný vzorec jako používá OEC a publikuje (na svých stránkách)[https://oec.world/en/resources/methods].
+Pro výpočet příbuznosti produktů české ekonomice je použit stejný vzorec jako používá OEC a publikuje [na svých stránkách](https://oec.world/en/resources/methods).
 
 
 """
