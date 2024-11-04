@@ -43,7 +43,7 @@ st.latex(r"""
 """)
 
 # Rozšířený popis vzorce s použitím LaTeXu pro jednotlivé výrazy
-"""
+r"""
 Příbuznost produktu \\( p \\) v zemi \\( c \\) se vypočítá na základě následujícího vzorce:
 
 - \\( M_{cp'} \\): Hodnota v matici \\( M \\), která je rovna 1, pokud daný produkt \\( p' \\) má v zemi \\( c \\) zjištěný **Revealed Comparative Advantage (RCA)** větší než 1. Pokud \\( \text{RCA} \leq 1 \\), hodnota je 0.
