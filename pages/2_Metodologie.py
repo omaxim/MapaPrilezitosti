@@ -39,7 +39,6 @@ st.markdown("### 🔍 Výpočet příbuznosti produktů")
 st.markdown("""
 Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC. Podrobný popis této metodiky je k dispozici na stránkách **OEC**.
 """)
-st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
 
 """
 Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
@@ -58,3 +57,4 @@ st.markdown("""
 
 Celkový vzorec tedy počítá příbuznost produktu $$p$$ s produkty $$p'$$, které jsou v zemi $$c$$ aktivní (splňují podmínku **RCA > 1**). Výpočet je **normalizován**, což zajistí, že výsledek zohledňuje vztahy produktu $$p$$ vůči celé produktové struktuře.
 """, unsafe_allow_html=True)
+st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
