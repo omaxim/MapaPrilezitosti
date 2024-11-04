@@ -43,7 +43,7 @@ st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
 
 # LaTeX Formula with Explanation
 st.latex(r"""
-\text{Příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
+\text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
 # Explanation with inline LaTeX
