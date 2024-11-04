@@ -378,7 +378,8 @@ fig.update_layout(
         showgrid=False
     )  ,
     yaxis=dict(
-        showgrid=False
+        showgrid=False,
+        zeroline=False
     )  
 )
 
