@@ -42,7 +42,7 @@ st.latex(r"""
 \text{Příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
-# Rozšířený popis vzorce
+# Rozšířený popis vzorce s použitím LaTeXu pro jednotlivé výrazy
 """
 Příbuznost produktu \\( p \\) v zemi \\( c \\) se vypočítá na základě následujícího vzorce:
 
