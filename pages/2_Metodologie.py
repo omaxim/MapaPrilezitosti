@@ -27,8 +27,6 @@ st.markdown("""
 Pro detekci ekonomické aktivity konkrétního produktu v zemi se používá kritérium **RCA > 1**. Tento postup je obdobný metodice používané v **OEC**, kde jsou důležité relativní vztahy mezi produkty, i když absolutní hodnoty komplexity se mohou mírně lišit.
 """)
 
-# Critique of Absolute Values
-st.markdown("### 📉 Kritika absolutních hodnot")
 st.markdown("""
 Jednoznačné určení absolutních hodnot komplexity je často zpochybňované. Tato aplikace se však zaměřuje na **relativní komplexitu produktů** (percentil a pořadí v rámci datasetu BACI).
 """)
