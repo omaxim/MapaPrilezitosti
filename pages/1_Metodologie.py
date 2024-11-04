@@ -23,7 +23,7 @@ st.logo('logo_web.svg',size='large')
 st.image('logo.svg')
 
 # Main Title
-st.markdown("# 📊 Metodologie aplikace")
+st.markdown("# 📊 Metodologie")
 
 # Introduction
 st.markdown("""
