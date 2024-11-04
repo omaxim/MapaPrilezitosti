@@ -380,7 +380,9 @@ fig.update_layout(
     yaxis=dict(
         showgrid=False,
         zeroline=False
-    )  
+    )  ,
+    paper_bgcolor="#ffffff",
+    plot_bgcolor = "#ffffff"
 )
 
 col1.plotly_chart(fig)
