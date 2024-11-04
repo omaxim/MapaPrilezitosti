@@ -394,7 +394,7 @@ vega_chart_spec = {
     },
     "config": {
         "legend": {
-            "orient": "right",
+            "orient": "left",
             "title": None,
             "direction": "vertical"
         }
