@@ -1,4 +1,9 @@
 import streamlit as st
+st.set_page_config(
+    page_title="Mapa Příležitostí",
+    page_icon="favicon.ico",
+    layout="wide"
+)
 st.logo('logo_web.svg',size='large')
 
 col0,col1, colx = st.columns([1,4, 1])
