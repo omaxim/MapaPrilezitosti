@@ -15,7 +15,7 @@ Tato aplikace je založena na harmonizovaném datasetu **BACI**, který je každ
 st.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
 # Product Complexity Calculation
-st.markdown("## 📈 Výpočet komplexity produktu")
+st.markdown("### 📈 Výpočet komplexity produktu")
 st.markdown("""
 Pro výpočet komplexity produktu používáme **Python modul py-ecomplexity** od Centre for International Development při **Harvardské univerzitě**. Tento modul také umožňuje výpočet **matice příbuznosti** v produktovém prostoru. Data pro výpočet zahrnují celou databázi **BACI**.
 """)
@@ -35,7 +35,7 @@ Jednoznačné určení absolutních hodnot komplexity je často zpochybňované.
 st.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
 
 # Product Relatedness Calculation
-st.markdown("## 🔍 Výpočet příbuznosti produktů")
+st.markdown("### 🔍 Výpočet příbuznosti produktů")
 st.markdown("""
 Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC. Podrobný popis této metodiky je k dispozici na stránkách **OEC**.
 """)
