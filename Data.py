@@ -5,16 +5,15 @@ from io import StringIO
 import plotly.io as pio
 from PIL import Image
 
-
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.ico",
     layout="wide"
 )
-
+text_color = "#000000"
 st.logo('logo_web.svg',size='large')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
-col1.title("Mapa Příležitostí")
+col1.title(":#000000[Mapa Příležitostí]")
 
 # Sidebar for selecting variables
 col2.title("")
