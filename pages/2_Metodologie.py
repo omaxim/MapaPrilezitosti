@@ -41,7 +41,7 @@ Příbuznost produktů vůči české ekonomice je vypočítána stejným způso
 st.latex(r"""Příbuznost_{cp}=\frac{\sum_{p'}{M_{cp'}\phi_{pp'}}}{\sum_{p'} \phi_{pp'}}""")
 
 # Popis vzorce
-"""
+r"""
 Příbuznost pro produkt \\( p \\) v zemi \\( c \\) je počítána jako kontrakce v produktovém prostoru, kde:
 - \\( M_{cp'} \\) je matice s hodnotou 1, pokud \\( \text{RCA} > 1 \\), jinak 0,
 - \\( \phi_{pp'} \\) vyjadřuje příbuznost mezi produkty \\( p \\) a \\( p' \\).
