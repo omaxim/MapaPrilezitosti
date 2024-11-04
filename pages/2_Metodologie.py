@@ -27,6 +27,8 @@ st.markdown("""
 Pro detekci ekonomické aktivity konkrétního produktu v zemi se používá kritérium **RCA > 1**. Tento postup je obdobný metodice používané v **OEC**, kde jsou důležité relativní vztahy mezi produkty, i když absolutní hodnoty komplexity se mohou mírně lišit.
 """)
 
+# Critique of Absolute Values
+st.markdown("### 📉 Kritika absolutních hodnot")
 st.markdown("""
 Jednoznačné určení absolutních hodnot komplexity je často zpochybňované. Tato aplikace se však zaměřuje na **relativní komplexitu produktů** (percentil a pořadí v rámci datasetu BACI).
 """)
@@ -39,6 +41,10 @@ Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC
 """)
 st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
 
+"""
+Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
+
+"""
 # LaTeX Formula with Explanation
 st.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
@@ -46,7 +52,6 @@ st.latex(r"""
 
 # Explanation with inline LaTeX
 st.markdown("""
-Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
 
 - **$$M_{cp'}$$**: Hodnota v matici $$M$$, která je rovna **1**, pokud produkt $$p'$$ v zemi $$c$$ vykazuje **RCA > 1** (tj. komparativní výhodu); jinak je rovna **0**.
 - **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty $$p$$ a $$p'$$, vyjadřující jejich blízkost v produktovém prostoru.
