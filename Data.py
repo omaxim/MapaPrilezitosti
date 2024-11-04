@@ -2,12 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from io import StringIO
-import plotly.io as pio
-from PIL import Image
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
-    page_icon="favicon.ico",
+    page_icon="favicon.png",
     layout="wide"
 )
 st.markdown("""
