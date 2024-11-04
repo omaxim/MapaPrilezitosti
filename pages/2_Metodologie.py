@@ -17,4 +17,4 @@ Pro výpočet příbuznosti produktů české ekonomice je použit stejný vzore
 
 
 """
-st.latex(r"""omega_{cp}=\frac{\sum_{p'}{M_{cp'}\phi_{pp'}}}{\sum_{p'} \phi_{pp'}}""")
+st.latex(r"""Příbuznost_{cp}=\frac{\sum_{p'}{M_{cp'}\phi_{pp'}}}{\sum_{p'} \phi_{pp'}}""")
