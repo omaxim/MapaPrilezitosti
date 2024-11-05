@@ -45,7 +45,7 @@ def load_visual_identity(header_image_path):
             width: 100%;        /* Use 100% width to prevent gaps */
             height: 200px;      /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
-            background-size: 180%;  /* Ensure image covers the area */
+            background-size: 100%;  /* Ensure image covers the area */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
             z-index: 0;
@@ -95,13 +95,13 @@ def load_visual_identity(header_image_path):
         
     </style>
     """, unsafe_allow_html=True)
-    st.markdown("""
-            <style>
-                   .block-container {
-                        padding-top: 1rem;
-                        padding-bottom: 5rem;
-                        padding-left: 5rem;
-                        padding-right: 5rem;
-                    }
-            </style>
-            """, unsafe_allow_html=True)
+    #st.markdown("""
+    #        <style>
+    #               .block-container {
+    #                    padding-top: 1rem;
+    #                    padding-bottom: 5rem;
+    #                    padding-left: 5rem;
+    #                    padding-right: 5rem;
+    #                }
+    #        </style>
+    #        """, unsafe_allow_html=True)
