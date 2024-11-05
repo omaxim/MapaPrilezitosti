@@ -1,8 +1,12 @@
 import streamlit as st
+from visualsetup import load_visual_identity
+
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png"
 )
+load_visual_identity("header.jpg")
+
 st.markdown("""
 <style>
     /* Set sidebar background color */
