@@ -375,7 +375,7 @@ for trace in fig.data:
 fig.update_layout(
     font=dict(
         family="Montserrat, sans-serif",  # Specify the font family
-        size=15,                          # Font size
+        size=12,                          # Font size
         color="black"                     # Font color
     ),
     hoverlabel=dict(
