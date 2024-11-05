@@ -403,7 +403,6 @@ fig.update_layout(
         ticklen=5,                 # Length of the ticks
         tickfont=dict(color='black', size=15),  # Set tick text color to black and size
         title=dict(
-            text="X Axis Title",  # Set your x-axis title
             font=dict(color='black', size=15)  # Set x-axis label color and size
         )
     ),
@@ -419,7 +418,6 @@ fig.update_layout(
         ticklen=5,                 # Length of the ticks
         tickfont=dict(color='black', size=15),  # Set tick text color to black and size
         title=dict(
-            text="Y Axis Title",  # Set your y-axis title
             font=dict(color='black', size=15)  # Set y-axis label color and size
         )
     )
