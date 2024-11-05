@@ -371,17 +371,25 @@ else:
 for trace in fig.data:
     trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
 
+# Update layout with font settings and existing configurations
 fig.update_layout(
+    font=dict(
+        family="Montserrat, sans-serif",  # Specify the font family
+        size=15,                          # Font size
+        color="black"                     # Font color
+    ),
     hoverlabel=dict(
-        font_family="Montserrat",
-        font_color="#FFFFFF"
+        font=dict(
+            family="Montserrat, sans-serif",  # Hover label font family
+            color="#FFFFFF"                   # Hover label font color
+        )
     ),
     legend=dict(
         orientation="h",          # Horizontal legend
-        yanchor="top",             # Align the legend's top with the graph's bottom
-        y=-0.3,                    # Push the legend further below
-        xanchor="center",          # Center the legend horizontally
-        x=0.5                      # Position it at the center of the graph
+        yanchor="top",            # Align the legend's top with the graph's bottom
+        y=-0.3,                   # Push the legend further below
+        xanchor="center",         # Center the legend horizontally
+        x=0.5                     # Position it at the center of the graph
     ),
     xaxis=dict(
         showgrid=False,
@@ -393,8 +401,11 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black'),  # Set tick text color to black
-        title=dict(font=dict(color='black'))  # Set x-axis label color to black
+        tickfont=dict(color='black', size=15),  # Set tick text color to black and size
+        title=dict(
+            text="X Axis Title",  # Set your x-axis title
+            font=dict(color='black', size=15)  # Set x-axis label color and size
+        )
     ),
     yaxis=dict(
         showgrid=False,
@@ -406,8 +417,11 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black'),  # Set tick text color to black
-        title=dict(font=dict(color='black'))  # Set y-axis label color to black
+        tickfont=dict(color='black', size=15),  # Set tick text color to black and size
+        title=dict(
+            text="Y Axis Title",  # Set your y-axis title
+            font=dict(color='black', size=15)  # Set y-axis label color and size
+        )
     )
 )
 
