@@ -440,12 +440,10 @@ else:
 mybuff = StringIO()
 fig.write_html(mybuff, include_plotlyjs='cdn')
 html_bytes = mybuff.getvalue().encode()
-st.sidebar.divider()
-st.sidebar.download_button(
+col2.download_button(
     label = "Stáhnout HTML graf",
     data = html_bytes,
     file_name = "plot.html",
-    mime="text/html",
-    color='white'
+    mime="text/html"
 )
 
