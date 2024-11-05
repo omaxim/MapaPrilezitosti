@@ -43,12 +43,12 @@ st.markdown(
             width: 100%;
             height: 100%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
-            z-index: 2;
+            z-index: 1;
         }}
 
         /* Create overlap effect with main content */
         .main-content {{
-            margin-top: -40px;  /* Negative margin to pull content up */
+            margin-top: -150px;  /* Negative margin to pull content up */
             z-index: 0;         /* Ensures it sits below the header */
             position: relative;
         }}
