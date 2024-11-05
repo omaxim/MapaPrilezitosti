@@ -59,7 +59,7 @@ st.markdown(
             width: 100%;
             height: 100%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
-            z-index: 2;
+            z-index: 1.4;
         }}
 
         /* Adjust padding for main content to avoid overlap */
