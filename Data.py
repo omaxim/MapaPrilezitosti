@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 from io import StringIO
 import base64
+from visualsetup import load_visual_identity
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png",
