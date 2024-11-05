@@ -48,7 +48,7 @@ st.markdown(
 
         /* Create overlap effect with main content */
         .main-content {{
-            margin-top: -100px;  /* Negative margin to pull content up */
+            margin-top: -40px;  /* Negative margin to pull content up */
             z-index: 0;         /* Ensures it sits below the header */
             position: relative;
         }}
