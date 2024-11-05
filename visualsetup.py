@@ -91,9 +91,6 @@ def load_visual_identity(header_image_path):
         [data-testid="stHeader"] {
             background-color: rgba(0,0,0,0);
         }
-        [data-testid="stAppViewContainer"] {
-            background-attachment: local;
-        }
         
     </style>
     """, unsafe_allow_html=True)
