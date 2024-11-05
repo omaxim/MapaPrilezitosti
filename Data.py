@@ -424,6 +424,11 @@ fig.update_layout(
     )
 )
 
+# Update each trace to have the hover background color match the trace's color
+for trace in fig.data:
+    trace.hovertemplate = ""  # Set hovertemplate to default to avoid double tooltip
+    trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
+
 
 col1.plotly_chart(fig)
 mcol1, mcol2, mcol3 = col1.columns(3)
