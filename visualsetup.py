@@ -37,39 +37,40 @@ def load_visual_identity(header_image_path):
             padding: 0;           /* No padding */
             width: 100%;          /* Ensure full width */
             height: 100%;         /* Ensure full height */
-            overflow-x: hidden;   /* Prevent horizontal scroll */
+            overflow: hidden;     /* Prevent any overflow */
         }}
 
-        /* Make header image oversized to fill viewport */
+        /* Make header image fill the viewport */
         .header-image {{
-            position: absolute;    /* Use absolute positioning */
-            top: 0;                /* Start from the top */
-            left: 0;               /* Start from the left */
+            position: fixed;       /* Fixed positioning */
+            top: 0;                /* Align to top */
+            left: 0;               /* Align to left */
             width: 100vw;          /* Full viewport width */
             height: 100vh;         /* Full viewport height */
             background-image: url("data:image/jpg;base64,{header_image}");
-            background-size: cover;  /* Ensure image covers the area */
+            background-size: cover; /* Ensure image covers the area */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
-            z-index: 0;
+            z-index: -1;          /* Send it to the back */
         }}
 
-        /* Extend the gradient to blend into content smoothly */
+        /* Gradient overlay */
         .header-gradient {{
-            position: absolute;
+            position: absolute;    
             bottom: 0;
             width: 100%;
-            height: 80%;          /* Match header-image height */
+            height: 80%;           /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
-            z-index: 1;
+            z-index: 1;           /* Ensure it sits above the header image */
         }}
 
-        /* Create overlap effect with main content */
+        /* Main content styling */
         .main-content {{
-            margin-top: 200px;   /* Adjust margin-top to push content below the header */
-            margin: 0;           /* Ensure no margin around main content */
-            padding: 20px;       /* Add some padding to content, adjust as needed */
             position: relative;
+            z-index: 2;           /* Bring main content above header */
+            padding: 20px;        /* Add some padding to content */
+            margin-top: 200px;    /* Space to accommodate header height */
+            overflow: auto;       /* Allow scrolling if needed */
         }}
     </style>
     <div class="header-image">
@@ -79,8 +80,7 @@ def load_visual_identity(header_image_path):
         <!-- Your main content goes here -->
     </div>
     """,
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
 
     st.markdown("""
     <style>
