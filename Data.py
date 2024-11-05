@@ -87,7 +87,7 @@ st.markdown("""
         </style>
         """, unsafe_allow_html=True)
 
-st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
+st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
 logocol1,logocol2 = col1.columns(2)
