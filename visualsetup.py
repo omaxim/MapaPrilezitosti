@@ -40,18 +40,18 @@ def load_visual_identity(header_image_path):
             overflow-x: hidden;   /* Prevent horizontal scroll */
         }}
 
-        /* Make header image scroll with content */
+        /* Make header image oversized to fill viewport */
         .header-image {{
-            position: relative;    /* Changed from fixed to relative */
-            width: 100%;          /* Use 100% width to prevent gaps */
-            height: 200px;        /* Adjust height as needed */
+            position: absolute;    /* Use absolute positioning */
+            top: 0;                /* Start from the top */
+            left: 0;               /* Start from the left */
+            width: 100vw;          /* Full viewport width */
+            height: 100vh;         /* Full viewport height */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;  /* Ensure image covers the area */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
             z-index: 0;
-            margin: 0;            /* No margin */
-            padding: 0;           /* No padding */
         }}
 
         /* Extend the gradient to blend into content smoothly */
@@ -66,20 +66,21 @@ def load_visual_identity(header_image_path):
 
         /* Create overlap effect with main content */
         .main-content {{
-            margin-top: -150px;  /* Negative margin to pull content up */
-            z-index: 0;          /* Ensures it sits below the header */
-            position: relative;
-            padding: 20px;       /* Add some padding to content, adjust as needed */
+            margin-top: 200px;   /* Adjust margin-top to push content below the header */
             margin: 0;           /* Ensure no margin around main content */
+            padding: 20px;       /* Add some padding to content, adjust as needed */
+            position: relative;
         }}
     </style>
     <div class="header-image">
         <div class="header-gradient"></div>
     </div>
+    <div class="main-content">
+        <!-- Your main content goes here -->
+    </div>
     """,
     unsafe_allow_html=True
 )
-    
 
     st.markdown("""
     <style>
