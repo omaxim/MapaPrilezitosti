@@ -21,49 +21,61 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-#st.markdown("""
-#        <style>
-#               .block-container {
-#                    padding-top: 1rem;
-#                    padding-bottom: 5rem;
-#                    padding-left: 5rem;
-#                    padding-right: 5rem;
-#                }
-#        </style>
-#        """, unsafe_allow_html=True)
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 5rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
 
 # Load the image and encode it in Base64 format
 with open("header.jpg", "rb") as image_file:
     header_image = base64.b64encode(image_file.read()).decode("utf-8")
 
-# Define the HTML and CSS with a gradient overlay
 st.markdown(
     f"""
     <style>
+        /* Reset margins and padding for the header image to go full width */
         .header-image {{
             position: relative;
-            width: 100%;
-            height: 300px;  /* Adjust the height as needed */
+            width: 100vw;  /* Full viewport width */
+            height: 350px;  /* Adjust the height for better blending */
+            margin: 0;      /* Remove default margin */
+            padding: 0;     /* Remove default padding */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            z-index: 1;
         }}
+        /* Extend the gradient to cover the full container */
         .header-gradient {{
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100%;
+            height: 120%;  /* Increase the height to overlap more */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
+            z-index: 2;
+        }}
+        /* Adjust the main content margin to pull up under the gradient */
+        .main-content {{
+            margin-top: -100px;  /* Pull the main content up */
+            z-index: 0;
         }}
     </style>
     <div class="header-image">
         <div class="header-gradient"></div>
     </div>
+    <div class="main-content">
+        <!-- Your main app content goes here -->
+    </div>
     """,
     unsafe_allow_html=True
 )
-
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa příležitostí")
