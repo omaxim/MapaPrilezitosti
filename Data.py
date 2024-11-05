@@ -420,7 +420,9 @@ fig.update_layout(
         title=dict(
             font=dict(color='black', size=15)  # Set y-axis label color and size
         )
-    )
+    ),
+    plot_bgcolor='rgba(0, 0, 0, 0)',  # Transparent plot background
+    paper_bgcolor='rgba(0, 0, 0, 0)'  # Transparent overall background
 )
 
 
