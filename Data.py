@@ -370,7 +370,7 @@ else:
 # Update each trace to have the hover background color match the trace's color
 for trace in fig.data:
     trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
-fontsize = col1.number_input("Velikost fontu",5,2000,1)
+fontsize = col1.number_input("Velikost fontu",5,20,1)
 # Update layout with font settings and existing configurations
 fig.update_layout(
     font=dict(
