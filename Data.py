@@ -15,7 +15,7 @@ load_visual_identity("header.jpg")
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
-logocol1,logocol2 = col1.columns(2)
+logocol1,logocol2 = col1.columns([2,3])
 logocol1.image('logo_web.svg',use_column_width=True)
 logocol1.title("")
 # Sidebar for selecting variables
