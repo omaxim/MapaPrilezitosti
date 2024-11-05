@@ -390,12 +390,7 @@ fig.update_layout(
         yanchor="top",            # Align the legend's top with the graph's bottom
         y=-0.3,                   # Push the legend further below
         xanchor="center",         # Center the legend horizontally
-        x=0.5 ,
-        font=dict(
-            family="Montserrat, sans-serif",  # Hover label font family
-            color="#FFFFFF"   ,
-            size=fontsize                # Hover label font color
-        )                    # Position it at the center of the graph
+        x=0.5                  # Position it at the center of the graph
     ),
     xaxis=dict(
         showgrid=False,
@@ -410,12 +405,8 @@ fig.update_layout(
         tickfont=dict(color='black', size=fontsize),  # Set tick text color to black and size
         title=dict(
             font=dict(color='black', size=fontsize)  # Set x-axis label color and size
-        ),
-        font=dict(
-            family="Montserrat, sans-serif",  # Hover label font family
-            color="#FFFFFF"   ,
-            size=fontsize                # Hover label font color
         )
+
     ),
     yaxis=dict(
         showgrid=False,
