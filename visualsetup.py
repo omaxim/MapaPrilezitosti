@@ -76,9 +76,6 @@ def load_visual_identity(header_image_path):
     <div class="header-image">
         <div class="header-gradient"></div>
     </div>
-    <div class="main-content">
-        <!-- Your main content goes here -->
-    </div>
     """,
     unsafe_allow_html=True
 )
