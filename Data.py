@@ -25,7 +25,7 @@ st.markdown(
         /* Make header fixed at the top with full viewport width */
         .header-image {{
             position: fixed;
-            top: 0;
+            top: -100px;
             left: 0;
             width: 100vw;
             height: 200px;  /* Adjust height as needed */
