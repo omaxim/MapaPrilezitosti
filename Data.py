@@ -79,11 +79,6 @@ st.markdown(
     <div class="header-image">
         <div class="header-gradient"></div>
     </div>
-    <div class="main-content">
-        <!-- Your main app content goes here -->
-        <h1>Welcome to My Streamlit App</h1>
-        <p>Here is some sample content that should overlap slightly with the header.</p>
-    </div>
     """,
     unsafe_allow_html=True
 )
