@@ -39,32 +39,32 @@ with open("header.jpg", "rb") as image_file:
 st.markdown(
     f"""
     <style>
-        /* Reset margins and padding for the header image to go full width */
+        /* Make header fixed at the bottom */
         .header-image {{
-            position: relative;
+            position: fixed;
+            bottom: 0;
             width: 100vw;  /* Full viewport width */
-            height: 350px;  /* Adjust the height for better blending */
-            margin: 0;      /* Remove default margin */
-            padding: 0;     /* Remove default padding */
+            height: 300px;  /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             z-index: 1;
         }}
-        /* Extend the gradient to cover the full container */
+        
+        /* Extend the gradient to blend into content smoothly */
         .header-gradient {{
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 120%;  /* Increase the height to overlap more */
+            height: 100%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
             z-index: 2;
         }}
-        /* Adjust the main content margin to pull up under the gradient */
+
+        /* Adjust padding for main content to avoid overlap */
         .main-content {{
-            margin-top: -100px;  /* Pull the main content up */
-            z-index: 0;
+            padding-bottom: 300px;  /* Add space equal to header height to avoid content overlap */
         }}
     </style>
     <div class="header-image">
