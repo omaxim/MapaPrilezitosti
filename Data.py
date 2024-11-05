@@ -374,7 +374,8 @@ for trace in fig.data:
 fig.update_layout(
     hoverlabel=dict(
         font_family="Montserrat",
-        font_color="#FFFFFF"
+        font_color="#FFFFFF",
+        font_size=12
     ),
     legend=dict(
         orientation="h",          # Horizontal legend
