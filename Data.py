@@ -35,45 +35,43 @@ st.markdown("""
 # Load the image and encode it in Base64 format
 with open("header.jpg", "rb") as image_file:
     header_image = base64.b64encode(image_file.read()).decode("utf-8")
-
 st.markdown(
     f"""
     <style>
-        /* Remove default padding and margin from body and html to prevent gaps */
+        /* Remove default padding and margin from body and html */
         html, body {{
             margin: 0;
             padding: 0;
         }}
 
-        /* Make header fixed at the top with full viewport width */
+        /* Make header fixed at the top behind content and Streamlit top bar */
         .header-image {{
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 300px;  /* Adjust height as needed */
+            width: 100vw;        /* Full viewport width */
+            height: 300px;        /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 0;
+            z-index: -1;          /* Set behind Streamlit top bar and main content */
         }}
         
-        /* Extend the gradient to blend into content smoothly */
+        /* Gradient overlay to fade the header image smoothly */
         .header-gradient {{
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100%;  /* Match header-image height */
+            height: 100%;
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
-            z-index: 2;
         }}
 
-        /* Create overlap effect with main content */
+        /* Add padding to main content to sit below the header image */
         .main-content {{
-            margin-top: -150px;  /* Negative margin to pull content up */
-            z-index: 0;         /* Ensures it sits below the header */
+            padding-top: 300px;   /* Add space equal to header height */
             position: relative;
+            z-index: 0;           /* Ensure content is above the header image */
         }}
     </style>
     <div class="header-image">
@@ -82,7 +80,7 @@ st.markdown(
     <div class="main-content">
         <!-- Your main app content goes here -->
         <h1>Welcome to My Streamlit App</h1>
-        <p>Here is some sample content that should overlap slightly with the header.</p>
+        <p>This content should now sit above the header image background.</p>
     </div>
     """,
     unsafe_allow_html=True
