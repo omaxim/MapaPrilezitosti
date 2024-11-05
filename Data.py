@@ -42,7 +42,7 @@ st.markdown(
         /* Make header fixed at the bottom */
         .header-image {{
             position: fixed;
-            bottom: 0;
+            top: 0;
             width: 100vw;  /* Full viewport width */
             height: 300px;  /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
@@ -55,7 +55,7 @@ st.markdown(
         /* Extend the gradient to blend into content smoothly */
         .header-gradient {{
             position: absolute;
-            bottom: 0;
+            top: 0;
             width: 100%;
             height: 100%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
