@@ -79,7 +79,7 @@ def load_visual_identity(header_image_path):
         r"""
         <style>
         [data-testid="stAppViewContainer"] > .main {{
-        background-image: url("data:image/png;base64,{header_image}");
+        background-image: url("data:image/jpg;base64,{header_image}");
         background-size: 180%;
         background-position: top left;
         background-repeat: no-repeat;
@@ -87,7 +87,7 @@ def load_visual_identity(header_image_path):
         }}
 
         [data-testid="stSidebar"] > div:first-child {{
-        background-image: url("data:image/png;base64,{header_image}");
+        background-image: url("data:image/jpg;base64,{header_image}");
         background-position: center; 
         background-repeat: no-repeat;
         background-attachment: fixed;
