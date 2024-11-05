@@ -12,7 +12,25 @@ st.set_page_config(
 # Load the image and encode it in Base64 format
 with open("header.jpg", "rb") as image_file:
     header_image = base64.b64encode(image_file.read()).decode("utf-8")
+# Load Montserrat font from Google Fonts
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+    /* Apply Montserrat font globally */
+    body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Optional: Customize other elements as needed */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 st.markdown(
     f"""
     <style>
