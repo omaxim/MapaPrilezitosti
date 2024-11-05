@@ -9,11 +9,9 @@ st.set_page_config(
     page_icon="favicon.png",
     layout="wide"
 )
-
-# Load the image and encode it in Base64 format
-with open("header.jpg", "rb") as image_file:
-    header_image = base64.b64encode(image_file.read()).decode("utf-8")
+#Loading loads of custom css in markdown
 load_visual_identity("header.jpg")
+
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
