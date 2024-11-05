@@ -54,7 +54,7 @@ st.markdown(
         
         /* Extend the gradient to blend into content smoothly */
         .header-gradient {{
-            position: fixed;
+            position: relative;
             top: 0;
             width: 100%;
             height: 100%;  /* Match header-image height */
