@@ -43,7 +43,7 @@ def load_visual_identity(header_image_path):
                 top: 0;
                 left: 0;
                 width: 100vw;
-                height: 180px;  /* Adjust height as needed */
+                height: 220px;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
                 background-position: center;
@@ -57,7 +57,7 @@ def load_visual_identity(header_image_path):
                 bottom: 0;
                 width: 100%;
                 height: 80%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
                 z-index: 1;
             }}
 
