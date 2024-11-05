@@ -90,7 +90,7 @@ st.markdown(
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
-col0.image('logo_web.svg',use_column_width=True)
+col1.image('logo_web.svg',use_column_width=True)
 # Sidebar for selecting variables
 col2.title("")
 col2.subheader("Nastavení Grafu")
