@@ -33,7 +33,7 @@ st.markdown("""
         """, unsafe_allow_html=True)
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
-col1.title("Mapa *příležitostí*")
+col1.title("Mapa příležitostí")
 
 # Sidebar for selecting variables
 col2.title("")
