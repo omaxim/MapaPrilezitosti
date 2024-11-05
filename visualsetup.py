@@ -27,7 +27,6 @@ def load_visual_identity(header_image_path):
     ## Load the image and encode it in Base64 format
     #with open(header_image_path, "rb") as image_file:
     #    header_image = base64.b64encode(image_file.read()).decode("utf-8")
-    @st.experimental_memo
     def get_img_as_base64(file):
         with open(file, "rb") as f:
             data = f.read()
