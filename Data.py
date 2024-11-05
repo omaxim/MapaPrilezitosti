@@ -393,7 +393,7 @@ fig.update_layout(
         x=0.5,                  # Position it at the center of the graph
         font=dict(
             family="Montserrat, sans-serif",  # Hover label font family
-            color="#FFFFFF"   ,
+            color="#000000"   ,
             size=fontsize                # Hover label font color
         )
     ),
