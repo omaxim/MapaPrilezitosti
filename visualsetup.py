@@ -30,7 +30,7 @@ def load_visual_identity(header_image_path):
         """
     <style>
     [data-testid="stAppViewContainer"] > .main {{
-    background-image: {header_image};
+    background-image: url("https://images.unsplash.com/photo-1501426026826-31c667bdf23d");
     background-size: 180%;
     background-position: top left;
     background-repeat: no-repeat;
