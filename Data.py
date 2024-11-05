@@ -56,7 +56,7 @@ st.markdown(
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 1;
+            z-index: -1;
         }}
         
         /* Extend the gradient to blend into content smoothly */
