@@ -375,7 +375,7 @@ fig.update_layout(
     hoverlabel=dict(
         font_family="Montserrat",
         font_color="#FFFFFF",
-        font_size=12
+        font_size=15
     ),
     legend=dict(
         orientation="h",          # Horizontal legend
