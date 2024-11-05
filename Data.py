@@ -95,6 +95,8 @@ logocol1.image('logo_web.svg',use_column_width=True)
 logocol1.title("")
 # Sidebar for selecting variables
 col2.title("")
+col2.title("")
+
 col2.subheader("Nastavení Grafu")
 
 # Prumer CNB za rok 2022
