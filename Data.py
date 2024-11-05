@@ -28,7 +28,7 @@ st.markdown(
             top: 0;
             left: 0;
             width: 100vw;
-            height: 300px;  /* Adjust height as needed */
+            height: 200px;  /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
