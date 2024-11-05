@@ -384,7 +384,6 @@ else:
                      )
 # Update each trace to have the hover background color match the trace's color
 for trace in fig.data:
-    trace.hovertemplate = ""  # Set hovertemplate to default to avoid double tooltip
     trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
 
 fig.update_layout(
