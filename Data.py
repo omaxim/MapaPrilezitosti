@@ -398,6 +398,7 @@ fig.update_layout(
     ),
     xaxis=dict(
         showgrid=False,
+        zeroline=False,
         color='black',             # Set axis color to black
         showline=True,             # Show axis line
         linecolor='black',         # Line color
