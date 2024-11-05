@@ -1,34 +1,12 @@
 import streamlit as st
 from visualsetup import load_visual_identity
 #Loading loads of custom css in markdown
-load_visual_identity("header.jpg")
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png"
 )
-st.markdown("""
-<style>
-    /* Set sidebar background color */
-    [data-testid="stSidebar"] {
-        background-color: #000000;
-    }
+load_visual_identity("header.jpg")
 
-    /* Set sidebar text color */
-    [data-testid="stSidebar"] * {
-        color: #FFFFFF;
-    }
-</style>
-""", unsafe_allow_html=True)
-st.markdown("""
-        <style>
-               .block-container {
-                    padding-top: 1rem;
-                    padding-bottom: 5rem;
-                    padding-left: 0rem;
-                    padding-right: 0rem;
-                }
-        </style>
-        """, unsafe_allow_html=True)
 st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
 
 # Main Title
