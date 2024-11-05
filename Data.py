@@ -60,24 +60,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Custom CSS to make the navigation bar transparent
-st.markdown(
-    """
-    <style>
-    /* Make the top navigation bar transparent */
-    .css-1rs6os4 {
-        background-color: rgba(255, 255, 255, 0) !important; /* Change this to desired RGBA color */
-        border: none; /* Remove any border */
-    }
-
-    /* Optional: Change the color of the text for better visibility */
-    .css-1rs6os4 a {
-        color: white !important; /* Change to desired text color */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 st.markdown("""
 <style>
     /* Set sidebar background color */
