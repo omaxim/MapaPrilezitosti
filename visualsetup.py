@@ -24,10 +24,16 @@ def load_visual_identity(header_image_path):
     )
 
 
-    # Load the image and encode it in Base64 format
-    with open(header_image_path, "rb") as image_file:
-        header_image = base64.b64encode(image_file.read()).decode("utf-8")
-        
+    ## Load the image and encode it in Base64 format
+    #with open(header_image_path, "rb") as image_file:
+    #    header_image = base64.b64encode(image_file.read()).decode("utf-8")
+    @st.experimental_memo
+    def get_img_as_base64(file):
+        with open(file, "rb") as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    img = get_img_as_base64(header_image_path)
+
     #st.markdown(
     #    f"""
     #    <style>
@@ -79,7 +85,7 @@ def load_visual_identity(header_image_path):
         r"""
         <style>
         [data-testid="stAppViewContainer"] > .main {{
-        background-image: url("data:image/jpg;base64,{header_image}");
+        background-image: url("data:image/jpg;base64,{img}");
         background-size: 180%;
         background-position: top left;
         background-repeat: no-repeat;
@@ -87,7 +93,7 @@ def load_visual_identity(header_image_path):
         }}
 
         [data-testid="stSidebar"] > div:first-child {{
-        background-image: url("data:image/jpg;base64,{header_image}");
+        background-image: url("data:image/jpg;base64,{img}");
         background-position: center; 
         background-repeat: no-repeat;
         background-attachment: fixed;
