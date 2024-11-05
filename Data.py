@@ -55,7 +55,7 @@ st.markdown(
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: -1;          /* Set behind Streamlit top bar and main content */
+            z-index: 0;          /* Set behind Streamlit top bar and main content */
         }}
         
         /* Gradient overlay to fade the header image smoothly */
