@@ -257,7 +257,7 @@ if 'filters' not in st.session_state:
 
 subcol1, subcol2, subcol3 = col2.columns(3)
 with subcol1:
-    if st.button("Číselný filtr"):
+    if st.button("Filtrování hodnot"):
         st.session_state.filters.append({'column': None, 'range': None})
 with subcol2:
     if st.button("Odstranit filtry"):
