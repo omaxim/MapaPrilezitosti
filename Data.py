@@ -39,32 +39,41 @@ with open("header.jpg", "rb") as image_file:
 st.markdown(
     f"""
     <style>
-        /* Make header fixed at the bottom */
+        /* Remove default padding and margin from body and html to prevent gaps */
+        html, body {{
+            margin: 0;
+            padding: 0;
+        }}
+
+        /* Make header fixed at the top with full viewport width */
         .header-image {{
-            position: relative;
+            position: fixed;
             top: 0;
-            width: 100vw;  /* Full viewport width */
+            left: 0;
+            width: 100vw;
             height: 300px;  /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 2;
+            z-index: 1;
         }}
         
         /* Extend the gradient to blend into content smoothly */
         .header-gradient {{
-            position: relative;
-            top: 0;
+            position: absolute;
+            bottom: 0;
             width: 100%;
             height: 100%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
-            z-index: 5;
+            z-index: 2;
         }}
 
-        /* Adjust padding for main content to avoid overlap */
+        /* Create overlap effect with main content */
         .main-content {{
-            padding-bottom: 300px;  /* Add space equal to header height to avoid content overlap */
+            margin-top: -150px;  /* Negative margin to pull content up */
+            z-index: 0;         /* Ensures it sits below the header */
+            position: relative;
         }}
     </style>
     <div class="header-image">
@@ -72,6 +81,8 @@ st.markdown(
     </div>
     <div class="main-content">
         <!-- Your main app content goes here -->
+        <h1>Welcome to My Streamlit App</h1>
+        <p>Here is some sample content that should overlap slightly with the header.</p>
     </div>
     """,
     unsafe_allow_html=True
