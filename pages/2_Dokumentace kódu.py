@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png"
 )
-load_visual_identity("header.jpg")
+#load_visual_identity("header.jpg")
 
 st.markdown("""
 <style>
