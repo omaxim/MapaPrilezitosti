@@ -26,67 +26,54 @@ def load_visual_identity(header_image_path):
     )
 
 
+
+    
     st.markdown(
-        """
-    <style>
-    [data-testid="stAppViewContainer"] > .main {{
-    background-image: url("https://images.unsplash.com/photo-1501426026826-31c667bdf23d");
-    background-size: 180%;
-    background-position: top left;
-    background-repeat: no-repeat;
-    background-attachment: local;}}
-    </style>
+        f"""
+        <style>
+            /* Remove default padding and margin from body and html to prevent gaps */
+            html, body {{
+                margin: 0;
+                padding: 0;
+            }}
+
+            /* Make header fixed at the top with full viewport width */
+            .header-image {{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 200px;  /* Adjust height as needed */
+                background-image: url("data:image/jpg;base64,{header_image}");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                z-index: 0;
+            }}
+
+            /* Extend the gradient to blend into content smoothly */
+            .header-gradient {{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 80%;  /* Match header-image height */
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
+                z-index: 1;
+            }}
+
+            /* Create overlap effect with main content */
+            .main-content {{
+                margin-top: -150px;  /* Negative margin to pull content up */
+                z-index: 0;         /* Ensures it sits below the header */
+                position: relative;
+            }}
+        </style>
+        <div class="header-image">
+            <div class="header-gradient"></div>
+        </div>
         """,
         unsafe_allow_html=True
     )
-
-    
-#    st.markdown(
-#        f"""
-#        <style>
-#            /* Remove default padding and margin from body and html to prevent gaps */
-#            html, body {{
-#                margin: 0;
-#                padding: 0;
-#            }}
-#
-#            /* Make header fixed at the top with full viewport width */
-#            .header-image {{
-#                position: fixed;
-#                top: 0;
-#                left: 0;
-#                width: 100vw;
-#                height: 200px;  /* Adjust height as needed */
-#                background-image: url("data:image/jpg;base64,{header_image}");
-#                background-size: cover;
-#                background-position: center;
-#                background-repeat: no-repeat;
-#                z-index: 0;
-#            }}
-#
-#            /* Extend the gradient to blend into content smoothly */
-#            .header-gradient {{
-#                position: absolute;
-#                bottom: 0;
-#                width: 100%;
-#                height: 80%;  /* Match header-image height */
-#                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
-#                z-index: 1;
-#            }}
-#
-#            /* Create overlap effect with main content */
-#            .main-content {{
-#                margin-top: -150px;  /* Negative margin to pull content up */
-#                z-index: 0;         /* Ensures it sits below the header */
-#                position: relative;
-#            }}
-#        </style>
-#        <div class="header-image">
-#            <div class="header-gradient"></div>
-#        </div>
-#        """,
-#        unsafe_allow_html=True
-#    )
 
     
 
@@ -104,6 +91,10 @@ def load_visual_identity(header_image_path):
         [data-testid="stHeader"] {
             background-color: rgba(0,0,0,0);
         }
+        [data-testid="stAppViewContainer"] {
+            background-attachment: local;
+        }
+        
     </style>
     """, unsafe_allow_html=True)
     st.markdown("""
