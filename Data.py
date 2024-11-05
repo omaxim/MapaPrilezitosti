@@ -42,7 +42,7 @@ st.markdown(
             bottom: 0;
             width: 100%;
             height: 100%;  /* Match header-image height */
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
             z-index: 1;
         }}
 
