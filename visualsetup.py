@@ -24,6 +24,23 @@ def load_visual_identity(header_image_path):
         """,
         unsafe_allow_html=True
     )
+
+
+    st.markdown(
+        page_bg_img = f"""
+    <style>
+    [data-testid="stAppViewContainer"] > .main {{
+    background-image: {header_image};
+    background-size: 180%;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-attachment: local;}}
+    </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    
     st.markdown(
         f"""
         <style>
