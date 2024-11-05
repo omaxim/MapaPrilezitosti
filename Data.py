@@ -446,5 +446,6 @@ st.sidebar.download_button(
     data = html_bytes,
     file_name = "plot.html",
     mime="text/html"
+    color='white'
 )
 
