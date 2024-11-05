@@ -8,6 +8,8 @@ st.set_page_config(
 load_visual_identity("header.jpg")
 
 st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
+st.title("")
+st.title("")
 
 # Title
 st.title("Analýza Ekonomické Komplexity")

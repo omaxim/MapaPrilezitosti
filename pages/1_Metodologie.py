@@ -6,6 +6,8 @@ st.set_page_config(
     page_icon="favicon.png"
 )
 load_visual_identity("header.jpg")
+st.title("")
+st.title("")
 
 st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
 
