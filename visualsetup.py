@@ -33,54 +33,50 @@ def load_visual_identity(header_image_path):
     <style>
         /* Remove default padding and margin from body and html to prevent gaps */
         html, body {{
-            margin: 0;            /* No margin */
-            padding: 0;           /* No padding */
-            width: 100%;          /* Ensure full width */
-            height: 100%;         /* Ensure full height */
-            overflow: hidden;     /* Prevent any overflow */
+            margin: 0;
+            padding: 0;
+            width: 100%;  /* Ensure full width */
+            height: 100%; /* Ensure full height */
         }}
 
-        /* Make header image fill the viewport */
+        /* Make header image scroll with content */
         .header-image {{
-            position: fixed;       /* Fixed positioning */
-            top: 0;                /* Align to top */
-            left: 0;               /* Align to left */
-            width: 100vw;          /* Full viewport width */
-            height: 100vh;         /* Full viewport height */
+            position: relative;  /* Changed from fixed to relative */
+            width: 100%;        /* Use 100% width to prevent gaps */
+            height: 200px;      /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
-            background-size: cover; /* Ensure image covers the area */
+            background-size: 100%;  /* Ensure image covers the area */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
-            z-index: -1;          /* Send it to the back */
+            z-index: 0;
         }}
 
-        /* Gradient overlay */
+        /* Extend the gradient to blend into content smoothly */
         .header-gradient {{
-            position: absolute;    
+            position: absolute;
             bottom: 0;
             width: 100%;
-            height: 80%;           /* Match header-image height */
+            height: 80%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
-            z-index: 1;           /* Ensure it sits above the header image */
+            z-index: 1;
         }}
 
-        /* Main content styling */
+        /* Create overlap effect with main content */
         .main-content {{
+            margin-top: -150px;  /* Negative margin to pull content up */
+            z-index: 0;         /* Ensures it sits below the header */
             position: relative;
-            z-index: 2;           /* Bring main content above header */
-            padding: 20px;        /* Add some padding to content */
-            margin-top: 200px;    /* Space to accommodate header height */
-            overflow: auto;       /* Allow scrolling if needed */
+            padding: 20px;      /* Add some padding to content */
         }}
     </style>
     <div class="header-image">
         <div class="header-gradient"></div>
     </div>
-    <div class="main-content">
-        <!-- Your main content goes here -->
-    </div>
     """,
-    unsafe_allow_html=True)
+    unsafe_allow_html=True
+)
+
+    
 
     st.markdown("""
     <style>
