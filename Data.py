@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from io import StringIO
-
+import base64
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png",
@@ -31,7 +31,12 @@ st.markdown("""
                 }
         </style>
         """, unsafe_allow_html=True)
-header_image = "header.jpg"
+
+# Load the image and encode it in Base64 format
+with open("header.jpg", "rb") as image_file:
+    header_image = base64.b64encode(image_file.read()).decode("utf-8")
+
+# Define the HTML and CSS with a gradient overlay
 st.markdown(
     f"""
     <style>
@@ -39,7 +44,7 @@ st.markdown(
             position: relative;
             width: 100%;
             height: 300px;  /* Adjust the height as needed */
-            background-image: url("{header_image}");
+            background-image: url("data:image/jpg;base64,{header_image}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -58,7 +63,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
