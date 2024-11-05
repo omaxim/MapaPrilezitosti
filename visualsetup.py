@@ -29,51 +29,52 @@ def load_visual_identity(header_image_path):
 
     
     st.markdown(
-        f"""
-        <style>
-            /* Remove default padding and margin from body and html to prevent gaps */
-            html, body {{
-                margin: 0;
-                padding: 0;
-            }}
+    f"""
+    <style>
+        /* Remove default padding and margin from body and html to prevent gaps */
+        html, body {{
+            margin: 0;
+            padding: 0;
+            width: 100%;  /* Ensure full width */
+            height: 100%; /* Ensure full height */
+        }}
 
-            /* Make header fixed at the top with full viewport width */
-            .header-image {{
-                position: relative;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 200px;  /* Adjust height as needed */
-                background-image: url("data:image/jpg;base64,{header_image}");
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                z-index: 0;
-            }}
+        /* Make header image scroll with content */
+        .header-image {{
+            position: relative;  /* Changed from fixed to relative */
+            width: 100%;        /* Use 100% width to prevent gaps */
+            height: 200px;      /* Adjust height as needed */
+            background-image: url("data:image/jpg;base64,{header_image}");
+            background-size: cover;  /* Ensure image covers the area */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat;
+            z-index: 0;
+        }}
 
-            /* Extend the gradient to blend into content smoothly */
-            .header-gradient {{
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                height: 80%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
-                z-index: 1;
-            }}
+        /* Extend the gradient to blend into content smoothly */
+        .header-gradient {{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80%;  /* Match header-image height */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
+            z-index: 1;
+        }}
 
-            /* Create overlap effect with main content */
-            .main-content {{
-                margin-top: -150px;  /* Negative margin to pull content up */
-                z-index: 0;         /* Ensures it sits below the header */
-                position: relative;
-            }}
-        </style>
-        <div class="header-image">
-            <div class="header-gradient"></div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+        /* Create overlap effect with main content */
+        .main-content {{
+            margin-top: -150px;  /* Negative margin to pull content up */
+            z-index: 0;         /* Ensures it sits below the header */
+            position: relative;
+            padding: 20px;      /* Add some padding to content */
+        }}
+    </style>
+    <div class="header-image">
+        <div class="header-gradient"></div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
     
 
