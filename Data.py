@@ -445,7 +445,7 @@ st.sidebar.download_button(
     label = "Stáhnout HTML graf",
     data = html_bytes,
     file_name = "plot.html",
-    mime="text/html"
+    mime="text/html",
     color='white'
 )
 
