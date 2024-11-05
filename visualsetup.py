@@ -76,7 +76,7 @@ def load_visual_identity(header_image_path):
     #)
 
     st.markdown(
-        """
+        r"""
         <style>
         [data-testid="stAppViewContainer"] > .main {{
         background-image: url("data:image/png;base64,{header_image}");
@@ -102,7 +102,7 @@ def load_visual_identity(header_image_path):
         }}
         </style>
         """
-    )
+    , unsafe_allow_html=True)
 
     #st.markdown("""
     #<style>
