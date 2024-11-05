@@ -48,7 +48,7 @@ st.markdown(
         /* Make header fixed at the top with full viewport width */
         .header-image {{
             position: fixed;
-            top: 0;
+            top: 64px;  /* Adjust this value based on the height of the Streamlit navigation bar */
             left: 0;
             width: 100vw;
             height: 300px;  /* Adjust height as needed */
@@ -71,7 +71,7 @@ st.markdown(
 
         /* Create overlap effect with main content */
         .main-content {{
-            margin-top: -150px;  /* Negative margin to pull content up */
+            margin-top: 300px;  /* Adjust this value based on the height of the header-image */
             z-index: 0;         /* Ensures it sits below the header */
             position: relative;
         }}
