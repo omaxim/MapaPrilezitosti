@@ -26,7 +26,7 @@ st.markdown("""
                 }
         </style>
         """, unsafe_allow_html=True)
-st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
+st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
 
 # Title
 st.title("Analýza Ekonomické Komplexity")
