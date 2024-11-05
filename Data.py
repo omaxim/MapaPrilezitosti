@@ -255,7 +255,7 @@ col2.divider()
 if 'filters' not in st.session_state:
     st.session_state.filters = []
 
-subcol1, subcol2 = col2.columns(2)
+subcol1, subcol2, subcol3 = col2.columns(3)
 with subcol1:
     if st.button("Číselný filtr"):
         st.session_state.filters.append({'column': None, 'range': None})
@@ -440,8 +440,8 @@ else:
 mybuff = StringIO()
 fig.write_html(mybuff, include_plotlyjs='cdn')
 html_bytes = mybuff.getvalue().encode()
-col2.download_button(
-    label = "Stáhnout HTML graf",
+subcol3.download_button(
+    label = "Stáhnout HTML",
     data = html_bytes,
     file_name = "plot.html",
     mime="text/html"
