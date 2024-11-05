@@ -42,10 +42,10 @@ def load_visual_identity(header_image_path):
         /* Make header image scroll with content */
         .header-image {{
             position: relative;  /* Changed from fixed to relative */
-            width: 180%;        /* Use 100% width to prevent gaps */
+            width: 100%;        /* Use 100% width to prevent gaps */
             height: 200px;      /* Adjust height as needed */
             background-image: url("data:image/jpg;base64,{header_image}");
-            background-size: cover;  /* Ensure image covers the area */
+            background-size: 180%;  /* Ensure image covers the area */
             background-position: center; /* Center the image */
             background-repeat: no-repeat;
             z-index: 0;
@@ -55,7 +55,7 @@ def load_visual_identity(header_image_path):
         .header-gradient {{
             position: absolute;
             bottom: 0;
-            width: 180%;
+            width: 100%;
             height: 80%;  /* Match header-image height */
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
             z-index: 1;
