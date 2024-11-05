@@ -1,4 +1,7 @@
 import streamlit as st
+from visualsetup import load_visual_identity
+#Loading loads of custom css in markdown
+load_visual_identity("header.jpg")
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png"
