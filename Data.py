@@ -381,7 +381,8 @@ fig.update_layout(
     hoverlabel=dict(
         font=dict(
             family="Montserrat, sans-serif",  # Hover label font family
-            color="#FFFFFF"                   # Hover label font color
+            color="#FFFFFF"   ,
+            size=fontsize                # Hover label font color
         )
     ),
     legend=dict(
@@ -389,7 +390,12 @@ fig.update_layout(
         yanchor="top",            # Align the legend's top with the graph's bottom
         y=-0.3,                   # Push the legend further below
         xanchor="center",         # Center the legend horizontally
-        x=0.5                     # Position it at the center of the graph
+        x=0.5 ,
+        font=dict(
+            family="Montserrat, sans-serif",  # Hover label font family
+            color="#FFFFFF"   ,
+            size=fontsize                # Hover label font color
+        )                    # Position it at the center of the graph
     ),
     xaxis=dict(
         showgrid=False,
@@ -401,9 +407,14 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=15),  # Set tick text color to black and size
+        tickfont=dict(color='black', size=fontsize),  # Set tick text color to black and size
         title=dict(
-            font=dict(color='black', size=15)  # Set x-axis label color and size
+            font=dict(color='black', size=fontsize)  # Set x-axis label color and size
+        ),
+        font=dict(
+            family="Montserrat, sans-serif",  # Hover label font family
+            color="#FFFFFF"   ,
+            size=fontsize                # Hover label font color
         )
     ),
     yaxis=dict(
@@ -416,9 +427,9 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=15),  # Set tick text color to black and size
+        tickfont=dict(color='black', size=fontsize),  # Set tick text color to black and size
         title=dict(
-            font=dict(color='black', size=15)  # Set y-axis label color and size
+            font=dict(color='black', size=fontsize)  # Set y-axis label color and size
         )
     ),
     plot_bgcolor='rgba(0, 0, 0, 0)',  # Transparent plot background
