@@ -25,7 +25,7 @@ st.markdown(
         /* Make header fixed at the top with full viewport width */
         .header-image {{
             position: fixed;
-            top: -100px;
+            top: 0;
             left: 0;
             width: 100vw;
             height: 200px;  /* Adjust height as needed */
@@ -33,7 +33,7 @@ st.markdown(
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 5;
+            z-index: 0;
         }}
         
         /* Extend the gradient to blend into content smoothly */
