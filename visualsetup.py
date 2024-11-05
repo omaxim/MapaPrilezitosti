@@ -27,7 +27,7 @@ def load_visual_identity(header_image_path):
 
 
     st.markdown(
-        page_bg_img = f"""
+        """
     <style>
     [data-testid="stAppViewContainer"] > .main {{
     background-image: {header_image};
