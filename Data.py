@@ -31,6 +31,35 @@ st.markdown("""
                 }
         </style>
         """, unsafe_allow_html=True)
+header_image = "header.jpg"
+st.markdown(
+    f"""
+    <style>
+        .header-image {{
+            position: relative;
+            width: 100%;
+            height: 300px;  /* Adjust the height as needed */
+            background-image: url("{header_image}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }}
+        .header-gradient {{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
+        }}
+    </style>
+    <div class="header-image">
+        <div class="header-gradient"></div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 col1.title("Mapa příležitostí")
