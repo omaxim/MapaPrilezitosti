@@ -8,29 +8,6 @@ st.set_page_config(
     page_icon="favicon.png",
     layout="wide"
 )
-st.markdown("""
-<style>
-    /* Set sidebar background color */
-    [data-testid="stSidebar"] {
-        background-color: #000000;
-    }
-
-    /* Set sidebar text color */
-    [data-testid="stSidebar"] * {
-        color: #FFFFFF;
-    }
-</style>
-""", unsafe_allow_html=True)
-st.markdown("""
-        <style>
-               .block-container {
-                    padding-top: 1rem;
-                    padding-bottom: 5rem;
-                    padding-left: 5rem;
-                    padding-right: 5rem;
-                }
-        </style>
-        """, unsafe_allow_html=True)
 
 # Load the image and encode it in Base64 format
 with open("header.jpg", "rb") as image_file:
@@ -82,6 +59,30 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+st.markdown("""
+<style>
+    /* Set sidebar background color */
+    [data-testid="stSidebar"] {
+        background-color: #000000;
+    }
+
+    /* Set sidebar text color */
+    [data-testid="stSidebar"] * {
+        color: #FFFFFF;
+    }
+</style>
+""", unsafe_allow_html=True)
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 5rem;
+                    padding-left: 5rem;
+                    padding-right: 5rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
+
 st.logo('logo_web.svg',size='large',icon_image='nologo.jpg')
 col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
