@@ -17,9 +17,7 @@ col0,col1, colx,col2, = st.columns([1,4, 1,2])
 #col1.title("Mapa příležitostí")
 logocol1,logocol2 = col1.columns([2,3])
 logocol1.image('logo_web.svg',use_column_width=True)
-logocol1.title("")
 # Sidebar for selecting variables
-col2.title("")
 col2.title("")
 
 col2.subheader("Nastavení Grafu")
