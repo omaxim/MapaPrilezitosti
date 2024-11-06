@@ -64,6 +64,13 @@ def load_visual_identity(header_image_path):
                 z-index: 1;
             }}
 
+            /* Offset the main content below the fixed header */
+            .main-content {{
+            padding-top: 240px;  /* Adjust to header height + some buffer */
+            position: relative; 
+            z-index: 1;
+        }}
+
         </style>
         <div class="header-image">
             <div class="header-gradient"></div>
