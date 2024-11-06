@@ -99,8 +99,8 @@ def load_visual_identity(header_image_path):
                    .block-container {
                         padding-top: 0rem;
                         padding-bottom: 5rem;
-                        padding-left: 5rem;
-                        padding-right: 5rem;
+                        padding-left: -5rem;
+                        padding-right: -5rem;
                     }
             </style>
             """, unsafe_allow_html=True)
