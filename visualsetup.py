@@ -47,7 +47,7 @@ def load_visual_identity(header_image_path):
                 overflow-x: hidden;
                 width: 150vw;
                 box-sizing: border-box;
-                height: 10vw;  /* Adjust height as needed */
+                height: 30vw;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
                 background-position: center;
