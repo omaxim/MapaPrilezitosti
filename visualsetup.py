@@ -43,7 +43,7 @@ def load_visual_identity(header_image_path):
             .header-image {{
                 position: relative;
                 top: 0;
-                left: 0;
+                left: -300px;
                 width: 1500px;
                 box-sizing: border-box;
                 height: 220px;  /* Adjust height as needed */
