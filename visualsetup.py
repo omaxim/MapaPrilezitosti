@@ -43,7 +43,6 @@ def load_visual_identity(header_image_path):
                 top: 0;
                 left: 0;
                 width: 100vw;
-                height: 220px;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
                 background-position: center;
