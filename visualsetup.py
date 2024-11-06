@@ -39,10 +39,10 @@ def load_visual_identity(header_image_path):
 
             /* Make header fixed at the top with full viewport width */
             .header-image {{
-                position: fixed;
+                position: relative;
                 top: 0;
                 left: 0;
-                width: 100vw;
+                width: 100%;
                 height: 220px;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
