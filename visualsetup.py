@@ -64,12 +64,6 @@ def load_visual_identity(header_image_path):
                 z-index: 1;
             }}
 
-            /* Create overlap effect with main content */
-            .main-content {{
-                margin-top: 500px;  /* Negative margin to pull content up */
-                z-index: 0;         /* Ensures it sits below the header */
-                position: absolute;
-            }}
         </style>
         <div class="header-image">
             <div class="header-gradient"></div>
