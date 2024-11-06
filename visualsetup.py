@@ -44,6 +44,7 @@ def load_visual_identity(header_image_path):
                 position: absolute;
                 top: o;
                 left: -10%;
+                right: -10%;
                 overflow-x: hidden;
                 width: 100%;
                 box-sizing: border-box;
