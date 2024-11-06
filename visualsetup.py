@@ -42,8 +42,8 @@ def load_visual_identity(header_image_path):
             /* Make header fixed at the top with full viewport width */
             .header-image {{
                 position: relative;
-                top: -10vw;
-                left: -10vw;
+                top: -1vw;
+                left: -1vw;
                 width: 150vw;
                 box-sizing: border-box;
                 height: 10vw;  /* Adjust height as needed */
