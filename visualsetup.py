@@ -63,7 +63,7 @@ def load_visual_identity(header_image_path):
 
             /* Create overlap effect with main content */
             .main-content {{
-                margin-top: 0;  /* Negative margin to pull content up */
+                margin-top: -500px;  /* Negative margin to pull content up */
                 z-index: 0;         /* Ensures it sits below the header */
                 position: absolute;
             }}
