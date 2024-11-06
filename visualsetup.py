@@ -36,11 +36,12 @@ def load_visual_identity(header_image_path):
                 margin: 0;
                 padding: 0;
                 overflow-x: hidden;
+                display: block;
             }}
 
             /* Make header fixed at the top with full viewport width */
             .header-image {{
-                position: fixed;
+                position: relative;
                 top: 0;
                 left: 0;
                 width: 100%;
@@ -63,13 +64,7 @@ def load_visual_identity(header_image_path):
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
                 z-index: 1;
             }}
-
-            /* Offset the main content below the fixed header */
-            .main-content {{
-            padding-top: 240px;  /* Adjust to header height + some buffer */
-            position: relative; 
-            z-index: 1;
-        }}
+            
 
         </style>
         <div class="header-image">
