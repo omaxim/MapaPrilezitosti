@@ -40,11 +40,12 @@ def load_visual_identity(header_image_path):
             /* Make header fixed at the top with full viewport width */
             .header-image {{
                 position: relative;
-                top: -50%;
+                top: 0;
                 left: 0;
                 width: 100%;
                 height: 220px;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
+                background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
                 z-index: 0;
@@ -62,7 +63,7 @@ def load_visual_identity(header_image_path):
 
             /* Create overlap effect with main content */
             .main-content {{
-                margin-top: -150px;  /* Negative margin to pull content up */
+                margin-top: -1050px;  /* Negative margin to pull content up */
                 z-index: 0;         /* Ensures it sits below the header */
                 position: relative;
             }}
