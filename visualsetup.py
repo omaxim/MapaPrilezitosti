@@ -49,7 +49,7 @@ def load_visual_identity(header_image_path):
                 background-position: center;
                 background-repeat: no-repeat;
                 z-index: 0;
-                margin: 0 auto;
+                margin: 0 ;
             }}
 
             /* Extend the gradient to blend into content smoothly */
