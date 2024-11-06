@@ -43,7 +43,7 @@ def load_visual_identity(header_image_path):
             .header-image {{
                 position: absolute;
                 top: o;
-                left: 0;
+                left: -10%;
                 overflow-x: hidden;
                 width: 100%;
                 box-sizing: border-box;
