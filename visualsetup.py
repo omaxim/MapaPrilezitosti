@@ -44,7 +44,8 @@ def load_visual_identity(header_image_path):
                 position: relative;
                 top: 0;
                 left: 0;
-                width: 100vw;
+                width: 100%;
+                box-sizing: border-box;
                 height: 10vw;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
