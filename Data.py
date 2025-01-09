@@ -97,8 +97,9 @@ color_discrete_map = {
 def load_data():
     # Replace with the path to your data file
     #df                          = pd.read_csv('GreenComplexity_CZE_2022.csv')
-    url = 'https://docs.google.com/spreadsheets/d/1mhv7sJC5wSqJRXdfyFaWtBuEpX6ENj2c/gviz/tq?tqx=out:csv'
-    taxonomy = pd.read_csv(url)
+    #url = 'https://docs.google.com/spreadsheets/d/1mhv7sJC5wSqJRXdfyFaWtBuEpX6ENj2c/gviz/tq?tqx=out:csv'
+    #taxonomy = pd.read_csv(url)
+    taxonomy = pd.read_csv('data.csv')
     CZE = pd.read_csv('CZE.csv')
     GreenProducts = taxonomy.merge(CZE,how='left',left_on='HS_ID',right_on='prod')
     # Calculate 2030 export value
