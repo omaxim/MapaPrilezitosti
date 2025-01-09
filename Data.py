@@ -93,7 +93,7 @@ color_discrete_map = {
 
 
 # Load data
-@st.cache_data
+#@st.cache_data
 def load_data():
     # Replace with the path to your data file
     #df                          = pd.read_csv('GreenComplexity_CZE_2022.csv')
