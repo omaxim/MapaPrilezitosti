@@ -133,7 +133,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 }},
                 animation: {{ duration: 500 }}, // Disable default animations if hover is jerky
                 transitions: {{
-                    active: {{ animation: {{ duration: 0 }} }} // Faster response on hover
+                    active: {{ animation: {{ duration: 300 }} }} // Faster response on hover
                 }},
                 // *** REVISED onHover LOGIC ***
                 onHover: (event, elements, chart) => {{
