@@ -162,12 +162,12 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         }},
                         onClick: (event, item, chart) => {{
                             const datasetIndex = item.datasetIndex;  // Get the dataset index of the clicked legend item
-
+                        
                             // Check if the dataset is already isolated
                             if (isolatedDatasets.includes(datasetIndex)) {{
                                 // If dataset is isolated, remove it from isolatedDatasets and reset its color
                                 isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
-
+                        
                                 // Reset all datasets to original colors
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     let originalColor = dataset._originalColor || dataset.backgroundColor;  // Store original color to reset
@@ -177,7 +177,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                             }} else {{
                                 // If dataset is not isolated, isolate it
                                 isolatedDatasets.push(datasetIndex);
-
+                        
                                 // Dim all other datasets except the clicked one
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     if (index !== datasetIndex) {{
@@ -194,9 +194,10 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                                     }}
                                 }});
                             }}
-
+                        
                             chart.update();  // Update the chart to reflect the changes
-                    }},
+                        }},
+
                     tooltip: {{
                         callbacks: {{
                             label: function(context) {{
