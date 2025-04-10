@@ -115,7 +115,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 // Increase hover radius directly in options
                 layout: {{
                     padding: {{
-                        top: 30 // Adjust this value (in pixels) to get the desired spacing
+                        top: 300 // Adjust this value (in pixels) to get the desired spacing
                     }}
                 }},
                 elements: {{
