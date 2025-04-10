@@ -21,7 +21,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         log_max = np.sqrt(max_size + 1)
 
         # Scale the size based on the log of the values
-        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 25 + 2
+        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 30 + 2
 
     color_discrete_map = get_color_discrete_map() # Assume this returns a dict
     fallback_colors = [
@@ -76,17 +76,13 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         grouped_data[color_category]["data"].append(data_point)
 
     # Convert grouped data into Chart.js dataset format
-    # --- Create datasets with default transparency ---
-    default_alpha_hex = 'E6' # Set desired default alpha (~80% opaque). Try 'B3', '99', '80' etc.
-
     datasets = [
         {
             "label": category,
             "data": group_info["data"],
-            "backgroundColor": group_info["color"] + default_alpha_hex,
-            "borderColor": group_info["color"] + default_alpha_hex,
+            "backgroundColor": group_info["color"],
+            "borderColor": group_info["color"],
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
-            "_defaultBackgroundColor": group_info["color"] + default_alpha_hex,
             "borderWidth": 0,
             "hoverRadius": 5,
             "clip": 100
@@ -281,11 +277,11 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         // Optional: Add logic to reset hover state if mouse leaves canvas
         ctx.canvas.addEventListener('mouseout', () => {{
              myBubbleChart.data.datasets.forEach(dataset => {{
-                const originalColor = dataset._defaultBackgroundColor || dataset.backgroundColor;
+                const originalColor = dataset._originalBackgroundColor || dataset.backgroundColor;
                  dataset.backgroundColor = originalColor;
                  dataset.borderColor = originalColor;
             }});
-            myBubbleChart.update('none');
+            myBubbleChart.update();
         }});
 
     </script>
