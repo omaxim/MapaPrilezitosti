@@ -92,6 +92,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        let isolatedDatasets = [];  // Array to track isolated datasets
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
@@ -155,25 +156,46 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
                 plugins: {{
                     legend: {{
-                        onHover: (event, elements, chart) => {{
-                            const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
-                            if (datasetIndex !== undefined)  {{
+                        labels: {{
+                            usePointStyle: true,
+                            padding: 10
+                        }},
+                        onClick: (event, item, chart) => {{
+                            const datasetIndex = item.datasetIndex;  // Get the dataset index of the clicked legend item
+
+                            // Check if the dataset is already isolated
+                            if (isolatedDatasets.includes(datasetIndex)) {{
+                                // If dataset is isolated, remove it from isolatedDatasets and reset its color
+                                isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
+
+                                // Reset all datasets to original colors
+                                chart.data.datasets.forEach((dataset, index) => {{
+                                    let originalColor = dataset._originalColor || dataset.backgroundColor;  // Store original color to reset
+                                    dataset.backgroundColor = originalColor;  // Reset to original color
+                                    dataset.borderColor = originalColor;     // Reset border color
+                                }});
+                            }} else {{
+                                // If dataset is not isolated, isolate it
+                                isolatedDatasets.push(datasetIndex);
+
+                                // Dim all other datasets except the clicked one
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     if (index !== datasetIndex) {{
                                         let color = dataset.backgroundColor;
                                         if (typeof color === 'string' && !color.endsWith('0D')) {{
-                                            dataset.backgroundColor = color + '0D';
-                                            dataset.borderColor = color + '0D';
+                                            dataset.backgroundColor = color + '0D';  // Add transparency (dim)
+                                            dataset.borderColor = color + '0D';     // Add transparency to border
                                         }}
+                                    }} else {{
+                                        // Highlight the clicked dataset
+                                        dataset._originalColor = dataset.backgroundColor;  // Store original color before change
+                                        dataset.backgroundColor = 'rgba(255, 0, 0, 1)';  // Highlight color (red for example)
+                                        dataset.borderColor = 'rgba(255, 0, 0, 1)';     // Highlight border color
                                     }}
                                 }});
-                                chart.update();
-                            }} 
-                        }},
-                        labels: {{
-                            usePointStyle: true,
-                            padding: 10
-                        }}
+                            }}
+
+                            chart.update();  // Update the chart to reflect the changes
                     }},
                     tooltip: {{
                         callbacks: {{
