@@ -123,7 +123,7 @@ else:
     color       = 'Skupina'
 
 
-hover_info  = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název',x_axis,y_axis])
+hover_info  = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
 col2.divider()
 # Filter section
 if 'filters' not in st.session_state:
