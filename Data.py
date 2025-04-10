@@ -17,7 +17,14 @@ st.set_page_config(
 load_visual_identity("header.jpg")
 
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
-st.error('Toto je pracovní verze. Data s vyjímkou budoucího růstu pochází z CEPII databáze BACI. Projekce 2025-30 berte s velikou rezervou. Krom toho, že jsou odhadem, neberou v potaz inflaci.', icon="⚠️")
+col0,col1, colx,col2, = st.columns([1,4, 1,2])
+#col1.title("Mapa příležitostí")
+logocol1,logocol2 = col1.columns([2,3])
+logocol1.image('logo_web.svg',use_container_width=True)
+# Sidebar for selecting variables
+col2.title("")
+
+col2.subheader("Nastavení Grafu")
 
 # Sidebar for selecting variables
 st.sidebar.header("Nastavení Grafu")
