@@ -119,14 +119,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     duration: 500,         
                     easing: 'easeOutQuad'  
                 }},
-                transitions: {{
-                    active: {{
-                        animation: {{
-                            duration: 600,
-                            easing: 'easeOutQuad'
-                        }}
-                    }}
-                }},
                 onHover: (event, elements, chart) => {{
                     if (elements.length > 0) {{
                         const datasetIndex = elements[0].datasetIndex;
