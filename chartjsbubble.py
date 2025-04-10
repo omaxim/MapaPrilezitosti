@@ -21,7 +21,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         log_max = np.sqrt(max_size + 1)
 
         # Scale the size based on the log of the values
-        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 30 + 1
+        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 30 + 2
 
     color_discrete_map = get_color_discrete_map() # Assume this returns a dict
     fallback_colors = [
