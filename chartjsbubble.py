@@ -92,44 +92,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function debounce(func, delay) {{
-            let timeout;
-            return function(...args) {{
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), delay);
-            }};
-        }}
-        const debouncedUpdate = debounce(() => {{
-            chart.update();
-        }}, 100);  // 100ms debounce delay
-
-        function handleHover(evt, item, legend) {{
-            const chart = legend.chart;
-            const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
-            chart.data.datasets.forEach((dataset, index) => {{
-                if (index !== datasetIndex) {{
-                    // Dim all others by adding alpha (if not already)
-                    let color = dataset.backgroundColor;
-                    if (typeof color === 'string' && !color.endsWith('0D')) {{
-                        dataset.backgroundColor = color + '0D';
-                        dataset.borderColor = color + '0D';
-                    }}
-                }}
-            }});
-            debouncedUpdate();
-        }}
-        
-        function handleLeave(evt, item, legend) {{
-            const chart = legend.chart;
-            chart.data.datasets.forEach((dataset) => {{
-                let bg = dataset.backgroundColor;
-                if (typeof bg === 'string' && bg.length === 9) {{
-                    dataset.backgroundColor = bg.slice(0, -2);  // Remove the alpha part
-                    dataset.borderColor = bg.slice(0, -2);
-                }}
-            }});
-            debouncedUpdate();
-        }}
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
@@ -193,8 +155,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
                 plugins: {{
                     legend: {{
-                        onHover: handleHover,
-                        onLeave: handleLeave,
                         labels: {{
                             usePointStyle: true,
                             padding: 10
