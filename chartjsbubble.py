@@ -98,7 +98,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
     </div>
     <style>
     #myBubbleChart > div[role="legend"] {{ /* Common structure, ADJUST SELECTOR based on inspection */
-        margin-bottom: 25px !important; /* Adjust space */
+        margin-bottom: 250px !important; /* Adjust space */
     }}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
