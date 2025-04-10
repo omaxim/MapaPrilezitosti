@@ -155,6 +155,61 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
                 plugins: {{
                     legend: {{
+                        oonClick: (event, item, legend) => {{
+    const datasetIndex = item.datasetIndex;
+    const chart = legend.chart;
+
+    chart.data.datasets.forEach((dataset, index) => {{
+        if (index === datasetIndex) {{
+            // Toggle visibility of the clicked dataset
+            const isVisible = chart.isDatasetVisible(index);
+            if (isVisible) {{
+                chart.hide(index);
+                // Optionally, reset its highlight if it was highlighted
+                if (dataset._originalBackgroundColor) {{
+                    dataset.backgroundColor = dataset._originalBackgroundColor;
+                    dataset.borderColor = dataset._originalBorderColor;
+                    delete dataset._originalBackgroundColor;
+                    delete dataset._originalBorderColor;
+                }}
+            }} else {{
+                chart.show(index);
+                // Highlight the clicked dataset
+                dataset._originalBackgroundColor = dataset.backgroundColor;
+                dataset._originalBorderColor = dataset.borderColor;
+                dataset.backgroundColor = 'rgba(255, 0, 0, 1)';
+                dataset.borderColor = 'rgba(255, 0, 0, 1)';
+            }}
+        }} else {{
+            // For other datasets, hide if the clicked one is shown, or show if the clicked one is hidden
+            const clickedIsVisible = chart.isDatasetVisible(datasetIndex);
+            if (clickedIsVisible) {{
+                chart.hide(index);
+                // Store original colors for potential reset
+                if (!dataset._originalBackgroundColor) {{
+                    dataset._originalBackgroundColor = dataset.backgroundColor;
+                    dataset._originalBorderColor = dataset.borderColor;
+                }}
+                // Dim other datasets
+                dataset.backgroundColor = dataset.backgroundColor + '0D';
+                dataset.borderColor = dataset.borderColor + '0D';
+            }} else {{
+                chart.show(index);
+                // Restore original colors of other datasets
+                if (dataset._originalBackgroundColor) {{
+                    dataset.backgroundColor = dataset._originalBackgroundColor;
+                    dataset.borderColor = dataset._originalBorderColor;
+                    delete dataset._originalBackgroundColor;
+                    delete dataset._originalBorderColor;
+                }}
+            }}
+        }}
+    }});
+
+    chart.update();
+}},
+
+
                         labels: {{
                             usePointStyle: true,
                             padding: 10
