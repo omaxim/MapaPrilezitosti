@@ -156,34 +156,34 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 plugins: {{
                     legend: {{
                         onClick: (event, item, legend) => {{
-    const datasetIndex = item.datasetIndex;
-    const chart = legend.chart;
+                            const datasetIndex = item.datasetIndex;
+                            const chart = legend.chart;
 
-    // Initialize an isolated state on the chart if it doesn't exist
-    if (chart._isolatedDatasetIndex === undefined) {{
-        chart._isolatedDatasetIndex = null;
-    }}
+                            // Initialize an isolated state on the chart if it doesn't exist
+                            if (chart._isolatedDatasetIndex === undefined) {{
+                                chart._isolatedDatasetIndex = null;
+                            }}
 
-    if (chart._isolatedDatasetIndex === datasetIndex) {{
-        // If the clicked dataset is already isolated, un-isolate all
-        chart.data.datasets.forEach((_, index) => {{
-            chart.show(index);
-        }});
-        chart._isolatedDatasetIndex = null; // Reset isolated state
-    }} else {{
-        // Isolate the clicked dataset
-        chart.data.datasets.forEach((_, index) => {{
-            if (index === datasetIndex) {{
-                chart.show(index);
-            }} else {{
-                chart.hide(index);
-            }}
-        }});
-        chart._isolatedDatasetIndex = datasetIndex; // Set isolated state
-    }}
+                            if (chart._isolatedDatasetIndex === datasetIndex) {{
+                                // If the clicked dataset is already isolated, un-isolate all
+                                chart.data.datasets.forEach((_, index) => {{
+                                    chart.show(index);
+                                }});
+                                chart._isolatedDatasetIndex = null; // Reset isolated state
+                            }} else {{
+                                // Isolate the clicked dataset
+                                chart.data.datasets.forEach((_, index) => {{
+                                    if (index === datasetIndex) {{
+                                        chart.show(index);
+                                    }} else {{
+                                        chart.hide(index);
+                                    }}
+                                }});
+                                chart._isolatedDatasetIndex = datasetIndex; // Set isolated state
+                            }}
 
-    chart.update();
-}},
+                            chart.update();
+                        }},
 
 
                         labels: {{
