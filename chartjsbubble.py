@@ -77,7 +77,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
 
     # Convert grouped data into Chart.js dataset format
     # --- Create datasets with default transparency ---
-    default_alpha_hex = 'CC' # Set desired default alpha (~80% opaque). Try 'B3', '99', '80' etc.
+    default_alpha_hex = 'E6' # Set desired default alpha (~80% opaque). Try 'B3', '99', '80' etc.
 
     datasets = [
         {
