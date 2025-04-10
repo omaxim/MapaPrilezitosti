@@ -95,7 +95,6 @@ def load_data(datayear,USD_to_czk):
     return df
 
 df = load_data(year,USD_to_czk)
-st.title("Mapa Příležitostí "+year)
 
 # Create lists of display names for the sidebar
 ji_display_names = ['Skupina', 'Podskupina', 'Kategorie výrobku']
