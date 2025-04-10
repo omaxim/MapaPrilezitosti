@@ -108,7 +108,7 @@ markersize  = col2.selectbox("Velikost dle:", plot_display_names, index=10)
 # Apply filters to dataframe
 filtered_df = df.copy()
 
-filtrovat_dle_skupin = col2.toggle("Filtrovat dle skupin",value=False)
+filtrovat_dle_skupin = col2.toggle("Filtrovat dle kategorií",value=False)
 
 if filtrovat_dle_skupin:
     color       = 'Kategorie'
