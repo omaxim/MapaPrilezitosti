@@ -155,12 +155,11 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 }},
 
                 plugins: {{
-                    legend: {{
-                        onClick: (event, item, chart) => {{
+                    legend: {{onClick: (event, item, chart) => {{
     if (!item || !item.datasetIndex) return; // Ensure item is valid
 
     const datasetIndex = item.datasetIndex;
-
+    
     // Check if the dataset is already isolated
     if (isolatedDatasets.includes(datasetIndex)) {{
         // If dataset is isolated, remove it from isolatedDatasets and reset its color
@@ -198,6 +197,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
     chart.update();  // Update the chart to reflect the changes
 }},
+
 
 
                         labels: {{
