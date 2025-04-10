@@ -156,9 +156,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 plugins: {{
                     legend: {{
                         onHover: (event, elements, chart) => {{
-                            const chart = legend.chart;
                             if (elements.length > 0) {{
-                                const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
+                                const datasetIndex = elements[0].datasetIndex;
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     if (index !== datasetIndex) {{
                                         let color = dataset.backgroundColor;
