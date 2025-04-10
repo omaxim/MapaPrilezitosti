@@ -92,7 +92,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        let isolatedDatasets = [];
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
@@ -155,47 +154,56 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 }},
 
                 plugins: {{
-                    legend: {{onClick: (event, item, chart) => {{
+                    legend: {{
+                        onClick: (event, item, chart) => {{
     if (!item || !item.datasetIndex) return; // Ensure item is valid
 
     const datasetIndex = item.datasetIndex;
-    
+
+    // Initialize isolatedDatasets if it doesn't exist on the chart's data
+    if (!chart.data.isolatedDatasets) {{
+        chart.data.isolatedDatasets = [];
+    }}
+    const isolatedDatasets = chart.data.isolatedDatasets;
+
     // Check if the dataset is already isolated
     if (isolatedDatasets.includes(datasetIndex)) {{
         // If dataset is isolated, remove it from isolatedDatasets and reset its color
-        isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
+        chart.data.isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
 
-        // Reset all datasets to original colors
+        // Reset all datasets to original colors and visibility
         chart.data.datasets.forEach((dataset, index) => {{
-            let originalColor = dataset._originalColor || dataset.backgroundColor;  // Store original color to reset
-            dataset.backgroundColor = originalColor;  // Reset to original color
+            let originalColor = dataset._originalColor || dataset.backgroundColor; // Retrieve stored original color
+            dataset.backgroundColor = originalColor; // Reset to original color
             dataset.borderColor = originalColor;     // Reset border color
             chart.show(index); // Ensure dataset is visible
         }});
     }} else {{
         // If dataset is not isolated, isolate it
-        isolatedDatasets.push(datasetIndex);
+        chart.data.isolatedDatasets.push(datasetIndex);
 
         // Dim all other datasets except the clicked one
         chart.data.datasets.forEach((dataset, index) => {{
             if (index !== datasetIndex) {{
                 let color = dataset.backgroundColor;
                 if (typeof color === 'string' && !color.endsWith('0D')) {{
-                    dataset.backgroundColor = color + '0D';  // Add transparency (dim)
+                    // Store original color before dimming
+                    dataset._originalColor = dataset.backgroundColor;
+                    dataset.backgroundColor = color + '0D'; // Add transparency (dim)
                     dataset.borderColor = color + '0D';     // Add transparency to border
                     chart.hide(index); // Hide the non-clicked dataset
                 }}
             }} else {{
                 // Highlight the clicked dataset
-                dataset._originalColor = dataset.backgroundColor;  // Store original color before change
-                dataset.backgroundColor = 'rgba(255, 0, 0, 1)';  // Highlight color (red for example)
+                dataset._originalColor = dataset.backgroundColor; // Store original color before change
+                dataset.backgroundColor = 'rgba(255, 0, 0, 1)'; // Highlight color (red for example)
                 dataset.borderColor = 'rgba(255, 0, 0, 1)';     // Highlight border color
                 chart.show(index); // Ensure the clicked dataset is visible
             }}
         }});
     }}
 
-    chart.update();  // Update the chart to reflect the changes
+    chart.update(); // Update the chart to reflect the changes
 }},
 
 
