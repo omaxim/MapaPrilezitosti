@@ -80,9 +80,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "backgroundColor": group_info["color"],
             "borderColor": group_info["color"],
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
-            "borderWidth": 1,
-            "hoverBorderWidth": 2, # Optional: thicker border on hover
-            "hoverRadius": 2
+            "borderWidth": 1
         }
         for category, group_info in grouped_data.items()
     ]
