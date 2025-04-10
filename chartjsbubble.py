@@ -76,7 +76,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         grouped_data[color_category]["data"].append(data_point)
 
         # --- Create datasets with default transparency ---
-        default_alpha_hex = 'CC' # Set desired default alpha (~80% opaque)
+        default_alpha_hex = 'DE' # Set desired default alpha (~80% opaque)
 
         datasets = [
             {
