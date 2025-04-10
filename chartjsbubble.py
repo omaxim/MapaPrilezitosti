@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import itertools
+import re
 from variable_names import get_hover_formatting, get_color_discrete_map
 def hex_to_rgba(hex_color, alpha=1.0):
     hex_color = hex_color.lstrip("#")
@@ -173,5 +174,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
         }});
     </script>
     """
-    return chart_js.replace("Název 3: ", "").replace("Název 2: ", "").replace("Název: ", "")
+
+    def remove_nazev_variants(text):
+        return re.sub(r"Název(?:\xa0| )?\d?: ?", "", text)
+    return remove_nazev_variants(chart_js)
 

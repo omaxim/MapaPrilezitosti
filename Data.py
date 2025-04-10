@@ -7,6 +7,7 @@ from chartjsbubble import chartjs_plot
 from variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
 import streamlit.components.v1 as components
 from visualsetup import load_visual_identity
+
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.png",
