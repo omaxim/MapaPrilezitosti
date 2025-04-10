@@ -96,6 +96,11 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
     <div style="width:100%; height:700px;">
         <canvas id="myBubbleChart"></canvas>
     </div>
+    <style>
+    #myBubbleChart > div[role="legend"] {{ /* Common structure, ADJUST SELECTOR based on inspection */
+        margin-bottom: 25px !important; /* Adjust space */
+    }}
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
@@ -204,10 +209,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                                 chart._isolatedDatasetIndex = datasetIndex;
                             }}
                             chart.update();
-                        }},
-                        labels: {{ usePointStyle: true}},
-                        padding: {{
-                        bottom: 200
                         }}
                     }},
                     tooltip: {{
