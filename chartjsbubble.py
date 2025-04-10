@@ -212,7 +212,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                         text: '', // Intentionally empty or use ' '
                         padding: {{
                             top: 0, // No padding above the (invisible) title
-                            bottom: 20 // ** This creates space below the title/legend **
+                            bottom: 200 // ** This creates space below the title/legend **
                                        // Adjust this value (e.g., 20, 30)
                         }}
                     }},
