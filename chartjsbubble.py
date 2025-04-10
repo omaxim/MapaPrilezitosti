@@ -113,11 +113,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 responsive: true,
                 maintainAspectRatio: false,
                 // Increase hover radius directly in options
-                layout: {{
-                    padding: {{
-                        top: 300 // Adjust this value (in pixels) to get the desired spacing
-                    }}
-                }},
                 elements: {{
                     point: {{
                         hoverRadius: function(context) {{
@@ -211,6 +206,15 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                             chart.update();
                         }},
                         labels: {{ usePointStyle: true, padding: 10 }}
+                    }},
+                    title: {{
+                        display: true,
+                        text: '', // Intentionally empty or use ' '
+                        padding: {{
+                            top: 0, // No padding above the (invisible) title
+                            bottom: 20 // ** This creates space below the title/legend **
+                                       // Adjust this value (e.g., 20, 30)
+                        }}
                     }},
                     tooltip: {{
                         callbacks: {{
