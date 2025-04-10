@@ -57,6 +57,22 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         # Handle <br> splitting if necessary (your existing logic here)
         # ...
         # Sort meta dictionary alphabetically
+
+        if color_category not in grouped_data:
+            grouped_data[color_category] = {"data": [], "color": assigned_color}
+            for key in hover_data:
+                if hover_data[key] is not False:
+                    value = format_hover_data(key, row[key])
+                if "<br>" in value:
+                    parts = value.split("<br>")
+                    for i, part in enumerate(parts):
+                        new_key = f"{key} {i+1}" if i > 0 else key # Append (1), (2), etc.
+                        data_point["meta"][new_key] = part
+                else:
+                    data_point["meta"][key] = value
+        # Sort meta dictionary alphabetically
+        data_point["meta"] = dict(sorted(data_point["meta"].items()))
+        grouped_data[color_category]["data"].append(data_point)
         sorted_meta = dict(sorted(meta_data.items()))
 
 
