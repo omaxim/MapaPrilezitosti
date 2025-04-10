@@ -92,6 +92,33 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function handleHover(evt, item, legend) {{
+            const chart = legend.chart;
+            const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
+            chart.data.datasets.forEach((dataset, index) => {{
+                if (index !== datasetIndex) {{
+                    // Dim all others by adding alpha (if not already)
+                    let color = dataset.backgroundColor;
+                    if (!color.endsWith('4D')) {{
+                        dataset.backgroundColor = color + '4D';
+                        dataset.borderColor = color + '4D';
+                    }}
+                }}
+            }});
+            chart.update();
+        }}
+        
+        function handleLeave(evt, item, legend) {{
+            const chart = legend.chart;
+            chart.data.datasets.forEach((dataset) => {{
+                let bg = dataset.backgroundColor;
+                if (typeof bg === 'string' && bg.length === 9) {{
+                    dataset.backgroundColor = bg.slice(0, -2);  // Remove the alpha part
+                    dataset.borderColor = bg.slice(0, -2);
+                }}
+            }});
+            chart.update();
+        }}
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
