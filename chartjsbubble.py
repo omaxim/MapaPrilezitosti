@@ -158,19 +158,26 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         onClick: (event, item, legend) => {{
     const datasetIndex = item.datasetIndex;
     const chart = legend.chart;
-    const allHidden = chart.data.datasets.every((_, index) => chart.isDatasetHidden(index) || index === datasetIndex);
+
+    const isCurrentlyHidden = chart.isDatasetHidden(datasetIndex);
 
     chart.data.datasets.forEach((dataset, index) => {{
         if (index === datasetIndex) {{
-            // Always show the clicked dataset
-            chart.show(index);
-        }} else {{
-            // If all others (including this one) are hidden, show all
-            if (allHidden) {{
+            // Always toggle the visibility of the clicked dataset
+            if (isCurrentlyHidden) {{
                 chart.show(index);
             }} else {{
-                // Otherwise, hide all others
                 chart.hide(index);
+            }}
+        }} else {{
+            // If the clicked dataset was just shown, hide all others
+            if (isCurrentlyHidden) {{
+                chart.hide(index);
+            }} else {{
+                // If the clicked dataset was just hidden, show all others that were previously hidden
+                if (chart.isDatasetHidden(index)) {{
+                    chart.show(index);
+                }}
             }}
         }}
     }});
