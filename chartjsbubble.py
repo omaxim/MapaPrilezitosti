@@ -135,7 +135,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                             text: {x_label}  // X-axis label
                         }},
                         ticks: {{
-                            padding: 10  // Add some padding around x-axis ticks if needed
+                            padding: 100  // Add some padding around x-axis ticks if needed
                         }}
                     }},
                     y: {{
@@ -144,7 +144,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                             text: {y_label}  // Y-axis label
                         }},
                         ticks: {{
-                            padding: 10  // Add some padding around x-axis ticks if needed
+                            padding: 100  // Add some padding around x-axis ticks if needed
                         }}
                     }}
                 }},
