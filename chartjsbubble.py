@@ -21,7 +21,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         log_max = np.sqrt(max_size + 1)
 
         # Scale the size based on the log of the values
-        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 50 + 1
+        filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 40 + 1
 
     color_discrete_map = get_color_discrete_map() # Assume this returns a dict
     fallback_colors = [
@@ -82,7 +82,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
             "borderWidth": 1,
             "hoverBorderWidth": 2, # Optional: thicker border on hover
-            "hoverRadius": lambda ctx: ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r + 5 if ctx.active else ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r, # Make hovered point bigger
+            "hoverRadius": 2
         }
         for category, group_info in grouped_data.items()
     ]
