@@ -81,7 +81,8 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "borderColor": group_info["color"],
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
             "borderWidth": 0,
-            "hoverRadius": 5
+            "hoverRadius": 5,
+            "clip": 5
         }
         for category, group_info in grouped_data.items()
     ]
@@ -113,7 +114,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 datasets: datasets // Use the datasets variable
             }},
             options: {{
-                clip: 1000,
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {{
