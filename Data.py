@@ -97,7 +97,7 @@ def load_data(datayear,USD_to_czk):
 df = load_data(year,USD_to_czk)
 
 # Create lists of display names for the sidebar
-ji_display_names = ['Skupina', 'Podskupina', 'Kategorie']
+ji_display_names = ['Kategorie']
 year_placeholder = " ‎"
 plot_display_names, hover_display_data = get_plot_and_hover_display_names(year_placeholder)
 # Sidebar selection boxes using display names
