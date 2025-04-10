@@ -116,6 +116,11 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }},
                 plugins: {{
+                    legend: {{
+                        labels: {{
+                            usePointStyle: true
+                        }}
+                    }},
                     tooltip: {{
                         callbacks: {{
                             label: function(context) {{
