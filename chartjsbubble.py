@@ -157,7 +157,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                     }});
                 }}
                 // 3. Update the chart (No 'else' needed, step 1 handles reset)
-                chart.update('none'); // Use 'none' for smoother updates without animation flicker
+                chart.update(); // Use 'none' for smoother updates without animation flicker
             }},
 
                 plugins: {{
