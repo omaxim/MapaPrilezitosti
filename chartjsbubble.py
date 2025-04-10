@@ -14,7 +14,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         filtered_df["scaled_size"] = 10  # Assign a medium default size
     else:
         # Scale radius: map input range to output range [2, 32] (adjust 30+2 as needed)
-        filtered_df["scaled_size"] = ((filtered_df[markersize].copy() - min_size) / (max_size - min_size)) * 30 + 2
+        filtered_df["scaled_size"] = ((filtered_df[markersize].copy() - min_size) / (max_size - min_size)) * 10 + 2
 
     color_discrete_map = get_color_discrete_map() # Assume this returns a dict
     fallback_colors = [
@@ -96,11 +96,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
     <div style="width:100%; height:700px;">
         <canvas id="myBubbleChart"></canvas>
     </div>
-    <style>
-    #myBubbleChart > div[role="legend"] {{ /* Common structure, ADJUST SELECTOR based on inspection */
-        margin-bottom: 250px !important; /* Adjust space */
-    }}
-    </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
