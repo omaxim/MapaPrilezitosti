@@ -75,20 +75,22 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             grouped_data[color_category] = {"data": [], "color": assigned_color, "_originalBackgroundColor": assigned_color} # Add original color store here too if not already done
         grouped_data[color_category]["data"].append(data_point)
 
-    # Convert grouped data into Chart.js dataset format
-    datasets = [
-        {
-            "label": category,
-            "data": group_info["data"],
-            "backgroundColor": group_info["color"],
-            "borderColor": group_info["color"],
-            "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
-            "borderWidth": 0,
-            "hoverRadius": 5,
-            "clip": 100
-        }
-        for category, group_info in grouped_data.items()
-    ]
+        # --- Create datasets with default transparency ---
+        default_alpha_hex = 'CC' # Set desired default alpha (~80% opaque)
+
+        datasets = [
+            {
+                "label": category,
+                "data": group_info["data"],
+                "backgroundColor": group_info["color"] + default_alpha_hex, # Default appearance
+                "borderColor": group_info["color"] + default_alpha_hex, # Default appearance
+                "_originalBackgroundColor": group_info["_originalBackgroundColor"], # OPAQUE color
+                # *** ADD DEFAULT TRANSPARENT COLOR FOR RESETTING ***
+                "_defaultBackgroundColor": group_info["color"] + default_alpha_hex,
+                "borderWidth": 1,
+                "hoverRadius": 5, # May be overridden by JS element options
+                # "clip": 100
+            }for category, group_info in grouped_data.items()]
 
     # Convert datasets to JSON
     # Use a custom encoder if you have non-standard types (like lambdas, though they won't serialize)
@@ -127,44 +129,37 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 transitions: {{
                     active: {{ animation: {{ duration: 500 }} }} // Faster response on hover
                 }},
-                // *** REVISED onHover LOGIC ***
-                onHover: (event, elements, chart) => {{
-                    // 1. Reset all datasets to their original colors first
-                    chart.data.datasets.forEach(dataset => {{
-                        // Ensure _originalBackgroundColor exists, otherwise use current color as fallback
-                        const originalColor = dataset._originalBackgroundColor || dataset.backgroundColor;
-                        // Only reset if it was potentially modified (ends with '0D' alpha)
-                        if (typeof dataset.backgroundColor === 'string' && dataset.backgroundColor.length === 9) {{
-                             dataset.backgroundColor = originalColor;
-                             dataset.borderColor = originalColor;
-                        }} else if (!dataset.backgroundColor.startsWith('#')) {{
-                            // If it's not a hex string (maybe reset from transparent state error)
-                            dataset.backgroundColor = originalColor;
-                            dataset.borderColor = originalColor;
-                        }}
-                         // If already original, this does nothing harmful
-                         dataset.backgroundColor = originalColor;
-                         dataset.borderColor = originalColor;
-                    }});
 
-                    // 2. If hovering over an element, apply transparency to OTHERS
-                    if (elements.length > 0) {{
-                        const hoveredDatasetIndex = elements[0].datasetIndex;
-                        chart.data.datasets.forEach((dataset, index) => {{
-                            if (index !== hoveredDatasetIndex) {{
-                                // Make sure we have a valid original color string to modify
-                                const originalColor = dataset._originalBackgroundColor || dataset.backgroundColor;
-                                if (typeof originalColor === 'string' && originalColor.startsWith('#') && originalColor.length === 7) {{ // Only modify #RRGGBB
-                                    dataset.backgroundColor = originalColor + '0D'; // Add low alpha hex
-                                    dataset.borderColor = originalColor + '0D';
-                                }}
-                                // Handle potential RGBA or other formats if necessary
-                            }}
-                        }});
-                    }}
-                    // 3. Update the chart
-                    chart.update(); // Use 'none' or 0 for mode to prevent animation conflicts
-                }},
+                onHover: (event, elements, chart) => {{
+                // 1. Reset ALL datasets to the DEFAULT transparent state first
+                chart.data.datasets.forEach(dataset => {{
+                    // Use the stored default color with transparency
+                    const defaultColor = dataset._defaultBackgroundColor || dataset.backgroundColor; // Fallback
+                    dataset.backgroundColor = defaultColor;
+                    dataset.borderColor = defaultColor; // Assuming border matches fill
+                }});
+
+                // 2. If hovering over an element, apply specific styles
+                if (elements.length > 0) {{
+                    const hoveredDatasetIndex = elements[0].datasetIndex;
+
+                    chart.data.datasets.forEach((dataset, index) => {{
+                        if (index === hoveredDatasetIndex) {{
+                            // Make the HOVERED dataset OPAQUE
+                            dataset.backgroundColor = dataset._originalBackgroundColor;
+                            dataset.borderColor = dataset._originalBackgroundColor;
+                        }} else {{
+                            // Make INACTIVE datasets HIGHLY transparent ('0D' alpha)
+                            // Add '0D' to the OPAQUE original color
+                            dataset.backgroundColor = dataset._originalBackgroundColor + '0D';
+                            dataset.borderColor = dataset._originalBackgroundColor + '0D';
+                        }}
+                    }});
+                }}
+                // 3. Update the chart (No 'else' needed, step 1 handles reset)
+                chart.update('none'); // Use 'none' for smoother updates without animation flicker
+            }},
+
                 plugins: {{
                     legend: {{
                         // --- Your existing legend onClick logic ---
@@ -277,7 +272,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         // Optional: Add logic to reset hover state if mouse leaves canvas
         ctx.canvas.addEventListener('mouseout', () => {{
              myBubbleChart.data.datasets.forEach(dataset => {{
-                const originalColor = dataset._originalBackgroundColor || dataset.backgroundColor;
+                const originalColor = dataset._defaultBackgroundColor || dataset.backgroundColor;
                  dataset.backgroundColor = originalColor;
                  dataset.borderColor = originalColor;
             }});
