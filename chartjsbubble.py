@@ -205,15 +205,9 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                             }}
                             chart.update();
                         }},
-                        labels: {{ usePointStyle: true, padding: 10 }}
-                    }},
-                    title: {{
-                        display: true,
-                        text: '', // Intentionally empty or use ' '
+                        labels: {{ usePointStyle: true}},
                         padding: {{
-                            top: 0, // No padding above the (invisible) title
-                            bottom: 200 // ** This creates space below the title/legend **
-                                       // Adjust this value (e.g., 20, 30)
+                        bottom: 200
                         }}
                     }},
                     tooltip: {{
