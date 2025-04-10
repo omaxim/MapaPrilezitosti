@@ -105,7 +105,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }}
             }});
-            chart.update('active');
+            chart.update();
         }}
         
         function handleLeave(evt, item, legend) {{
@@ -117,7 +117,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     dataset.borderColor = bg.slice(0, -2);
                 }}
             }});
-            chart.update('active');
+            chart.update();
         }}
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
@@ -182,8 +182,31 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
                 plugins: {{
                     legend: {{
-                        onHover: handleHover,
-                        onLeave: handleLeave,
+                        onHover: (event, elements, chart) => {{
+                    if (elements.length > 0) {{
+                        const datasetIndex = elements[0].datasetIndex;
+                        chart.data.datasets.forEach((dataset, index) => {{
+                            if (index !== datasetIndex) {{
+                                let color = dataset.backgroundColor;
+                                if (typeof color === 'string' && !color.endsWith('0D')) {{
+                                    dataset.backgroundColor = color + '0D';
+                                    dataset.borderColor = color + '0D';
+                                }}
+                            }}
+                        }});
+                        chart.update();
+                    }} else {{
+                        // Reset colors if no point is hovered
+                        chart.data.datasets.forEach((dataset) => {{
+                            let bg = dataset.backgroundColor;
+                            if (typeof bg === 'string' && bg.length === 9) {{
+                                dataset.backgroundColor = bg.slice(0, -2);
+                                dataset.borderColor = bg.slice(0, -2);
+                            }}
+                        }});
+                        chart.update();
+                    }}
+                }},
                         labels: {{
                             usePointStyle: true,
                             padding: 10
