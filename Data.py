@@ -14,7 +14,7 @@ st.set_page_config(
     layout="wide"
 )
 #Loading loads of custom css in markdown
-#load_visual_identity("header.jpg")
+load_visual_identity("header.jpg")
 
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 st.error('Toto je pracovní verze. Data s vyjímkou budoucího růstu pochází z CEPII databáze BACI. Projekce 2025-30 berte s velikou rezervou. Krom toho, že jsou odhadem, neberou v potaz inflaci.', icon="⚠️")
