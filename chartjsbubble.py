@@ -171,7 +171,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                         }});
                     }}
                     // 3. Update the chart
-                    chart.update('none'); // Use 'none' or 0 for mode to prevent animation conflicts
+                    chart.update(); // Use 'none' or 0 for mode to prevent animation conflicts
                 }},
                 plugins: {{
                     legend: {{
