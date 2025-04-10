@@ -78,6 +78,7 @@ def load_visual_identity(header_image_path):
 
     st.markdown("""
     <style>
+
         [data-testid="stHeader"] {
             background-color: rgba(0,0,0,0);
         }
