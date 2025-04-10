@@ -304,7 +304,7 @@ else:
 
 
 
-st.download_button(
+subcol3.download_button(
     label = "Stáhnout HTML",
     data = html_bytes,
     file_name = "plot.html",
