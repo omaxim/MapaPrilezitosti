@@ -116,13 +116,13 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }},
                 animation: {{
-                    duration: 100,         // 0.5s duration
-                    easing: 'easeOutQuint'  // smooth easing
+                    duration: 200,         
+                    easing: 'easeInQuint'  
                 }},
                 transitions: {{
                     active: {{
                         animation: {{
-                            duration: 500,
+                            duration: 300,
                             easing: 'easeInElastic'
                         }}
                     }}
