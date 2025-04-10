@@ -146,8 +146,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     padding: {{
                         left: 20,
                         right: 20,
-                        top: 20,
-                        bottom: 4000  // This helps to avoid overlap with the legend
+                        top: -20,
+                        bottom: 20  // This helps to avoid overlap with the legend
                     }}
                     }},
                 animation: {{
