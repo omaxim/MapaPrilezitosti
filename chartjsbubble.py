@@ -177,5 +177,5 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
     def remove_nazev_variants(text):
         return re.sub(r"Název(?:\xa0| )?\d?: ?", "", text)
-    return ""#remove_nazev_variants(chart_js)
+    return remove_nazev_variants(chart_js)
 
