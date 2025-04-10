@@ -285,7 +285,7 @@ else:
     # Render the chart in Streamlit
     html_bytes=chart_js
     with col1:
-        col1.components.html(chart_js, height=800)
+        components.html(chart_js, height=800)
 
 mcol1, mcol2, mcol3 = col1.columns(3)
 if HS_select == []:
