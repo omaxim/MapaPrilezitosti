@@ -75,7 +75,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
             "backgroundColor": group_info["color"],
             "borderColor": group_info["color"],
             "borderWidth": 1,
-            "hoverRadius": 10,  # Increase size on hover
+            "hoverRadius": 5,  # Increase size on hover
         }
         for category, group_info in grouped_data.items()
     ]
@@ -151,13 +151,13 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }},
                 animation: {{
-                    duration: 500,         // 0.5s duration
+                    duration: 300,         // 0.5s duration
                     easing: 'easeInQuad'  // smooth easing
                 }},
                 transitions: {{
                     active: {{
                         animation: {{
-                            duration: 500,
+                            duration: 300,
                             easing: 'easeInQuad'
                         }}
                     }}
