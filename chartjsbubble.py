@@ -85,7 +85,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "data": group_info["data"],
             "backgroundColor": group_info["color"] + default_alpha_hex,
             "borderColor": group_info["color"] + default_alpha_hex,
-            "_originalBackgroundColor": group_info["color"] + default_alpha_hex, # <-- STORE ORIGINAL COLOR
+            "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
             "borderWidth": 0,
             "hoverRadius": 5,
             "clip": 100
