@@ -205,19 +205,18 @@ else:
 # Update each trace to have the hover background color match the trace's color
 for trace in fig.data:
     trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
-    fontsize = col1.number_input("Velikost fontu",5,20,12,step=1)
 # Update layout with font settings and existing configurations
 fig.update_layout(
     font=dict(
         family="Montserrat, sans-serif",  # Specify the font family
-        size=fontsize,                          # Font size
+        size=12,                          # Font size
         color="black"                     # Font color
     ),
     hoverlabel=dict(
         font=dict(
             family="Montserrat, sans-serif",  # Hover label font family
             color="#FFFFFF"   ,
-            size=fontsize                # Hover label font color
+            size=12                # Hover label font color
         )
     ),
     legend=dict(
@@ -229,7 +228,7 @@ fig.update_layout(
         font=dict(
             family="Montserrat, sans-serif",  # Hover label font family
             color="#000000"   ,
-            size=fontsize                # Hover label font color
+            size=12                # Hover label font color
         )
     ),
     xaxis=dict(
@@ -242,9 +241,9 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=fontsize),  # Set tick text color to black and size
+        tickfont=dict(color='black', size=12),  # Set tick text color to black and size
         title=dict(
-            font=dict(color='black', size=fontsize)  # Set x-axis label color and size
+            font=dict(color='black', size=12)  # Set x-axis label color and size
         )
 
     ),
