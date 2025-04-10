@@ -193,7 +193,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         onHover: handleHover,
                         onLeave: handleLeave,
                         labels: {{
-                            usePointStyle: true
+                            usePointStyle: true,
+                            padding: 100
                         }}
                     }},
                     tooltip: {{
