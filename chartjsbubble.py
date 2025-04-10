@@ -2,6 +2,11 @@ import pandas as pd
 import json
 import itertools
 from variable_names import get_hover_formatting, get_color_discrete_map
+def hex_to_rgba(hex_color, alpha=1.0):
+    hex_color = hex_color.lstrip("#")
+    r, g, b = tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+    return f"rgba({r},{g},{b},{alpha})"
+
 def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
     # Min-Max scaling for markersize (normalize to 0-100)
@@ -20,6 +25,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     ]  # Example palette (you can use more)
 
     color_cycle = itertools.cycle(fallback_colors)  # Cycles through colors
+
     no_decimal,two_sigfig,percentage,texthover = get_hover_formatting(year)
     # Function to format values based on the hover_data rules
     def format_hover_data(key, value):
@@ -40,7 +46,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
         color_category = row[color]
 
         # Use mapped color or fallback if missing
-        assigned_color = color_discrete_map.get(color_category, next(color_cycle))
+        raw_color = color_discrete_map.get(color_category, next(color_cycle))
+        assigned_color = hex_to_rgba(raw_color, alpha=1.0)
 
         data_point = {
             "x": row[x_axis],
