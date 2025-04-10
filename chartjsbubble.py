@@ -115,9 +115,13 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         }}
                     }}
                 }},
-                animation: {{
-                    duration: 500,         
-                    easing: 'easeOutQuad'  
+                transitions: {{
+                    active: {{
+                        animation: {{
+                            duration: 100,
+                            easing: 'easeOutQuad'
+                        }}
+                    }}
                 }},
                 onHover: (event, elements, chart) => {{
                     if (elements.length > 0) {{
