@@ -76,13 +76,16 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         grouped_data[color_category]["data"].append(data_point)
 
     # Convert grouped data into Chart.js dataset format
+    # --- Create datasets with default transparency ---
+    default_alpha_hex = 'CC' # Set desired default alpha (~80% opaque). Try 'B3', '99', '80' etc.
+
     datasets = [
         {
             "label": category,
             "data": group_info["data"],
-            "backgroundColor": group_info["color"],
-            "borderColor": group_info["color"],
-            "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
+            "backgroundColor": group_info["color"] + default_alpha_hex,
+            "borderColor": group_info["color"] + default_alpha_hex,
+            "_originalBackgroundColor": group_info["color"] + default_alpha_hex, # <-- STORE ORIGINAL COLOR
             "borderWidth": 0,
             "hoverRadius": 5,
             "clip": 100
