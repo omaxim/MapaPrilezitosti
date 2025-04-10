@@ -283,8 +283,9 @@ if plotly_or_chartjs=="Plotly":
     html_bytes = mybuff.getvalue().encode()
 else:
     # Render the chart in Streamlit
-    col1.components.html(chart_js, height=800)
     html_bytes=chart_js
+    with col1:
+        col1.components.html(chart_js, height=800)
 
 mcol1, mcol2, mcol3 = col1.columns(3)
 if HS_select == []:
