@@ -190,6 +190,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     legend: {{
                         onHover: handleHover,
                         onLeave: handleLeave,
+                        padding: 100,
                         labels: {{
                             usePointStyle: true
                         }}
