@@ -155,7 +155,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
 
                 plugins: {{
                     legend: {{
-                        oonClick: (event, item, legend) => {{
+                        onClick: (event, item, legend) => {{
     const datasetIndex = item.datasetIndex;
     const chart = legend.chart;
     const allHidden = chart.data.datasets.every((_, index) => chart.isDatasetHidden(index) || index === datasetIndex);
