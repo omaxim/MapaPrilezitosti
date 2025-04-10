@@ -131,7 +131,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                     x: {{ title: {{ display: true, text: {x_label} }} }},
                     y: {{ title: {{ display: true, text: {y_label} }} }}
                 }},
-                animation: {{ duration: 0 }}, // Disable default animations if hover is jerky
+                animation: {{ duration: 500 }}, // Disable default animations if hover is jerky
                 transitions: {{
                     active: {{ animation: {{ duration: 0 }} }} // Faster response on hover
                 }},
