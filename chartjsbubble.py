@@ -159,50 +159,43 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     if (!item || !item.datasetIndex) return;
 
     const datasetIndex = item.datasetIndex;
+    const isHidden = chart.isDatasetHidden(datasetIndex);
 
-    if (!chart.data.isolatedDatasets) {{
-        chart.data.isolatedDatasets = [];
-    }}
-    const isolatedDatasets = chart.data.isolatedDatasets;
+    chart.data.datasets.forEach((dataset, index) => {{
+        if (index === datasetIndex) {{
+            // Toggle the clicked dataset's visibility
+            chart.toggleDataVisibility(index);
 
-    if (isolatedDatasets.includes(datasetIndex)) {{
-        chart.data.isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
-        chart.data.datasets.forEach((dataset, index) => {{
-            let originalColor = dataset._originalColor || dataset.backgroundColor;
-            dataset.backgroundColor = originalColor;
-            dataset.borderColor = originalColor;
-            chart.show(index);
-        }});
-    }} else {{
-        chart.data.isolatedDatasets.push(datasetIndex);
-        chart.data.datasets.forEach((dataset, index) => {{
-            if (index !== datasetIndex) {{
-                let color = dataset.backgroundColor;
-                if (typeof color === 'string' && !color.endsWith('0D')) {{
-                    dataset._originalColor = dataset.backgroundColor;
-                    dataset.backgroundColor = color + '0D';
-                    dataset.borderColor = color + '0D';
-                    chart.hide(index);
-                }}
+            // Highlight or un-highlight the clicked dataset
+            if (isHidden) {{
+                // If it was hidden, show and highlight
+                dataset.backgroundColor = dataset._originalBackgroundColor || dataset.backgroundColor.slice(0, -2); // Remove transparency if present
+                dataset.borderColor = dataset._originalBorderColor || dataset.borderColor.slice(0, -2);
             }} else {{
-                dataset._originalColor = dataset.backgroundColor;
+                // If it was visible, hide and highlight
+                dataset._originalBackgroundColor = dataset.backgroundColor; // Store original
+                dataset._originalBorderColor = dataset.borderColor;       // Store original
                 dataset.backgroundColor = 'rgba(255, 0, 0, 1)';
                 dataset.borderColor = 'rgba(255, 0, 0, 1)';
+            }}
+        }} else {{
+            // For other datasets, either hide or show based on the clicked one
+            if (!isHidden) {{ // If the clicked one is now hidden (was visible)
+                dataset._originalBackgroundColor = dataset.backgroundColor; // Store original
+                dataset._originalBorderColor = dataset.borderColor;       // Store original
+                dataset.backgroundColor = dataset.backgroundColor + '0D'; // Dim
+                dataset.borderColor = dataset.borderColor + '0D';         // Dim
+                chart.hide(index);
+            }} else {{ // If the clicked one is now visible (was hidden)
+                dataset.backgroundColor = dataset._originalBackgroundColor || dataset.backgroundColor.slice(0, -2); // Restore
+                dataset.borderColor = dataset._originalBorderColor || dataset.borderColor.slice(0, -2);         // Restore
                 chart.show(index);
             }}
-        }});
-    }}
+        }}
+    }});
 
-    // Wait for any ongoing animation to complete before updating
-    if (chart.animating) {{
-        chart.onComplete(() => {{
-            chart.update();
-        }});
-    }} else {{
-        chart.update();
-    }}
+    chart.update();
 }},
-
 
 
                         labels: {{
