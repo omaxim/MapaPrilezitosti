@@ -80,18 +80,15 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "backgroundColor": group_info["color"],
             "borderColor": group_info["color"],
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
-            "borderWidth": 1,
-            "hoverRadius": lambda ctx: ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r + 2 if ctx.active else ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r, # Make hovered point bigger
+            "borderWidth": 0,
+            "hoverRadius": 2
         }
         for category, group_info in grouped_data.items()
     ]
 
     # Convert datasets to JSON
     # Use a custom encoder if you have non-standard types (like lambdas, though they won't serialize)
-    # For the hoverRadius lambda, we'll handle that in JS or set a fixed value here.
-    # Let's simplify hoverRadius for the JSON part and rely on JS options.
-    for ds in datasets:
-        del ds["hoverRadius"] # Remove lambda before JSON dump
+
 
     datasets_json = json.dumps(datasets)
     x_label = json.dumps(x_axis)
@@ -118,21 +115,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             options: {{
                 responsive: true,
                 maintainAspectRatio: false,
-                // Increase hover radius directly in options
-                elements: {{
-                    point: {{
-                        hoverRadius: function(context) {{
-                           // Increase radius of the specific hovered point
-                           const point = context.chart.data.datasets[context.datasetIndex].data[context.dataIndex];
-                           return point.r + 1; // Add 1 to original radius on hover
-                        }},
-                        radius: function(context) {{
-                           // Use the radius defined in the data
-                           const point = context.chart.data.datasets[context.datasetIndex].data[context.dataIndex];
-                           return point.r;
-                        }}
-                    }}
-                }},
                 scales: {{
                     x: {{ title: {{ display: true, text: {x_label} }} }},
                     y: {{ title: {{ display: true, text: {y_label} }} }}
