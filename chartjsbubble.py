@@ -124,7 +124,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                         hoverRadius: function(context) {{
                            // Increase radius of the specific hovered point
                            const point = context.chart.data.datasets[context.datasetIndex].data[context.dataIndex];
-                           return point.r + 5; // Add 5 to original radius on hover
+                           return point.r + 1; // Add 1 to original radius on hover
                         }},
                         radius: function(context) {{
                            // Use the radius defined in the data
