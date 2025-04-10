@@ -114,10 +114,7 @@ if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.selectbox('Skupina',skupiny)
-    podskupiny = df['Podskupina'][df['Skupina'].isin(Skupina)].unique()
-    Podskupina = col2.multiselect('Podskupina',podskupiny,default=podskupiny)
     filtered_df = filtered_df[filtered_df['Skupina'].isin(Skupina)]
-    filtered_df = filtered_df[filtered_df['Podskupina'].isin(Podskupina)]
 else:
     color       = 'Skupina'
 
