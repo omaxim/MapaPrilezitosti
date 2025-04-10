@@ -113,7 +113,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 datasets: datasets // Use the datasets variable
             }},
             options: {{
-                clip: 100,
+                clip: 1000,
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {{
