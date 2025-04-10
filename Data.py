@@ -170,8 +170,6 @@ if plotly_or_chartjs=="Plotly":
     plotlystyle = col2.selectbox("Styl grafu:",["plotly_dark","plotly","ggplot2","seaborn","simple_white","none"])
     pio.templates.default = plotlystyle
 
-
-background_color = col2.selectbox('Barva pozadí',[None,'#0D1A27','#112841'])
 # Create a button in the sidebar that clears the cache
 if col2.button('Obnovit Data'):
     load_data.clear()  # This will clear the cache for the load_data function
