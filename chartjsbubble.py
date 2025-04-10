@@ -52,39 +52,30 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         color_category = row[color]
         assigned_color = color_discrete_map.get(color_category, next(color_cycle))
 
-        # --- Assume hover data formatting logic is correct ---
-        meta_data = {key: format_hover_data(key, row[key]) for key in hover_data if hover_data.get(key) is not False}
-        # Handle <br> splitting if necessary (your existing logic here)
-        # ...
-        # Sort meta dictionary alphabetically
-
-        if color_category not in grouped_data:
-            grouped_data[color_category] = {"data": [], "color": assigned_color}
-            for key in hover_data:
-                if hover_data[key] is not False:
-                    value = format_hover_data(key, row[key])
-                if "<br>" in value:
-                    parts = value.split("<br>")
-                    for i, part in enumerate(parts):
-                        new_key = f"{key} {i+1}" if i > 0 else key # Append (1), (2), etc.
-                        data_point["meta"][new_key] = part
-                else:
-                    data_point["meta"][key] = value
-        # Sort meta dictionary alphabetically
-        data_point["meta"] = dict(sorted(data_point["meta"].items()))
-        grouped_data[color_category]["data"].append(data_point)
-        sorted_meta = dict(sorted(meta_data.items()))
-
-
+        # Create the basic data point structure
         data_point = {
             "x": row[x_axis],
             "y": row[y_axis],
             "r": row["scaled_size"],
-            "meta": sorted_meta
+            "meta": {} # Initialize meta dictionary here
         }
 
+        # Populate meta dictionary - *** MODIFIED LOGIC ***
+        for key in hover_data:
+            # Check if the key should be included (value is not False)
+            if hover_data.get(key) is not False:
+                # Format the value using your existing function
+                value = format_hover_data(key, row[key])
+                # Store the value directly, preserving any <br> tags. NO MORE SPLITTING.
+                data_point["meta"][key] = str(value) # Ensure it's a string
+
+        # Sort meta dictionary alphabetically (optional, but good for consistency below title)
+        # We will handle Název separately in JS, sorting affects the rest
+        data_point["meta"] = dict(sorted(data_point["meta"].items()))
+
+        # Add the complete data point to the correct group
         if color_category not in grouped_data:
-            grouped_data[color_category] = {"data": [], "color": assigned_color}
+            grouped_data[color_category] = {"data": [], "color": assigned_color, "_originalBackgroundColor": assigned_color} # Add original color store here too if not already done
 
         grouped_data[color_category]["data"].append(data_point)
 
@@ -213,15 +204,76 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                         labels: {{ usePointStyle: true, padding: 10 }}
                     }},
                     tooltip: {{
+                        // Use callbacks for custom tooltip content
                         callbacks: {{
-                            // --- Your existing tooltip label callback ---
+                            // ** Use the 'title' callback for 'Název' **
+                            // It's typically bold by default.
+                            title: function(tooltipItems) {{
+                                // tooltipItems is an array, we usually use the first item
+                                if (!tooltipItems.length) {{
+                                    return '';
+                                }}
+                                const context = tooltipItems[0];
+                                const data = context.dataset.data[context.dataIndex];
+
+                                // Check if 'Název' exists in our meta data
+                                if (data.meta && data.meta.hasOwnProperty('Název')) {{
+                                    // Split the 'Název' string by '<br>' to create multiple lines
+                                    // Chart.js handles an array return as multiple title lines
+                                    return data.meta['Název'].split('<br>');
+                                }}
+                                return ''; // Return empty string if no 'Název'
+                            }},
+
+                            // ** Optional: Add space after title if Název existed **
+                            afterTitle: function(tooltipItems) {{
+                                const context = tooltipItems[0];
+                                const data = context.dataset.data[context.dataIndex];
+                                // Add space only if Název was shown and there are other items
+                                if (data.meta && data.meta.hasOwnProperty('Název') && Object.keys(data.meta).length > 1) {{
+                                     // Return an empty string or one with just space to force a line
+                                    return ' '; // Creates visual separation
+                                }}
+                                return '';
+                            }},
+
+
+                            // ** Use 'beforeBody' to generate the Key: Value lines for other items **
+                            // Returns an array of strings, each becoming a line in the tooltip body.
+                            beforeBody: function(tooltipItems) {{
+                                const context = tooltipItems[0];
+                                const data = context.dataset.data[context.dataIndex];
+                                const bodyLines = []; // Array to hold our custom body lines
+
+                                if (data.meta) {{
+                                    // Iterate through the keys (already sorted in Python)
+                                    for (const key in data.meta) {{
+                                        // Make sure the key is not 'Název' (already handled in title)
+                                        if (key !== 'Název' && data.meta.hasOwnProperty(key)) {{
+                                            // Format as "Key: Value"
+                                            bodyLines.push(`${{key}}: ${{data.meta[key]}}`);
+                                        }}
+                                    }}
+                                }}
+                                return bodyLines; // Return the array of lines
+                            }},
+
+                            // ** Disable the default label **
+                            // Since we are generating the body content in beforeBody,
+                            // we don't need the default label (which usually shows dataset label & y-value).
                             label: function(context) {{
-                                let data = context.dataset.data[context.dataIndex];
-                                if (!data.meta) return [];
-                                return Object.entries(data.meta).map(([key, value]) => `${{key}}: ${{value}}`);
+                                return null; // Returning null prevents the default label line
+                            }},
+
+                            // ** Optional: Hide the color swatch next to the label **
+                            // Since we disabled the default label, you might not want the color box either.
+                            labelColor: function(context) {{
+                                return null; // Returning null hides the color box
+                                // Alternative: return {{ borderColor: 'transparent', backgroundColor: 'transparent' }};
                             }}
-                        }}
-                    }}
+
+                        }} // end callbacks
+                    }} // end tooltip
                 }}
             }}
         }});
