@@ -281,7 +281,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         // Optional: Add logic to reset hover state if mouse leaves canvas
         ctx.canvas.addEventListener('mouseout', () => {{
              myBubbleChart.data.datasets.forEach(dataset => {{
-                const originalColor = dataset._originalBackgroundColor || dataset.backgroundColor;
+                const originalColor = dataset._defaultBackgroundColor || dataset.backgroundColor;
                  dataset.backgroundColor = originalColor;
                  dataset.borderColor = originalColor;
             }});
