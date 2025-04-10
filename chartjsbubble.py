@@ -79,7 +79,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
         }
         for category, group_info in grouped_data.items()
     ]
-
     # Convert datasets to JSON
     datasets_json = json.dumps(datasets)
     x_label = json.dumps(x_axis)  # Convert to JSON for safe JS use
@@ -92,6 +91,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        const originalColors = [];
+
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
@@ -105,13 +106,13 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     x: {{
                         title: {{
                             display: true,
-                            text: {x_label}  // X-axis label
+                            text: {x_label}
                         }}
                     }},
                     y: {{
                         title: {{
                             display: true,
-                            text: {y_label}  // Y-axis label
+                            text: {y_label}
                         }}
                     }}
                 }},
@@ -125,16 +126,45 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         callbacks: {{
                             label: function(context) {{
                                 let data = context.dataset.data[context.dataIndex]; 
-                                if (!data.meta) return []; // Return empty array if no meta data
-
-                                // Convert meta object to array of "Key: Value" strings (each in a new line)
+                                if (!data.meta) return [];
                                 return Object.entries(data.meta).map(([key, value]) => `${{key}}: ${{value}}`);
                             }}
                         }}
                     }}
                 }},
+                hover: {{
+                    mode: 'nearest',
+                    intersect: true,
+                    onHover: function(event, elements) {{
+                        if (elements.length > 0) {{
+                            const hoveredDatasetIndex = elements[0].datasetIndex;
+
+                            // Store original colors if not already stored
+                            if (originalColors.length === 0) {{
+                                myBubbleChart.data.datasets.forEach(ds => {{
+                                    originalColors.push(ds.backgroundColor);
+                                }});
+                            }}
+
+                            myBubbleChart.data.datasets.forEach((ds, idx) => {{
+                                ds.backgroundColor = idx === hoveredDatasetIndex
+                                    ? originalColors[idx]
+                                    : originalColors[idx].replace(/rgba?\\(([^,]+),([^,]+),([^,]+)(?:,[^)]+)?\\)/, 'rgba($1,$2,$3,0.1)');
+                            }});
+
+                            myBubbleChart.update();
+                        }}
+                    }},
+                    onLeave: function(event) {{
+                        myBubbleChart.data.datasets.forEach((ds, idx) => {{
+                            ds.backgroundColor = originalColors[idx];
+                        }});
+                        myBubbleChart.update();
+                    }}
+                }}
             }}
         }});
     </script>
     """
     return chart_js
+
