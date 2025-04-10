@@ -114,7 +114,7 @@ if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.selectbox('Skupina',skupiny)
-    filtered_df = filtered_df[filtered_df['Skupina'].isin(Skupina)]
+    filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
     color       = 'Skupina'
 
