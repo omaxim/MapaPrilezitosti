@@ -52,28 +52,28 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         color_category = row[color]
         assigned_color = color_discrete_map.get(color_category, next(color_cycle))
 
-    # Create the basic data point structure
-    data_point = {
-         "x": row[x_axis],
-         "y": row[y_axis],
-         "r": row["scaled_size"],
-         "meta": {} # Initialize meta dictionary here
-    }
-    # Populate meta dictionary - *** MODIFIED LOGIC ***
-    for key in hover_data:
-         # Check if the key should be included (value is not False)
-        if hover_data.get(key) is not False:
-            # Format the value using your existing function
-            value = format_hover_data(key, row[key])
-             # Store the value directly, preserving any <br> tags. NO MORE SPLITTING.
-            data_point["meta"][key] = str(value) # Ensure it's a string
-    # Sort meta dictionary alphabetically (optional, but good for consistency below title)
-    # We will handle Název separately in JS, sorting affects the rest
-    data_point["meta"] = dict(sorted(data_point["meta"].items()))
-    # Add the complete data point to the correct group
-    if color_category not in grouped_data:
-        grouped_data[color_category] = {"data": [], "color": assigned_color, "_originalBackgroundColor": assigned_color} # Add original color store here too if not already done
-    grouped_data[color_category]["data"].append(data_point)
+        # Create the basic data point structure
+        data_point = {
+             "x": row[x_axis],
+             "y": row[y_axis],
+             "r": row["scaled_size"],
+             "meta": {} # Initialize meta dictionary here
+        }
+        # Populate meta dictionary - *** MODIFIED LOGIC ***
+        for key in hover_data:
+             # Check if the key should be included (value is not False)
+            if hover_data.get(key) is not False:
+                # Format the value using your existing function
+                value = format_hover_data(key, row[key])
+                 # Store the value directly, preserving any <br> tags. NO MORE SPLITTING.
+                data_point["meta"][key] = str(value) # Ensure it's a string
+        # Sort meta dictionary alphabetically (optional, but good for consistency below title)
+        # We will handle Název separately in JS, sorting affects the rest
+        data_point["meta"] = dict(sorted(data_point["meta"].items()))
+        # Add the complete data point to the correct group
+        if color_category not in grouped_data:
+            grouped_data[color_category] = {"data": [], "color": assigned_color, "_originalBackgroundColor": assigned_color} # Add original color store here too if not already done
+        grouped_data[color_category]["data"].append(data_point)
 
     # Convert grouped data into Chart.js dataset format
     datasets = [
