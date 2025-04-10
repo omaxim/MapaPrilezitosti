@@ -97,7 +97,6 @@ def load_data(datayear,USD_to_czk):
 df = load_data(year,USD_to_czk)
 
 # Create lists of display names for the sidebar
-ji_display_names = ['Kategorie']
 year_placeholder = " ‎"
 plot_display_names, hover_display_data = get_plot_and_hover_display_names(year_placeholder)
 # Sidebar selection boxes using display names
@@ -112,7 +111,7 @@ filtered_df = df.copy()
 filtrovat_dle_skupin = col2.toggle("Filtrovat dle skupin",value=False)
 
 if filtrovat_dle_skupin:
-    color       = col2.selectbox("Barva dle:", ji_display_names,index = 1)
+    color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.multiselect('Skupina',skupiny,default=skupiny[0])
     podskupiny = df['Podskupina'][df['Skupina'].isin(Skupina)].unique()
