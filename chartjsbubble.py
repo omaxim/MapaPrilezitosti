@@ -157,7 +157,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     legend: {{
                         onHover: (event, elements, chart) => {{
                             const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
-                            if (datasetIndex !== -1)  {{
+                            if (datasetIndex !== undefined)  {{
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     if (index !== datasetIndex) {{
                                         let color = dataset.backgroundColor;
@@ -168,17 +168,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                                     }}
                                 }});
                                 chart.update();
-                            }} else {{
-                                // Reset colors if no point is hovered
-                                chart.data.datasets.forEach((dataset) => {{
-                                    let bg = dataset.backgroundColor;
-                                    if (typeof bg === 'string' && bg.length === 9) {{
-                                        dataset.backgroundColor = bg.slice(0, -2);
-                                        dataset.borderColor = bg.slice(0, -2);
-                                    }}
-                                }});
-                                chart.update();
-                            }}
+                            }} 
                         }},
                         labels: {{
                             usePointStyle: true,
