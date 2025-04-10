@@ -99,9 +99,9 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 if (index !== datasetIndex) {{
                     // Dim all others by adding alpha (if not already)
                     let color = dataset.backgroundColor;
-                    if (!color.endsWith('4D')) {{
-                        dataset.backgroundColor = color + '4D';
-                        dataset.borderColor = color + '4D';
+                    if (!color.endsWith('1A')) {{
+                        dataset.backgroundColor = color + '1A';
+                        dataset.borderColor = color + '1A';
                     }}
                 }}
             }});
@@ -139,6 +139,18 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         title: {{
                             display: true,
                             text: {y_label}  // Y-axis label
+                        }}
+                    }}
+                }},
+                animation: {{
+                    duration: 500,         // 0.5s duration
+                    easing: 'easeOutQuad'  // smooth easing
+                }},
+                transitions: {{
+                    active: {{
+                        animation: {{
+                            duration: 500,
+                            easing: 'easeOutQuad'
                         }}
                     }}
                 }},
