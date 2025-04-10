@@ -142,14 +142,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         }}
                     }}
                 }},
-                chartArea: {{
-                    padding: {{
-                        left: 20,
-                        right: 20,
-                        top: 20,
-                        bottom: 20
-                    }}
-                }},
                 animation: {{
                     duration: 100,         // 0.5s duration
                     easing: 'easeOutQuint'  // smooth easing
@@ -194,7 +186,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         onLeave: handleLeave,
                         labels: {{
                             usePointStyle: true,
-                            padding: 100
+                            padding: 10
                         }}
                     }},
                     tooltip: {{
