@@ -133,23 +133,21 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         title: {{
                             display: true,
                             text: {x_label}  // X-axis label
+                        }},
+                        ticks: {{
+                            padding: 10  // Add some padding around x-axis ticks if needed
                         }}
                     }},
                     y: {{
                         title: {{
                             display: true,
                             text: {y_label}  // Y-axis label
+                        }},
+                        ticks: {{
+                            padding: 10  // Add some padding around x-axis ticks if needed
                         }}
                     }}
                 }},
-                layout: {{
-                    padding: {{
-                        left: 20,
-                        right: 20,
-                        top: 200,
-                        bottom: 20  // This helps to avoid overlap with the legend
-                    }}
-                    }},
                 animation: {{
                     duration: 500,         // 0.5s duration
                     easing: 'easeOutQuad'  // smooth easing
