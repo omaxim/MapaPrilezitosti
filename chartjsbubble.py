@@ -80,7 +80,8 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             "backgroundColor": group_info["color"],
             "borderColor": group_info["color"],
             "_originalBackgroundColor": group_info["color"], # <-- STORE ORIGINAL COLOR
-            "borderWidth": 1
+            "borderWidth": 1,
+            "hoverRadius": lambda ctx: ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r + 2 if ctx.active else ctx.chart.data.datasets[ctx.datasetIndex].data[ctx.dataIndex].r, # Make hovered point bigger
         }
         for category, group_info in grouped_data.items()
     ]
