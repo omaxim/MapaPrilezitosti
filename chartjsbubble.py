@@ -173,5 +173,5 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
         }});
     </script>
     """
-    return chart_js
+    return chart_js.replace("Název 3: ", "").replace("Název 2: ", "").replace("Název: ", "")
 
