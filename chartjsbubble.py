@@ -99,7 +99,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                 if (index !== datasetIndex) {{
                     // Dim all others by adding alpha (if not already)
                     let color = dataset.backgroundColor;
-                    if (!color.endsWith('0D')) {{
+                    if (typeof color === 'string' && !color.endsWith('0D')) {{
                         dataset.backgroundColor = color + '0D';
                         dataset.borderColor = color + '0D';
                     }}
