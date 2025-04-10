@@ -92,7 +92,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var isolatedDatasets = [];
+        let isolatedDatasets = [];
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
@@ -158,14 +158,14 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     legend: {{
                         onClick: (event, item, chart) => {{
                             if (!item || !item.datasetIndex) return; // Ensure item is valid
-                        
+
                             const datasetIndex = item.datasetIndex;
-                        
+
                             // Check if the dataset is already isolated
                             if (isolatedDatasets.includes(datasetIndex)) {{
                                 // If dataset is isolated, remove it from isolatedDatasets and reset its color
                                 isolatedDatasets = isolatedDatasets.filter(index => index !== datasetIndex);
-                        
+
                                 // Reset all datasets to original colors
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     let originalColor = dataset._originalColor || dataset.backgroundColor;  // Store original color to reset
@@ -176,7 +176,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                             }} else {{
                                 // If dataset is not isolated, isolate it
                                 isolatedDatasets.push(datasetIndex);
-                        
+
                                 // Dim all other datasets except the clicked one
                                 chart.data.datasets.forEach((dataset, index) => {{
                                     if (index !== datasetIndex) {{
@@ -195,7 +195,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                                     }}
                                 }});
                             }}
-                        
+
                             chart.update();  // Update the chart to reflect the changes
                         }},
 
