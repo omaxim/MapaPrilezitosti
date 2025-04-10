@@ -6,5 +6,4 @@ textColor="#000000"
 
 [theme.sidebar]
 backgroundColor ="#000000"
-textColor = "#12b9de"
-secondaryBackgroundColor="#ffffff"
+textColor = "#ffffff"
