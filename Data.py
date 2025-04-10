@@ -257,9 +257,9 @@ fig.update_layout(
         tickcolor='black',         # Color of the ticks
         tickwidth=2,               # Width of the ticks
         ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=fontsize),  # Set tick text color to black and size
+        tickfont=dict(color='black', size=12),  # Set tick text color to black and size
         title=dict(
-            font=dict(color='black', size=fontsize)  # Set y-axis label color and size
+            font=dict(color='black', size=12)  # Set y-axis label color and size
         )
     ),
     plot_bgcolor='rgba(0, 0, 0, 0)',  # Transparent plot background
