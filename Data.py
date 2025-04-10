@@ -6,12 +6,16 @@ import plotly.io as pio
 from chartjsbubble import chartjs_plot
 from variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
 import streamlit.components.v1 as components
-
+from visualsetup import load_visual_identity
 st.set_page_config(
-    page_title="Mapa Příležitostí 2023",
-    page_icon="favicon.png"
+    page_title="Mapa Příležitostí",
+    page_icon="favicon.png",
+    layout="wide"
 )
-st.logo('logo.svg')
+#Loading loads of custom css in markdown
+load_visual_identity("header.jpg")
+
+st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 st.error('Toto je pracovní verze. Data s vyjímkou budoucího růstu pochází z CEPII databáze BACI. Projekce 2025-30 berte s velikou rezervou. Krom toho, že jsou odhadem, neberou v potaz inflaci.', icon="⚠️")
 
 # Sidebar for selecting variables
