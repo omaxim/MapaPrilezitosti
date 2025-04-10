@@ -92,6 +92,17 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function debounce(func, delay) {{
+            let timeout;
+            return function(...args) {{
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), delay);
+            }};
+        }}
+        const debouncedUpdate = debounce(() => {{
+            chart.update();
+        }}, 100);  // 100ms debounce delay
+
         function handleHover(evt, item, legend) {{
             const chart = legend.chart;
             const datasetIndex = chart.data.datasets.findIndex(ds => ds.label === item.text);
@@ -105,7 +116,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }}
             }});
-            chart.update();
+            debouncedUpdate();
         }}
         
         function handleLeave(evt, item, legend) {{
@@ -117,7 +128,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     dataset.borderColor = bg.slice(0, -2);
                 }}
             }});
-            chart.update();
+            debouncedUpdate();
         }}
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
