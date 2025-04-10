@@ -205,7 +205,7 @@ else:
                      size_max=40
                      )
     chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year)
-
+st.text(chart_js)
 
 # Update each trace to have the hover background color match the trace's color
 for trace in fig.data:
