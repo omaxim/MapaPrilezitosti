@@ -281,7 +281,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                  dataset.backgroundColor = originalColor;
                  dataset.borderColor = originalColor;
             }});
-            myBubbleChart.update();
+            myBubbleChart.update('none');
         }});
 
     </script>
