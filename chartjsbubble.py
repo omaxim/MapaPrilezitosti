@@ -1,7 +1,6 @@
 import pandas as pd
 import json
 import itertools
-import re
 from variable_names import get_hover_formatting, get_color_discrete_map
 def hex_to_rgba(hex_color, alpha=1.0):
     hex_color = hex_color.lstrip("#")
@@ -80,8 +79,8 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
         {
             "label": category,
             "data": group_info["data"],
-            "backgroundColor": group_info["color"],
-            "borderColor": group_info["color"],
+            "backgroundColor": [group_info["color"]] * len(group_info["data"]),
+            "borderColor": [group_info["color"]] * len(group_info["data"]),
             "borderWidth": 1,
             "hoverRadius": 10,  # Increase size on hover
         }
@@ -92,7 +91,6 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     x_label = json.dumps(x_axis)  # Convert to JSON for safe JS use
     y_label = json.dumps(y_axis)
 
-    # Generate the JavaScript chart code
     chart_js = f"""
     <div style="width:100%; height:700px;">
         <canvas id="myBubbleChart"></canvas>
@@ -147,17 +145,20 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         if (elements.length > 0) {{
                             const hoveredDatasetIndex = elements[0].datasetIndex;
 
-                            // Store original colors if not already stored
                             if (originalColors.length === 0) {{
-                                myBubbleChart.data.datasets.forEach(ds => {{
-                                    originalColors.push(ds.backgroundColor);
+                                myBubbleChart.data.datasets.forEach((ds) => {{
+                                    originalColors.push([...ds.backgroundColor]);
                                 }});
                             }}
 
                             myBubbleChart.data.datasets.forEach((ds, idx) => {{
-                                ds.backgroundColor = idx === hoveredDatasetIndex
-                                    ? originalColors[idx]
-                                    : originalColors[idx].replace(/rgba?\\(([^,]+),([^,]+),([^,]+)(?:,[^)]+)?\\)/, 'rgba($1,$2,$3,0.1)');
+                                if (idx === hoveredDatasetIndex) {{
+                                    ds.backgroundColor = [...originalColors[idx]];
+                                }} else {{
+                                    ds.backgroundColor = originalColors[idx].map(c =>
+                                        c.replace(/rgba\\(([^,]+),([^,]+),([^,]+),[^)]+\\)/, 'rgba($1,$2,$3,0.1)')
+                                    );
+                                }}
                             }});
 
                             myBubbleChart.update();
@@ -165,7 +166,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }},
                     onLeave: function(event) {{
                         myBubbleChart.data.datasets.forEach((ds, idx) => {{
-                            ds.backgroundColor = originalColors[idx];
+                            ds.backgroundColor = [...originalColors[idx]];
                         }});
                         myBubbleChart.update();
                     }}
@@ -175,7 +176,5 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
     </script>
     """
 
-    def remove_nazev_variants(text):
-        return re.sub(r"Název(?:\xa0| )?\d?: ?", "", text)
-    return remove_nazev_variants(chart_js)
+    return chart_js
 
