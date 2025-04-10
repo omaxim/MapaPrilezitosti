@@ -105,7 +105,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     }}
                 }}
             }});
-            chart.update();
+            chart.update('active');
         }}
         
         function handleLeave(evt, item, legend) {{
@@ -117,7 +117,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                     dataset.borderColor = bg.slice(0, -2);
                 }}
             }});
-            chart.update();
+            chart.update('active');
         }}
         var ctx = document.getElementById('myBubbleChart').getContext('2d');
         var myBubbleChart = new Chart(ctx, {{
