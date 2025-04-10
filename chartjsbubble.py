@@ -149,7 +149,7 @@ def chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year):
                         top: 20,
                         bottom: 20
                     }}
-                }}
+                }},
                 animation: {{
                     duration: 500,         // 0.5s duration
                     easing: 'easeOutQuad'  // smooth easing
