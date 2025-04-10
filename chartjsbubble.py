@@ -164,47 +164,34 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                     legend: {{
                         // --- Your existing legend onClick logic ---
                         onClick: (event, item, legend) => {{
-                       const datasetIndex = item.datasetIndex;
-                       const chart = legend.chart;
-                       if (chart._isolatedDatasetIndex === undefined) {{ chart._isolatedDatasetIndex = null; }}
-
-                       const currentlyIsolating = chart._isolatedDatasetIndex !== null;
-                       const clickedOwnIsolation = chart._isolatedDatasetIndex === datasetIndex;
-
-                       if (currentlyIsolating && clickedOwnIsolation) {{
-                            // --- Clicked on already isolated dataset: Un-isolate ---
-                            chart.data.datasets.forEach((ds, index) => {{
-                                chart.setDatasetVisibility(index, true); // Make all visible
-                                // Reset all to DEFAULT transparent color
-                                if (ds._defaultBackgroundColor) {{
-                                    ds.backgroundColor = ds._defaultBackgroundColor;
-                                    ds.borderColor = ds._defaultBackgroundColor;
-                                }}
-                            }});
-                            chart._isolatedDatasetIndex = null; // Reset isolated state
-                        }} else {{
-                            // --- Clicked on a dataset to isolate it (or first click) ---
-                            chart.data.datasets.forEach((ds, index) => {{
-                                if (index === datasetIndex) {{
-                                    chart.setDatasetVisibility(index, true); // Show this one
-                                    // Make the isolated one OPAQUE
-                                    if(ds._originalBackgroundColor) {{
-                                        ds.backgroundColor = ds._originalBackgroundColor;
-                                        ds.borderColor = ds._originalBackgroundColor;
+                            const datasetIndex = item.datasetIndex;
+                            const chart = legend.chart;
+                            if (chart._isolatedDatasetIndex === undefined) {{
+                                chart._isolatedDatasetIndex = null;
+                            }}
+                            if (chart._isolatedDatasetIndex === datasetIndex) {{
+                                chart.data.datasets.forEach((ds, index) => {{
+                                    chart.setDatasetVisibility(index, true);
+                                     // Restore original colors when un-isolating
+                                    if(ds._defaultBackgroundColor) {{
+                                        ds.backgroundColor = ds._defaultBackgroundColor;
+                                        ds.borderColor = ds._defaultBackgroundColor;
                                     }}
-                                }} else {{
-                                    chart.setDatasetVisibility(index, false); // Hide others
-                                    // Optional: Reset hidden ones to default transparent just in case
-                                    if (ds._defaultBackgroundColor) {{
-                                      ds.backgroundColor = ds._defaultBackgroundColor;
-                                      ds.borderColor = ds._defaultBackgroundColor;
+                                }});
+                                chart._isolatedDatasetIndex = null;
+                            }} else {{
+                                chart.data.datasets.forEach((ds, index) => {{
+                                    chart.setDatasetVisibility(index, index === datasetIndex);
+                                     // Restore original colors before hiding/showing
+                                     if(ds._defaultBackgroundColor) {{
+                                        ds.backgroundColor = ds._defaultBackgroundColor;
+                                        ds.borderColor = ds._defaultBackgroundColor;
                                     }}
-                                }}
-                            }});
-                            chart._isolatedDatasetIndex = datasetIndex; // Set isolated state
-                        }}
-                       chart.update();
-                    }}, // end onClick
+                                }});
+                                chart._isolatedDatasetIndex = datasetIndex;
+                            }}
+                            chart.update();
+                        }},
                         labels: {{ usePointStyle: true, padding: 10 }}
                     }},
                     tooltip: {{
