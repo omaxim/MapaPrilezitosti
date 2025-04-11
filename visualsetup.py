@@ -38,6 +38,20 @@ def load_visual_identity(header_image_path):
                 overflow-x: hidden;
                 display: block;
             }}
+            <div class="global-background"></div>
+            .global-background {{
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background-image: url('background.svg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                z-index: -100;
+                opacity: 0.1; /* Optional fade */
+            }}
 
             /* Make header fixed at the top with full viewport width */
             .header-image {{
