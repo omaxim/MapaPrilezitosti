@@ -27,7 +27,7 @@ col2.subheader("Nastavení grafu")
 
 
 
-year = col2.pills("Rok",["2022","2023"],default="2023")
+year = col2.segmented_control("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
     if year=="2022":
         return 23.360
@@ -120,7 +120,7 @@ filtrovat_dle_skupin = col2.toggle("Filtrovat dle kategorií",value=False)
 if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
-    Skupina = col2.pills('Skupina',skupiny)
+    Skupina = col2.segmented_control('Skupina',skupiny)
     filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
     color       = 'Skupina'
