@@ -24,6 +24,9 @@ col1,col2, = st.columns([10,5])
 #col1.title("Mapa příležitostí")
 # Sidebar for selecting variables
 
+col2.subheader("Nastavení grafu")
+
+
 
 year = col2.pills("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
