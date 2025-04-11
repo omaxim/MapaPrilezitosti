@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="301" height="67" viewBox="0 0 301 67">
   <defs>
     <clipPath id="clip-Artboard_1">
-      <rect width="301" height="67"/>
+      <rect width="101" height="67"/>
     </clipPath>
   </defs>
   <g id="Artboard_1" data-name="Artboard – 1" clip-path="url(#clip-Artboard_1)">
-    <g id="logo_web">
+    <g id="logo_web" transform="translate(-44.025 -31.9)">
       <rect id="Rectangle_6" data-name="Rectangle 6" width="92.453" height="56.188" transform="translate(47.142 35.145)" fill="none"/>
       <path id="Path_28421" d="M125.12,84.263l-21.79-21.79a1.791,1.791,0,0,1,0-2.646h0L115.937,47.22a1.791,1.791,0,0,1,2.646,0h0l20.389,20.389a1.791,1.791,0,0,1,0,2.646L125.12,84.108Zm-41.4-22.1L62.862,83.018a1.791,1.791,0,0,1-2.646,0h0L47.609,70.411a1.791,1.791,0,0,1,0-2.646h0L68.465,46.909a1.791,1.791,0,0,1,2.646,0h0L83.718,59.516a1.791,1.791,0,0,1,0,2.646h0" transform="translate(0 6.914)" fill="#12b9de" fill-rule="evenodd"/>
       <path id="Path_28422" d="M122.858,50.462,90.484,82.836a1.973,1.973,0,0,1-2.8,0h0L55.309,50.462a1.973,1.973,0,0,1,0-2.8L67.76,35.209a1.973,1.973,0,0,1,2.8,0L87.838,52.485a1.973,1.973,0,0,0,2.8,0h0l17.277-17.277a1.973,1.973,0,0,1,2.8,0h0L123.17,47.66a1.973,1.973,0,0,1,0,2.8" transform="translate(4.285 0.403)" fill="#fff" fill-rule="evenodd"/>
