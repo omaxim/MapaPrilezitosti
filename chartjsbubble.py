@@ -210,7 +210,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                             }}
                             chart.update();
                         }},
-                        labels: {{ usePointStyle: true, padding: 10, boxWidth: 20 }}
+                        labels: {{ usePointStyle: true, padding: 10, boxWidth: 200 }}
                     }},
                     tooltip: {{
                         // Use callbacks for custom tooltip content
