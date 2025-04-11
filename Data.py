@@ -19,15 +19,52 @@ load_visual_identity("header.jpg")
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 logocol1,logocol2 = st.columns([2,3])
 logocol1.image('logo_text.svg',use_container_width=True)
-p1,p2,p3,p4 = logocol2.columns(4)
+p1,p2,p3,p4,p5,p6,p7 = logocol2.columns(7)
 p1.image('partners/01.png',use_container_width=True)
 p2.image('partners/02.svg',use_container_width=True)
 p3.image('partners/03.svg',use_container_width=True)
 p4.image('partners/04.svg',use_container_width=True)
-p2.image('partners/05.png',use_container_width=True)
-p3.image('partners/06.png',use_container_width=True)
-p4.image('partners/datlab_logo.svg',use_container_width=True)
+p5.image('partners/05.png',use_container_width=True)
+p6.image('partners/06.png',use_container_width=True)
+p7.image('partners/datalab_logo.svg',use_container_width=True)
 
+# Use markdown to center the logos with some custom CSS for vertical alignment
+st.markdown("""
+    <style>
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .logo-container img {
+            margin: 10px 0;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Create a container for the logos
+with st.container():
+    # Create the logos in a vertically aligned container
+    st.markdown('<div class="logo-container">', unsafe_allow_html=True)
+    
+    # Define the image paths
+    logos = [
+        'partners/01.png',
+        'partners/02.svg',
+        'partners/03.svg',
+        'partners/04.svg',
+        'partners/05.png',
+        'partners/06.png',
+        'partners/datalab_logo.svg'
+    ]
+
+    # Loop through and display each logo
+    for logo in logos:
+        st.image(logo, use_container_width=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
 col1,col2, = st.columns([10,5])
 col1.subheader("")
 col2.subheader("")
