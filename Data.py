@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-from io import StringIO
-import plotly.io as pio
+
 from chartjsbubble import chartjs_plot
 from variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
 import streamlit.components.v1 as components
@@ -20,13 +18,13 @@ st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 logocol1,logocol2 = st.columns([2,3])
 logocol1.image('logo_text.svg',use_container_width=True)
 p1,p2,p3,p4,p5,p6,p7 = logocol2.columns(7)
-p1.image('partners/01.png',use_container_width=True)
-p2.image('partners/02.svg',use_container_width=True)
-p3.image('partners/03.svg',use_container_width=True)
-p4.image('partners/04.svg',use_container_width=True)
-p5.image('partners/05.png',use_container_width=True)
-p6.image('partners/06.png',use_container_width=True)
-p7.image('partners/datlab_logo.svg',use_container_width=True)
+p1.image('processed_logos_ipynb_svglib/01.png',use_container_width=True)
+p2.image('processed_logos_ipynb_svglib/02.png',use_container_width=True)
+p3.image('processed_logos_ipynb_svglib/03.png',use_container_width=True)
+p4.image('processed_logos_ipynb_svglib/04.png',use_container_width=True)
+p5.image('processed_logos_ipynb_svglib/05.png',use_container_width=True)
+p6.image('processed_logos_ipynb_svglib/06.png',use_container_width=True)
+p7.image('processed_logos_ipynb_svglib/07.png',use_container_width=True)
 
 
 col1,col2, = st.columns([10,5])
