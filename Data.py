@@ -120,7 +120,7 @@ filtrovat_dle_skupin = col2.toggle("Filtrovat dle kategorií",value=False)
 if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
-    Skupina = col2.segmented_control('Skupina',skupiny,default=5)
+    Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
     filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
     color       = 'Skupina'
