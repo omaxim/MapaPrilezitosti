@@ -25,7 +25,7 @@ logocol1.image('logo_web.svg',use_container_width=True)
 col2.title("")
 
 col2.markdown("""
-    <h3 style="color:white; font-weight:600; margin-bottom:2em;">
+    <h3 style="color:white; font-weight:600; margin-bottom:20px;">
         Nastavení grafu
     </h3>
 """, unsafe_allow_html=True)
@@ -163,7 +163,7 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 # Remove NA values
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
-col1.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15vh; position:center">Filtrovat HS6 kódy</p>', unsafe_allow_html=True)
+col1.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15px; position:center">Filtrovat HS6 kódy</p>', unsafe_allow_html=True)
 
 HS_select = col1.multiselect("",filtered_df['HS_Lookup'])
 plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
