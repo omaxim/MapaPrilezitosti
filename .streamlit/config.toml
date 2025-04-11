@@ -2,7 +2,7 @@
 base="light"
 primaryColor="#12b9de"
 secondaryBackgroundColor="#d0d0d0"
-textColor=#666666
+textColor="#666666"
 
 [theme.sidebar]
 backgroundColor ="#000000"
