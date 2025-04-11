@@ -24,7 +24,6 @@ logocol1.image('logo_web.svg',use_container_width=True)
 # Sidebar for selecting variables
 col2.title("")
 
-col2.subheader("Nastavení Grafu")
 col2.markdown("""
     <h3 style="color:white; font-weight:600; margin-top:1em; margin-bottom:0.5em;">
         Nastavení grafu
