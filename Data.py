@@ -179,7 +179,7 @@ hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,marke
 
 if Skupina is None:
     chart_js = None
-else if HS_select == []:
+elif HS_select == []:
     chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year)
 else:
     chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year)
