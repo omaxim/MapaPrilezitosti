@@ -202,11 +202,11 @@ else:
 
 
 
-
-subcol3.download_button(
-    label = "Stáhnout HTML",
-    data = html_bytes,
-    file_name = "plot.html",
-    mime="text/html"
-)
+if Skupina is not None:
+    subcol3.download_button(
+        label = "Stáhnout HTML",
+        data = html_bytes,
+        file_name = "plot.html",
+        mime="text/html"
+    )
 
