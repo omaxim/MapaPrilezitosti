@@ -48,12 +48,12 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background-image: url("data:image/svg;base64,{background_image}");;
+                background-image: url("data:image/svg+xml;base64,{background_image}");;
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
                 z-index: -100;
-                opacity: 0.1; /* Optional fade */
+                opacity: 0.8; /* Optional fade */
             }}
 
             /* Make header fixed at the top with full viewport width */
