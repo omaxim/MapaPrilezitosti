@@ -21,8 +21,8 @@ logocol1,logocol2 = st.columns([2,3])
 logocol1.image('logo_web.svg',use_container_width=True)
 
 col1,col2, = st.columns([10,5])
-col1.markdown("***")
-col2.markdown("***")
+col1.title("")
+col2.title("")
 col2.subheader("Nastavení grafu")
 
 
