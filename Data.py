@@ -177,7 +177,7 @@ if st.sidebar.button('Obnovit Data'):
 #hover_data = {col: True for col in hover_info}
 hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,markersize)
 
-if Skupina is None:
+if filtrovat_dle_skupin is True and Skupina is None:
     chart_js = None
 elif HS_select == []:
     chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year)
@@ -202,7 +202,9 @@ else:
 
 
 
-if Skupina is not None:
+if filtrovat_dle_skupin is True and Skupina is None:
+    st.balloons()
+else:    
     subcol3.download_button(
         label = "Stáhnout HTML",
         data = html_bytes,
