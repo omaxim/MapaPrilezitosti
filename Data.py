@@ -176,9 +176,9 @@ if plotly_or_chartjs=="Plotly":
     pio.templates.default = plotlystyle
 
 # Create a button in the sidebar that clears the cache
-if col2.button('Obnovit Data'):
+if st.sidebar.button('Obnovit Data'):
     load_data.clear()  # This will clear the cache for the load_data function
-    col2.write("Sušenky vyčištěny!")
+    st.sidebar.write("Sušenky vyčištěny!")
 # Initialize the hover_data dictionary with default values of False for x, y, and markersize
 #hover_data = {col: True for col in hover_info}
 hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,markersize)
