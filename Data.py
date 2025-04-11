@@ -29,7 +29,7 @@ p6.image('partners/06.png',use_container_width=True)
 p7.image('partners/datlab_logo.svg',use_container_width=True)
 
 # Use markdown to center the logos with some custom CSS for vertical alignment
-st.markdown("""
+logocol2.markdown("""
     <style>
         .logo-container {
             display: flex;
