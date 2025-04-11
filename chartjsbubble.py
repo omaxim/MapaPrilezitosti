@@ -120,7 +120,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             }},
             defaults: {{
                 font:{{
-                family: 'Helvetica', sans-serif;  
+                family: 'Montserrat', sans-serif;  
                 }}
             }},
             options: {{
