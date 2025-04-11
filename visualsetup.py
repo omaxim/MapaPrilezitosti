@@ -60,7 +60,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-size: cover;
                 background-position: center;
                 z-index: -2;
-                opacity: 0.8; /* adjust to taste */
+                opacity: 0.1; /* adjust to taste */
             }}
 
             /* Make header fixed at the top with full viewport width */
