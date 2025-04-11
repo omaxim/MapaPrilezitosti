@@ -17,7 +17,7 @@ st.set_page_config(
 load_visual_identity("header.jpg")
 
 st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
-logocol1,logocol2 = st.columns(2)
+logocol1,logocol2 = st.columns([2,3])
 logocol1.image('logo_web.svg',use_container_width=True)
 
 col1,col2, = st.columns([10,5])
