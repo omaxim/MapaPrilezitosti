@@ -29,6 +29,7 @@ col2.markdown("""
         Nastavení grafu
     </h3>
 """, unsafe_allow_html=True)
+col2.subheader("Nastavení grafu")
 col1.markdown("""
     <h3 style="color:white; font-weight:600; margin-bottom:20px;">
     </h3>
