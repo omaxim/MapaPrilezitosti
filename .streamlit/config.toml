@@ -7,3 +7,6 @@ textColor="#666666"
 [theme.sidebar]
 backgroundColor ="#000000"
 textColor = "#ffffff"
+
+[ui]
+hideTopBar = true
