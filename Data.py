@@ -160,20 +160,7 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
-# Unique label for targeting
-label_text = "Filtrovat HS6 kódy"
-
-# Multiselect with unique label
-HS_select = col1.multiselect(label_text, filtered_df['HS_Lookup'], key="unique_hs_multiselect")
-
-# Inject CSS to style only that label
-st.markdown(f"""
-    <style>
-        label:has(span:contains("{label_text}")) {{
-            color: white !important;
-        }}
-    </style>
-""", unsafe_allow_html=True)
+HS_select = col1.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
 if plotly_or_chartjs=="Plotly":
     plotlystyle = col2.selectbox("Styl grafu:",["plotly_dark","plotly","ggplot2","seaborn","simple_white","none"])
