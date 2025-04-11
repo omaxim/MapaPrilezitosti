@@ -59,7 +59,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-repeat: no-repeat;
                 background-size: contain;    /* prevent stretching */
                 background-position: center;
-                z-index: 0;
+                z-index: 2;
                 opacity: 0.8;           /* adjust as needed */
                 pointer-events: none;   /* ensure it doesn't block interaction */
             }}
