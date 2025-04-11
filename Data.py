@@ -160,7 +160,7 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
-HS_select = col2.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
+HS_select = col1.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
 if plotly_or_chartjs=="Plotly":
     plotlystyle = col2.selectbox("Styl grafu:",["plotly_dark","plotly","ggplot2","seaborn","simple_white","none"])
