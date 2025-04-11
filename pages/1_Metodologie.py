@@ -10,7 +10,7 @@ load_visual_identity("header.jpg")
 st.title("")
 st.title("")
 
-st.logo('logo_web.svg',size='large',icon_image='logo_notext.svg')
+st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
 
 # Main Title
 st.markdown("# 📊 Metodologie")
