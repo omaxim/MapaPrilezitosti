@@ -188,9 +188,9 @@ hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,marke
 
 if filtrovat_dle_skupin is False:
     if HS_select == []:
-        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year)
+        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti")
     else:
-        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year)
+        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti")
 elif filtrovat_dle_skupin is True and Skupina is None:
     chart_js = None
 elif filtrovat_dle_skupin is True and Skupina is not None:
