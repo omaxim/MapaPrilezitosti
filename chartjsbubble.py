@@ -118,6 +118,11 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             data: {{
                 datasets: datasets // Use the datasets variable
             }},
+            defaults: {{
+                font:{{
+                family: 'Montserrat', sans-serif;  
+                }}
+            }},
             options: {{
                 responsive: true,
                 maintainAspectRatio: false,
