@@ -24,17 +24,6 @@ col1,col2, = st.columns([10,5])
 #col1.title("Mapa příležitostí")
 # Sidebar for selecting variables
 
-col2.markdown("""
-    <h3 style="color:white; font-weight:600; margin-bottom:20px;">
-        Nastavení grafu
-    </h3>
-""", unsafe_allow_html=True)
-col2.subheader("Nastavení grafu")
-col1.markdown("""
-    <h3 style="color:white; font-weight:600; margin-bottom:20px;">
-    </h3>
-""", unsafe_allow_html=True)
-
 
 year = col2.pills("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
