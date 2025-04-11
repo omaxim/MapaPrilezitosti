@@ -33,11 +33,11 @@ def USDtoCZKdefault(year):
         return 23.360
     elif year=="2023":
         return 22.21
-USD_to_czk = USDtoCZKdefault(year)
 
 # Load data
 @st.cache_data
-def load_data(datayear,USD_to_czk):
+def load_data(datayear):
+    USD_to_czk = USDtoCZKdefault(datayear)
     # Replace with the path to your data file
     #df                          = pd.read_csv('GreenComplexity_CZE_2022.csv')
     url = 'https://docs.google.com/spreadsheets/d/1mhv7sJC5wSqJRXdfyFaWtBuEpX6ENj2c/gviz/tq?tqx=out:csv'
@@ -95,7 +95,6 @@ def load_data(datayear,USD_to_czk):
     st.sidebar.info(str(GreenProducts.shape[0]) + " HS6 načteno, z toho " +str(df.shape[0])+" je IN")
     return df
 
-df = load_data(year,USD_to_czk)
 
 # Create lists of display names for the sidebar
 year_placeholder = " ‎"
@@ -105,6 +104,13 @@ x_axis      = col2.selectbox("Vyber osu X:", plot_display_names, index=4)
 y_axis      = col2.selectbox("Vyber osu Y:", plot_display_names, index=5)
 markersize  = col2.selectbox("Velikost dle:", plot_display_names, index=10)
 
+df_2022 = load_data("2022")
+df_2023 = load_data("2023")
+
+if year=="2022":
+    df = df_2022
+if year=="2023":
+    df = df_2023
 
 # Apply filters to dataframe
 filtered_df = df.copy()
