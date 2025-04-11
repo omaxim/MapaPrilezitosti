@@ -123,7 +123,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 title:{{
                 display: true,
                 text: {chart_title}
-            }}
+                }},
                 maintainAspectRatio: false,
                 scales: {{
                     x: {{ title: {{ display: true, text: {x_label} }} }},
