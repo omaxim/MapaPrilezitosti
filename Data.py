@@ -25,8 +25,11 @@ logocol1.image('logo_web.svg',use_container_width=True)
 col2.title("")
 
 col2.subheader("Nastavení Grafu")
-col2.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15vh; position:center">Nastavení grafu</p>', unsafe_allow_html=True)
-
+col2.markdown("""
+    <h3 style="color:white; font-weight:600; margin-top:1em; margin-bottom:0.5em;">
+        Nastavení grafu
+    </h3>
+""", unsafe_allow_html=True)
 
 year = col2.pills("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
