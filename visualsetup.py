@@ -41,7 +41,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 overflow-x: hidden;
                 display: block;
             }}
-            <div class="global-background"></div>
+            
             .global-background {{
                 position: fixed;
                 top: 0;
@@ -84,6 +84,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
             
 
         </style>
+        <div class="global-background"></div>
         <div class="header-image">
             <div class="header-gradient"></div>
         </div>
