@@ -25,7 +25,7 @@ logocol1.image('logo_web.svg',use_container_width=True)
 col2.title("")
 
 col2.markdown("""
-    <h3 style="color:white; font-weight:600">
+    <h3 style="color:white; font-weight:600; margin-bottom:2em;">
         Nastavení grafu
     </h3>
 """, unsafe_allow_html=True)
