@@ -112,7 +112,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
 
         // --- Optional: Add original color back if needed post-JSON parsing ---
         // Not strictly necessary if we use the _originalBackgroundColor added above
-        Chart.defaults.font.family = 'Montserrat'; 
+        Chart.defaults.font.family = 'Montserrat', sans-serif;; 
         var myBubbleChart = new Chart(ctx, {{
             type: 'bubble',
             data: {{
