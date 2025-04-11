@@ -74,16 +74,6 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 margin: 0 ;
             }}
 
-            /* Extend the gradient to blend into content smoothly */
-            .header-gradient {{
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-                height: 80%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 1) 100%);
-                z-index: 1;
-            }}
-            
 
         </style>
         <div class="header-image">
