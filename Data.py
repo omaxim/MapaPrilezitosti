@@ -28,7 +28,7 @@ p5.image('partners/05.png',use_container_width=True)
 p6.image('partners/06.png',use_container_width=True)
 p7.image('partners/07.png',use_container_width=True)
 
-col1,col2, = st.columns([11,4])
+col1,col2, = st.columns([12,4])
 col1.subheader("")
 col2.subheader("")
 col2.subheader("Nastavení grafu")
