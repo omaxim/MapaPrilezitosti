@@ -160,7 +160,7 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 st.markdown("""
-    <p style="color:white; font-weight:bold; margin-bottom:0px">
+    <p style="color:white; font-weight:bold">
         Filtrovat HS6 kódy
     </p>
 """, unsafe_allow_html=True)
