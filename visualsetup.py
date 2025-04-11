@@ -70,7 +70,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 position: absolute;
                 top: o;
                 overflow-x: hidden;
-                width: 100%;
+                width: 100vw;
                 height: 20vw;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
