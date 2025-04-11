@@ -78,7 +78,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-position: center;
                 background-repeat: no-repeat;
                 z-index: 0;
-                opacity: 0.7;
+                opacity: 0.8;
                 margin: 0 ;
             }}
 
