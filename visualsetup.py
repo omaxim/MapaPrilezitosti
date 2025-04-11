@@ -45,7 +45,8 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
             .block-container {{
                 position: relative;
                 z-index: 0;
-                overflow: hidden; /* ← prevents children from overflowing */
+                overflow-x: hidden;
+                overflow-y: visible;
             }}
 
             .block-container::before {{
