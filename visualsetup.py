@@ -1,10 +1,13 @@
 import streamlit as st
 import base64
 
-def load_visual_identity(header_image_path):
+def load_visual_identity(header_image_path, background_image_path = 'background.svg'):
     # Load the image and encode it in Base64 format
     with open(header_image_path, "rb") as image_file:
         header_image = base64.b64encode(image_file.read()).decode("utf-8")
+    # Load the image and encode it in Base64 format
+    with open(background_image_path, "rb") as image_file:
+        background_image = base64.b64encode(image_file.read()).decode("utf-8")
     # Load Montserrat font from Google Fonts
     st.markdown(
         """
@@ -45,7 +48,7 @@ def load_visual_identity(header_image_path):
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background-image: url('background.svg');
+                background-image: url("data:image/svg;base64,{background_image}");;
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
