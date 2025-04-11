@@ -23,7 +23,6 @@ logocol1.image('logo_web.svg',use_container_width=True)
 col1,col2, = st.columns([10,5])
 #col1.title("Mapa příležitostí")
 # Sidebar for selecting variables
-col2.title("")
 
 col2.markdown("""
     <h3 style="color:white; font-weight:600; margin-bottom:20px;">
