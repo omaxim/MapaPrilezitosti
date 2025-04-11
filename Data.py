@@ -57,7 +57,7 @@ with st.container():
         'partners/04.svg',
         'partners/05.png',
         'partners/06.png',
-        'partners/datalab_logo.svg'
+        'partners/datlab_logo.svg'
     ]
 
     # Loop through and display each logo
