@@ -45,9 +45,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Create a container for the logos
-with st.container():
+with logocol2.container():
     # Create the logos in a vertically aligned container
-    st.markdown('<div class="logo-container">', unsafe_allow_html=True)
+    logocol2.markdown('<div class="logo-container">', unsafe_allow_html=True)
     
     # Define the image paths
     logos = [
@@ -62,9 +62,9 @@ with st.container():
 
     # Loop through and display each logo
     for logo in logos:
-        st.image(logo, use_container_width=True)
+        logocol2.image(logo, use_container_width=True)
     
-    st.markdown('</div>', unsafe_allow_html=True)
+    logocol2.markdown('</div>', unsafe_allow_html=True)
 col1,col2, = st.columns([10,5])
 col1.subheader("")
 col2.subheader("")
