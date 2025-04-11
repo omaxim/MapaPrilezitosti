@@ -61,7 +61,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-size: contain;
                 background-position: center;
                 z-index: 0;
-                opacity: 0.6;
+                opacity: 0.4;
                 pointer-events: none;
             }}
 
