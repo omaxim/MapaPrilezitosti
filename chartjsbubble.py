@@ -120,10 +120,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             }},
             options: {{
                 responsive: true,
-                title:{{
-                display: true,
-                text: {chart_title}
-                }},
                 maintainAspectRatio: false,
                 scales: {{
                     x: {{ title: {{ display: true, text: {x_label} }} }},
@@ -165,6 +161,10 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             }},
 
                 plugins: {{
+                    title: {{
+                        display: true,
+                        text: {chart_title}
+                    }},
                     legend: {{
                         // --- Your existing legend onClick logic ---
                         onClick: (event, item, legend) => {{
