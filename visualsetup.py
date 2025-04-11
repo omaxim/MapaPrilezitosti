@@ -46,7 +46,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 position: relative;
                 z-index: 0;
             }}
-                
+
             .block-container::before {{
                 content: "";
                 position: absolute;
@@ -58,8 +58,8 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-repeat: no-repeat;
                 background-size: contain;
                 background-position: top right;
-                z-index: -1;
-                opacity: 0.1;
+                z-index: 0;
+                opacity: 0.7;
                 pointer-events: none;
             }}
 
