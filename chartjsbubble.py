@@ -5,7 +5,7 @@ import numpy as np
 # Assuming get_hover_formatting and get_color_discrete_map are defined elsewhere
 from variable_names import get_hover_formatting, get_color_discrete_map
 
-def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,chart_title="Chart Title"):
+def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,chart_title="Chart Title",bottom_text="Bottom Text"):
     # Min-Max scaling for markersize (normalize to range like 2-32)
     min_size = filtered_df[markersize].min()
     max_size = filtered_df[markersize].max()
@@ -163,7 +163,18 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 plugins: {{
                     title: {{
                         display: true,
-                        text: {chart_title}
+                        text: {json.dumps(chart_title)}
+                    }},
+                    subtitle: {{
+                    display: true,
+                    text: {json.dumps(bottom_text)},
+                    position: 'bottom',
+                    padding: {{
+                        top: 10
+                    }},
+                    font: {{
+                        size: 14
+                    }}
                     }},
                     legend: {{
                         // --- Your existing legend onClick logic ---
