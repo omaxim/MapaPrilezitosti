@@ -32,7 +32,7 @@ def USDtoCZKdefault(year):
         return 23.360
     elif year=="2023":
         return 22.21
-USD_to_czk = col2.number_input("Kurz USD vůči CZK",value=USDtoCZKdefault(year))
+USD_to_czk = USDtoCZKdefault(year)
 
 # Load data
 @st.cache_data
