@@ -161,7 +161,7 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
 # Unique label for targeting
-label_text = "🎯 Filtrovat HS6 kódy"
+label_text = "Filtrovat HS6 kódy"
 
 # Multiselect with unique label
 HS_select = col1.multiselect(label_text, filtered_df['HS_Lookup'], key="unique_hs_multiselect")
