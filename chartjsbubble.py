@@ -5,7 +5,7 @@ import numpy as np
 # Assuming get_hover_formatting and get_color_discrete_map are defined elsewhere
 from variable_names import get_hover_formatting, get_color_discrete_map
 
-def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year):
+def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,chart_title="Chart Title"):
     # Min-Max scaling for markersize (normalize to range like 2-32)
     min_size = filtered_df[markersize].min()
     max_size = filtered_df[markersize].max()
@@ -120,6 +120,10 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             }},
             options: {{
                 responsive: true,
+                title:{{
+                display: true,
+                text: {chart_title}
+            }}
                 maintainAspectRatio: false,
                 scales: {{
                     x: {{ title: {{ display: true, text: {x_label} }} }},
