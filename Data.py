@@ -100,7 +100,7 @@ def load_data(datayear,USD_to_czk):
     df['HS_ID']                 = df['HS_ID'].astype(str)
     df['HS_Lookup']              = df['HS_ID']+" - "+df['Název']
     
-    st.sidebar(str(GreenProducts.shape[0]) + " produktů načteno z excelu, z toho " +str(df.shape[0])+" je IN")
+    st.sidebar.info(str(GreenProducts.shape[0]) + " produktů načteno z excelu, z toho " +str(df.shape[0])+" je IN")
     return df
 
 df = load_data(year,USD_to_czk)
