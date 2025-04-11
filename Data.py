@@ -162,10 +162,6 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 
 HS_select = st.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
-plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
-if plotly_or_chartjs=="Plotly":
-    plotlystyle = col2.selectbox("Styl grafu:",["plotly_dark","plotly","ggplot2","seaborn","simple_white","none"])
-    pio.templates.default = plotlystyle
 
 # Create a button in the sidebar that clears the cache
 if st.sidebar.button('Obnovit Data'):
@@ -176,109 +172,14 @@ if st.sidebar.button('Obnovit Data'):
 hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,markersize)
 
 if HS_select == []:
-    fig = px.scatter(filtered_df,
-                     x=x_axis,
-                     y=y_axis,
-                     color=color,
-                     color_discrete_map=get_color_discrete_map(),  # Hard-code the colors
-                     labels={x_axis: x_axis, y_axis: y_axis},
-                     hover_data=hover_data,
-                     opacity=0.7,
-                     size=markersize,
-                     size_max=40)
     chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year)
-
-    
-
 else:
-    fig = px.scatter(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],
-                     x=x_axis,
-                     y=y_axis,
-                     color=color,
-                     color_discrete_map=get_color_discrete_map(),  # Hard-code the colors
-                     labels={x_axis: x_axis, y_axis: y_axis},
-                     hover_data=hover_data,
-                     opacity=0.7,
-                     size=markersize,
-                     size_max=40
-                     )
     chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year)
 
-# Update each trace to have the hover background color match the trace's color
-for trace in fig.data:
-    trace.hoverlabel.bgcolor = trace.marker.color  # Match hover background color with the marker color
-# Update layout with font settings and existing configurations
-fig.update_layout(
-    font=dict(
-        family="Montserrat, sans-serif",  # Specify the font family
-        size=12,                          # Font size
-        color="black"                     # Font color
-    ),
-    hoverlabel=dict(
-        font=dict(
-            family="Montserrat, sans-serif",  # Hover label font family
-            color="#FFFFFF"   ,
-            size=12                # Hover label font color
-        )
-    ),
-    legend=dict(
-        orientation="h",          # Horizontal legend
-        yanchor="top",            # Align the legend's top with the graph's bottom
-        y=-0.3,                   # Push the legend further below
-        xanchor="center",         # Center the legend horizontally
-        x=0.5,                  # Position it at the center of the graph
-        font=dict(
-            family="Montserrat, sans-serif",  # Hover label font family
-            color="#000000"   ,
-            size=12                # Hover label font color
-        )
-    ),
-    xaxis=dict(
-        showgrid=False,
-        zeroline=False,
-        color='black',             # Set axis color to black
-        showline=True,             # Show axis line
-        linecolor='black',         # Line color
-        ticks='outside',           # Show ticks outside the axis line
-        tickcolor='black',         # Color of the ticks
-        tickwidth=2,               # Width of the ticks
-        ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=12),  # Set tick text color to black and size
-        title=dict(
-            font=dict(color='black', size=12)  # Set x-axis label color and size
-        )
-
-    ),
-    yaxis=dict(
-        showgrid=False,
-        zeroline=False,
-        color='black',             # Set axis color to black
-        showline=True,             # Show axis line
-        linecolor='black',         # Line color
-        ticks='outside',           # Show ticks outside the axis line
-        tickcolor='black',         # Color of the ticks
-        tickwidth=2,               # Width of the ticks
-        ticklen=5,                 # Length of the ticks
-        tickfont=dict(color='black', size=12),  # Set tick text color to black and size
-        title=dict(
-            font=dict(color='black', size=12)  # Set y-axis label color and size
-        )
-    ),
-    plot_bgcolor='rgba(0, 0, 0, 0)',  # Transparent plot background
-    paper_bgcolor='rgba(0, 0, 0, 0)'  # Transparent overall background
-)
-
-
-if plotly_or_chartjs=="Plotly":
-    col1.plotly_chart(fig)
-    mybuff = StringIO()
-    fig.write_html(mybuff, include_plotlyjs='cdn')
-    html_bytes = mybuff.getvalue().encode()
-else:
-    # Render the chart in Streamlit
-    html_bytes=chart_js
-    with col1:
-        components.html(chart_js, height=800)
+# Render the chart in Streamlit
+html_bytes=chart_js
+with col1:
+    components.html(chart_js, height=800)
 
 mcol1, mcol2, mcol3 = st.columns(3)
 if HS_select == []:
