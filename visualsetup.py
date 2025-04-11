@@ -47,20 +47,21 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 z-index: 0;
             }}
             
-            /* Background image behind everything using ::before */
-            .block-container:before {{
+            .block-container::before {{
                 content: "";
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
+                top: 50%;               /* halfway down the block */
+                right: 0;               /* stick to the right edge */
+                transform: translateY(-50%);  /* center vertically */
+                width: 50vw;            /* half the viewport width */
+                height: auto;
                 background-image: url("data:image/svg+xml;base64,{background_image}");
                 background-repeat: no-repeat;
-                background-size: cover;
+                background-size: contain;    /* prevent stretching */
                 background-position: center;
-                z-index: -2;
-                opacity: 0.1; /* adjust to taste */
+                z-index: -1;
+                opacity: 0.1;           /* adjust as needed */
+                pointer-events: none;   /* ensure it doesn't block interaction */
             }}
 
             /* Make header fixed at the top with full viewport width */
