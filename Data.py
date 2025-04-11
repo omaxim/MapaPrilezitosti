@@ -26,7 +26,7 @@ p3.image('partners/03.svg',use_container_width=True)
 p4.image('partners/04.svg',use_container_width=True)
 p5.image('partners/05.png',use_container_width=True)
 p6.image('partners/06.png',use_container_width=True)
-p7.image('partners/datalab_logo.svg',use_container_width=True)
+p7.image('partners/datlab_logo.svg',use_container_width=True)
 
 col1,col2, = st.columns([10,5])
 col1.subheader("")
