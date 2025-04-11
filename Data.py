@@ -25,6 +25,8 @@ logocol1.image('logo_web.svg',use_container_width=True)
 col2.title("")
 
 col2.subheader("Nastavení Grafu")
+col2.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15vh; position:center">Nastavení grafu</p>', unsafe_allow_html=True)
+
 
 year = col2.pills("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
@@ -160,7 +162,6 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 col1.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15vh; position:center">Filtrovat HS6 kódy</p>', unsafe_allow_html=True)
-col2.markdown('<p style="color:white; font-weight:bold; margin-bottom:-15vh; position:center">Nastavení grafu</p>', unsafe_allow_html=True)
 
 HS_select = col1.multiselect("",filtered_df['HS_Lookup'])
 plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
