@@ -62,7 +62,7 @@ logos = [
 for col, logo in zip(columns, logos):
     with col:
         col.markdown('<div class="logo-container">', unsafe_allow_html=True)
-        col.image(logo, use_container_width=True)
+        col.image(logo)
         col.markdown('</div>', unsafe_allow_html=True)
 
 col1,col2, = st.columns([10,5])
