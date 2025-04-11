@@ -70,7 +70,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
-                z-index: 0;
+                z-index: -1;
                 margin: 0 ;
             }}
 
@@ -81,7 +81,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 width: 100%;
                 height: 80%;  /* Match header-image height */
                 background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 1) 100%);
-                z-index: 1;
+                z-index: 0;
             }}
             
 
