@@ -53,11 +53,11 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 top: 40vh;  /* halfway-ish down */
                 left: 60vw; /* start from the right-ish */
                 width: 30vw; /* not too large */
-                height: auto;
+                height: 30vw;
                 background-image: url("data:image/svg+xml;base64,{background_image}");
                 background-repeat: no-repeat;
                 background-size: contain;
-                background-position: top right;
+                background-position: center;
                 z-index: 0;
                 opacity: 0.7;
                 pointer-events: none;
