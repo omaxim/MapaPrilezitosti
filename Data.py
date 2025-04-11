@@ -36,7 +36,7 @@ logocol2.markdown("""
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 300px;
+            height: 30px;
         }
         .logo-container img {
             margin: 10px 0;
