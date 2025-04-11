@@ -164,17 +164,20 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                     title: {{
                         display: true,
                         text: {json.dumps(chart_title)}
+                        font: {{
+                        size: 20
+                        }}
                     }},
                     subtitle: {{
-                    display: true,
-                    text: {json.dumps(bottom_text)},
-                    position: 'bottom',
-                    padding: {{
-                        top: 10
-                    }},
-                    font: {{
-                        size: 14
-                    }}
+                        display: true,
+                        text: {json.dumps(bottom_text)},
+                        position: 'bottom',
+                        padding: {{
+                            top: 10
+                        }},
+                        font: {{
+                            size: 14
+                        }}
                     }},
                     legend: {{
                         // --- Your existing legend onClick logic ---
