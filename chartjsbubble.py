@@ -163,7 +163,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                 plugins: {{
                     title: {{
                         display: true,
-                        text: {json.dumps(chart_title)}
+                        text: {json.dumps(chart_title)},
                         font: {{
                         size: 20
                         }}
