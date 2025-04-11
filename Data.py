@@ -163,9 +163,8 @@ filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 # Remove NA values
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
-col1.markdown('<p style="color:white; font-weight:bold; margin-bottom:-45px; position:center">Filtrovat HS6 kódy</p>', unsafe_allow_html=True)
 
-HS_select = col1.multiselect("",filtered_df['HS_Lookup'])
+HS_select = st.multiselect("Filtrovat HS6 kódy",filtered_df['HS_Lookup'])
 plotly_or_chartjs = col2.radio("Plotly nebo Chart.js",["Plotly","Chart.js"],1)
 if plotly_or_chartjs=="Plotly":
     plotlystyle = col2.selectbox("Styl grafu:",["plotly_dark","plotly","ggplot2","seaborn","simple_white","none"])
