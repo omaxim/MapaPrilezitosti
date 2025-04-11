@@ -165,7 +165,8 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
                         display: true,
                         text: {json.dumps(chart_title)},
                         font: {{
-                        size: 20
+                        weight: 600,
+                        color: white
                         }}
                     }},
                     subtitle: {{
