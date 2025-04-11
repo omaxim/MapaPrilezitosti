@@ -42,18 +42,20 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
                 display: block;
             }}
             
-            .global-background {{
+            /* Background image behind everything using ::before */
+            body::before {{
+                content: "";
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100vw;
                 height: 100vh;
-                background-image: url("data:image/svg+xml;base64,{background_image}");;
+                background-image: url("data:image/svg+xml;base64,{background_image}");
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;
-                z-index: -1;
-                opacity: 0.8; /* Optional fade */
+                z-index: -9999;
+                opacity: 0.1; /* adjust to taste */
             }}
 
             /* Make header fixed at the top with full viewport width */
@@ -84,7 +86,6 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
             
 
         </style>
-        <div class="global-background"></div>
         <div class="header-image">
             <div class="header-gradient"></div>
         </div>
