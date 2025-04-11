@@ -29,6 +29,12 @@ col2.markdown("""
         Nastavení grafu
     </h3>
 """, unsafe_allow_html=True)
+col1.markdown("""
+    <h3 style="color:white; font-weight:600; margin-bottom:20px;">
+        gugu gaga
+    </h3>
+""", unsafe_allow_html=True)
+
 
 year = col2.pills("Rok",["2022","2023"],default="2023")
 def USDtoCZKdefault(year):
