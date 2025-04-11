@@ -45,7 +45,7 @@ def load_visual_identity(header_image_path, background_image_path = 'background.
             /* Background image behind everything using ::before */
             body::before {{
                 content: "";
-                position: fixed;
+                position: absolute;
                 top: 0;
                 left: 0;
                 width: 100vw;
