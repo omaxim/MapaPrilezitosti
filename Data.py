@@ -279,7 +279,7 @@ else:
     with col1:
         components.html(chart_js, height=800)
 
-mcol1, mcol2, mcol3 = col1.columns(3)
+mcol1, mcol2, mcol3 = st.columns(3)
 if HS_select == []:
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1000000000),'miliard CZK' )
     mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
