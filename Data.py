@@ -203,7 +203,7 @@ else:
 
 
 if filtrovat_dle_skupin is True and Skupina is None:
-    st.balloons()
+    pass
 else:    
     subcol3.download_button(
         label = "Stáhnout HTML",
