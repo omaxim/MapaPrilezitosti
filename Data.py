@@ -185,19 +185,19 @@ if st.sidebar.button('Obnovit Data'):
 #hover_data = {col: True for col in hover_info}
 hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,markersize)
 
-
+bottom_text =  "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
 if filtrovat_dle_skupin is False:
     if HS_select == []:
-        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti")
+        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
     else:
-        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti")
+        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
 elif filtrovat_dle_skupin is True and Skupina is None:
     chart_js = None
 elif filtrovat_dle_skupin is True and Skupina is not None:
     if HS_select == []:
-        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina)
+        chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina, bottom_text=bottom_text)
     else:
-        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina)
+        chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina, bottom_text=bottom_text)
 
 # Render the chart in Streamlit
 html_bytes=chart_js
