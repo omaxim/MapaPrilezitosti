@@ -28,7 +28,7 @@ p5.image('partners/05.png',use_container_width=True)
 p6.image('partners/06.png',use_container_width=True)
 p7.image('partners/datlab_logo.svg',use_container_width=True)
 
-# Use markdown to center the logos with some custom CSS for vertical alignment
+# Define the CSS for vertical alignment of logos in each column
 logocol2.markdown("""
     <style>
         .logo-container {
@@ -44,27 +44,27 @@ logocol2.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Create a container for the logos
-with logocol2.container():
-    # Create the logos in a vertically aligned container
-    logocol2.markdown('<div class="logo-container">', unsafe_allow_html=True)
-    
-    # Define the image paths
-    logos = [
-        'partners/01.png',
-        'partners/02.svg',
-        'partners/03.svg',
-        'partners/04.svg',
-        'partners/05.png',
-        'partners/06.png',
-        'partners/datlab_logo.svg'
-    ]
+# Create a 7-column layout
+columns = logocol2.columns(7)
 
-    # Loop through and display each logo
-    for logo in logos:
+# Define the image paths
+logos = [
+    'partners/01.png',
+    'partners/02.svg',
+    'partners/03.svg',
+    'partners/04.svg',
+    'partners/05.png',
+    'partners/06.png',
+    'partners/datlab_logo.svg'
+]
+
+# Loop through each column and display the corresponding logo
+for col, logo in zip(columns, logos):
+    with col:
+        logocol2.markdown('<div class="logo-container">', unsafe_allow_html=True)
         logocol2.image(logo, use_container_width=True)
-    
-    logocol2.markdown('</div>', unsafe_allow_html=True)
+        logocol2.markdown('</div>', unsafe_allow_html=True)
+
 col1,col2, = st.columns([10,5])
 col1.subheader("")
 col2.subheader("")
