@@ -31,7 +31,7 @@ col2.markdown("""
 """, unsafe_allow_html=True)
 col1.markdown("""
     <h3 style="color:white; font-weight:600; margin-bottom:20px;">
-        gugu gaga
+        Mapa příležitostí
     </h3>
 """, unsafe_allow_html=True)
 
