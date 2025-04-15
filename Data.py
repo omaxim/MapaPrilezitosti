@@ -123,10 +123,10 @@ if year=="2023":
 # Apply filters to dataframe
 filtered_df = df.copy()
 
+skupiny = filtered_df['Skupina'].unique()
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
-    skupiny = df['Skupina'].unique()
 
 # Handle initial value for selected Skupina
 if 'selected_skupina' not in st.session_state or st.session_state.selected_skupina not in skupiny:
