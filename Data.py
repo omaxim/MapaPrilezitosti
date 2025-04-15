@@ -137,10 +137,16 @@ with col2:
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 if st.session_state.filtrovat_dle_skupin:
-    color       = 'Kategorie'
+    color = 'Kategorie'
     skupiny = df['Skupina'].unique()
-    Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
-    filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
+
+    if 'selected_skupina' not in st.session_state:
+        st.session_state.selected_skupina = skupiny[min(5, len(skupiny)-1)]
+
+    st.session_state.selected_skupina = col2.selectbox('Skupina', skupiny, index=skupiny.tolist().index(st.session_state.selected_skupina), key="selected_skupina_select")
+    Skupina = st.session_state.selected_skupina
+
+    filtered_df = df[df['Skupina'] == Skupina]
 else:
     color       = 'Skupina'
 
