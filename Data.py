@@ -140,11 +140,11 @@ col2.divider()
 if 'filters' not in st.session_state:
     st.session_state.filters = []
 
-subcol1, subcol2, subcol3 = col2.columns(3)
-with subcol1:
+#subcol1, subcol2, subcol3 = col2.columns(3)
+with col2:
     if st.button("Filtrování hodnot"):
         st.session_state.filters.append({'column': None, 'range': None})
-with subcol2:
+with col2:
     if st.button("Odstranit filtry"):
         st.session_state.filters = []
 
@@ -220,7 +220,7 @@ else:
 if filtrovat_dle_skupin is True and Skupina is None:
     pass
 else:    
-    subcol3.download_button(
+    col2.download_button(
         label = "Stáhnout HTML",
         data = html_bytes,
         file_name = "plot.html",
