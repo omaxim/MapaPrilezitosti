@@ -133,7 +133,7 @@ with col2:
     st.markdown(f"**Aktuální režim:** {current_mode}")
 
     # Fixed label button, with a key
-    if st.button("Přepnout filtr", use_container_width=True, key="toggle_filter_button"):
+    if st.button("Přepnout režim", use_container_width=True, key="toggle_filter_button"):
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 if st.session_state.filtrovat_dle_skupin:
