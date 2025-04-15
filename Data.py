@@ -126,12 +126,10 @@ filtered_df = df.copy()
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
-if 'toggle_button_clicked' not in st.session_state:
-    st.session_state.toggle_button_clicked = False
 
 with col2:
     # Show current filter mode as a label
-    current_mode = "🔘 Filtrovat kategorie" if st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
+    current_mode = "✅ Všechny zelené produkty" if st.session_state.filtrovat_dle_skupin else "🧩 Jednotlivé skupiny"
     st.markdown(f"**Aktuální režim:** {current_mode}")
 
     # Fixed label button, with a key
