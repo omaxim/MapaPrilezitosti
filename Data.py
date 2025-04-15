@@ -122,14 +122,19 @@ if year=="2023":
 
 # Apply filters to dataframe
 filtered_df = df.copy()
+# Initialize session state
+if 'filtrovat_dle_skupin' not in st.session_state:
+    st.session_state.filtrovat_dle_skupin = False
 
-filtrovat_select = col2.segmented_control("label",["Filtrovat kategorie","Všechny zelené produkty"],label_visibility='hidden',selection_mode="single")
-if filtrovat_select == "Filtrovat kategorie":
-    filtrovat_dle_skupin = True
-else:
-    filtrovat_dle_skupin = False
+col1, col2 = st.columns([1, 3])  # adjust ratio as needed
+
+with col2:
+    btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
+    if st.button(btn_text, use_container_width=True):
+        st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
+
     filtrovat_select = "Všechny zelené produkty"
-if filtrovat_dle_skupin:
+if st.session_state.filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
@@ -190,14 +195,14 @@ if st.sidebar.button('Obnovit Data'):
 hover_data = get_hover_data(year,year_placeholder,hover_info,x_axis,y_axis,markersize)
 
 bottom_text =  "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
-if filtrovat_dle_skupin is False:
+if st.session_state.filtrovat_dle_skupin is False:
     if HS_select == []:
         chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
     else:
         chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
-elif filtrovat_dle_skupin is True and Skupina is None:
+elif st.session_state.filtrovat_dle_skupin is True and Skupina is None:
     chart_js = None
-elif filtrovat_dle_skupin is True and Skupina is not None:
+elif st.session_state.filtrovat_dle_skupin is True and Skupina is not None:
     if HS_select == []:
         chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina, bottom_text=bottom_text)
     else:
@@ -221,7 +226,7 @@ else:
 
 
 
-if filtrovat_dle_skupin is True and Skupina is None:
+if st.session_state.filtrovat_dle_skupin is True and Skupina is None:
     pass
 else:    
     col2.download_button(
