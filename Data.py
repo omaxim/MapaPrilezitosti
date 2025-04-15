@@ -128,13 +128,16 @@ if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
 if 'toggle_button_clicked' not in st.session_state:
     st.session_state.toggle_button_clicked = False
+
 with col2:
-    btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
-    # Add a unique key to avoid duplicate ID error
-    if st.button(btn_text, use_container_width=True, key="toggle_filtrovat"):
+    # Show current filter mode as a label
+    current_mode = "🔘 Filtrovat kategorie" if st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
+    st.markdown(f"**Aktuální režim:** {current_mode}")
+
+    # Fixed label button, with a key
+    if st.button("Přepnout filtr", use_container_width=True, key="toggle_filter_button"):
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
-    filtrovat_select = "Všechny zelené produkty"
 if st.session_state.filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
