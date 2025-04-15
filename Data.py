@@ -126,6 +126,11 @@ filtered_df = df.copy()
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
+    skupiny = df['Skupina'].unique()
+
+# Handle initial value for selected Skupina
+if 'selected_skupina' not in st.session_state or st.session_state.selected_skupina not in skupiny:
+    st.session_state.selected_skupina = skupiny[5]
 
 with col2:
     # Show current filter mode as a label
@@ -138,9 +143,14 @@ with col2:
 
 if st.session_state.filtrovat_dle_skupin:
     color       = 'Kategorie'
-    skupiny = df['Skupina'].unique()
-    Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
+    Skupina = col2.segmented_control(
+    'Skupina',
+    skupiny,
+    default=skupiny.tolist().index(st.session_state.selected_skupina),
+    key='selected_skupina')
     filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
+    # Assign it back to session_state to persist between reruns
+    st.session_state.selected_skupina = Skupina
 else:
     color       = 'Skupina'
 
