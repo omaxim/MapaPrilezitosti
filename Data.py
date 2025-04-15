@@ -124,6 +124,7 @@ if year=="2023":
 filtered_df = df.copy()
 
 skupiny = filtered_df['Skupina'].unique()
+st.text(skupiny)
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
