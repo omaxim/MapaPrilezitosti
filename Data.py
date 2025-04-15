@@ -140,11 +140,11 @@ col2.divider()
 if 'filters' not in st.session_state:
     st.session_state.filters = []
 
-#subcol1, subcol2, subcol3 = col2.columns(3)
-with col2:
+subcol1, subcol2 = col2.columns(2)
+with subcol1:
     if st.button("Filtrování hodnot", use_container_width=True):
         st.session_state.filters.append({'column': None, 'range': None})
-with col2:
+with subcol2:
     if st.button("Odstranit filtry", use_container_width=True):
         st.session_state.filters = []
 
