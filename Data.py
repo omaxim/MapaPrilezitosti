@@ -130,14 +130,8 @@ if 'toggle_button_clicked' not in st.session_state:
     st.session_state.toggle_button_clicked = False
 with col2:
     btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
-    if st.button(btn_text, use_container_width=True):
-        # Toggle the filter state directly
-        st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
-
-
-with col2:
-    btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
-    if st.button(btn_text, use_container_width=True):
+    # Add a unique key to avoid duplicate ID error
+    if st.button(btn_text, use_container_width=True, key="toggle_filtrovat"):
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
     filtrovat_select = "Všechny zelené produkty"
