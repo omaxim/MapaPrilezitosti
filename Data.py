@@ -123,9 +123,9 @@ if year=="2023":
 # Apply filters to dataframe
 filtered_df = df.copy()
 
-filtrovat_dle_skupin = col2.toggle("Filtrovat dle kategorií",value=False)
+filtrovat_dle_skupin = col2.segmented_control("",["Filtrovat dle kategorií"])
 
-if filtrovat_dle_skupin:
+if filtrovat_dle_skupin=="Filtrovat dle kategorií":
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
