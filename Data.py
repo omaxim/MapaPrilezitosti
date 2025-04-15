@@ -214,7 +214,7 @@ html_bytes=chart_js
 
 with col1:
     if st.session_state.filtrovat_dle_skupin is False:
-        chart_height = 800
+        chart_height = 1800
     else:
         chart_height = 1500
     components.html(chart_js, height=chart_height)
