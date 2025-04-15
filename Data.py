@@ -123,15 +123,9 @@ if year=="2023":
 # Apply filters to dataframe
 filtered_df = df.copy()
 
-skupiny = filtered_df['Skupina'].unique()
-st.text(skupiny)
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
-
-# Handle initial value for selected Skupina
-if 'selected_skupina' not in st.session_state or st.session_state.selected_skupina not in skupiny:
-    st.session_state.selected_skupina = skupiny[min(5, len(skupiny) - 1)]
 
 with col2:
     # Show current filter mode as a label
@@ -143,26 +137,12 @@ with col2:
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 if st.session_state.filtrovat_dle_skupin:
-    color = 'Kategorie'
-
-    # Get the index of the current value in the updated list
-    try:
-        default_index = list(skupiny).index(st.session_state.selected_skupina)
-    except ValueError:
-        default_index = min(5, len(skupiny) - 1)
-        st.session_state.selected_skupina = skupiny[default_index]
-
-    Skupina = col2.segmented_control(
-        'Skupina',
-        options=skupiny,
-        default=skupiny[default_index]
-    )
-
-    # Update the session state
-    st.session_state.selected_skupina = Skupina
+    color       = 'Kategorie'
+    skupiny = df['Skupina'].unique()
+    Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
     filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
-    color = 'Skupina'
+    color       = 'Skupina'
 
 
 hover_info  = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
