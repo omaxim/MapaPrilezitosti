@@ -126,8 +126,6 @@ filtered_df = df.copy()
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
 
-col1, col2 = st.columns([1, 3])  # adjust ratio as needed
-
 with col2:
     btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
     if st.button(btn_text, use_container_width=True):
