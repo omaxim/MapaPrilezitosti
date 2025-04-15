@@ -81,18 +81,11 @@ def get_plot_and_hover_display_names(year_placeholder):
         'CZ Export '+year_placeholder+' CZK',
         'Světový export '+year_placeholder+' CZK',
         'EU Export '+year_placeholder+' CZK',
-        'EU Světový Podíl '+year_placeholder+' %',
         'CZ Světový Podíl '+year_placeholder+' %',
         'CZ-EU Podíl '+year_placeholder+' %',
-        'ubiquity',
-        'density',
-        'cog',
         'CZ 2030 Export CZK',
         'CZ Celkový Export 25-30 CZK',
         'EU 2030 Export CZK',
-        'EU Celkový Export 25-30 CZK',
-        'CAGR 2022-2030 Předpověď',
-        'Stejná Velikost'
     ]
 
     hover_display_data = [
@@ -117,8 +110,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'CZ 2030 Export CZK',
         'CZ Celkový Export 25-30 CZK',
         'EU 2030 Export CZK',
-        'ubiquity',
-        'EU Celkový Export 25-30 CZK',
         'Percentil příbuznosti CZ '+year_placeholder+'',
         'Percentil komplexity '+year_placeholder+'',
         'Žebříček příbuznosti CZ '+year_placeholder+'',

@@ -86,7 +86,6 @@ def load_data(datayear):
                                'CAGR_2022_30_FORECAST':'CAGR 2022-2030 Předpověď'
                                })
     df                          = df[df.Included == "IN"]
-    df['stejna velikost']       = 0.02
     df['CZ-EU Podíl '+datayear+' %']      = 100 * df['CZ-EU Podíl '+datayear+' %'] 
     df['EU Světový Podíl '+datayear+' %'] = 100 * df['EU Světový Podíl '+datayear+' %'] 
     df['CZ Světový Podíl '+datayear+' %'] = 100 * df['CZ Světový Podíl '+datayear+' %'] 
