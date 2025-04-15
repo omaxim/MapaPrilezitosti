@@ -142,10 +142,10 @@ if 'filters' not in st.session_state:
 
 #subcol1, subcol2, subcol3 = col2.columns(3)
 with col2:
-    if st.button("Filtrování hodnot"):
+    if st.button("Filtrování hodnot", use_container_width=True):
         st.session_state.filters.append({'column': None, 'range': None})
 with col2:
-    if st.button("Odstranit filtry"):
+    if st.button("Odstranit filtry", use_container_width=True):
         st.session_state.filters = []
 
 # Display existing filters using display names
@@ -224,6 +224,7 @@ else:
         label = "Stáhnout HTML",
         data = html_bytes,
         file_name = "plot.html",
-        mime="text/html"
+        mime="text/html",
+        use_container_width=True
     )
 
