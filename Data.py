@@ -202,13 +202,16 @@ if st.session_state.filtrovat_dle_skupin is False:
         chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
     else:
         chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title="České zelené příležitosti", bottom_text=bottom_text)
+        st.session_state.filtrovat_dle_skupin = True
 elif st.session_state.filtrovat_dle_skupin is True and Skupina is None:
     chart_js = None
 elif st.session_state.filtrovat_dle_skupin is True and Skupina is not None:
     if HS_select == []:
         chart_js = chartjs_plot(filtered_df,markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina, bottom_text=bottom_text)
+        st.session_state.filtrovat_dle_skupin = True
     else:
         chart_js = chartjs_plot(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)],markersize,hover_data,color,x_axis,y_axis,year,chart_title=Skupina, bottom_text=bottom_text)
+        st.session_state.filtrovat_dle_skupin = True
 
 # Render the chart in Streamlit
 html_bytes=chart_js
