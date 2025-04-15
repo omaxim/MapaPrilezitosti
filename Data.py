@@ -131,7 +131,7 @@ if 'filtrovat_dle_skupin' not in st.session_state:
 
 # Handle initial value for selected Skupina
 if 'selected_skupina' not in st.session_state or st.session_state.selected_skupina not in skupiny:
-    st.session_state.selected_skupina = skupiny[5]
+    st.session_state.selected_skupina = skupiny[min(5, len(skupiny) - 1)]
 
 with col2:
     # Show current filter mode as a label
