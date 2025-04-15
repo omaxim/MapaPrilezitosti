@@ -128,6 +128,7 @@ if filtrovat_select == "Filtrovat kategorie":
     filtrovat_dle_skupin = True
 else:
     filtrovat_dle_skupin = False
+    filtrovat_select = "Všechny zelené produkty"
 if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
