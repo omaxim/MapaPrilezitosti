@@ -123,8 +123,8 @@ if year=="2023":
 # Apply filters to dataframe
 filtered_df = df.copy()
 
-filtrovat_select = col2.segmented_control("label",["Filtrovat dle kategorií","Zobrazit všechny zelené produkty"],label_visibility='hidden',selection_mode="single")
-if filtrovat_select == "Filtrovat dle kategorií":
+filtrovat_select = col2.segmented_control("label",["Filtrovat kategorie","Všechny zelené produkty"],label_visibility='hidden',selection_mode="single")
+if filtrovat_select == "Filtrovat kategorie":
     filtrovat_dle_skupin = True
 else:
     filtrovat_dle_skupin = False
