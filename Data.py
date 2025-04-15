@@ -143,17 +143,26 @@ with col2:
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 if st.session_state.filtrovat_dle_skupin:
-    color       = 'Kategorie'
+    color = 'Kategorie'
+
+    # Get the index of the current value in the updated list
+    try:
+        default_index = list(skupiny).index(st.session_state.selected_skupina)
+    except ValueError:
+        default_index = min(5, len(skupiny) - 1)
+        st.session_state.selected_skupina = skupiny[default_index]
+
     Skupina = col2.segmented_control(
-    'Skupina',
-    skupiny,
-    default=skupiny.tolist().index(st.session_state.selected_skupina),
-    key='selected_skupina')
-    filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
-    # Assign it back to session_state to persist between reruns
+        'Skupina',
+        options=skupiny,
+        default=default_index
+    )
+
+    # Update the session state
     st.session_state.selected_skupina = Skupina
+    filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
-    color       = 'Skupina'
+    color = 'Skupina'
 
 
 hover_info  = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
