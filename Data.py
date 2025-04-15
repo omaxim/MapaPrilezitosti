@@ -128,20 +128,18 @@ if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
 
 with col2:
-    # Show current filter mode as a label
-    current_mode = "✅ Všechny zelené produkty" if st.session_state.filtrovat_dle_skupin else "🧩 Jednotlivé skupiny"
-    st.markdown(f"**Aktuální režim:** {current_mode}")
-
     # Fixed label button, with a key
     if st.button("Přepnout režim", use_container_width=True, key="toggle_filter_button"):
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 if st.session_state.filtrovat_dle_skupin:
+    col2.markdown(f"**Aktuální režim:** 🧩 Jednotlivé skupiny")
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
     filtered_df = filtered_df[filtered_df['Skupina'].isin([Skupina])]
 else:
+    col2.markdown(f"**Aktuální režim:** ✅ Všechny zelené produkty")
     color       = 'Skupina'
 
 
