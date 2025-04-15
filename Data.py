@@ -122,9 +122,18 @@ if year=="2023":
 
 # Apply filters to dataframe
 filtered_df = df.copy()
+
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
+if 'toggle_button_clicked' not in st.session_state:
+    st.session_state.toggle_button_clicked = False
+with col2:
+    btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
+    if st.button(btn_text, use_container_width=True):
+        # Toggle the filter state directly
+        st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
+
 
 with col2:
     btn_text = "🔘 Filtrovat kategorie" if not st.session_state.filtrovat_dle_skupin else "✅ Všechny zelené produkty"
