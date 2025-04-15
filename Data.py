@@ -210,8 +210,14 @@ elif st.session_state.filtrovat_dle_skupin is True and Skupina is not None:
 
 # Render the chart in Streamlit
 html_bytes=chart_js
+
+
 with col1:
-    components.html(chart_js, height=800)
+    if st.session_state.filtrovat_dle_skupin is False:
+        chart_height = 800
+    else:
+        chart_height = 1000
+    components.html(chart_js, height=chart_height)
 
 mcol1, mcol2, mcol3 = st.columns(3)
 if HS_select == []:
