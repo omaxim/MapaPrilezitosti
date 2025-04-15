@@ -149,7 +149,7 @@ if st.session_state.filtrovat_dle_skupin:
     try:
         default_index = list(skupiny).index(st.session_state.selected_skupina)
     except ValueError:
-        default_index = min(5, len(skupiny) - 1)
+        default_index = int(min(5, len(skupiny) - 1))
         st.session_state.selected_skupina = skupiny[default_index]
 
     Skupina = col2.segmented_control(
