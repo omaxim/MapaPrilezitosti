@@ -128,7 +128,7 @@ if filtrovat_select == "Filtrovat dle kategorií":
     filtrovat_dle_skupin = True
 else:
     filtrovat_dle_skupin = False
-if filtrovat_dle_skupin=="Filtrovat dle kategorií":
+if filtrovat_dle_skupin:
     color       = 'Kategorie'
     skupiny = df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina',skupiny,default=skupiny[5])
