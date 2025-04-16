@@ -100,9 +100,9 @@ year_placeholder = " ‎"
 plot_display_names, hover_display_data = get_plot_and_hover_display_names(year_placeholder)
 
 # Sidebar selection boxes using display names
-x_axis = col2.selectbox("Vyber osu X:", plot_display_names, index=4)
-y_axis = col2.selectbox("Vyber osu Y:", plot_display_names, index=5)
-markersize = col2.selectbox("Velikost dle:", plot_display_names, index=10)
+x_axis = col2.selectbox("Vyber osu X:", plot_display_names, index=2)
+y_axis = col2.selectbox("Vyber osu Y:", plot_display_names, index=3)
+markersize = col2.selectbox("Velikost dle:", plot_display_names, index=8)
 
 # Load datasets for both years
 df_2022, cz_export_22 = load_data("2022")
