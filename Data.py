@@ -118,7 +118,35 @@ if year=="2023":
     df = df_2023
 
 # Apply filters to dataframe
-filtered_df = df.copy()
+def apply_filters(df, year_str):
+    filtered = df.copy()
+
+    if st.session_state.filtrovat_dle_skupin:
+        filtered = filtered[filtered['Skupina'].isin([Skupina])]
+
+    for filter in st.session_state.filters:
+        if filter['column'] is not None and filter['range'] is not None:
+            colname = filter['column'].replace(year_placeholder, year_str)
+            filtered = filtered[
+                (filtered[colname] >= filter['range'][0]) &
+                (filtered[colname] <= filter['range'][1])
+            ]
+
+    # Replace negative marker sizes with 0
+    filtered[markersize.replace(year_placeholder, year_str)] = filtered[markersize.replace(year_placeholder, year_str)].clip(lower=0)
+
+    # Drop rows with missing plotting values
+    filtered = filtered.dropna(subset=[
+        x_axis.replace(year_placeholder, year_str),
+        y_axis.replace(year_placeholder, year_str),
+        color,
+        markersize.replace(year_placeholder, year_str)
+    ])
+
+    return filtered
+filtered_df_2022 = apply_filters(df_2022, "2022")
+filtered_df_2023 = apply_filters(df_2023, "2023")
+filtered_df = filtered_df_2022 if year == "2022" else filtered_df_2023
 
 # Initialize session state
 if 'filtrovat_dle_skupin' not in st.session_state:
@@ -235,4 +263,3 @@ else:
         mime="text/html",
         use_container_width=True
     )
-
