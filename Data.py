@@ -278,3 +278,4 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
         mime="text/html",
         use_container_width=True
     )
+st.dataframe(filtered_df)
