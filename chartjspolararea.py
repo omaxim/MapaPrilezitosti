@@ -26,16 +26,10 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
     growthAbs = []
     growthPct = []
     backgroundColor = []
-    outerRadius = []
 
     color_map = get_color_discrete_map()
     fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
     fallback_cycle = itertools.cycle(fallback_colors)
-
-    max_value = max(non_green_23, other_green_23, green_total_23_filtered)
-
-    def compute_radius(value):
-        return 60 + (value / max_value) * 60  # Scale radius from 60 to 120
 
     # Non-green
     labels.append("Nezelené produkty")
@@ -45,7 +39,6 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
     growthAbs.append((non_green_23 - non_green_22) / 1e9)
     growthPct.append(safe_growth(non_green_22, non_green_23))
     backgroundColor.append("#CCCCCC")
-    outerRadius.append(f"{compute_radius(non_green_23)}%")
 
     # Other green
     if other_green_22 > 0:
@@ -56,10 +49,9 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
         growthAbs.append((other_green_23 - other_green_22) / 1e9)
         growthPct.append(safe_growth(other_green_22, other_green_23))
         backgroundColor.append("#B2BEB5")
-        outerRadius.append(f"{compute_radius(other_green_23)}%")
 
-    green_cats = sorted(set(filtered_df_2022[group_field].unique()).union(
-                        set(filtered_df_2023[group_field].unique())))
+    green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
+                              set(filtered_df_2023[group_field].unique()))))
 
     for cat in green_cats:
         exp22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
@@ -72,7 +64,11 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
         growthAbs.append((exp23 - exp22) / 1e9)
         growthPct.append(safe_growth(exp22, exp23))
         backgroundColor.append(color_map.get(cat, next(fallback_cycle)))
-        outerRadius.append(f"{compute_radius(exp23)}%")
+
+    # Calculate radius offsets based on 2023 export size
+    max_radius_offset = 40
+    max_value = max(data_2023)
+    radiusOffset = [(val / max_value) * max_radius_offset for val in data_2023]
 
     chart_data = {
         "labels": labels,
@@ -83,15 +79,12 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
             "export23": export23,
             "growthAbs": growthAbs,
             "growthPct": growthPct,
-            "borderWidth": 1,
-            "hoverBorderColor": "rgba(0, 0, 0, 0.4)",
-            "hoverBorderWidth": 2,
-            "outerRadius": outerRadius
+            "radiusOffset": radiusOffset
         }]
     }
 
     chart_config = {
-        "type": "pie",
+        "type": "doughnut",
         "data": chart_data,
         "options": {
             "responsive": True,
@@ -102,15 +95,6 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
                     "bottom": 50,
                     "left": 50,
                     "right": 50
-                }
-            },
-            "hover": {
-                "mode": "nearest",
-                "animationDuration": 0
-            },
-            "elements": {
-                "arc": {
-                    "hoverOffset": 0
                 }
             },
             "plugins": {
@@ -137,26 +121,32 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
                 }
             }
         },
-        "plugins": ["ChartDataLabels"]
+        "plugins": ["ChartDataLabels", "variableRadius"]
     }
 
     html = f'''
-    <div style="width: 100%; max-width: 800px; margin: auto">
-      <canvas id="exportGrowthChart"></canvas>
+    <div style="width: 100%; max-width: 800px; margin: auto; padding: 40px;">
+    <canvas id="exportGrowthChart" style="max-height: 600px;"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script>
+      const variableRadius = {{
+        id: "variableRadius",
+        beforeDraw(chart) {{
+          const dataset = chart.data.datasets[0];
+          const meta = chart.getDatasetMeta(0);
+          meta.data.forEach((arc, i) => {{
+            const offset = dataset.radiusOffset?.[i] || 0;
+            arc.outerRadius = arc.outerRadius + offset;
+          }});
+        }}
+      }};
+      Chart.register(variableRadius);
+
       const ctx = document.getElementById('exportGrowthChart').getContext('2d');
       const chartConfig = {json.dumps(chart_config)};
       chartConfig.options.plugins.tooltip.callbacks.label = eval('(' + chartConfig.options.plugins.tooltip.callbacks.label.function + ')');
-
-      Chart.defaults.elements.arc.borderAlign = 'center';
-      Chart.defaults.elements.arc.hoverBorderColor = 'rgba(0,0,0,0.4)';
-      Chart.defaults.elements.arc.hoverBorderWidth = 2;
-
-      Chart.defaults.elements.arc.borderWidth = 1;
-
       new Chart(ctx, chartConfig);
     </script>
     <div style="text-align:center; font-size: 0.8em; color: #666">{bottom_text}</div>
