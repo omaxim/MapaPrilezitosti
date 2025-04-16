@@ -58,7 +58,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
         "name": "Nezelené produkty",
         "y": non_green_22,  # 2022 share for slice angle.
         "z": growth_non_green,  # Growth fraction.
-        "color": "#CCCCCC",  # Gray.
+        "color": "#B2BEB5",  # Gray.
         # Extra details for the tooltip (values converted to billions):
         "export22": non_green_22 / 1e9,
         "export23": non_green_23 / 1e9,
