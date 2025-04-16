@@ -3,7 +3,7 @@ import itertools
 import numpy as np
 from variable_names import get_color_discrete_map  # Assumes this returns a dict mapping category to color
 
-def chartjs_polar_area(filtered_df_2022, filtered_df_2023, group_field, chart_title="Export růst mezi lety 2022 a 2023", bottom_text="Data: UN COMTRADE, CEPII, a další"):
+def chartjs_polar_area(filtered_df_2022, filtered_df_2023,total_export_22,total_export_23, group_field, chart_title="Export růst mezi lety 2022 a 2023", bottom_text="Data: UN COMTRADE, CEPII, a další"):
     """
     Create a polar area chart in Chart.js showing growth in % for total export and by category.
     
@@ -17,8 +17,6 @@ def chartjs_polar_area(filtered_df_2022, filtered_df_2023, group_field, chart_ti
     - A string containing HTML + JS code for embedding in Streamlit.
     """
     # Total export values and growth percentage
-    total_export_22 = filtered_df_2022['CZ Export 2022 CZK'].sum()
-    total_export_23 = filtered_df_2023['CZ Export 2023 CZK'].sum()
     total_growth = total_export_23 - total_export_22
     total_growth_perc = total_growth / total_export_22 if total_export_22 else 0
 
