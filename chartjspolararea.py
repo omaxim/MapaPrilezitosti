@@ -55,7 +55,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     data_series = []
     
     data_series.append({
-        "name": "Ostatní produkty",
+        "name": "Nezelené produkty",
         "y": non_green_22,  # 2022 share for slice angle.
         "z": growth_non_green,  # Growth fraction.
         "color": "#CCCCCC",  # Gray.
