@@ -291,5 +291,5 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
 polar_js = chartjs_polar_area(filtered_df_2022, filtered_df_2023, group_field="Kategorie",
                               chart_title="Růst exportu podle kategorie",
                               bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
-
+st.text(polar_js)
 st.components.v1.html(polar_js, height=750)
