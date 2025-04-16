@@ -118,7 +118,7 @@ if year=="2023":
     df = df_2023
 
 # Apply filters to dataframe
-def apply_filters(df, year_str):
+def apply_filters(df, year_str, x_axis, y_axis, color, markersize):
     filtered = df.copy()
 
     if st.session_state.filtrovat_dle_skupin:
@@ -144,8 +144,8 @@ def apply_filters(df, year_str):
     ])
 
     return filtered
-filtered_df_2022 = apply_filters(df_2022, "2022")
-filtered_df_2023 = apply_filters(df_2023, "2023")
+filtered_df_2022 = apply_filters(df_2022, "2022", x_axis, y_axis, color, markersize)
+filtered_df_2023 = apply_filters(df_2023, "2023", x_axis, y_axis, color, markersize)
 filtered_df = filtered_df_2022 if year == "2022" else filtered_df_2023
 
 # Initialize session state
