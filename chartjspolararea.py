@@ -56,7 +56,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     
     data_series.append({
         "name": "Nezelené produkty",
-        "y": non_green_22,  # 2022 share for slice angle.
+        "y": non_green_23,  # 2023 share for slice angle.
         "z": growth_non_green,  # Growth fraction.
         "color": "#CCCCCC",  # Gray.
         # Extra details for the tooltip (values converted to billions):
@@ -68,7 +68,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     if other_green_22!=0:
         data_series.append({
             "name": "Ostatní zelené produkty",
-            "y": other_green_22,  # 2022 share for slice angle.
+            "y": other_green_23,  # 2023 share for slice angle.
             "z": growth_other_green,  # Growth fraction.
             "color": "#B2BEB5",  # Gray.
             # Extra details for the tooltip (values converted to billions):
@@ -93,7 +93,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
         
         data_series.append({
             "name": cat,
-            "y": export_22,
+            "y": export_23,
             "z": growth,
             "color": color_map.get(cat, next(fallback_cycle)),
             "export22": export_22 / 1e9,  # Converted to billions.
