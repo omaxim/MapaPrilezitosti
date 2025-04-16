@@ -68,8 +68,6 @@ def get_color_discrete_map():
 
 def get_plot_and_hover_display_names(year_placeholder):
     plot_display_names = [
-        'Příbuznost CZ '+year_placeholder+'',
-        'Výhoda CZ '+year_placeholder+'',
         'Koncentrace světového trhu '+year_placeholder+'',
         'Koncentrace evropského exportu '+year_placeholder+'',
         'Percentil příbuznosti CZ '+year_placeholder+'',
