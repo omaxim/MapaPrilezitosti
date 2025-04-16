@@ -92,7 +92,7 @@ def load_data(datayear):
     df['CZ 2030 Export CZK'] = USD_to_czk * df['CZ 2030 Export CZK']
     df['HS_ID'] = df['HS_ID'].astype(str)
     df['HS_Lookup'] = df['HS_ID'] + " - " + df['Název']
-    total_cz_export = CZE['ExportValue'].sum()
+    total_cz_export = USD_to_czk * CZE['ExportValue'].sum()
     return df, total_cz_export
 
 # Define the default year_placeholder and get plotting lists
