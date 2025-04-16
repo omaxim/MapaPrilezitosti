@@ -103,7 +103,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
                 '<span style="color:{point.color}">\u25CF</span> <b>{point.name}</b><br/>' +
                 '2022: {point.export22:,.1f} miliard CZK<br/>' +
                 '2023: {point.export23:,.1f} miliard CZK<br/>' +
-                'Růst: {point.growth_abs:,.1f} miliard CZK ({point.growth_frac:,.1%})'
+                'Růst: {point.growth_abs:,.1f} miliard CZK ({point.growth_frac:.1f})'
             )
         },
         "series": [{
