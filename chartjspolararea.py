@@ -51,7 +51,7 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
         backgroundColor.append("#B2BEB5")
 
     green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
-                              set(filtered_df_2023[group_field].unique())))
+                              set(filtered_df_2023[group_field].unique()))))
 
     for cat in green_cats:
         exp22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
