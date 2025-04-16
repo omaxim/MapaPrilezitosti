@@ -298,8 +298,8 @@ polar_js = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_
                               bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
 st.components.v1.html(polar_js, height=750)
 # Example: render the polar area chart in a Streamlit component
-polar_js2 = chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
-                              group_field="Skupina",
-                              chart_title="Růst exportu podle kategorie",
-                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
-st.components.v1.html(polar_js2, height=750)
+#polar_js2 = chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
+#                              group_field="Skupina",
+#                              chart_title="Růst exportu podle kategorie",
+#                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
+#st.components.v1.html(polar_js2, height=750)
