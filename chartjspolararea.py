@@ -7,58 +7,62 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
                                   bottom_text="Data: UN COMTRADE, CEPII, a další"):
     """
     Creates a Highcharts variable pie chart where:
-      - Slice angle (y) represents the export share in 2022.
-      - Slice radius (z) represents the percentage growth between 2022 and 2023.
+      - The slice angle (y) represents the export share in 2022.
+      - The slice radius (z) represents the percentage growth between 2022 and 2023,
+        computed as (export_23 - export_22)/export_22.
+    
+    The exports and absolute growth are converted to billions (divided by 1e9)
+    so that they are displayed as "miliard CZK" in the tooltip.
     
     Each data point carries extra fields:
-      - export22: Export value for 2022.
-      - export23: Export value for 2023.
-      - growth_abs: Absolute export difference (export23 - export22).
-      - growth_frac: Growth fraction (used for slice radius).
+      - export22: 2022 export value in billions.
+      - export23: 2023 export value in billions.
+      - growth_abs: Absolute export difference in billions.
+      - growth_frac: Growth fraction (dimensionless) computed as (export23 - export22) / export22.
     
-    The tooltip displays these values, formatted nicely (growth percentage with one decimal place).
+    The tooltip displays these values.
     
     Parameters:
       - filtered_df_2022, filtered_df_2023: DataFrames containing green product exports.
-      - total_export_22, total_export_23: Total exports for the entire economy in 2022 and 2023.
-      - group_field: Field name (e.g., 'Kategorie') to group green products.
+      - total_export_22, total_export_23: Total exports (entire economy) for 2022 and 2023.
+      - group_field: The column (e.g., "Kategorie") used to group green products.
       - chart_title: Title of the chart.
-      - bottom_text: Subtitle/footer text for the chart.
+      - bottom_text: Subtitle/footer text.
     
     Returns:
-      - A string containing the HTML/JS snippet to render the Highcharts variable pie chart.
+      - A string containing the HTML/JS snippet to render the chart.
     """
-    # Calculate totals for green exports
+    # Calculate totals for green exports.
     green_total_22 = filtered_df_2022['CZ Export 2022 CZK'].sum()
     green_total_23 = filtered_df_2023['CZ Export 2023 CZK'].sum()
     
-    # Calculate non-green exports
+    # Calculate non-green exports.
     non_green_22 = total_export_22 - green_total_22
     non_green_23 = total_export_23 - green_total_23
     
-    # Calculate growth for non-green segment (if denominator > 0)
+    # Calculate growth for non-green (year-on-year % growth).
     growth_non_green = (non_green_23 - non_green_22) / non_green_22 if non_green_22 > 0 else 0
     
-    # Build the data series. First element for non-green products.
+    # Build the data series list. The first element is for non-green products.
     data_series = []
     
     data_series.append({
         "name": "Nenezelené produkty",
-        "y": non_green_22,     # Slice angle determined by 2022 value.
-        "z": growth_non_green, # Growth fraction.
-        "color": "#CCCCCC",    # Gray.
-        # Extra details for tooltip:
-        "export22": non_green_22,
-        "export23": non_green_23,
-        "growth_abs": non_green_23 - non_green_22,
+        "y": non_green_22,  # 2022 share for slice angle.
+        "z": growth_non_green,  # Growth fraction.
+        "color": "#CCCCCC",  # Gray.
+        # Extra details for the tooltip (values converted to billions):
+        "export22": non_green_22 / 1e9,
+        "export23": non_green_23 / 1e9,
+        "growth_abs": (non_green_23 - non_green_22) / 1e9,
         "growth_frac": growth_non_green
     })
     
-    # Build list of green categories from filtered data (both years)
+    # Get all green categories from the filtered data (both years).
     green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
                           set(filtered_df_2023[group_field].unique()))))
     
-    color_map = get_color_discrete_map()  # Expects a dict mapping category -> color.
+    color_map = get_color_discrete_map()  # Expected to return a dict: category -> color.
     fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
     fallback_cycle = itertools.cycle(fallback_colors)
     
@@ -72,13 +76,13 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
             "y": export_22,
             "z": growth,
             "color": color_map.get(cat, next(fallback_cycle)),
-            "export22": export_22,
-            "export23": export_23,
-            "growth_abs": export_23 - export_22,
+            "export22": export_22 / 1e9,  # Converted to billions.
+            "export23": export_23 / 1e9,
+            "growth_abs": (export_23 - export_22) / 1e9,
             "growth_frac": growth
         })
     
-    # Highcharts configuration with tooltip formatted per the example.
+    # Highcharts configuration with tooltip using headerFormat and pointFormat.
     chart_config = {
         "chart": {
             "type": "variablepie",
@@ -97,9 +101,9 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
             "headerFormat": "",
             "pointFormat": (
                 '<span style="color:{point.color}">\u25CF</span> <b>{point.name}</b><br/>' +
-                '2022: {point.export22:,.0f} CZK<br/>' +
-                '2023: {point.export23:,.0f} CZK<br/>' +
-                'Růst: {point.growth_abs:,.0f} CZK ({point.growth_frac:.1%})'
+                '2022: {point.export22:,.1f} miliard CZK<br/>' +
+                '2023: {point.export23:,.1f} miliard CZK<br/>' +
+                'Růst: {point.growth_abs:,.1f} miliard CZK ({point.growth_frac:.1%})'
             )
         },
         "series": [{
