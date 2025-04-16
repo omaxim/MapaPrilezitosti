@@ -251,27 +251,23 @@ with col1:
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3 = st.columns(3)
-selected_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
-with mcol1:
-    st.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", 
-              "{:,.0f}".format(selected_growth/1e9), 
-              "miliard CZK")
 
-with mcol2:
-    st.metric("Český export 2025-2030 (2022)", 
-              "{:,.0f}".format(filtered_df_2022['CZ Celkový Export 25-30 CZK'].sum()/1e9), 
-              "miliard CZK")
-    st.metric("Český export 2025-2030 (2023)", 
-              "{:,.0f}".format(filtered_df_2023['CZ Celkový Export 25-30 CZK'].sum()/1e9), 
-              "miliard CZK")
+mcol1, mcol2, mcol3 = st.columns(3)
+if HS_select == []:
+    selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
+    mcol1.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1000000000),'miliard CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['CZ Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df['EU Celkový Export 25-30 CZK'])/1000000000), "miliard CZK")
 
-with mcol3:
-    st.metric("Evropský export 2025-2030 (2022)", 
-              "{:,.0f}".format(filtered_df_2022['EU Celkový Export 25-30 CZK'].sum()/1e9), 
-              "miliard CZK")
-    st.metric("Evropský export 2025-2030 (2023)", 
-              "{:,.0f}".format(filtered_df_2023['EU Celkový Export 25-30 CZK'].sum()/1e9), 
-              "miliard CZK")
+else:
+    selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
+    mcol1.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů CZK")
+
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export '+year+' CZK'])/1000000),'milionů CZK' )
+    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+
 
 if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
     col2.download_button(
