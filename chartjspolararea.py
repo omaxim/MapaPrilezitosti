@@ -32,14 +32,25 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     Returns:
       - A string containing the HTML/JS snippet to render the chart.
     """
+    # Calculate totals for green exports.
+    green_total_22_filtered = filtered_df_2022['CZ Export 2022 CZK'].sum()
+    green_total_23_filtered = filtered_df_2023['CZ Export 2023 CZK'].sum()
     
     # Calculate non-green exports.
     non_green_22 = total_export_22 - green_total_22
     non_green_23 = total_export_23 - green_total_23
     
+    # Calculate other-green exports
+
+    other_green_22 = green_total_22-green_total_22_filtered
+    other_green_23 = green_total_23-green_total_23_filtered
+
     # Calculate growth for non-green (year-on-year % growth).
     growth_non_green = (non_green_23 - non_green_22) / non_green_22 if non_green_22 > 0 else 0
     
+    # Calculate growth for other-green (year-on-year % growth).
+    growth_other_green = (other_green_23 - other_green_22) / other_green_22 if other_green_22 > 0 else 0
+
     # Build the data series list. The first element is for non-green products.
     data_series = []
     
@@ -54,7 +65,20 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
         "growth_abs": (non_green_23 - non_green_22) / 1e9,
         "growth_frac": growth_non_green
     })
-    
+    if other_green_22!=0:
+        data_series.append({
+            "name": "Ostatní zelené produkty",
+            "y": other_green_22,  # 2022 share for slice angle.
+            "z": growth_other_green,  # Growth fraction.
+            "color": "#CCCCCC",  # Gray.
+            # Extra details for the tooltip (values converted to billions):
+            "export22": other_green_22 / 1e9,
+            "export23": other_green_23 / 1e9,
+            "growth_abs": (other_green_23 - other_green_22) / 1e9,
+            "growth_frac": growth_other_green
+        })
+    else:
+        continue
     # Get all green categories from the filtered data (both years).
     green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
                           set(filtered_df_2023[group_field].unique()))))
