@@ -139,8 +139,6 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     
     chart_html = f"""
     <div id="container" style="width: 100%; height: 700px;"></div>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {{
