@@ -257,7 +257,7 @@ if HS_select == []:
     selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
     selected_CZ_growth_perc = selected_CZ_growth/filtered_df_2022['CZ Export 2022 CZK'].sum()
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
-    mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
+    mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
 
