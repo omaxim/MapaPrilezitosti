@@ -246,12 +246,10 @@ with col1:
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3 = st.columns(3)
+selected_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
 with mcol1:
-    st.metric("Vybraný český export 2022", 
-              "{:,.0f}".format(filtered_df_2022['CZ Export 2022 CZK'].sum()/1e9), 
-              "miliard CZK")
-    st.metric("Vybraný český export 2023", 
-              "{:,.0f}".format(filtered_df_2023['CZ Export 2023 CZK'].sum()/1e9), 
+    st.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", 
+              "{:,.0f}".format(selected_growth/1e9), 
               "miliard CZK")
 
 with mcol2:
@@ -278,4 +276,3 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
         mime="text/html",
         use_container_width=True
     )
-st.dataframe(filtered_df)
