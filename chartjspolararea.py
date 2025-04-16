@@ -7,81 +7,70 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
                                   bottom_text="Data: UN COMTRADE, CEPII, a další"):
     """
     Creates a Highcharts variable pie chart where:
-      - The slice angle (y) represents the 2022 export share (for that segment, in CZK).
-      - The slice radius (z) represents the percentage growth between 2022 and 2023.
-    
-    The chart includes:
-      - A segment for non-green products (calculated as total exports minus green exports)
-        shown in gray.
-      - One segment per green category defined by 'group_field'. Colors for these segments are
-        drawn from get_color_discrete_map() (with fallback colors if not defined).
+      - Slice angle (y) represents the export share for 2022.
+      - Slice radius (z) represents the percentage growth between 2022 and 2023.
       
+    The chart displays:
+      - A segment for non-green products (total exports minus green exports) in gray.
+      - One segment per green category (as defined by group_field), using colors from your discrete map.
+    
+    The tooltip now shows the growth percentage with 1 decimal place.
+    
     Parameters:
       - filtered_df_2022, filtered_df_2023: DataFrames with green product exports.
       - total_export_22, total_export_23: Total exports (for the entire economy) for 2022 and 2023.
-      - group_field: Field in the filtered DataFrames (e.g. 'Kategorie') for grouping green products.
+      - group_field: Field name (e.g., 'Kategorie') to group green products.
       - chart_title: Title of the chart.
-      - bottom_text: Subtitle or additional info displayed on the chart.
+      - bottom_text: Subtitle or footer text displayed on the chart.
     
     Returns:
-      - A string of HTML/JS code to be rendered by st.components.v1.html().
+      - A string containing HTML/JS code to render the chart.
     """
-    # Calculate sums for green products
+    # Sum up green exports from filtered data
     green_total_22 = filtered_df_2022['CZ Export 2022 CZK'].sum()
     green_total_23 = filtered_df_2023['CZ Export 2023 CZK'].sum()
 
-    # Non-green exports = Total - Green subset
+    # Non-green exports = Total - Green
     non_green_22 = total_export_22 - green_total_22
     non_green_23 = total_export_23 - green_total_23
 
-    # Growth calculation for non-green:
-    # Use percentage growth (e.g., 0.15 meaning 15% growth)
-    if non_green_22 > 0:
-        growth_non_green = (non_green_23 - non_green_22) / non_green_22
-    else:
-        growth_non_green = 0
+    # Calculate growth for non-green as a fraction (e.g., 0.15 for 15%)
+    growth_non_green = (non_green_23 - non_green_22) / non_green_22 if non_green_22 else 0
 
-    # Build data for variable pie: first segment for non-green, then one per green category.
+    # Begin building the data series: first element for non-green, then per green category.
     data_series = []
     
-    # Non-green data point:
+    # Non-green segment (displayed in gray)
     data_series.append({
         "name": "Nenezelené produkty",
-        "y": non_green_22,  # Angle determined by the 2022 non-green export share
-        "z": growth_non_green,  # Growth as percentage (used to adjust the radius)
-        "color": "#CCCCCC"  # Fixed grey color
+        "y": non_green_22,  # Determines slice angle based on 2022 share
+        "z": growth_non_green,  # Growth percentage for the radius
+        "color": "#CCCCCC"
     })
     
-    # Get the set of green categories (union from both years)
+    # Determine all green categories from both years
     green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
                           set(filtered_df_2023[group_field].unique()))))
     
-    # Create a color map from your helper function and a fallback cycle
-    color_map = get_color_discrete_map()  # Expecting: { category: color }
+    # Get color mapping and fallback colors
+    color_map = get_color_discrete_map()  # Expected dict mapping category to color
     fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
     fallback_cycle = itertools.cycle(fallback_colors)
-
+    
     for cat in green_cats:
-        # Sum exports for this category in 2022 and 2023:
         export_22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
         export_23 = filtered_df_2023[filtered_df_2023[group_field] == cat]['CZ Export 2023 CZK'].sum()
         
-        # Calculate growth for the green category
-        if export_22 > 0:
-            growth = (export_23 - export_22) / export_22
-        else:
-            growth = 0
+        growth = (export_23 - export_22) / export_22 if export_22 else 0
         
-        # Append the data point
         data_series.append({
             "name": cat,
-            "y": export_22,  # Slice's angle determined by its share of 2022 exports
-            "z": growth,     # Growth percentage determines the extra dimension (slice radius)
+            "y": export_22,
+            "z": growth,
             "color": color_map.get(cat, next(fallback_cycle))
         })
     
-    # Build the Highcharts configuration using the variable pie module.
-    # (Highcharts requires highcharts.js, highcharts-more.js, and modules/variable-pie.js)
+    # Build the Highcharts configuration
     chart_config = {
         "chart": {
             "type": "variablepie",
@@ -89,21 +78,17 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
         },
         "title": {
             "text": chart_title,
-            "style": {
-                "fontSize": "25px"
-            }
+            "style": {"fontSize": "25px"}
         },
         "subtitle": {
             "text": bottom_text,
             "align": "center",
-            "style": {
-                "fontSize": "14px"
-            }
+            "style": {"fontSize": "14px"}
         },
         "tooltip": {
             "pointFormatter": (
-                "function() { return '<span style=\"color:' + this.color + '\">&#9679;</span> ' +"
-                " this.name + ': ' + Highcharts.numberFormat(this.z * 100, 1) + '% růst'; }"
+                "function() { return '<span style=\"color:' + this.color + '\">&#9679;</span> ' + "
+                "this.name + ': ' + Highcharts.numberFormat(this.z * 100, 1) + '% růst'; }"
             )
         },
         "series": [{
@@ -115,10 +100,10 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
         }]
     }
     
-    # Convert the configuration to JSON
+    # Convert configuration to JSON
     config_json = json.dumps(chart_config)
     
-    # Generate the HTML/JS snippet (including required Highcharts scripts)
+    # Produce the HTML/JS snippet with required Highcharts modules
     chart_html = f"""
     <div id="container" style="width: 100%; height: 700px;"></div>
     <script src="https://code.highcharts.com/highcharts.js"></script>
