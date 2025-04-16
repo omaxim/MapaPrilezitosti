@@ -2,130 +2,132 @@ import json
 import itertools
 from variable_names import get_color_discrete_map
 
-def chartjs_polar_area(filtered_df_2022, filtered_df_2023, total_export_22, total_export_23, 
-                       group_field, chart_title="Export růst mezi lety 2022 a 2023", 
-                       bottom_text="Data: UN COMTRADE, CEPII, a další"):
+def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_export_22, total_export_23,
+                                  group_field, chart_title="Export růst mezi lety 2022 a 2023",
+                                  bottom_text="Data: UN COMTRADE, CEPII, a další"):
     """
-    Create a polar area chart using Chart.js that compares export growth (% difference relative to total 2022 exports)
-    for non-green products versus green products per category (as defined by group_field).
-
-    Parameters:
-      - filtered_df_2022, filtered_df_2023: DataFrames containing the green product subset for years 2022 and 2023.
-      - total_export_22, total_export_23: Totals (for the entire economy) for the years 2022 and 2023, respectively.
-      - group_field: The column name to group filtered_df (e.g. 'Kategorie' or 'Skupina').
-      - chart_title: Title to display on the chart.
-      - bottom_text: Subtitle text to display on the chart.
-
-    The function calculates growth as:
-         (value_2023 - value_2022) / total_export_22
-
-    It computes this separately for:
-      1) Non-green: total exports minus green exports.
-      2) Each green category present in the filtered datasets.
+    Creates a Highcharts variable pie chart where:
+      - The slice angle (y) represents the 2022 export share (for that segment, in CZK).
+      - The slice radius (z) represents the percentage growth between 2022 and 2023.
+    
+    The chart includes:
+      - A segment for non-green products (calculated as total exports minus green exports)
+        shown in gray.
+      - One segment per green category defined by 'group_field'. Colors for these segments are
+        drawn from get_color_discrete_map() (with fallback colors if not defined).
       
+    Parameters:
+      - filtered_df_2022, filtered_df_2023: DataFrames with green product exports.
+      - total_export_22, total_export_23: Total exports (for the entire economy) for 2022 and 2023.
+      - group_field: Field in the filtered DataFrames (e.g. 'Kategorie') for grouping green products.
+      - chart_title: Title of the chart.
+      - bottom_text: Subtitle or additional info displayed on the chart.
+    
     Returns:
-      - HTML/JS code (as a string) for embedding the Chart.js polar area chart.
+      - A string of HTML/JS code to be rendered by st.components.v1.html().
     """
-    # Sum of green exports from filtered data in each year
+    # Calculate sums for green products
     green_total_22 = filtered_df_2022['CZ Export 2022 CZK'].sum()
     green_total_23 = filtered_df_2023['CZ Export 2023 CZK'].sum()
 
-    # Non-green exports for each year
+    # Non-green exports = Total - Green subset
     non_green_22 = total_export_22 - green_total_22
     non_green_23 = total_export_23 - green_total_23
 
-    # Calculate growth for non-green segment (relative to total_export_22)
-    growth_non_green = (non_green_23 - non_green_22) / total_export_22 if total_export_22 else 0
+    # Growth calculation for non-green:
+    # Use percentage growth (e.g., 0.15 meaning 15% growth)
+    if non_green_22 > 0:
+        growth_non_green = (non_green_23 - non_green_22) / non_green_22
+    else:
+        growth_non_green = 0
 
-    # Build set of green categories from filtered data (union of both years)
-    categories = sorted(list(set(filtered_df_2022[group_field].unique()).union(
-                               set(filtered_df_2023[group_field].unique()))))
+    # Build data for variable pie: first segment for non-green, then one per green category.
+    data_series = []
     
-    # For each green category, compute the export volumes and growth percentage
-    cat_growth = {}
-    for cat in categories:
-        export_22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
-        export_23 = filtered_df_2023[filtered_df_2023[group_field] == cat]['CZ Export 2023 CZK'].sum()
-        # Growth is calculated relative to total_export_22; if no baseline then use 0
-        growth = (export_23 - export_22) / total_export_22 if total_export_22 else 0
-        cat_growth[cat] = growth
-
-    # Build labels and data; first element is for non-green, then the green categories.
-    labels = ["Nenezelené produkty"] + list(cat_growth.keys())
-    data_values = [growth_non_green] + [cat_growth[cat] for cat in cat_growth]
-
-    # Colors: use a fixed color for non-green (grey) and then one color per green category.
-    non_green_color = "#CCCCCC"  # Grey for non-green
-    colors = [non_green_color]
-    color_map = get_color_discrete_map()  # Returns a dict mapping group -> color
+    # Non-green data point:
+    data_series.append({
+        "name": "Nenezelené produkty",
+        "y": non_green_22,  # Angle determined by the 2022 non-green export share
+        "z": growth_non_green,  # Growth as percentage (used to adjust the radius)
+        "color": "#CCCCCC"  # Fixed grey color
+    })
+    
+    # Get the set of green categories (union from both years)
+    green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
+                          set(filtered_df_2023[group_field].unique()))))
+    
+    # Create a color map from your helper function and a fallback cycle
+    color_map = get_color_discrete_map()  # Expecting: { category: color }
     fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
     fallback_cycle = itertools.cycle(fallback_colors)
 
-    for cat in cat_growth:
-        cat_color = color_map.get(cat, next(fallback_cycle))
-        colors.append(cat_color)
-
-    # Build the Chart.js data structure.
-    chart_data = {
-        "labels": labels,
-        "datasets": [{
-            "data": data_values,
-            "backgroundColor": colors,
-            "borderColor": colors,
-            "borderWidth": 1
+    for cat in green_cats:
+        # Sum exports for this category in 2022 and 2023:
+        export_22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
+        export_23 = filtered_df_2023[filtered_df_2023[group_field] == cat]['CZ Export 2023 CZK'].sum()
+        
+        # Calculate growth for the green category
+        if export_22 > 0:
+            growth = (export_23 - export_22) / export_22
+        else:
+            growth = 0
+        
+        # Append the data point
+        data_series.append({
+            "name": cat,
+            "y": export_22,  # Slice's angle determined by its share of 2022 exports
+            "z": growth,     # Growth percentage determines the extra dimension (slice radius)
+            "color": color_map.get(cat, next(fallback_cycle))
+        })
+    
+    # Build the Highcharts configuration using the variable pie module.
+    # (Highcharts requires highcharts.js, highcharts-more.js, and modules/variable-pie.js)
+    chart_config = {
+        "chart": {
+            "type": "variablepie",
+            "height": "700px"
+        },
+        "title": {
+            "text": chart_title,
+            "style": {
+                "fontSize": "25px"
+            }
+        },
+        "subtitle": {
+            "text": bottom_text,
+            "align": "center",
+            "style": {
+                "fontSize": "14px"
+            }
+        },
+        "tooltip": {
+            "pointFormatter": (
+                "function() { return '<span style=\"color:' + this.color + '\">&#9679;</span> ' +"
+                " this.name + ': ' + Highcharts.numberFormat(this.z * 100, 1) + '% růst'; }"
+            )
+        },
+        "series": [{
+            "minPointSize": 10,
+            "innerSize": "20%",
+            "zMin": 0,
+            "name": "Export",
+            "data": data_series
         }]
     }
     
-    # Chart options with a tooltip that will show the label and value in percentage format.
-    chart_options = {
-        "responsive": True,
-        "maintainAspectRatio": False,
-        "plugins": {
-            "title": {
-                "display": True,
-                "text": chart_title,
-                "font": {"size": 25}
-            },
-            "subtitle": {
-                "display": True,
-                "text": bottom_text,
-                "position": "bottom",
-                "padding": {"top": 10},
-                "font": {"size": 14}
-            },
-            "tooltip": {
-                "callbacks": {
-                    "label": (
-                        "function(context) {"
-                        "   var label = context.label || '';"
-                        "   var value = context.parsed;"
-                        "   return label + ': ' + (value*100).toFixed(1) + '% růst';"
-                        "}"
-                    )
-                }
-            }
-        }
-    }
+    # Convert the configuration to JSON
+    config_json = json.dumps(chart_config)
     
-    # Convert Python dictionaries to JSON.
-    data_json = json.dumps(chart_data)
-    options_json = json.dumps(chart_options)
-    
-    # Generate the HTML/JS snippet for Chart.js polar area chart.
-    chart_js = f"""
-    <div style="width:100%; height:700px;">
-        <canvas id="polarChart"></canvas>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    # Generate the HTML/JS snippet (including required Highcharts scripts)
+    chart_html = f"""
+    <div id="container" style="width: 100%; height: 700px;"></div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/variable-pie.js"></script>
     <script>
-        var ctx = document.getElementById('polarChart').getContext('2d');
-        var data = {data_json};
-        var options = {options_json};
-        new Chart(ctx, {{
-            type: 'polarArea',
-            data: data,
-            options: options
-        }});
+      document.addEventListener('DOMContentLoaded', function () {{
+        Highcharts.chart('container', {config_json});
+      }});
     </script>
     """
-    return chart_js
+    return chart_html
