@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 
 from chartjsbubble import chartjs_plot
+from chartjspolararea import chartjs_polar_area
 from variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
 import streamlit.components.v1 as components
 from visualsetup import load_visual_identity
@@ -285,3 +286,10 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
         mime="text/html",
         use_container_width=True
     )
+
+# Example: render the polar area chart in a Streamlit component
+polar_js = chartjs_polar_area(filtered_df_2022, filtered_df_2023, group_field="Kategorie",
+                              chart_title="Růst exportu podle kategorie",
+                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
+
+st.components.v1.html(polar_js, height=750)
