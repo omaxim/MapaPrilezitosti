@@ -92,8 +92,8 @@ def load_data(datayear):
     df['CZ 2030 Export CZK'] = USD_to_czk * df['CZ 2030 Export CZK']
     df['HS_ID'] = df['HS_ID'].astype(str)
     df['HS_Lookup'] = df['HS_ID'] + " - " + df['Název']
-    df['total_cz_export'] = CZE['ExportValue'].sum()
-    return df
+    total_cz_export = CZE['ExportValue'].sum()
+    return df, total_cz_export
 
 # Define the default year_placeholder and get plotting lists
 year_placeholder = " ‎"
@@ -105,8 +105,8 @@ y_axis = col2.selectbox("Vyber osu Y:", plot_display_names, index=5)
 markersize = col2.selectbox("Velikost dle:", plot_display_names, index=10)
 
 # Load datasets for both years
-df_2022 = load_data("2022")
-df_2023 = load_data("2023")
+df_2022, cz_export_22 = load_data("2022")
+df_2023, cz_export_23 = load_data("2023")
 if year == "2022":
     df = df_2022
 else:
@@ -255,7 +255,7 @@ mcol1, mcol2, mcol3 = st.columns(3)
 mcol1, mcol2, mcol3 = st.columns(3)
 if HS_select == []:
     selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
-    selected_EU_growth = filtered_df_2023['EU Export 2023 CZK'].sum() - filtered_df_2022['EU Export 2022 CZK'].sum()
+    selected_CZ_growth_perc = selected_CZ_growth/filtered_df_2022['CZ Export 2022 CZK'].sum()
 
     mcol1.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1000000000),'miliard CZK' )
