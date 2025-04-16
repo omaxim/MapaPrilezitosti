@@ -2,7 +2,7 @@ import json
 import itertools
 from variable_names import get_color_discrete_map
 
-def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_export_22, total_export_23,
+def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_export_22, total_export_23,green_total_22,green_total_23,
                                   group_field, chart_title="Export růst mezi lety 2022 a 2023",
                                   bottom_text="Data: UN COMTRADE, CEPII, a další"):
     """
@@ -32,9 +32,6 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
     Returns:
       - A string containing the HTML/JS snippet to render the chart.
     """
-    # Calculate totals for green exports.
-    green_total_22 = filtered_df_2022['CZ Export 2022 CZK'].sum()
-    green_total_23 = filtered_df_2023['CZ Export 2023 CZK'].sum()
     
     # Calculate non-green exports.
     non_green_22 = total_export_22 - green_total_22

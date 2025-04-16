@@ -94,7 +94,8 @@ def load_data(datayear):
     df['HS_ID'] = df['HS_ID'].astype(str)
     df['HS_Lookup'] = df['HS_ID'] + " - " + df['Název']
     total_cz_export = USD_to_czk * CZE['ExportValue'].sum()
-    return df, total_cz_export
+    total_cz_green_export = df['CZ Export ' + datayear + ' CZK'].sum()
+    return df, total_cz_export, total_cz_green_export
 
 # Define the default year_placeholder and get plotting lists
 year_placeholder = " ‎"
@@ -106,14 +107,16 @@ y_axis = col2.selectbox("Vyber osu Y:", plot_display_names, index=3)
 markersize = col2.selectbox("Velikost dle:", plot_display_names, index=8)
 
 # Load datasets for both years
-df_2022, cz_export_22 = load_data("2022")
-df_2023, cz_export_23 = load_data("2023")
+df_2022, cz_export_22, cz_green_export_22 = load_data("2022")
+df_2023, cz_export_23, cz_green_export_23 = load_data("2023")
 if year == "2022":
     df = df_2022
     cz_total_export = cz_export_22
+    cz_total_green_export = cz_export_22
 else:
     df = df_2023
     cz_total_export = cz_export_23
+    cz_total_green_export = cz_export_23
 
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
@@ -288,7 +291,7 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
     )
 
 # Example: render the polar area chart in a Streamlit component
-polar_js = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,
+polar_js = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23
                               group_field="Skupina",
                               chart_title="Růst exportu podle kategorie",
                               bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
