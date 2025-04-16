@@ -77,8 +77,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, total_expo
             "growth_abs": (other_green_23 - other_green_22) / 1e9,
             "growth_frac": growth_other_green
         })
-    else:
-        continue
+
     # Get all green categories from the filtered data (both years).
     green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
                           set(filtered_df_2023[group_field].unique()))))
