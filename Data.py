@@ -177,7 +177,7 @@ filtered_df = filtered_df_2022 if year == "2022" else filtered_df_2023
 # Filter control buttons
 subcol1, subcol2 = col2.columns(2)
 with subcol1:
-    if st.button("Filtrování hodnot", use_container_width=True):
+    if st.button("Filtrování", use_container_width=True):
         st.session_state.filters.append({'column': None, 'range': None})
 with subcol2:
     if st.button("Odstranit filtry", use_container_width=True):
