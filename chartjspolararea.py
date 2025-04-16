@@ -89,6 +89,14 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
         "options": {
             "responsive": True,
             "cutout": "30%",
+            "layout": {
+                "padding": {
+                    "top": 50,
+                    "bottom": 50,
+                    "left": 50,
+                    "right": 50
+                }
+            },
             "plugins": {
                 "tooltip": {
                     "callbacks": {
@@ -117,8 +125,8 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
     }
 
     html = f'''
-    <div style="width: 100%; max-width: 800px; margin: auto">
-      <canvas id="exportGrowthChart"></canvas>
+    <div style="width: 100%; max-width: 800px; margin: auto; padding: 40px;">
+    <canvas id="exportGrowthChart" style="max-height: 600px;"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
