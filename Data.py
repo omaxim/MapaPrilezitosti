@@ -109,8 +109,10 @@ df_2022, cz_export_22 = load_data("2022")
 df_2023, cz_export_23 = load_data("2023")
 if year == "2022":
     df = df_2022
+    cz_total_export = cz_export_22
 else:
     df = df_2023
+    cz_total_export = cz_export_23
 
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
@@ -250,13 +252,12 @@ with col1:
     components.html(chart_js, height=800)
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
-mcol1, mcol2, mcol3 = st.columns(3)
-
-mcol1, mcol2, mcol3 = st.columns(3)
+mcol1, mcol2, mcol3, = st.columns(3)
 if HS_select == []:
     selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum() - filtered_df_2022['CZ Export 2022 CZK'].sum()
     selected_CZ_growth_perc = selected_CZ_growth/filtered_df_2022['CZ Export 2022 CZK'].sum()
-    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1000000000),'miliard CZK' )
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
+    mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
 
