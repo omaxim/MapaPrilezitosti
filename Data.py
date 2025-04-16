@@ -116,6 +116,11 @@ else:
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
 
+with col2:
+    # Fixed label button, with a key
+    if st.button("Přepnout režim", use_container_width=True, key="toggle_filter_button"):
+        st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
+
 # **MOVE THE SESSION STATE FILTER MODE CHECK UP HERE** so that "color" is defined before filtering.
 if st.session_state.filtrovat_dle_skupin:
     col2.markdown("**Aktuální režim:** 🧩 Jednotlivé skupiny")
