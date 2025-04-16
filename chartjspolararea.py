@@ -65,7 +65,11 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
         growthPct.append(safe_growth(exp22, exp23))
         backgroundColor.append(color_map.get(cat, next(fallback_cycle)))
 
-    # Assemble chart config
+    # Calculate radius offsets based on 2023 export size
+    max_radius_offset = 40
+    max_value = max(data_2023)
+    radiusOffset = [(val / max_value) * max_radius_offset for val in data_2023]
+
     chart_data = {
         "labels": labels,
         "datasets": [{
@@ -74,20 +78,32 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
             "export22": export22,
             "export23": export23,
             "growthAbs": growthAbs,
-            "growthPct": growthPct
+            "growthPct": growthPct,
+            "radiusOffset": radiusOffset
         }]
     }
 
     chart_config = {
-        "type": "pie",
+        "type": "doughnut",
         "data": chart_data,
         "options": {
             "responsive": True,
+            "cutout": "30%",
             "plugins": {
                 "tooltip": {
                     "callbacks": {
                         "label": {
-                            "function": "function(context) { const i = context.dataIndex; const d = context.dataset; const l = context.label || ''; return [`${l}`, `2022: ${d.export22[i].toFixed(1)} miliard CZK`, `2023: ${d.export23[i].toFixed(1)} miliard CZK`, `Růst: ${d.growthAbs[i].toFixed(1)} miliard CZK (${d.growthPct[i].toFixed(1)}%)`]; }"
+                            "function": """function(context) {
+                                const i = context.dataIndex;
+                                const d = context.dataset;
+                                const l = context.label || '';
+                                return [
+                                    `${l}`,
+                                    `2022: ${d.export22[i].toFixed(1)} miliard CZK`,
+                                    `2023: ${d.export23[i].toFixed(1)} miliard CZK`,
+                                    `Růst: ${d.growthAbs[i].toFixed(1)} miliard CZK (${d.growthPct[i].toFixed(1)}%)`
+                                ];
+                            }"""
                         }
                     }
                 },
@@ -97,10 +113,9 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
                 }
             }
         },
-        "plugins": ["ChartDataLabels"]
+        "plugins": ["ChartDataLabels", "variableRadius"]
     }
 
-    # Build HTML
     html = f'''
     <div style="width: 100%; max-width: 800px; margin: auto">
       <canvas id="exportGrowthChart"></canvas>
@@ -108,6 +123,19 @@ def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <script>
+      const variableRadius = {{
+        id: "variableRadius",
+        beforeDraw(chart) {{
+          const dataset = chart.data.datasets[0];
+          const meta = chart.getDatasetMeta(0);
+          meta.data.forEach((arc, i) => {{
+            const offset = dataset.radiusOffset?.[i] || 0;
+            arc.outerRadius = arc.outerRadius + offset;
+          }});
+        }}
+      }};
+      Chart.register(variableRadius);
+
       const ctx = document.getElementById('exportGrowthChart').getContext('2d');
       const chartConfig = {json.dumps(chart_config)};
       chartConfig.options.plugins.tooltip.callbacks.label = eval('(' + chartConfig.options.plugins.tooltip.callbacks.label.function + ')');
