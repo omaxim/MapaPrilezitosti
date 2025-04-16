@@ -267,12 +267,17 @@ if HS_select == []:
 
 
 else:
-    selected_CZ_growth = filtered_df_2023[filtered_df_2023['HS_Lookup'].isin(HS_select)]['CZ Export 2023 CZK'].sum() - filtered_df_2022[filtered_df_2023['HS_Lookup'].isin(HS_select)]['CZ Export 2022 CZK'].sum()
-    mcol1.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů CZK")
-
-    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Export '+year+' CZK'])/1000000),'milionů CZK' )
-    mcol2.metric("Vybraný český export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['CZ Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
-    mcol3.metric("Vybraný evropský export 2025 až 2030", "{:,.0f}".format(sum(filtered_df[filtered_df['HS_Lookup'].isin(HS_select)]['EU Celkový Export 25-30 CZK'])/1000000), "milionů CZK")
+    lookup_year = filtered_df['HS_Lookup'].isin(HS_select)
+    lookup_22 = filtered_df_2022['HS_Lookup'].isin(HS_select)
+    lookup_23 = filtered_df_2023['HS_Lookup'].isin(HS_select)
+    selected_CZ_growth = filtered_df_2023[lookup_23]['CZ Export 2023 CZK'].sum() - filtered_df_2022[lookup_22]['CZ Export 2022 CZK'].sum()
+    selected_CZ_growth_perc = selected_CZ_growth/filtered_df_2022[lookup_22]['CZ Export 2022 CZK'].sum()
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['CZ Export '+year+' CZK'])/1e6),'milionů CZK' )
+    mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e6),'milionů CZK' )
+    mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů CZK")
+    mcol2.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(total_CZ_growth/1e6), "milionů CZK")
+    mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
+    mcol3.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(total_CZ_growth_perc), "%")
 
 
 if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
