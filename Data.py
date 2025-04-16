@@ -98,9 +98,7 @@ def load_data(datayear):
     df['CZ 2030 Export CZK']        = USD_to_czk*df['CZ 2030 Export CZK'] 
     df['HS_ID']                 = df['HS_ID'].astype(str)
     df['HS_Lookup']              = df['HS_ID']+" - "+df['Název']
-    
-    st.sidebar.info(str(GreenProducts.shape[0]) + " HS6 načteno, z toho " +str(df.shape[0])+" je IN")
-    return df
+        return df
 
 
 # Create lists of display names for the sidebar
