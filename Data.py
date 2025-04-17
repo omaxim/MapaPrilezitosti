@@ -272,6 +272,7 @@ with pie1:
 with pie2:
     st.components.v1.html(polar_js_kategorie, height=500)
 
+st.divider()
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3, = st.columns(3)
 if HS_select == []:
