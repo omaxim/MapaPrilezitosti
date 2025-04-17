@@ -219,7 +219,7 @@ y_axis = y_axis.replace(year_placeholder, year)
 filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
-HS_select = st.multiselect("Filtrovat HS6 kódy", filtered_df['HS_Lookup'])
+HS_select = col2.multiselect("Filtrovat HS6 kódy", filtered_df['HS_Lookup'])
 
 # Button to clear the cached data
 if st.sidebar.button('Obnovit Data'):
@@ -271,7 +271,7 @@ with pie1:
     st.components.v1.html(polar_js_skupiny, height=750)
 with pie2:
     st.components.v1.html(polar_js_kategorie, height=750)
-    
+
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3, = st.columns(3)
 if HS_select == []:
