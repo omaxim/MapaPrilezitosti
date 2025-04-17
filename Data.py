@@ -269,9 +269,9 @@ polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df
 
 pie1,pie2 = st.columns(2)
 with pie1:
-    st.components.v1.html(polar_js_skupiny, height=750)
+    st.components.v1.html(polar_js_skupiny, height=300)
 with pie2:
-    st.components.v1.html(polar_js_kategorie, height=750)
+    st.components.v1.html(polar_js_kategorie, height=300)
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3, = st.columns(3)
