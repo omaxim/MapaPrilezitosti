@@ -35,7 +35,8 @@ col2.subheader("")
 col2.subheader("Nastavení grafu")
 
 # Sidebar: Year selection
-year = col2.segmented_control("Rok", ["2022", "2023"], default="2023")
+topsubcol1,topsubcol2 = col2.columns(2)
+year = topsubcol1.segmented_control("Rok", ["2022", "2023"], default="2023")
 
 def USDtoCZKdefault(year):
     if year == "2022":
@@ -219,7 +220,7 @@ y_axis = y_axis.replace(year_placeholder, year)
 filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
-HS_select = col2.multiselect("Filtrovat HS6 kódy", filtered_df['HS_Lookup'])
+HS_select = topsubcol2.multiselect("Filtrovat HS6 kódy", filtered_df['HS_Lookup'])
 st.divider()
 # Button to clear the cached data
 if st.sidebar.button('Obnovit Data'):
