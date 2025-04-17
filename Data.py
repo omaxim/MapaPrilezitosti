@@ -302,8 +302,10 @@ polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df
                               bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
 
 pie1,pie2 = st.columns(2)
-pie1.components.v1.html(polar_js_skupiny, height=750)
-pie2.components.v1.html(polar_js_kategorie, height=750)
+with pie1:
+    st.components.v1.html(polar_js_skupiny, height=750)
+with pie2:
+    pie2.components.v1.html(polar_js_kategorie, height=750)
 
 # Example: render the polar area chart in a Streamlit component
 #polar_js2 = chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
