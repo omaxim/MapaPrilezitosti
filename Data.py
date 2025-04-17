@@ -220,7 +220,7 @@ y_axis = y_axis.replace(year_placeholder, year)
 filtered_df[markersize] = filtered_df[markersize].clip(lower=0)
 filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
-HS_select = topsubcol2.multiselect("Filtrovat HS6 kódy", filtered_df['HS_Lookup'])
+HS_select = topsubcol2.multiselect("Filtrovat jednotlivé kódy", filtered_df['HS_Lookup'])
 st.divider()
 # Button to clear the cached data
 if st.sidebar.button('Obnovit Data'):
