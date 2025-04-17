@@ -292,11 +292,19 @@ if not (st.session_state.filtrovat_dle_skupin and Skupina is None):
     )
 
 # Example: render the polar area chart in a Streamlit component
-polar_js = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
+polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
                               group_field="Skupina",
+                              chart_title="Růst exportu podle skupiny",
+                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
+polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
+                              group_field="Kategorie",
                               chart_title="Růst exportu podle kategorie",
                               bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
-st.components.v1.html(polar_js, height=750)
+
+pie1,pie2 = st.columns(2)
+pie1.components.v1.html(polar_js_skupiny, height=750)
+pie2.components.v1.html(polar_js_kategorie, height=750)
+
 # Example: render the polar area chart in a Streamlit component
 #polar_js2 = chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
 #                              group_field="Skupina",
