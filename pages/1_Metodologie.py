@@ -3,7 +3,7 @@ from visualsetup import load_visual_identity
 #Loading loads of custom css in markdown
 st.set_page_config(
     page_title="Mapa Příležitostí",
-    page_icon="favicon.png",
+    page_icon="favicon.ico",
     layout="wide"
 )
 load_visual_identity("header.jpg")
