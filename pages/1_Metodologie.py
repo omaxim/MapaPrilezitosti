@@ -129,11 +129,9 @@ if 'flow_state' not in st.session_state:
     st.session_state.flow_state = StreamlitFlowState(nodes, edges)
 
 # Render the flow diagram
-streamlit_flow('tree_layout', st.session_state.flow_state, layout=TreeLayout(direction='right'), fit_view=True)
-
-# Render the flow diagram
 with col2:
-    streamlit_flow(nodes=nodes, edges=edges, layout="tree")
+    streamlit_flow('tree_layout', st.session_state.flow_state, layout=TreeLayout(direction='right'), fit_view=True)
+
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
