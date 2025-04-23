@@ -14,7 +14,7 @@ st.title("")
 st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
 # Main Title
-st.markdown("# \ud83d\udcca Metodologie")
+st.markdown("# Metodologie")
 
 # --- Úvod k datům ---
 st.markdown("""
@@ -139,5 +139,5 @@ selected = tree_select(
 )
 
 if selected:
-    st.markdown("### \ud83d\udd0d Vybrané kategorie:")
+    st.markdown("### Vybrané kategorie:")
     st.write(", ".join(selected))
