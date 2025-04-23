@@ -26,6 +26,7 @@ p7.image('partners/07.png', use_container_width=True)
 st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
 col1,col2,col3 = st.columns([1,5,1])
+col2.subheader("")
 # Main Section Title
 col2.markdown("# Metodologie")
 
