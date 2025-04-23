@@ -1,119 +1,114 @@
 import streamlit as st
-from streamlit_tree_select import tree_select
 from visualsetup import load_visual_identity
 
+# Page config
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.ico",
     layout="wide"
 )
+
+# Load custom branding
 load_visual_identity("header.jpg")
 st.title("")
 st.title("")
-
 st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
-# Main Title
-st.markdown("# Metodologie")
+# Main Section Title
+st.markdown("# 📊 Metodologie")
 
-# --- Úvod k datům ---
+# --- Introduction and Data Sources ---
 st.markdown("""
 ### Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
-
-Celá datová základna je založena na harmonizovaném datasetu světového obchodu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export z jedné země odpovídal importu v zemi druhé a nedocházelo k dvojímu započítání obchodních toků.
-
-Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy podle zemí, komodit a let.
+Celá datová základna je založena na harmonizovaném datasetu světového obchodu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export z jedné země odpovídal importu v zemi druhé a nedocházelo k dvojímu započítání obchodních toků.  
+Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy.
 """)
 
-# --- Klasifikace výrobků ---
+st.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
+
+# --- Product Classification ---
 st.markdown("""
 ### Klasifikace výrobků
-
-Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**. Analýza je prováděna na úrovni šesticiferného členění výrobků (**HS6**), kde se nachází **5 605** jednotlivých typů výrobků. V této klasifikaci jsou k dispozici data za roky **2022 a 2023**.
+Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**.  
+Analýza je prováděna na úrovni **šesticiferného členění výrobků (HS6)**, kde je celkem 5 605 typů výrobků.  
+Data jsou k dispozici za rok **2022 a 2023**.
 """)
 
-# --- Výběr zelených produktů ---
+# --- Green Products ---
 st.markdown("""
 ### Jak jsme vybírali tzv. „zelené výrobky“
+Za „zelené“ či „clean-tech“ označujeme produkty klíčové pro přechod na čistou, nízkouhlíkovou ekonomiku.  
+Výběr vychází z:
+- rešerší globálních akademických studií,
+- materiálů veřejného sektoru,
+- konzultací s experty z ČR.
 
-Za „zelené“ nebo „clean-tech“ označujeme výrobky (finální i komponenty), které hrají klíčovou roli při přechodu na čistou, nízkouhlíkovou ekonomiku. Výběr probíhá na základě:
-
-- rešerší akademických studií,
-- materiálů mezinárodních organizací a vlád,
-- konzultací s českými experty.
-
-Zahrnujeme nejen produkty přispívající ke snižování emisí, ale i komponenty nutné pro transformaci, jejichž poptávka poroste.
+Zahrnujeme i komponenty důležité pro zelenou transformaci.
 """)
 
-# --- Terminologie ---
 st.markdown("""
 ### Využívání termínu „zelená“ vs. „clean-tech“
-
-Rovnocenně používáme termíny **zelené výrobky**, **clean-tech** a **čisté technologie**. „Zelená transformace“ zahrnuje změny v energetice, průmyslu, dopravě, stavebnictví, cirkularitě i v zacházení se zdroji.
+Termíny **zelené výrobky**, **clean-tech** a **čisté technologie** používáme rovnocenně.  
+Zahrnujeme široké spektrum změn – od energetiky přes průmyslové technologie až po hospodaření s vodou, půdou a surovinami.
 """)
 
-# --- Taxonomie ---
+# --- Cleantech Taxonomy Tree Placeholder ---
+st.markdown("### Třídění zelených výrobků")
 st.markdown("""
-### Třídění zelených výrobků
-
-Zelené výrobky třídíme do:
-
-- **6 Taxonomických grup**
-- **17 Skupin**
-- **40 Podskupin**
-- **58 Kategorií**
-
-Některé skupiny zatím nemají přiřazené HS2022 kódy (např. Biodiverzita, CCS), ale očekáváme jejich doplnění s vývojem technologií.
+Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
+Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
+st.markdown("📌 **[ZDE BUDE VLOŽEN STROM KATEGORIÍ]**")
 
-# --- Klíčové ukazatele ---
+# --- Key Indicators ---
+st.markdown("### Na jaké ukazatele se zaměřujeme")
 st.markdown("""
-### Na jaké ukazatele se zaměřujeme
+**Příbuznost**  
+Produkty „příbuzné“ těm, které ČR už exportuje. Metrika je založená na metodologii OEC.
 
-- **Příbuznost**: Míra vazby na český export (viz kapitola „Datová metodologie“ níže).
-- **Komplexita (Unikátnost)**: Vzácnost produktu, vypočítaná pomocí modulu `py-ecomplexity` (viz níže).
-- **Velikost vývozu**: V USD dle BACI/Comtrade, převod na CZK podle ČNB.
-- **Růst**: Meziroční růst v USD za 2022–23.
-- **Podíl na světovém trhu**: % českého exportu z globálního obratu.
-- **Pořadí na světovém trhu**: Umístění ČR v absolutních USD hodnotách vývozu daného výrobku.
+**Komplexita**  
+Vyjadřuje unikátnost výrobku – čím vyšší, tím méně zemí jej umí vyvézt. Počítáno pomocí modulu **py-ecomplexity** (Harvard CID).
+
+**Exportní objem**  
+Měříme v USD. Pro CZK převod:  
+- 2022: kurz 23,36  
+- 2023: kurz 22,21
+
+**Růst**  
+Výpočet růstu vývozu za 2022–23 v USD (neočištěno o inflaci).
+
+**Podíl a pořadí na světovém trhu**  
+V procentech a absolutní hodnotě vývozu ČR ve srovnání se světem.
 """)
 
-# --- BACI Info Link ---
-st.link_button("Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
-
-# --- Interaktivní strom zelených výrobků ---
-st.markdown("""
-K některým Skupinám či Podskupinám (Zadržování uhlíku, Zachytávání a ukládání uhlíku, Ochrana půdy, Biodiverzita či Nové zdroje vody) v tuto chvíli nevidíme jednoznačně přiřaditelné výrobky v HS 2022 klasifikaci a tyto pozice v našem stromu tak zůstávají neobsazené. S dalším vývojem technologií a obchodování s těmito technologiemi počítáme, že se i tyto kategorie obsadí jednoznačně definovatelnými kódy výrobků.
-""")
-
-st.markdown("### 🌳 Strom zelených výrobků (vizuální pomoc)")
+# --- Detailed Data Methodology Section ---
+st.markdown("## 📘 Datová metodologie")
 
 st.markdown("""
-- **Snížení celkové emisní náročnosti**
-    - Snížení emisí výroby
-        - ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
-    - Snížení emisí dopravy (rozvoj vlaků)
-        - elektromobilita, vodík, infrastruktura
-    - Snížení emisí budov
-        - izolace, elektrifikace vytápění
-    - Snížení emisí energie
-        - nízkoemisní elektřina a paliva (vítr, FVE)
-    - Ukládání energie
-    - Posílení sítí
-        - elektrické a distribuční sítě, elektrifikace
-    - Zadržování uhlíku v krajině
-        - půda a lesnictví
-    - Zachytávání a ukládání CO₂
-- **Snížení materiálové náročnosti**
-    - redesign produktů a balení
-    - sběr, třídění, přepoužití, recyklace
-- **Ochrana životního prostředí**
-    - distribuce vody, snížení znečištění, ochrana biodiverzity
-- **Příprava na nepříznivé klima**
-    - živelné pohromy, sucho, nové zdroje bílkovin
-- **Měřící a diagnostické přístroje**
-    - termostaty, senzory, spektrometry, chemická analýza
-- **Materiály a komponenty**
-    - vzácné kovy, alternativy chemických látek
-    - alternativní pohony a stroje
+### 📈 Výpočet komplexity produktu
+Používáme Python modul **py-ecomplexity** od **Centre for International Development (Harvard)**.
 """)
+st.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
+
+# --- RCA Condition ---
+st.markdown("""
+### 🌍 Podmínka aktivity v dané zemi
+Používáme kritérium **RCA > 1** jako důkaz komparativní výhody, podobně jako v **OEC**.
+""")
+st.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
+
+# --- Relatedness Formula ---
+st.markdown("### 🔍 Výpočet příbuznosti produktů")
+
+st.latex(r"""
+\text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
+""")
+
+st.markdown("""
+- **$$M_{cp'}$$**: 1 pokud má produkt $$p'$$ v zemi $$c$$ RCA > 1, jinak 0.  
+- **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty.  
+
+Výpočet je **normalizovaný** a ukazuje příbuznost produktu $$p$$ k aktivním produktům v zemi $$c$$.
+""", unsafe_allow_html=True)
+
+st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
