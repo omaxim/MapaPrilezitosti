@@ -75,8 +75,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
     fallback_cycle = itertools.cycle(fallback_colors)
 
     for cat in green_cats:
-        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum()/usd_to_czk_22
-        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'CZ Export 2023 CZK'].sum()/usd_to_czk_23
+        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum()
+        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'CZ Export 2023 CZK'].sum()
         growth = (export_23 - export_22) / export_22 if export_22 > 0 else 0
 
         data_series.append({
