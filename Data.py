@@ -264,7 +264,8 @@ polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2
 polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
                               group_field="Kategorie",
                               chart_title="Růst exportu podle kategorie",
-                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023")
+                              bottom_text="Růst vyjadřuje změnu mezi lety 2022 a 2023",
+                              relative_to_green_only=True)
 
 pie1,pie2 = st.columns(2)
 with pie1:
