@@ -10,42 +10,33 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
                                   bottom_text="Data: UN COMTRADE, CEPII, a další",
                                   relative_to_green_only=False):
     """
-    Creates a Highcharts variable pie chart where:
-      - The slice angle (y) represents the export share.
-        - By default, relative to total exports.
-        - If `relative_to_green_only=True` or total exports are None, relative to green exports only.
-      - The slice radius (z) represents percentage growth between 2022 and 2023.
+    Creates a Highcharts variable pie chart showing green export growth.
+    Includes both filtered green categories and (optionally) non-green and unclassified green.
 
-    Parameters:
-      - filtered_df_2022, filtered_df_2023: DataFrames for green product exports.
-      - total_export_22, total_export_23: Overall export values (can be None).
-      - green_total_22, green_total_23: Total green export values.
-      - group_field: Column used to group green products.
-      - chart_title: Title of the chart.
-      - bottom_text: Subtitle/footer.
-      - relative_to_green_only: If True, slices are based only on green export totals.
-
-    Returns:
-      - HTML/JS string for rendering the chart.
+    If `relative_to_green_only` is True or total_export_22/23 are None, then
+    slice angles (y) are calculated as share of green exports only.
     """
 
+    # Base green export totals from filtered subset
     green_total_22_filtered = filtered_df_2022['CZ Export 2022 CZK'].sum()
     green_total_23_filtered = filtered_df_2023['CZ Export 2023 CZK'].sum()
 
+    # Compute unfiltered other-green portion
+    other_green_22 = green_total_22 - green_total_22_filtered
+    other_green_23 = green_total_23 - green_total_23_filtered
+    growth_other_green = (other_green_23 - other_green_22) / other_green_22 if other_green_22 > 0 else 0
+
+    # Decide what denominator to use for slice angles (y)
+    use_green_only = relative_to_green_only or total_export_22 is None or total_export_23 is None
+    denominator = green_total_23 if use_green_only else total_export_23
+
     data_series = []
 
-    # Decide denominator
-    use_green_relative = relative_to_green_only or (total_export_22 is None or total_export_23 is None)
-    denominator = green_total_23 if use_green_relative else total_export_23
-
-    if not use_green_relative:
+    # Add non-green slice if using total exports as denominator
+    if not use_green_only:
         non_green_22 = total_export_22 - green_total_22
         non_green_23 = total_export_23 - green_total_23
-        other_green_22 = green_total_22 - green_total_22_filtered
-        other_green_23 = green_total_23 - green_total_23_filtered
-
         growth_non_green = (non_green_23 - non_green_22) / non_green_22 if non_green_22 > 0 else 0
-        growth_other_green = (other_green_23 - other_green_22) / other_green_22 if other_green_22 > 0 else 0
 
         data_series.append({
             "name": "Nezelené produkty",
@@ -55,31 +46,31 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "export22": non_green_22 / 1e9,
             "export23": non_green_23 / 1e9,
             "growth_abs": (non_green_23 - non_green_22) / 1e9,
-            "growth_frac": growth_non_green
+            "growth_frac": 100 * growth_non_green
         })
 
-        if other_green_22 != 0:
-            data_series.append({
-                "name": "Ostatní zelené produkty",
-                "y": other_green_23 / denominator,
-                "z": growth_other_green,
-                "color": "#B2BEB5",
-                "export22": other_green_22 / 1e9,
-                "export23": other_green_23 / 1e9,
-                "growth_abs": (other_green_23 - other_green_22) / 1e9,
-                "growth_frac": growth_other_green
-            })
+    # Add other-green slice if it exists
+    if other_green_22 > 0 or other_green_23 > 0:
+        data_series.append({
+            "name": "Ostatní zelené produkty",
+            "y": other_green_23 / denominator,
+            "z": growth_other_green,
+            "color": "#B2BEB5",
+            "export22": other_green_22 / 1e9,
+            "export23": other_green_23 / 1e9,
+            "growth_abs": (other_green_23 - other_green_22) / 1e9,
+            "growth_frac": 100 * growth_other_green
+        })
 
-    green_cats = sorted(list(set(filtered_df_2022[group_field].unique()).union(
-                             set(filtered_df_2023[group_field].unique()))))
-
+    # Add each filtered green category
+    green_cats = sorted(set(filtered_df_2022[group_field]) | set(filtered_df_2023[group_field]))
     color_map = get_color_discrete_map()
     fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
     fallback_cycle = itertools.cycle(fallback_colors)
 
     for cat in green_cats:
-        export_22 = filtered_df_2022[filtered_df_2022[group_field] == cat]['CZ Export 2022 CZK'].sum()
-        export_23 = filtered_df_2023[filtered_df_2023[group_field] == cat]['CZ Export 2023 CZK'].sum()
+        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum()
+        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'CZ Export 2023 CZK'].sum()
         growth = (export_23 - export_22) / export_22 if export_22 > 0 else 0
 
         data_series.append({
@@ -93,6 +84,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "growth_frac": 100 * growth
         })
 
+    # Highcharts config
     chart_config = {
         "chart": {
             "type": "variablepie",
