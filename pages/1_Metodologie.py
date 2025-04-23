@@ -1,6 +1,7 @@
 import streamlit as st
 from visualsetup import load_visual_identity
-
+import streamlit.components.v1 as components
+import json
 # Page config
 st.set_page_config(
     page_title="Mapa Příležitostí",
@@ -97,119 +98,113 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
-# Define the HTML structure (using nested lists)
-html_tree = """
+
+
+# 1. Define your tree data in jsTree's JSON format
+# Each node needs an 'id', 'parent' ('#' for root nodes), and 'text'
+tree_data = [
+    # Snížení celkové emisní náročnosti Branch
+    {"id": "root_snizeni_emisi", "parent": "#", "text": "Snížení celkové emisní náročnosti"},
+    {"id": "emise_vyroba", "parent": "root_snizeni_emisi", "text": "Snížení emisí výroby"},
+    {"id": "emise_vyroba_detail", "parent": "emise_vyroba", "text": "(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"},
+    {"id": "emise_doprava", "parent": "root_snizeni_emisi", "text": "Snížení emisí dopravy"},
+    {"id": "emise_doprava_detail", "parent": "emise_doprava", "text": "(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"},
+    {"id": "emise_budov", "parent": "root_snizeni_emisi", "text": "Snížení emisí budov"},
+    {"id": "emise_budov_detail", "parent": "emise_budov", "text": "(izolace; elektrifikace vytápění)"},
+    {"id": "emise_energie", "parent": "root_snizeni_emisi", "text": "Snížení emisí energie"},
+    {"id": "emise_energie_detail", "parent": "emise_energie", "text": "(nízkoemisní elektřina a paliva – vítr, FVE, …)"},
+    {"id": "ukladani_energie", "parent": "root_snizeni_emisi", "text": "Ukládání energie"},
+    {"id": "posileni_siti", "parent": "root_snizeni_emisi", "text": "Posílení sítí"},
+    {"id": "posileni_siti_detail", "parent": "posileni_siti", "text": "(elektrické a distribuční sítě, elektrifikace)"},
+    {"id": "zadrzovani_uhliku", "parent": "root_snizeni_emisi", "text": "Zadržování uhlíku v krajině"},
+    {"id": "zadrzovani_uhliku_detail", "parent": "zadrzovani_uhliku", "text": "(půda a lesnictví)"},
+    {"id": "zachytavani_co2", "parent": "root_snizeni_emisi", "text": "Zachytávání a ukládání CO₂"},
+
+    # Snížení materiálové náročnosti Branch
+    {"id": "root_snizeni_materialu", "parent": "#", "text": "Snížení materiálové náročnosti"},
+    {"id": "snizeni_materialu_detail", "parent": "root_snizeni_materialu", "text": "(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"},
+
+    # Ochrana životního prostředí Branch
+    {"id": "root_ochrana_zp", "parent": "#", "text": "Ochrana životního prostředí"},
+    {"id": "ochrana_zp_detail", "parent": "root_ochrana_zp", "text": "(distribuce vody, snížení znečištění, ochrana biodiverzity)"},
+
+    # Příprava na nepříznivé klima Branch
+    {"id": "root_priprava_klima", "parent": "#", "text": "Příprava na nepříznivé klima"},
+    {"id": "priprava_klima_detail", "parent": "root_priprava_klima", "text": "(živelné pohromy, sucho, nové zdroje bílkovin)"},
+
+    # Měřící a diagnostické přístroje Branch
+    {"id": "root_merici_pristroje", "parent": "#", "text": "Měřící a diagnostické přístroje"},
+    {"id": "merici_pristroje_detail", "parent": "root_merici_pristroje", "text": "(termostaty, senzory, spektrometry, chemická analýza)"},
+
+    # Materiály a komponenty Branch
+    {"id": "root_materialy_komponenty", "parent": "#", "text": "Materiály a komponenty"},
+    {"id": "materialy_komponenty_detail", "parent": "root_materialy_komponenty", "text": "(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"},
+]
+
+# Convert the Python list of dictionaries to a JSON string
+# This is important to safely inject it into the JavaScript part of the HTML
+tree_data_json = json.dumps(tree_data)
+
+# 2. Create the HTML string
+#    - Includes CDN links for jQuery and jsTree
+#    - Contains a div with id="jstree_div" where the tree will be rendered
+#    - Includes the JavaScript to initialize jsTree
+html_string = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jsTree Example</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"></script>
 <style>
-/* Basic CSS for tree structure */
-.tree-view ul {
-    padding-left: 20px; /* Indentation for sub-levels */
-    list-style-type: none; /* Remove default bullets */
-    position: relative; /* Needed for positioning lines */
-}
-
-.tree-view li {
-    position: relative; /* Needed for positioning lines */
-    padding-left: 25px; /* Space for lines and text */
-    line-height: 1.5; /* Adjust spacing */
-    margin-left: -15px; /* Align text nicely after lines */
-}
-
-/* Tree lines using pseudo-elements */
-.tree-view li::before, .tree-view li::after {
-    content: '';
-    position: absolute;
-    left: 0;
-}
-
-/* Vertical line segment for all items */
-.tree-view li::before {
-    border-left: 1px solid #aaa; /* Line color and style */
-    height: 100%;
-    top: 0;
-    width: 1px;
-}
-
-/* Horizontal line segment for all items */
-.tree-view li::after {
-    border-top: 1px solid #aaa; /* Line color and style */
-    height: 1px;
-    top: 0.75em; /* Position horizontal line vertically (half of line-height) */
-    width: 20px; /* Length of the horizontal line */
-}
-
-/* Remove vertical line from the top part of the first item in any list */
-.tree-view ul > li:first-child::before {
-    top: 0.75em; /* Start vertical line at the horizontal line */
-    height: calc(100% - 0.75em);
-}
-
-/* Remove lines for the very last item in the entire tree */
-.tree-view > ul > li:last-child::before {
-    height: 0.75em; /* Only draw vertical line up to the horizontal line */
-}
-
-/* Remove horizontal line for items without children (or style differently if needed) */
-/* This basic CSS adds lines to all; more complex CSS needed to hide for leaves */
-/* A simpler approach is to manually add a class to leaf nodes if needed */
-
-/* Adjust root level indentation if necessary */
-.tree-view > ul {
-    padding-left: 0;
-}
-.tree-view > ul > li {
-     margin-left: 0;
-}
-
-
+  /* Optional: Add some basic styling */
+  body {{ font-family: sans-serif; }}
+  #jstree_div {{ padding: 10px; border: 1px solid #eee; border-radius: 5px; }}
 </style>
+</head>
+<body>
 
-<div class="tree-view">
-<ul>
-  <li>Snížení celkové emisní náročnosti
-    <ul>
-      <li>Snížení emisí výroby
-          <ul><li>(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)</li></ul>
-      </li>
-      <li>Snížení emisí dopravy
-          <ul><li>(rozvoj vlaků; elektromobilita, vodík, infrastruktura)</li></ul>
-      </li>
-      <li>Snížení emisí budov
-          <ul><li>(izolace; elektrifikace vytápění)</li></ul>
-      </li>
-      <li>Snížení emisí energie
-          <ul><li>(nízkoemisní elektřina a paliva – vítr, FVE, …)</li></ul>
-      </li>
-      <li>Ukládání energie</li>
-      <li>Posílení sítí
-          <ul><li>(elektrické a distribuční sítě, elektrifikace)</li></ul>
-      </li>
-      <li>Zadržování uhlíku v krajině
-          <ul><li>(půda a lesnictví)</li></ul>
-      </li>
-      <li>Zachytávání a ukládání CO₂</li>
-    </ul>
-  </li>
-  <li>Snížení materiálové náročnosti
-      <ul><li>(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)</li></ul>
-  </li>
-  <li>Ochrana životního prostředí
-      <ul><li>(distribuce vody, snížení znečištění, ochrana biodiverzity)</li></ul>
-  </li>
-  <li>Příprava na nepříznivé klima
-      <ul><li>(živelné pohromy, sucho, nové zdroje bílkovin)</li></ul>
-  </li>
-  <li>Měřící a diagnostické přístroje
-      <ul><li>(termostaty, senzory, spektrometry, chemická analýza)</li></ul>
-  </li>
-  <li>Materiály a komponenty
-      <ul><li>(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)</li></ul>
-  </li>
-</ul>
-</div>
+<div id="jstree_div"></div>
+
+<script>
+$(function () {{
+  // Get the JSON data string passed from Python
+  var treeData = {tree_data_json};
+
+  // Initialize jsTree
+  $('#jstree_div').jstree({{
+    'core' : {{
+      'data' : treeData, // Use the data defined above
+      'themes': {{
+          'name': 'default', // Use the default theme
+          'responsive': true, // Make the tree responsive
+          'stripes': true // Add stripes for better readability (optional)
+      }}
+    }},
+    "plugins" : ["wholerow"] // Use the wholerow plugin for better selection highlighting (optional)
+  }});
+
+  // Optional: Expand all nodes initially
+  $('#jstree_div').on('ready.jstree', function () {{
+    $(this).jstree('open_all');
+  }});
+
+}});
+</script>
+
+</body>
+</html>
 """
 
-# Use st.markdown to render the HTML with CSS
-col2.markdown(html_tree, unsafe_allow_html=True)
+# 3. Embed the HTML in Streamlit
+# Use st.components.v1.html to render the interactive tree
+# Adjust height as needed
+# Assuming this runs within your col2 context:
+# col2.components.v1.html(html_string, height=600, scrolling=True)
+# If not in a column, use st directly:
+st.components.v1.html(html_string, height=600, scrolling=True)
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
