@@ -72,18 +72,18 @@ Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplnění
 col2.code("""
 Snížení celkové emisní náročnosti
 ├────────── Snížení emisí výroby
-│   ├────────── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
+│            ├────────── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
 ├────────── Snížení emisí dopravy (rozvoj vlaků)
-│   ├────────── elektromobilita, vodík, infrastruktura
+│            ├────────── elektromobilita, vodík, infrastruktura
 ├────────── Snížení emisí budov
-│   ├────────── izolace, elektrifikace vytápění
+│            ├────────── izolace, elektrifikace vytápění
 ├────────── Snížení emisí energie
-│   ├────────── nízkoemisní elektřina a paliva (vítr, FVE)
+│            ├────────── nízkoemisní elektřina a paliva (vítr, FVE)
 ├────────── Ukládání energie
 ├────────── Posílení sítí
-│   ├────────── elektrické a distribuční sítě, elektrifikace
+│            ├────────── elektrické a distribuční sítě, elektrifikace
 ├────────── Zadržování uhlíku v krajině
-│   ├────────── půda a lesnictví
+│            ├────────── půda a lesnictví
 ├────────── Zachytávání a ukládání CO₂
 Snížení materiálové náročnosti
 ├────────── redesign produktů a balení
