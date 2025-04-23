@@ -86,55 +86,34 @@ st.markdown("""
 K některým Skupinám či Podskupinám (Zadržování uhlíku, Zachytávání a ukládání uhlíku, Ochrana půdy, Biodiverzita či Nové zdroje vody) v tuto chvíli nevidíme jednoznačně přiřaditelné výrobky v HS 2022 klasifikaci a tyto pozice v našem stromu tak zůstávají neobsazené. S dalším vývojem technologií a obchodování s těmito technologiemi počítáme, že se i tyto kategorie obsadí jednoznačně definovatelnými kódy výrobků.
 """)
 
-st.markdown("### Interaktivní strom zelených výrobků")
+st.markdown("### 🌳 Strom zelených výrobků (vizuální pomoc)")
 
-tree_data = {
-    "Snížení celkové emisní náročnosti": {
-        "Snížení emisí výroby": {
-            "ocel, cement, efektivita, elektrifikace průmyslu i zemědělství": {}
-        },
-        "Snížení emisí dopravy (rozvoj vlaků)": {
-            "elektromobilita, vodík, infrastruktura": {}
-        },
-        "Snížení emisí budov": {
-            "izolace, elektrifikace vytápění": {}
-        },
-        "Snížení emisí energie": {
-            "nízkoemisní elektřina a paliva (vítr, FVE)": {}
-        },
-        "Ukládání energie": {},
-        "Posílení sítí": {
-            "elektrické a distribuční sítě, elektrifikace": {}
-        },
-        "Zadržování uhlíku v krajině": {
-            "půda a lesnictví": {}
-        },
-        "Zachytávání a ukládání CO₂": {}
-    },
-    "Snížení materiálové náročnosti": {
-        "redesign produktů a balení": {},
-        "sběr, třídění, přepoužití, recyklace": {}
-    },
-    "Ochrana životního prostředí": {
-        "distribuce vody, snížení znečištění, ochrana biodiverzity": {}
-    },
-    "Příprava na nepříznivé klima": {
-        "živelné pohromy, sucho, nové zdroje bílkovin": {}
-    },
-    "Měřící a diagnostické přístroje": {
-        "termostaty, senzory, spektrometry, chemická analýza": {}
-    },
-    "Materiály a komponenty": {
-        "vzácné kovy, alternativy chemických látek": {},
-        "alternativní pohony a stroje": {}
-    }
-}
-
-selected = tree_select(
-    tree_data,
-    checked=[],
-    expanded=["Snížení celkové emisní náročnosti", "Materiály a komponenty"])
-
-if selected:
-    st.markdown("### Vybrané kategorie:")
-    st.write(", ".join(selected))
+st.markdown("""
+- **Snížení celkové emisní náročnosti**
+    - Snížení emisí výroby
+        - ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
+    - Snížení emisí dopravy (rozvoj vlaků)
+        - elektromobilita, vodík, infrastruktura
+    - Snížení emisí budov
+        - izolace, elektrifikace vytápění
+    - Snížení emisí energie
+        - nízkoemisní elektřina a paliva (vítr, FVE)
+    - Ukládání energie
+    - Posílení sítí
+        - elektrické a distribuční sítě, elektrifikace
+    - Zadržování uhlíku v krajině
+        - půda a lesnictví
+    - Zachytávání a ukládání CO₂
+- **Snížení materiálové náročnosti**
+    - redesign produktů a balení
+    - sběr, třídění, přepoužití, recyklace
+- **Ochrana životního prostředí**
+    - distribuce vody, snížení znečištění, ochrana biodiverzity
+- **Příprava na nepříznivé klima**
+    - živelné pohromy, sucho, nové zdroje bílkovin
+- **Měřící a diagnostické přístroje**
+    - termostaty, senzory, spektrometry, chemická analýza
+- **Materiály a komponenty**
+    - vzácné kovy, alternativy chemických látek
+    - alternativní pohony a stroje
+""")
