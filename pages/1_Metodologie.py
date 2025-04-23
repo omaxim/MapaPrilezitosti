@@ -97,6 +97,7 @@ Měřící a diagnostické přístroje
 Materiály a komponenty
 ├── vzácné kovy, alternativy chemických látek
 ├── alternativní pohony a stroje)
+""")
 
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
