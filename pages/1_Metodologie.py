@@ -97,6 +97,16 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
+
+dot_code = '''
+digraph G {
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy";
+    // Add more nodes and edges as needed
+}
+'''
+
+col2.graphviz_chart(dot_code)
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
