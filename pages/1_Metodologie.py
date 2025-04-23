@@ -1,7 +1,7 @@
 import streamlit as st
 from visualsetup import load_visual_identity
 from streamlit_flow import streamlit_flow
-from streamlit_flow.interfaces import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
 
 # Page config
 st.set_page_config(
