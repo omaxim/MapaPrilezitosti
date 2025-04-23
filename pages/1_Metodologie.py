@@ -14,7 +14,7 @@ st.title("")
 st.title("")
 st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
-col1,col2,col3 = st.columns([1,2,1])
+col1,col2,col3 = st.columns([1,5,1])
 # Main Section Title
 col2.markdown("# 📊 Metodologie")
 
