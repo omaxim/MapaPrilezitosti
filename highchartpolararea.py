@@ -6,6 +6,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
                                   total_export_22, total_export_23,
                                   green_total_22, green_total_23,
                                   group_field,
+                                  usd_to_czk_22=23.360,
+                                  usd_to_czk_23=22.21,
                                   chart_title="Export růst mezi lety 2022 a 2023",
                                   bottom_text="Data: UN COMTRADE, CEPII, a další",
                                   relative_to_green_only=False):
@@ -17,9 +19,13 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
     slice angles (y) are calculated as share of green exports only.
     """
 
-    # Base green export totals from filtered subset
-    green_total_22_filtered = filtered_df_2022['CZ Export 2022 CZK'].sum()
-    green_total_23_filtered = filtered_df_2023['CZ Export 2023 CZK'].sum()
+    # Base green export totals from filtered subset and convert to USD
+    total_export_22 = total_export_22/usd_to_czk_22
+    total_export_23 = total_export_23/usd_to_czk_23
+    green_total_22 = green_total_22/usd_to_czk_22
+    green_total_23 = green_total_23/usd_to_czk_23
+    green_total_22_filtered = filtered_df_2022['CZ Export 2022 CZK'].sum()/usd_to_czk_22
+    green_total_23_filtered = filtered_df_2023['CZ Export 2023 CZK'].sum()/usd_to_czk_23
 
     # Compute unfiltered other-green portion
     other_green_22 = green_total_22 - green_total_22_filtered
@@ -103,9 +109,9 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "headerFormat": "",
             "pointFormat": (
                 '<span style="color:{point.color}">\u25CF</span> <b>{point.name}</b><br/>' +
-                '2022: {point.export22:,.1f} miliard CZK<br/>' +
-                '2023: {point.export23:,.1f} miliard CZK<br/>' +
-                'Růst: {point.growth_abs:,.1f} miliard CZK ({point.growth_frac:.2f}%)'
+                '2022: {point.export22:,.1f} miliard USD<br/>' +
+                '2023: {point.export23:,.1f} miliard USD<br/>' +
+                'Růst: {point.growth_abs:,.1f} miliard USD ({point.growth_frac:.2f}%)'
             )
         },
         "series": [{
