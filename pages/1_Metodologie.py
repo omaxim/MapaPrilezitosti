@@ -85,15 +85,20 @@ Snížení celkové emisní náročnosti
 ├────────── Zadržování uhlíku v krajině
 │            ├────────── půda a lesnictví
 ├────────── Zachytávání a ukládání CO₂
+          
 Snížení materiálové náročnosti
 ├────────── redesign produktů a balení
 ├────────── sběr, třídění, přepoužití, recyklace
+          
 Ochrana životního prostředí
 ├────────── distribuce vody, snížení znečištění, ochrana biodiverzity
+          
 Příprava na nepříznivé klima
 ├────────── živelné pohromy, sucho, nové zdroje bílkovin
+          
 Měřící a diagnostické přístroje
 ├────────── termostaty, senzory, spektrometry, chemická analýza
+          
 Materiály a komponenty
 ├────────── vzácné kovy, alternativy chemických látek
 ├────────── alternativní pohony a stroje)
