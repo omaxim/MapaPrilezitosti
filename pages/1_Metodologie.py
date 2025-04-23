@@ -134,9 +134,7 @@ selected = tree_select(
     tree_data,
     multiple=True,
     checked=[],
-    expanded=["Snížení celkové emisní náročnosti", "Materiály a komponenty"],
-    key="green_tree"
-)
+    expanded=["Snížení celkové emisní náročnosti", "Materiály a komponenty"])
 
 if selected:
     st.markdown("### Vybrané kategorie:")
