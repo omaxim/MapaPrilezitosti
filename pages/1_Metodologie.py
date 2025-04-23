@@ -102,12 +102,16 @@ col2.code("""
 """)
 
 
-
-# Define the main root node
+# Define main nodes
 nodes = [
-    StreamlitFlowNode(id='root', pos=(0, 0), data={'content': 'Snížení celkové emisní náročnosti'}, node_type='input', source_position='right'),
-    
-    # Sub-nodes
+    StreamlitFlowNode(id='emissions', pos=(0, 0), data={'content': 'Snížení celkové emisní náročnosti'}),
+    StreamlitFlowNode(id='materials', pos=(0, 0), data={'content': 'Snížení materiálové náročnosti\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)'}),
+    StreamlitFlowNode(id='environment', pos=(0, 0), data={'content': 'Ochrana životního prostředí\n(distribuce vody, snížení znečištění, ochrana biodiverzity)'}),
+    StreamlitFlowNode(id='climate', pos=(0, 0), data={'content': 'Příprava na nepříznivé klima\n(živelné pohromy, sucho, nové zdroje bílkovin)'}),
+    StreamlitFlowNode(id='diagnostics', pos=(0, 0), data={'content': 'Měřící a diagnostické přístroje\n(termostaty, senzory, spektrometry, chemická analýza)'}),
+    StreamlitFlowNode(id='components', pos=(0, 0), data={'content': 'Materiály a komponenty\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)'}),
+
+    # Subnodes for "Snížení celkové emisní náročnosti"
     StreamlitFlowNode(id='vyroba', pos=(0, 0), data={'content': 'Snížení emisí výroby\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)'}),
     StreamlitFlowNode(id='doprava', pos=(0, 0), data={'content': 'Snížení emisí dopravy\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)'}),
     StreamlitFlowNode(id='budovy', pos=(0, 0), data={'content': 'Snížení emisí budov\n(izolace; elektrifikace vytápění)'}),
@@ -116,39 +120,25 @@ nodes = [
     StreamlitFlowNode(id='site', pos=(0, 0), data={'content': 'Posílení sítí\n(elektrické a distribuční sítě, elektrifikace)'}),
     StreamlitFlowNode(id='uhlík', pos=(0, 0), data={'content': 'Zadržování uhlíku v krajině\n(půda a lesnictví)'}),
     StreamlitFlowNode(id='zachytavani', pos=(0, 0), data={'content': 'Zachytávání a ukládání CO₂'}),
-
-    # Parallel branches
-    StreamlitFlowNode(id='materialy', pos=(0, 0), data={'content': 'Snížení materiálové náročnosti\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)'}),
-    StreamlitFlowNode(id='zivotni', pos=(0, 0), data={'content': 'Ochrana životního prostředí\n(distribuce vody, snížení znečištění, ochrana biodiverzity)'}),
-    StreamlitFlowNode(id='klima', pos=(0, 0), data={'content': 'Příprava na nepříznivé klima\n(živelné pohromy, sucho, nové zdroje bílkovin)'}),
-    StreamlitFlowNode(id='merici', pos=(0, 0), data={'content': 'Měřící a diagnostické přístroje\n(termostaty, senzory, spektrometry, chemická analýza)'}),
-    StreamlitFlowNode(id='komponenty', pos=(0, 0), data={'content': 'Materiály a komponenty\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)'}),
 ]
 
-# Create edges from the root to sub-nodes
+# Define edges for subnodes under emissions
 edges = [
-    StreamlitFlowEdge(id='root-vyroba', source='root', target='vyroba'),
-    StreamlitFlowEdge(id='root-doprava', source='root', target='doprava'),
-    StreamlitFlowEdge(id='root-budovy', source='root', target='budovy'),
-    StreamlitFlowEdge(id='root-energie', source='root', target='energie'),
-    StreamlitFlowEdge(id='root-ukladani', source='root', target='ukladani'),
-    StreamlitFlowEdge(id='root-site', source='root', target='site'),
-    StreamlitFlowEdge(id='root-uhlik', source='root', target='uhlík'),
-    StreamlitFlowEdge(id='root-zachytavani', source='root', target='zachytavani'),
-
-    # Additional major branches
-    StreamlitFlowEdge(id='root-materialy', source='root', target='materialy'),
-    StreamlitFlowEdge(id='root-zivotni', source='root', target='zivotni'),
-    StreamlitFlowEdge(id='root-klima', source='root', target='klima'),
-    StreamlitFlowEdge(id='root-merici', source='root', target='merici'),
-    StreamlitFlowEdge(id='root-komponenty', source='root', target='komponenty'),
+    StreamlitFlowEdge(id='emissions-vyroba', source='emissions', target='vyroba'),
+    StreamlitFlowEdge(id='emissions-doprava', source='emissions', target='doprava'),
+    StreamlitFlowEdge(id='emissions-budovy', source='emissions', target='budovy'),
+    StreamlitFlowEdge(id='emissions-energie', source='emissions', target='energie'),
+    StreamlitFlowEdge(id='emissions-ukladani', source='emissions', target='ukladani'),
+    StreamlitFlowEdge(id='emissions-site', source='emissions', target='site'),
+    StreamlitFlowEdge(id='emissions-uhlík', source='emissions', target='uhlík'),
+    StreamlitFlowEdge(id='emissions-zachytavani', source='emissions', target='zachytavani'),
 ]
 
 # Initialize state
 if 'flow_state' not in st.session_state:
     st.session_state.flow_state = StreamlitFlowState(nodes, edges)
 
-# Display in your column
+# Show the tree
 with col2:
     streamlit_flow('tree_layout', st.session_state.flow_state, layout=TreeLayout(direction='right'), fit_view=True)
 # --- Key Indicators ---
