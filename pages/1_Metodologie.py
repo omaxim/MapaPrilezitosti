@@ -1,5 +1,7 @@
 import streamlit as st
 from visualsetup import load_visual_identity
+from streamlit_flow import streamlit_flow
+from streamlit_flow.interfaces import StreamlitFlowNode, StreamlitFlowEdge
 
 # Page config
 st.set_page_config(
@@ -98,15 +100,45 @@ col2.code("""
 """)
 
 
-dot_code = '''
-digraph G {
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy";
-    // Add more nodes and edges as needed
-}
-'''
 
-col2.graphviz_chart(dot_code)
+# Define nodes
+nodes = [
+    StreamlitFlowNode(id="root", data={"label": "Snížení celkové emisní náročnosti"}, pos=(0, 0)),
+    StreamlitFlowNode(id="vyroba", data={"label": "Snížení emisí výroby\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"}, pos=(200, -200)),
+    StreamlitFlowNode(id="doprava", data={"label": "Snížení emisí dopravy\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"}, pos=(200, -100)),
+    StreamlitFlowNode(id="budovy", data={"label": "Snížení emisí budov\n(izolace; elektrifikace vytápění)"}, pos=(200, 0)),
+    StreamlitFlowNode(id="energie", data={"label": "Snížení emisí energie\n(nízkoemisní elektřina a paliva – vítr, FVE, …)"}, pos=(200, 100)),
+    StreamlitFlowNode(id="ukladani", data={"label": "Ukládání energie"}, pos=(200, 200)),
+    StreamlitFlowNode(id="site", data={"label": "Posílení sítí\n(elektrické a distribuční sítě, elektrifikace)"}, pos=(200, 300)),
+    StreamlitFlowNode(id="krajina", data={"label": "Zadržování uhlíku v krajině\n(půda a lesnictví)"}, pos=(200, 400)),
+    StreamlitFlowNode(id="co2", data={"label": "Zachytávání a ukládání CO₂"}, pos=(200, 500)),
+    StreamlitFlowNode(id="material", data={"label": "Snížení materiálové náročnosti\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"}, pos=(0, 600)),
+    StreamlitFlowNode(id="zivotni", data={"label": "Ochrana životního prostředí\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"}, pos=(0, 700)),
+    StreamlitFlowNode(id="klima", data={"label": "Příprava na nepříznivé klima\n(živelné pohromy, sucho, nové zdroje bílkovin)"}, pos=(0, 800)),
+    StreamlitFlowNode(id="pristroje", data={"label": "Měřící a diagnostické přístroje\n(termostaty, senzory, spektrometry, chemická analýza)"}, pos=(0, 900)),
+    StreamlitFlowNode(id="materialy", data={"label": "Materiály a komponenty\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"}, pos=(0, 1000)),
+]
+
+# Define edges
+edges = [
+    StreamlitFlowEdge(source="root", target="vyroba"),
+    StreamlitFlowEdge(source="root", target="doprava"),
+    StreamlitFlowEdge(source="root", target="budovy"),
+    StreamlitFlowEdge(source="root", target="energie"),
+    StreamlitFlowEdge(source="root", target="ukladani"),
+    StreamlitFlowEdge(source="root", target="site"),
+    StreamlitFlowEdge(source="root", target="krajina"),
+    StreamlitFlowEdge(source="root", target="co2"),
+    StreamlitFlowEdge(source="root", target="material"),
+    StreamlitFlowEdge(source="root", target="zivotni"),
+    StreamlitFlowEdge(source="root", target="klima"),
+    StreamlitFlowEdge(source="root", target="pristroje"),
+    StreamlitFlowEdge(source="root", target="materialy"),
+]
+
+# Render the flow diagram
+with col2:
+    streamlit_flow(nodes=nodes, edges=edges, layout="tree")
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
