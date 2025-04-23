@@ -2,6 +2,8 @@ import streamlit as st
 from visualsetup import load_visual_identity
 from streamlit_flow import streamlit_flow
 from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
+from streamlit_flow.state import StreamlitFlowState
+from streamlit_flow.layouts import TreeLayout
 
 # Page config
 st.set_page_config(
@@ -103,38 +105,31 @@ col2.code("""
 
 # Define nodes
 nodes = [
-    StreamlitFlowNode(id="root", data={"label": "Snížení celkové emisní náročnosti"}, pos=(0, 0)),
-    StreamlitFlowNode(id="vyroba", data={"label": "Snížení emisí výroby\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"}, pos=(200, -200)),
-    StreamlitFlowNode(id="doprava", data={"label": "Snížení emisí dopravy\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"}, pos=(200, -100)),
-    StreamlitFlowNode(id="budovy", data={"label": "Snížení emisí budov\n(izolace; elektrifikace vytápění)"}, pos=(200, 0)),
-    StreamlitFlowNode(id="energie", data={"label": "Snížení emisí energie\n(nízkoemisní elektřina a paliva – vítr, FVE, …)"}, pos=(200, 100)),
-    StreamlitFlowNode(id="ukladani", data={"label": "Ukládání energie"}, pos=(200, 200)),
-    StreamlitFlowNode(id="site", data={"label": "Posílení sítí\n(elektrické a distribuční sítě, elektrifikace)"}, pos=(200, 300)),
-    StreamlitFlowNode(id="krajina", data={"label": "Zadržování uhlíku v krajině\n(půda a lesnictví)"}, pos=(200, 400)),
-    StreamlitFlowNode(id="co2", data={"label": "Zachytávání a ukládání CO₂"}, pos=(200, 500)),
-    StreamlitFlowNode(id="material", data={"label": "Snížení materiálové náročnosti\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"}, pos=(0, 600)),
-    StreamlitFlowNode(id="zivotni", data={"label": "Ochrana životního prostředí\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"}, pos=(0, 700)),
-    StreamlitFlowNode(id="klima", data={"label": "Příprava na nepříznivé klima\n(živelné pohromy, sucho, nové zdroje bílkovin)"}, pos=(0, 800)),
-    StreamlitFlowNode(id="pristroje", data={"label": "Měřící a diagnostické přístroje\n(termostaty, senzory, spektrometry, chemická analýza)"}, pos=(0, 900)),
-    StreamlitFlowNode(id="materialy", data={"label": "Materiály a komponenty\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"}, pos=(0, 1000)),
+    StreamlitFlowNode(id='1', pos=(0, 0), data={'content': 'Node 1'}, node_type='input', source_position='right'),
+    StreamlitFlowNode(id='2', pos=(0, 0), data={'content': 'Node 2'}, node_type='default', source_position='right', target_position='left'),
+    StreamlitFlowNode(id='3', pos=(0, 0), data={'content': 'Node 3'}, node_type='default', source_position='right', target_position='left'),
+    StreamlitFlowNode(id='4', pos=(0, 0), data={'content': 'Node 4'}, node_type='output', target_position='left'),
+    StreamlitFlowNode(id='5', pos=(0, 0), data={'content': 'Node 5'}, node_type='output', target_position='left'),
+    StreamlitFlowNode(id='6', pos=(0, 0), data={'content': 'Node 6'}, node_type='output', target_position='left'),
+    StreamlitFlowNode(id='7', pos=(0, 0), data={'content': 'Node 7'}, node_type='output', target_position='left'),
 ]
 
-# Define edges
+# Define edges with 'id' parameter
 edges = [
-    StreamlitFlowEdge(source="root", target="vyroba"),
-    StreamlitFlowEdge(source="root", target="doprava"),
-    StreamlitFlowEdge(source="root", target="budovy"),
-    StreamlitFlowEdge(source="root", target="energie"),
-    StreamlitFlowEdge(source="root", target="ukladani"),
-    StreamlitFlowEdge(source="root", target="site"),
-    StreamlitFlowEdge(source="root", target="krajina"),
-    StreamlitFlowEdge(source="root", target="co2"),
-    StreamlitFlowEdge(source="root", target="material"),
-    StreamlitFlowEdge(source="root", target="zivotni"),
-    StreamlitFlowEdge(source="root", target="klima"),
-    StreamlitFlowEdge(source="root", target="pristroje"),
-    StreamlitFlowEdge(source="root", target="materialy"),
+    StreamlitFlowEdge(id='1-2', source='1', target='2', animated=True),
+    StreamlitFlowEdge(id='1-3', source='1', target='3', animated=True),
+    StreamlitFlowEdge(id='2-4', source='2', target='4', animated=True),
+    StreamlitFlowEdge(id='2-5', source='2', target='5', animated=True),
+    StreamlitFlowEdge(id='3-6', source='3', target='6', animated=True),
+    StreamlitFlowEdge(id='3-7', source='3', target='7', animated=True),
 ]
+
+# Initialize flow state
+if 'flow_state' not in st.session_state:
+    st.session_state.flow_state = StreamlitFlowState(nodes, edges)
+
+# Render the flow diagram
+streamlit_flow('tree_layout', st.session_state.flow_state, layout=TreeLayout(direction='right'), fit_view=True)
 
 # Render the flow diagram
 with col2:
