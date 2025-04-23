@@ -1,9 +1,5 @@
 import streamlit as st
 from visualsetup import load_visual_identity
-from streamlit_flow import streamlit_flow
-from streamlit_flow.elements import StreamlitFlowNode, StreamlitFlowEdge
-from streamlit_flow.state import StreamlitFlowState
-from streamlit_flow.layouts import DagreLayout
 
 # Page config
 st.set_page_config(
@@ -101,44 +97,6 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
-# Define nodes
-nodes = [
-    StreamlitFlowNode(id='emissions', pos=(0, 0), data={'content': 'Snížení celkové emisní náročnosti'}),
-    StreamlitFlowNode(id='vyroba', pos=(0, 0), data={'content': 'Snížení emisí výroby\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)'}),
-    StreamlitFlowNode(id='doprava', pos=(0, 0), data={'content': 'Snížení emisí dopravy\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)'}),
-    StreamlitFlowNode(id='budovy', pos=(0, 0), data={'content': 'Snížení emisí budov\n(izolace; elektrifikace vytápění)'}),
-    StreamlitFlowNode(id='energie', pos=(0, 0), data={'content': 'Snížení emisí energie\n(nízkoemisní elektřina a paliva – vítr, FVE, …)'}),
-    StreamlitFlowNode(id='ukladani', pos=(0, 0), data={'content': 'Ukládání energie'}),
-    StreamlitFlowNode(id='site', pos=(0, 0), data={'content': 'Posílení sítí\n(elektrické a distribuční sítě, elektrifikace)'}),
-    StreamlitFlowNode(id='uhlík', pos=(0, 0), data={'content': 'Zadržování uhlíku v krajině\n(půda a lesnictví)'}),
-    StreamlitFlowNode(id='zachytavani', pos=(0, 0), data={'content': 'Zachytávání a ukládání CO₂'}),
-
-    StreamlitFlowNode(id='materials', pos=(0, 0), data={'content': 'Snížení materiálové náročnosti\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)'}),
-    StreamlitFlowNode(id='environment', pos=(0, 0), data={'content': 'Ochrana životního prostředí\n(distribuce vody, snížení znečištění, ochrana biodiverzity)'}),
-    StreamlitFlowNode(id='climate', pos=(0, 0), data={'content': 'Příprava na nepříznivé klima\n(živelné pohromy, sucho, nové zdroje bílkovin)'}),
-    StreamlitFlowNode(id='diagnostics', pos=(0, 0), data={'content': 'Měřící a diagnostické přístroje\n(termostaty, senzory, spektrometry, chemická analýza)'}),
-    StreamlitFlowNode(id='components', pos=(0, 0), data={'content': 'Materiály a komponenty\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)'}),
-]
-
-# Define edges (right-angle layout with Dagre)
-edges = [
-    StreamlitFlowEdge(id='emissions-vyroba', source='emissions', target='vyroba'),
-    StreamlitFlowEdge(id='emissions-doprava', source='emissions', target='doprava'),
-    StreamlitFlowEdge(id='emissions-budovy', source='emissions', target='budovy'),
-    StreamlitFlowEdge(id='emissions-energie', source='emissions', target='energie'),
-    StreamlitFlowEdge(id='emissions-ukladani', source='emissions', target='ukladani'),
-    StreamlitFlowEdge(id='emissions-site', source='emissions', target='site'),
-    StreamlitFlowEdge(id='emissions-uhlík', source='emissions', target='uhlík'),
-    StreamlitFlowEdge(id='emissions-zachytavani', source='emissions', target='zachytavani'),
-]
-
-# Initialize flow state
-if 'flow_state' not in st.session_state:
-    st.session_state.flow_state = StreamlitFlowState(nodes, edges)
-
-# Render flow using DagreLayout for right-angled tree layout
-with col2:
-    streamlit_flow('climate_strategy_tree', st.session_state.flow_state, layout=DagreLayout(direction='TB'), fit_view=True)
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
