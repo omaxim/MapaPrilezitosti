@@ -5,7 +5,7 @@ from visualsetup import load_visual_identity
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.ico",
-    layout="centered"
+    layout="wide"
 )
 
 # Load custom branding
@@ -14,20 +14,21 @@ st.title("")
 st.title("")
 st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
+col1,col2,col3 = st.columns(3)
 # Main Section Title
-st.markdown("# 📊 Metodologie")
+col2.markdown("# 📊 Metodologie")
 
 # --- Introduction and Data Sources ---
-st.markdown("""
+col2.markdown("""
 ### Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
 Celá datová základna je založena na harmonizovaném datasetu světového obchodu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export z jedné země odpovídal importu v zemi druhé a nedocházelo k dvojímu započítání obchodních toků.  
 Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy.
 """)
 
-st.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
+col2.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
 # --- Product Classification ---
-st.markdown("""
+col2.markdown("""
 ### Klasifikace výrobků
 Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**.  
 Analýza je prováděna na úrovni **šesticiferného členění výrobků (HS6)**, kde je celkem 5 605 typů výrobků.  
@@ -35,7 +36,7 @@ Data jsou k dispozici za rok **2022 a 2023**.
 """)
 
 # --- Green Products ---
-st.markdown("""
+col2.markdown("""
 ### Jak jsme vybírali tzv. „zelené výrobky“
 Za „zelené“ či „clean-tech“ označujeme produkty klíčové pro přechod na čistou, nízkouhlíkovou ekonomiku.  
 Výběr vychází z:
@@ -46,23 +47,23 @@ Výběr vychází z:
 Zahrnujeme i komponenty důležité pro zelenou transformaci.
 """)
 
-st.markdown("""
+col2.markdown("""
 ### Využívání termínu „zelená“ vs. „clean-tech“
 Termíny **zelené výrobky**, **clean-tech** a **čisté technologie** používáme rovnocenně.  
 Zahrnujeme široké spektrum změn – od energetiky přes průmyslové technologie až po hospodaření s vodou, půdou a surovinami.
 """)
 
 # --- Cleantech Taxonomy Tree Placeholder ---
-st.markdown("### Třídění zelených výrobků")
-st.markdown("""
+col2.markdown("### Třídění zelených výrobků")
+col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
-st.markdown("📌 **[ZDE BUDE VLOŽEN STROM KATEGORIÍ]**")
+col2.markdown("📌 **[ZDE BUDE VLOŽEN STROM KATEGORIÍ]**")
 
 # --- Key Indicators ---
-st.markdown("### Na jaké ukazatele se zaměřujeme")
-st.markdown("""
+col2.markdown("### Na jaké ukazatele se zaměřujeme")
+col2.markdown("""
 **Příbuznost**  
 Produkty „příbuzné“ těm, které ČR už exportuje. Metrika je založená na metodologii OEC.
 
@@ -82,33 +83,33 @@ V procentech a absolutní hodnotě vývozu ČR ve srovnání se světem.
 """)
 
 # --- Detailed Data Methodology Section ---
-st.markdown("## 📘 Datová metodologie")
+col2.markdown("## 📘 Datová metodologie")
 
-st.markdown("""
+col2.markdown("""
 ### 📈 Výpočet komplexity produktu
 Používáme Python modul **py-ecomplexity** od **Centre for International Development (Harvard)**.
 """)
-st.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
+col2.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
 
 # --- RCA Condition ---
-st.markdown("""
+col2.markdown("""
 ### 🌍 Podmínka aktivity v dané zemi
 Používáme kritérium **RCA > 1** jako důkaz komparativní výhody, podobně jako v **OEC**.
 """)
-st.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
+col2.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
 
 # --- Relatedness Formula ---
-st.markdown("### 🔍 Výpočet příbuznosti produktů")
+col2.markdown("### 🔍 Výpočet příbuznosti produktů")
 
-st.latex(r"""
+col2.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
-st.markdown("""
+col2.markdown("""
 - **$$M_{cp'}$$**: 1 pokud má produkt $$p'$$ v zemi $$c$$ RCA > 1, jinak 0.  
 - **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty.  
 
 Výpočet je **normalizovaný** a ukazuje příbuznost produktu $$p$$ k aktivním produktům v zemi $$c$$.
 """, unsafe_allow_html=True)
 
-st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
+col2.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
