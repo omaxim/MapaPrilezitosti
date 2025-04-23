@@ -69,35 +69,38 @@ col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
-col2.text("""
-Snížení celkové emisní náročnosti\n
-├── Snížení emisí výroby\n
-│   ├── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství\n
-├── Snížení emisí dopravy (rozvoj vlaků)\n
+col2.markdown("""
+<div style="font-family: monospace; white-space: pre;">
+Snížení celkové emisní náročnosti/
+├── Snížení emisí výroby/
+│   ├── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
+├── Snížení emisí dopravy (rozvoj vlaků)/
 │   ├── elektromobilita, vodík, infrastruktura
-├── Snížení emisí budov\n
+├── Snížení emisí budov/
 │   ├── izolace, elektrifikace vytápění
-├── Snížení emisí energie\n
+├── Snížení emisí energie/
 │   ├── nízkoemisní elektřina a paliva (vítr, FVE)
-├── Ukládání energie\n
-├── Posílení sítí\n
+├── Ukládání energie/
+├── Posílení sítí/
 │   ├── elektrické a distribuční sítě, elektrifikace
-├── Zadržování uhlíku v krajině\n
+├── Zadržování uhlíku v krajině/
 │   ├── půda a lesnictví
-├── Zachytávání a ukládání CO₂\n
-Snížení materiálové náročnosti\n
-├── redesign produktů a balení\n
-├── sběr, třídění, přepoužití, recyklace\n
-Ochrana životního prostředí\n
-├── distribuce vody, snížení znečištění, ochrana biodiverzity\n
-Příprava na nepříznivé klima\n
-├── živelné pohromy, sucho, nové zdroje bílkovin\n
-Měřící a diagnostické přístroje\n
-├── termostaty, senzory, spektrometry, chemická analýza\n
-Materiály a komponenty\n
-├── vzácné kovy, alternativy chemických látek\n
-├── alternativní pohony a stroje\n
-""")
+├── Zachytávání a ukládání CO₂/
+Snížení materiálové náročnosti/
+├── redesign produktů a balení/
+├── sběr, třídění, přepoužití, recyklace/
+Ochrana životního prostředí/
+├── distribuce vody, snížení znečištění, ochrana biodiverzity/
+Příprava na nepříznivé klima/
+├── živelné pohromy, sucho, nové zdroje bílkovin/
+Měřící a diagnostické přístroje/
+├── termostaty, senzory, spektrometry, chemická analýza/
+Materiály a komponenty/
+├── vzácné kovy, alternativy chemických látek/
+├── alternativní pohony a stroje/
+</div>
+""", unsafe_allow_html=True)
+
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
