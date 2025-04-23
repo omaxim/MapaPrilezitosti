@@ -28,8 +28,6 @@ st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 col1,col2,col3 = st.columns([1,5,1])
 col2.subheader("")
 # Main Section Title
-col2.markdown("# Metodologie")
-
 # --- Introduction and Data Sources ---
 col2.markdown("""
 ### Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
