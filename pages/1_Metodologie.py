@@ -132,7 +132,6 @@ tree_data = {
 
 selected = tree_select(
     tree_data,
-    multiple=True,
     checked=[],
     expanded=["Snížení celkové emisní náročnosti", "Materiály a komponenty"])
 
