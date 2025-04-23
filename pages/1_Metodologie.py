@@ -71,43 +71,32 @@ Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplnění
 """)
 col2.code("""
 Snížení celkové emisní náročnosti
-├── Snížení emisí výroby
-│   ├── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
-├── Snížení emisí dopravy (rozvoj vlaků)
-│   ├── elektromobilita, vodík, infrastruktura
-├── Snížení emisí budov
-│   ├── izolace, elektrifikace vytápění
-├── Snížení emisí energie
-│   ├── nízkoemisní elektřina a paliva (vítr, FVE)
-├── Ukládání energie
-├── Posílení sítí
-│   ├── elektrické a distribuční sítě, elektrifikace
-├── Zadržování uhlíku v krajině
-│   ├── půda a lesnictví
-├── Zachytávání a ukládání CO₂
-""")
-
-col2.code("""        
+├────────── Snížení emisí výroby
+│   ├────────── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
+├────────── Snížení emisí dopravy (rozvoj vlaků)
+│   ├────────── elektromobilita, vodík, infrastruktura
+├────────── Snížení emisí budov
+│   ├────────── izolace, elektrifikace vytápění
+├────────── Snížení emisí energie
+│   ├────────── nízkoemisní elektřina a paliva (vítr, FVE)
+├────────── Ukládání energie
+├────────── Posílení sítí
+│   ├────────── elektrické a distribuční sítě, elektrifikace
+├────────── Zadržování uhlíku v krajině
+│   ├────────── půda a lesnictví
+├────────── Zachytávání a ukládání CO₂
 Snížení materiálové náročnosti
-├── redesign produktů a balení
-├── sběr, třídění, přepoužití, recyklace
-""")       
-col2.code("""  
+├────────── redesign produktů a balení
+├────────── sběr, třídění, přepoužití, recyklace
 Ochrana životního prostředí
-├── distribuce vody, snížení znečištění, ochrana biodiverzity
-""")
-col2.code("""  
+├────────── distribuce vody, snížení znečištění, ochrana biodiverzity
 Příprava na nepříznivé klima
-├── živelné pohromy, sucho, nové zdroje bílkovin
-""")
-col2.code("""  
+├────────── živelné pohromy, sucho, nové zdroje bílkovin
 Měřící a diagnostické přístroje
-├── termostaty, senzory, spektrometry, chemická analýza
-""")
-col2.code("""  
+├────────── termostaty, senzory, spektrometry, chemická analýza
 Materiály a komponenty
-├── vzácné kovy, alternativy chemických látek
-├── alternativní pohony a stroje)
+├────────── vzácné kovy, alternativy chemických látek
+├────────── alternativní pohony a stroje)
 """)
 
 # --- Key Indicators ---
