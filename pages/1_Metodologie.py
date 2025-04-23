@@ -27,7 +27,7 @@ st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
 col1,col2,col3 = st.columns([1,5,1])
 # Main Section Title
-col2.markdown("# 📊 Metodologie")
+col2.markdown("#Metodologie")
 
 # --- Introduction and Data Sources ---
 col2.markdown("""
@@ -36,7 +36,7 @@ Celá datová základna je založena na harmonizovaném datasetu světového obc
 Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy.
 """)
 
-col2.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
+col2.link_button("Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
 # --- Product Classification ---
 col2.markdown("""
@@ -94,23 +94,23 @@ V procentech a absolutní hodnotě vývozu ČR ve srovnání se světem.
 """)
 
 # --- Detailed Data Methodology Section ---
-col2.markdown("## 📘 Datová metodologie")
+col2.markdown("## Datová metodologie")
 
 col2.markdown("""
-### 📈 Výpočet komplexity produktu
+### Výpočet komplexity produktu
 Používáme Python modul **py-ecomplexity** od **Centre for International Development (Harvard)**.
 """)
-col2.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
+col2.link_button("Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
 
 # --- RCA Condition ---
 col2.markdown("""
-### 🌍 Podmínka aktivity v dané zemi
+### Podmínka aktivity v dané zemi
 Používáme kritérium **RCA > 1** jako důkaz komparativní výhody, podobně jako v **OEC**.
 """)
-col2.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
+col2.link_button("Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
 
 # --- Relatedness Formula ---
-col2.markdown("### 🔍 Výpočet příbuznosti produktů")
+col2.markdown("### Výpočet příbuznosti produktů")
 
 col2.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
@@ -123,4 +123,4 @@ col2.markdown("""
 Výpočet je **normalizovaný** a ukazuje příbuznost produktu $$p$$ k aktivním produktům v zemi $$c$$.
 """, unsafe_allow_html=True)
 
-col2.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
+col2.link_button("Metodika OEC", "https://oec.world/en/resources/methods")
