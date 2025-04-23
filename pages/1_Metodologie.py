@@ -69,8 +69,35 @@ col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
-col2.markdown("📌 **[ZDE BUDE VLOŽEN STROM KATEGORIÍ]**")
-
+col2.markdown("""
+- **Snížení celkové emisní náročnosti**
+    - Snížení emisí výroby
+        - ocel, cement, efektivita, elektrifikace průmyslu i zemědělství
+    - Snížení emisí dopravy (rozvoj vlaků)
+        - elektromobilita, vodík, infrastruktura
+    - Snížení emisí budov
+        - izolace, elektrifikace vytápění
+    - Snížení emisí energie
+        - nízkoemisní elektřina a paliva (vítr, FVE)
+    - Ukládání energie
+    - Posílení sítí
+        - elektrické a distribuční sítě, elektrifikace
+    - Zadržování uhlíku v krajině
+        - půda a lesnictví
+    - Zachytávání a ukládání CO₂
+- **Snížení materiálové náročnosti**
+    - redesign produktů a balení
+    - sběr, třídění, přepoužití, recyklace
+- **Ochrana životního prostředí**
+    - distribuce vody, snížení znečištění, ochrana biodiverzity
+- **Příprava na nepříznivé klima**
+    - živelné pohromy, sucho, nové zdroje bílkovin
+- **Měřící a diagnostické přístroje**
+    - termostaty, senzory, spektrometry, chemická analýza
+- **Materiály a komponenty**
+    - vzácné kovy, alternativy chemických látek
+    - alternativní pohony a stroje
+""")
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
