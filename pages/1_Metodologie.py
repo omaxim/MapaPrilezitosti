@@ -69,7 +69,7 @@ col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
-col2.markdown("""
+col2.text("""
 Snížení celkové emisní náročnosti\n
 ├── Snížení emisí výroby\n
 │   ├── ocel, cement, efektivita, elektrifikace průmyslu i zemědělství\n
