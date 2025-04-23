@@ -1,6 +1,7 @@
 import streamlit as st
+from streamlit_tree_select import tree_select
 from visualsetup import load_visual_identity
-#Loading loads of custom css in markdown
+
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="favicon.ico",
@@ -10,59 +11,133 @@ load_visual_identity("header.jpg")
 st.title("")
 st.title("")
 
-st.logo('logo_notext.svg',size='large',icon_image='logo_notext.svg')
+st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
 
 # Main Title
-st.markdown("# 📊 Metodologie")
+st.markdown("# \ud83d\udcca Metodologie")
 
-# Introduction
+# --- Úvod k datům ---
 st.markdown("""
-Tato aplikace je založena na harmonizovaném datasetu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export odpovídal importu a nedocházelo k dvojímu započítání obchodních toků. 
+### Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
+
+Celá datová základna je založena na harmonizovaném datasetu světového obchodu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export z jedné země odpovídal importu v zemi druhé a nedocházelo k dvojímu započítání obchodních toků.
+
+Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy podle zemí, komodit a let.
 """)
 
-# Link to BACI dataset
-st.link_button("ℹ️ Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
-
-# Product Complexity Calculation
-st.markdown("### 📈 Výpočet komplexity produktu")
+# --- Klasifikace výrobků ---
 st.markdown("""
-Pro výpočet komplexity produktu používáme **Python modul py-ecomplexity** od Centre for International Development při **Harvardské univerzitě**. Tento modul také umožňuje výpočet **matice příbuznosti** v produktovém prostoru. Data pro výpočet zahrnují celou databázi **BACI**.
-""")
-st.link_button("📜 Více o modulu py-ecomplexity", "https://github.com/cid-harvard/py-ecomplexity")
+### Klasifikace výrobků
 
-# Condition for Country Activity
-st.markdown("""
-### 🌍 Podmínka aktivity v dané zemi
-Pro detekci ekonomické aktivity konkrétního produktu v zemi se používá kritérium **RCA > 1**. Tento postup je obdobný metodice používané v **OEC**, kde jsou důležité relativní vztahy mezi produkty, i když absolutní hodnoty komplexity se mohou mírně lišit.
+Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**. Analýza je prováděna na úrovni šesticiferného členění výrobků (**HS6**), kde se nachází **5 605** jednotlivých typů výrobků. V této klasifikaci jsou k dispozici data za roky **2022 a 2023**.
 """)
 
+# --- Výběr zelených produktů ---
 st.markdown("""
-Jednoznačné určení absolutních hodnot komplexity je často zpochybňované. Tato aplikace se však zaměřuje na **relativní komplexitu produktů** (percentil a pořadí v rámci datasetu BACI).
-""")
-st.link_button("📑 Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
+### Jak jsme vybírali tzv. „zelené výrobky“
 
-# Product Relatedness Calculation
-st.markdown("### 🔍 Výpočet příbuznosti produktů")
-st.markdown("""
-Příbuznost produktů vůči ekonomice ČR je vypočítána podobně jako v OEC. Podrobný popis této metodiky je k dispozici na stránkách **OEC**.
+Za „zelené“ nebo „clean-tech“ označujeme výrobky (finální i komponenty), které hrají klíčovou roli při přechodu na čistou, nízkouhlíkovou ekonomiku. Výběr probíhá na základě:
 
-              
-Příbuznost produktu $$p$$ v zemi $$c$$ se vypočítá podle následujícího vzorce:
+- rešerší akademických studií,
+- materiálů mezinárodních organizací a vlád,
+- konzultací s českými experty.
 
-              """)
-
-
-# LaTeX Formula with Explanation
-st.latex(r"""
-\text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
+Zahrnujeme nejen produkty přispívající ke snižování emisí, ale i komponenty nutné pro transformaci, jejichž poptávka poroste.
 """)
 
-# Explanation with inline LaTeX
+# --- Terminologie ---
 st.markdown("""
+### Využívání termínu „zelená“ vs. „clean-tech“
 
-- **$$M_{cp'}$$**: Hodnota v matici $$M$$, která je rovna **1**, pokud produkt $$p'$$ v zemi $$c$$ vykazuje **RCA > 1** (tj. komparativní výhodu); jinak je rovna **0**.
-- **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty $$p$$ a $$p'$$, vyjadřující jejich blízkost v produktovém prostoru.
+Rovnocenně používáme termíny **zelené výrobky**, **clean-tech** a **čisté technologie**. „Zelená transformace“ zahrnuje změny v energetice, průmyslu, dopravě, stavebnictví, cirkularitě i v zacházení se zdroji.
+""")
 
-Celkový vzorec tedy počítá příbuznost produktu $$p$$ s produkty $$p'$$, které jsou v zemi $$c$$ aktivní (splňují podmínku **RCA > 1**). Výpočet je **normalizován**, což zajistí, že výsledek zohledňuje vztahy produktu $$p$$ vůči celé produktové struktuře.
-""", unsafe_allow_html=True)
-st.link_button("📘 Metodika OEC", "https://oec.world/en/resources/methods")
+# --- Taxonomie ---
+st.markdown("""
+### Třídění zelených výrobků
+
+Zelené výrobky třídíme do:
+
+- **6 Taxonomických grup**
+- **17 Skupin**
+- **40 Podskupin**
+- **58 Kategorií**
+
+Některé skupiny zatím nemají přiřazené HS2022 kódy (např. Biodiverzita, CCS), ale očekáváme jejich doplnění s vývojem technologií.
+""")
+
+# --- Klíčové ukazatele ---
+st.markdown("""
+### Na jaké ukazatele se zaměřujeme
+
+- **Příbuznost**: Míra vazby na český export (viz kapitola „Datová metodologie“ níže).
+- **Komplexita (Unikátnost)**: Vzácnost produktu, vypočítaná pomocí modulu `py-ecomplexity` (viz níže).
+- **Velikost vývozu**: V USD dle BACI/Comtrade, převod na CZK podle ČNB.
+- **Růst**: Meziroční růst v USD za 2022–23.
+- **Podíl na světovém trhu**: % českého exportu z globálního obratu.
+- **Pořadí na světovém trhu**: Umístění ČR v absolutních USD hodnotách vývozu daného výrobku.
+""")
+
+# --- BACI Info Link ---
+st.link_button("\u2139\ufe0f Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
+
+# --- Interaktivní strom zelených výrobků ---
+st.markdown("""
+K některým Skupinám či Podskupinám (Zadržování uhlíku, Zachytávání a ukládání uhlíku, Ochrana půdy, Biodiverzita či Nové zdroje vody) v tuto chvíli nevidíme jednoznačně přiřaditelné výrobky v HS 2022 klasifikaci a tyto pozice v našem stromu tak zůstávají neobsazené. S dalším vývojem technologií a obchodování s těmito technologiemi počítáme, že se i tyto kategorie obsadí jednoznačně definovatelnými kódy výrobků.
+""")
+
+st.markdown("### \ud83c\udf33 Interaktivní strom zelených výrobků")
+
+tree_data = {
+    "Snížení celkové emisní náročnosti": {
+        "Snížení emisí výroby": {
+            "ocel, cement, efektivita, elektrifikace průmyslu i zemědělství": {}
+        },
+        "Snížení emisí dopravy (rozvoj vlaků)": {
+            "elektromobilita, vodík, infrastruktura": {}
+        },
+        "Snížení emisí budov": {
+            "izolace, elektrifikace vytápění": {}
+        },
+        "Snížení emisí energie": {
+            "nízkoemisní elektřina a paliva (vítr, FVE)": {}
+        },
+        "Ukládání energie": {},
+        "Posílení sítí": {
+            "elektrické a distribuční sítě, elektrifikace": {}
+        },
+        "Zadržování uhlíku v krajině": {
+            "půda a lesnictví": {}
+        },
+        "Zachytávání a ukládání CO₂": {}
+    },
+    "Snížení materiálové náročnosti": {
+        "redesign produktů a balení": {},
+        "sběr, třídění, přepoužití, recyklace": {}
+    },
+    "Ochrana životního prostředí": {
+        "distribuce vody, snížení znečištění, ochrana biodiverzity": {}
+    },
+    "Příprava na nepříznivé klima": {
+        "živelné pohromy, sucho, nové zdroje bílkovin": {}
+    },
+    "Měřící a diagnostické přístroje": {
+        "termostaty, senzory, spektrometry, chemická analýza": {}
+    },
+    "Materiály a komponenty": {
+        "vzácné kovy, alternativy chemických látek": {},
+        "alternativní pohony a stroje": {}
+    }
+}
+
+selected = tree_select(
+    data=tree_data,
+    multiple=True,
+    checked=[],
+    expanded=["Snížení celkové emisní náročnosti", "Materiály a komponenty"],
+    key="green_tree"
+)
+
+if selected:
+    st.markdown("### \ud83d\udd0d Vybrané kategorie:")
+    st.write(", ".join(selected))
