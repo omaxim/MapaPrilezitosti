@@ -79,14 +79,14 @@ st.markdown("""
 """)
 
 # --- BACI Info Link ---
-st.link_button("\u2139\ufe0f Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
+st.link_button("Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
 # --- Interaktivní strom zelených výrobků ---
 st.markdown("""
 K některým Skupinám či Podskupinám (Zadržování uhlíku, Zachytávání a ukládání uhlíku, Ochrana půdy, Biodiverzita či Nové zdroje vody) v tuto chvíli nevidíme jednoznačně přiřaditelné výrobky v HS 2022 klasifikaci a tyto pozice v našem stromu tak zůstávají neobsazené. S dalším vývojem technologií a obchodování s těmito technologiemi počítáme, že se i tyto kategorie obsadí jednoznačně definovatelnými kódy výrobků.
 """)
 
-st.markdown("### \ud83c\udf33 Interaktivní strom zelených výrobků")
+st.markdown("### Interaktivní strom zelených výrobků")
 
 tree_data = {
     "Snížení celkové emisní náročnosti": {
