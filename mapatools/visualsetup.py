@@ -213,7 +213,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             height: {text_logo_height}px; /* Set height based on calculation */
             width: auto; /* Maintain aspect ratio */
             /* Optional: Limit max width on larger screens if it gets too wide */
-            /* max-width: 60%; */
+            /* max-width: 80%; */
         }}
 
         /* Container for partner logos (reusing/modifying your original styles) */
