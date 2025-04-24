@@ -100,7 +100,7 @@ digraph G {
         height=0.5,
         margin=0.2,
         labelloc=t,
-        justify=left
+        justify=center
     ];
 
     edge [arrowhead=none];
