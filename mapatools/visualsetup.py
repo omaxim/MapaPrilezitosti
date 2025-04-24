@@ -145,37 +145,50 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
     #p6.image('resources/partners/06.png',width=200)
     #p7.image('resources/partners/02.png',width=200)
 
+    def img_to_base64(path):
+        with open(path, "rb") as f:
+            return base64.b64encode(f.read()).decode()
+
+    # Convert all logos to base64
+    logos = [
+        "resources/partners/01.png",
+        "resources/partners/07.png",
+        "resources/partners/03.png",
+        "resources/partners/04.png",
+        "resources/partners/05.png",
+        "resources/partners/06.png",
+        "resources/partners/02.png",
+    ]
+    logo_tags = [
+        f'<img src="data:image/png;base64,{img_to_base64(path)}">' for path in logos
+    ]
+
+    # Display logos in a responsive container
     logocol2.markdown(
-        """
+        f"""
         <style>
-        .logo-container {
+        .logo-container {{
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-        }
-        .logo-container img {
+        }}
+        .logo-container img {{
             max-height: 60px;
             max-width: 100px;
             height: auto;
             width: auto;
-        }
-        @media (max-width: 768px) {
-            .logo-container {
+        }}
+        @media (max-width: 768px) {{
+            .logo-container {{
                 justify-content: center;
-            }
-        }
+            }}
+        }}
         </style>
 
         <div class="logo-container">
-            <img src="resources/partners/01.png">
-            <img src="resources/partners/07.png">
-            <img src="resources/partners/03.png">
-            <img src="resources/partners/04.png">
-            <img src="resources/partners/05.png">
-            <img src="resources/partners/06.png">
-            <img src="resources/partners/02.png">
+            {"".join(logo_tags)}
         </div>
         """,
         unsafe_allow_html=True
