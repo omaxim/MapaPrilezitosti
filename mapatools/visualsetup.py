@@ -175,7 +175,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             gap: 10px;
         }}
         .logo-container img {{
-            max-height: 60px;
+            max-height: 100px;
             max-width: 100px;
             height: auto;
             width: auto;
