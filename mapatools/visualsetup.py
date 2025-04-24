@@ -72,7 +72,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 left: -20vw;
                 overflow-x: hidden;
                 width: 120vw;
-                height: 50vh;  /* Adjust height as needed */
+                height: 35vh;  /* Adjust height as needed */
                 background-image: url("data:image/jpg;base64,{header_image}");
                 background-size: cover;
                 background-position: center;
@@ -88,7 +88,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 bottom: 0;
                 width: 100%;
                 height: 90%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 1) 100%);
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
                 z-index: 1;
             }}
             
