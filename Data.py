@@ -111,19 +111,19 @@ if 'filtrovat_dle_skupin' not in st.session_state:
 
 with col2:
     # Fixed label button, with a key
-    if st.button("Přepnout režim", use_container_width=True, key="toggle_filter_button"):
+    if st.button("Přepnout zobrazení", use_container_width=True, key="toggle_filter_button"):
         st.session_state.filtrovat_dle_skupin = not st.session_state.filtrovat_dle_skupin
 
 # **MOVE THE SESSION STATE FILTER MODE CHECK UP HERE** so that "color" is defined before filtering.
 if st.session_state.filtrovat_dle_skupin:
-    col2.markdown("**Aktuální režim:** 🧩 Jednotlivé skupiny")
+    col2.markdown("**Aktuální zobrazení:** 🧩 Jednotlivé skupiny")
     color = 'Kategorie'
     # Use the current year's dataframe for group options.
     cur_df = df_2022 if year == "2022" else df_2023
     skupiny = cur_df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina', skupiny, default=skupiny[5])
 else:
-    col2.markdown("**Aktuální režim:** ✅ Všechny zelené produkty")
+    col2.markdown("**Aktuální zobrazení:** ✅ Všechny zelené produkty")
     color = 'Skupina'
 
 # Define the filtering function
