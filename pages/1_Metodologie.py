@@ -43,13 +43,13 @@ Výběr vychází z:
 
 Zahrnujeme i komponenty důležité pro zelenou transformaci.
 """)
-col2.divider()
 
 col2.markdown("""
 ### Využívání termínu „zelená“ vs. „clean-tech“
 Termíny **zelené výrobky**, **clean-tech** a **čisté technologie** používáme rovnocenně.  
 Zahrnujeme široké spektrum změn – od energetiky přes průmyslové technologie až po hospodaření s vodou, půdou a surovinami.
 """)
+col2.divider()
 
 # --- Cleantech Taxonomy Tree Placeholder ---
 col2.markdown("### Třídění zelených výrobků")
@@ -103,6 +103,8 @@ digraph G {
     "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂";
 }
 """)
+col2.divider()
+
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
