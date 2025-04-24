@@ -66,8 +66,9 @@ digraph G {
         shape=box,
         style=filled,
         fillcolor=white,
-        fontname="Helvetica",
+        fontname="Montserrat, sans-serif",
         fontcolor=black,
+        fontsize=12,
         fixedsize=true,
         width=4,
         height=0.5,
@@ -79,7 +80,7 @@ digraph G {
     edge [arrowhead=none];
 
     // Top-level categories (not connected)
-    "Snížení celkové emisní náročnosti"[fontweight=bold];
+    "Snížení celkové emisní náročnosti";
     "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
     "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
     "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
