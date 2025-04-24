@@ -125,7 +125,7 @@ Výpočet růstu vývozu za 2022–23 v USD (neočištěno o inflaci).
 **Podíl a pořadí na světovém trhu**  
 V procentech a absolutní hodnotě vývozu ČR ve srovnání se světem.
 """)
-
+col2.divider()
 # --- Detailed Data Methodology Section ---
 col2.markdown("## Datová metodologie")
 
