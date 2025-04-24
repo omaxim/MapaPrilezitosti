@@ -48,7 +48,7 @@ def load_data(datayear):
     USD_to_czk = USDtoCZKdefault(datayear)
     url = 'https://docs.google.com/spreadsheets/d/1mhv7sJC5wSqJRXdfyFaWtBuEpX6ENj2c/gviz/tq?tqx=out:csv'
     taxonomy = pd.read_csv(url)
-    CZE = pd.read_csv('CZE_' + datayear + '.csv')
+    CZE = pd.read_csv('BACI_analysis/outputs/CZE_' + datayear + '.csv')
     GreenProducts = taxonomy.merge(CZE, how='left', left_on='HS_ID', right_on='prod')
     # Calculate export forecasts
     GreenProducts['CountryExport2030'] = GreenProducts['ExportValue'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** 8
