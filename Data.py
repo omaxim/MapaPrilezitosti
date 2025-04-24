@@ -211,8 +211,8 @@ st.divider()
 hover_info = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
 hover_data = get_hover_data(year, year_placeholder, hover_info, x_axis, y_axis, markersize)
 
-bottom_text = "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
-
+#bottom_text = "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
+bottom_text = "Každá bublina reprezentuje jeden český vývozní produkt. Čím více je výrobek vpravo, tím je pro nás v Česku snazší ho vyrobit, protože je velmi příbuzný tomu, co zde tradičně vyrábíme a vyvážíme. A čím je výrobek víc nahoře, tím je světově unikátnější, tedy jen málo zemí takovou věc umí vyrobit a vyvézt."
 if st.session_state.filtrovat_dle_skupin is False:
     if HS_select == []:
         chart_js = chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,
