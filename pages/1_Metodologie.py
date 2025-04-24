@@ -23,6 +23,7 @@ Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahu
 
 col2.link_button("Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37")
 
+col2.divider()
 # --- Product Classification ---
 col2.markdown("""
 ### Klasifikace výrobků
@@ -42,6 +43,7 @@ Výběr vychází z:
 
 Zahrnujeme i komponenty důležité pro zelenou transformaci.
 """)
+col2.divider()
 
 col2.markdown("""
 ### Využívání termínu „zelená“ vs. „clean-tech“
