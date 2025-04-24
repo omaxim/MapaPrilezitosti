@@ -130,3 +130,18 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                     }
             </style>
             """, unsafe_allow_html=True)
+    
+    st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
+    logocol1, logocol2 = st.columns([2, 3])
+    logocol1.image('resources/logo_text.svg', use_container_width=True)
+    logocol2.text("")
+    logocol2.text("")
+    p1, p2, p3, p4, p5, p6, p7 = logocol2.columns(7)
+    p1.image('resources/partners/01.png', use_container_width=True)
+    p2.image('resources/partners/07.png', use_container_width=True)
+    p3.image('resources/partners/03.png', use_container_width=True)
+    p4.image('resources/partners/04.png', use_container_width=True)
+    p5.image('resources/partners/05.png', use_container_width=True)
+    p6.image('resources/partners/06.png', use_container_width=True)
+    p7.image('resources/partners/02.png', use_container_width=True)
+
