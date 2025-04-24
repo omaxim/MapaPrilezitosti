@@ -9,14 +9,14 @@ from visualsetup import load_visual_identity
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
-    page_icon="logo_notext.svg",
+    page_icon="resources/logo_notext.svg",
     layout="wide"
 )
 # Loading custom CSS and identity assets
-load_visual_identity("header.jpg")
-st.logo('logo_notext.svg', size='large', icon_image='logo_notext.svg')
+load_visual_identity("resources/header.jpg")
+st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
 logocol1, logocol2 = st.columns([2, 3])
-logocol1.image('logo_text.svg', use_container_width=True)
+logocol1.image('resources/logo_text.svg', use_container_width=True)
 logocol2.text("")
 logocol2.text("")
 p1, p2, p3, p4, p5, p6, p7 = logocol2.columns(7)
