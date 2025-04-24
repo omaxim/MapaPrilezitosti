@@ -78,7 +78,7 @@ digraph G {
         fontstyle=bold,
         fixedsize=true,
         width=4,
-        height=0.5,
+        height=0.3,
         margin=0.2,
         labelloc=c,
         justify=center
