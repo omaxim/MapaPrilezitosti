@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 from chartjsbubble import chartjs_plot
 from highchartpolararea import chart_highcharts_variable_pie
@@ -12,6 +13,7 @@ st.set_page_config(
     page_icon="resources/logo_notext.svg",
     layout="wide"
 )
+st.title( os.getcwd())
 # Loading custom CSS and identity assets
 load_visual_identity("resources/header.jpg")
 st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
