@@ -79,12 +79,12 @@ digraph G {
     edge [arrowhead=none];
 
     // Top-level categories (not connected)
-    "Snížení celkové emisní náročnosti";
+    "<B>Snížení celkové emisní náročnosti</B>";
     "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
     "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
     "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
     "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
-    "**Materiály a komponenty**\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
+    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
 
     // Children for emissions strategy
     "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
