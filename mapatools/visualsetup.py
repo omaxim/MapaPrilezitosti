@@ -189,8 +189,8 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
     # a calculated height (2.5x) for the text logo.
 
     # Define the target height for partner logos
-    partner_logo_max_height = 60 # pixels
-    text_logo_height = partner_logo_max_height * 2.5 # pixels
+    partner_logo_max_height = 50 # pixels
+    text_logo_height = partner_logo_max_height * 2 # pixels
 
     html_content = f"""
     <style>
