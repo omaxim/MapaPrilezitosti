@@ -132,7 +132,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             """, unsafe_allow_html=True)
     
     st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
-    logocol1, logocol2 = st.columns([2, 3])
+    logocol1, logocol2 = st.columns([2, 5])
     logocol1.image('resources/logo_text.svg', use_container_width=True)
     logocol2.text("")
     logocol2.text("")
