@@ -82,27 +82,28 @@ col2.code("""
 ├─ Materiály a komponenty  
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
+
 st.latex(r"""
 \begin{array}{l}
-\textbf{Snížení celkové emisní náročnosti} \\
-\quad \text{Snížení emisí výroby (ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)} \\
-\quad \text{Snížení emisí dopravy (rozvoj vlaků; elektromobilita, vodík, infrastruktura)} \\
-\quad \text{Snížení emisí budov (izolace; elektrifikace vytápění)} \\
-\quad \text{Snížení emisí energie (nízkoemisní elektřina a paliva – vítr, FVE, \dots)} \\
-\quad \text{Ukládání energie} \\
-\quad \text{Posílení sítí (elektrické a distribuční sítě, elektrifikace)} \\
-\quad \text{Zadržování uhlíku v krajině (půda a lesnictví)} \\
-\quad \text{Zachytávání a ukládání CO_2} \\
-\textbf{Snížení materiálové náročnosti} \\
-\quad \text{(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)} \\
-\textbf{Ochrana životního prostředí} \\
-\quad \text{(distribuce vody, snížení znečištění, ochrana biodiverzity)} \\
-\textbf{Příprava na nepříznivé klima} \\
-\quad \text{(živelné pohromy, sucho, nové zdroje bílkovin)} \\
-\textbf{Měřící a diagnostické přístroje} \\
-\quad \text{(termostaty, senzory, spektrometry, chemická analýza)} \\
-\textbf{Materiály a komponenty} \\
-\quad \text{(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)} \\
+\textbf{Snížení\ celkové\ emisní\ náročnosti} \\
+\quad \text{Snížení\ emisí\ výroby\ (ocel,\ cement,\ efektivita,\ elektrifikace\ průmyslu\ i\ zemědělství)} \\
+\quad \text{Snížení\ emisí\ dopravy\ (rozvoj\ vlaků;\ elektromobilita,\ vodík,\ infrastruktura)} \\
+\quad \text{Snížení\ emisí\ budov\ (izolace;\ elektrifikace\ vytápění)} \\
+\quad \text{Snížení\ emisí\ energie\ (nízkoemisní\ elektřina\ a\ paliva\ --\ vítr,\ FVE,\ \dots)} \\
+\quad \text{Ukládání\ energie} \\
+\quad \text{Posílení\ sítí\ (elektrické\ a\ distribuční\ sítě,\ elektrifikace)} \\
+\quad \text{Zadržování\ uhlíku\ v\ krajině\ (půda\ a\ lesnictví)} \\
+\quad \text{Zachytávání\ a\ ukládání\ CO_2} \\
+\textbf{Snížení\ materiálové\ náročnosti} \\
+\quad \text{(redesign\ produktů\ a\ balení,\ sběr,\ třídění,\ přepoužití,\ recyklace)} \\
+\textbf{Ochrana\ životního\ prostředí} \\
+\quad \text{(distribuce\ vody,\ snížení\ znečištění,\ ochrana\ biodiverzity)} \\
+\textbf{Příprava\ na\ nepříznivé\ klima} \\
+\quad \text{(živelné\ pohromy,\ sucho,\ nové\ zdroje\ bílkovin)} \\
+\textbf{Měřící\ a\ diagnostické\ přístroje} \\
+\quad \text{(termostaty,\ senzory,\ spektrometry,\ chemická\ analýza)} \\
+\textbf{Materiály\ a\ komponenty} \\
+\quad \text{(vzácné\ kovy,\ alternativy\ chemických\ látek,\ alternativní\ pohony\ a\ stroje)} \\
 \end{array}
 """)
 # --- Key Indicators ---
