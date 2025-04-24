@@ -89,7 +89,7 @@ digraph G {
     bgcolor=transparent;
     splines=ortho;
 
-    node [shape=box, style=filled, fillcolor=#12b9de, fontname="Helvetica"];
+    node [shape=box, style=filled, fillcolor="#12b9de", fontname="Helvetica"];
     edge [arrowhead=none];
 
     // Main categories (not connected)
