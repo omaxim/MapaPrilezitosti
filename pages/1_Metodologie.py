@@ -82,7 +82,24 @@ col2.text_area("""
 ├─ Materiály a komponenty  
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
-
+col2.latex(r"""
+\begin{aligned}
+&\text{\underline{Snížení celkové emisní náročnosti}} \\
+&\quad \text{Snížení emisí výroby} \quad \text{\small (ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)} \\
+&\quad \text{Snížení emisí dopravy} \quad \text{\small (rozvoj vlaků; elektromobilita, vodík, infrastruktura)} \\
+&\quad \text{Snížení emisí budov} \quad \text{\small (izolace; elektrifikace vytápění)} \\
+&\quad \text{Snížení emisí energie} \quad \text{\small (nízkoemisní elektřina a paliva – vítr, FVE, \dots)} \\
+&\quad \text{Ukládání energie} \\
+&\quad \text{Posílení sítí} \quad \text{\small (elektrické a distribuční sítě, elektrifikace)} \\
+&\quad \text{Zadržování uhlíku v krajině} \quad \text{\small (půda a lesnictví)} \\
+&\quad \text{Zachytávání a ukládání CO_2} \\
+&\text{\underline{Snížení materiálové náročnosti}} \quad \text{\small (redesign produktů a balení, sběr, třídění, přepoužití, recyklace)} \\
+&\text{\underline{Ochrana životního prostředí}} \quad \text{\small (distribuce vody, snížení znečištění, ochrana biodiverzity)} \\
+&\text{\underline{Příprava na nepříznivé klima}} \quad \text{\small (živelné pohromy, sucho, nové zdroje bílkovin)} \\
+&\text{\underline{Měřící a diagnostické přístroje}} \quad \text{\small (termostaty, senzory, spektrometry, chemická analýza)} \\
+&\text{\underline{Materiály a komponenty}} \quad \text{\small (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)}
+\end{aligned}
+""")
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
