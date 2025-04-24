@@ -209,7 +209,6 @@ HS_select = topsubcol2.multiselect("Filtrovat jednotlivé produkty", filtered_df
 st.divider()
 
 hover_info = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
-col2.divider()
 hover_data = get_hover_data(year, year_placeholder, hover_info, x_axis, y_axis, markersize)
 
 bottom_text = "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
