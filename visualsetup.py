@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-def load_visual_identity(header_image_path, background_image_path = 'background.svg'):
+def load_visual_identity(header_image_path, background_image_path = 'resources/background.svg'):
     # Load the image and encode it in Base64 format
     with open(header_image_path, "rb") as image_file:
         header_image = base64.b64encode(image_file.read()).decode("utf-8")
