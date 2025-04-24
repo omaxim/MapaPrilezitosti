@@ -211,7 +211,7 @@ st.divider()
 hover_info = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
 hover_data = get_hover_data(year, year_placeholder, hover_info, x_axis, y_axis, markersize)
 
-bottom_text = "Analýza je založená na obchodních datech UN COMTRADE, která jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
+bottom_text = "Analýza je založená na obchodních datech UN COMTRADE.<br> Tato data jsou vyčištěna organizací CEPII a publikována každý rok jako dataset BACI"
 
 if st.session_state.filtrovat_dle_skupin is False:
     if HS_select == []:
