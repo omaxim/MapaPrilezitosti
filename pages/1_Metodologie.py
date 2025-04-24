@@ -82,6 +82,7 @@ col2.code("""
 ├─ Materiály a komponenty  
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
+
 col2.graphviz_chart("""
 digraph G {
     rankdir=LR;
@@ -91,104 +92,36 @@ digraph G {
     node [
         shape=box,
         style=filled,
-        fillcolor=white,
+        fillcolor="#12b9de",
         fontname="Helvetica",
-        fontcolor=black,
+        fontcolor=white,
         fixedsize=true,
-        width=4,
+        width=2,
         height=1,
         margin=0.2,
         labelloc=t,
-        justify=left,
-        color=black // Black border
+        justify=left
     ];
 
     edge [arrowhead=none];
 
     // Top-level categories (not connected)
-    "Snížení celkové emisní náročnosti" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení celkové emisní náročnosti</b></td></tr>
-        </table>
-    >];
-    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení materiálové náročnosti</b></td></tr>
-            <tr><td align="left">(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)</td></tr>
-        </table>
-    >];
-    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Ochrana životního prostředí</b></td></tr>
-            <tr><td align="left">(distribuce vody, snížení znečištění, ochrana biodiverzity)</td></tr>
-        </table>
-    >];
-    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Příprava na nepříznivé klima</b></td></tr>
-            <tr><td align="left">(živelné pohromy, sucho, nové zdroje bílkovin)</td></tr>
-        </table>
-    >];
-    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Měřící a diagnostické přístroje</b></td></tr>
-            <tr><td align="left">(termostaty, senzory, spektrometry, chemická analýza)</td></tr>
-        </table>
-    >];
-    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Materiály a komponenty</b></td></tr>
-            <tr><td align="left">(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)</td></tr>
-        </table>
-    >];
+    "Snížení celkové emisní náročnosti";
+    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
+    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
+    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
+    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
+    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
 
     // Children for emissions strategy
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení emisí výroby</b></td></tr>
-            <tr><td align="left">(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení emisí dopravy</b></td></tr>
-            <tr><td align="left">(rozvoj vlaků; elektromobilita, vodík, infrastruktura)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení emisí budov</b></td></tr>
-            <tr><td align="left">(izolace; elektrifikace vytápění)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Snížení emisí energie</b></td></tr>
-            <tr><td align="left">(nízkoemisní elektřina a paliva – vítr, FVE, …)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Ukládání energie" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Ukládání energie</b></td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Posílení sítí</b></td></tr>
-            <tr><td align="left">(elektrické a distribuční sítě, elektrifikace)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Zadržování uhlíku v krajině</b></td></tr>
-            <tr><td align="left">(půda a lesnictví)</td></tr>
-        </table>
-    >];
-    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂" [label=<
-        <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
-            <tr><td align="left"><b>Zachytávání a ukládání CO₂</b></td></tr>
-        </table>
-    >];
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)";
+    "Snížení celkové emisní náročnosti" -> "Ukládání energie";
+    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)";
+    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)";
+    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂";
 }
 """)
 # --- Key Indicators ---
