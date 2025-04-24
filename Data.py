@@ -237,10 +237,6 @@ html_bytes = chart_js
 with col1:
     components.html(chart_js, height=800)
 
-st.text(cz_export_22)
-st.text(cz_export_23)
-st.text(cz_green_export_22)
-st.text(cz_green_export_23)
 # Example: render the polar area chart in a Streamlit component
 polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_22,cz_green_export_23,
                               group_field="Skupina",
