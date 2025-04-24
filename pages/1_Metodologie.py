@@ -151,7 +151,7 @@ col2.link_button("Přečíst kritický článek", "https://pmc.ncbi.nlm.nih.gov/
 # --- Relatedness Formula ---
 col2.markdown("### Výpočet příbuznosti produktů")
 
-latexcol1,latexcol2 = col2.columns(2)
+latexcol1,latexcol2 = col2.columns([1,5])
 
 latexcol1.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
