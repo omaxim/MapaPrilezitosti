@@ -97,7 +97,7 @@ digraph G {
         fontcolor=black,
         fixedsize=true,
         width=4,
-        height=0.3,
+        height=0.5,
         margin=0.2,
         labelloc=t,
         justify=left
