@@ -161,7 +161,10 @@ latexcol2.markdown("""
 - **$$M_{cp'}$$**: 1 pokud má produkt $$p'$$ v zemi $$c$$ RCA > 1, jinak 0.  
 - **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty.  
 
+""", unsafe_allow_html=True)
+col2.markdown("""
 Výpočet je **normalizovaný** a ukazuje příbuznost produktu $$p$$ k aktivním produktům v zemi $$c$$.
+
 """, unsafe_allow_html=True)
 
 col2.link_button("Metodika OEC", "https://oec.world/en/resources/methods")
