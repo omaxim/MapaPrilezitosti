@@ -1,11 +1,13 @@
 import streamlit as st
 from visualsetup import load_visual_identity
+import os
 # Page config
 st.set_page_config(
     page_title="Mapa Příležitostí",
     page_icon="resources/favicon.ico",
     layout="wide"
 )
+st.title( os.getcwd())
 
 # Load custom branding
 load_visual_identity("header.jpg")
