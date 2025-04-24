@@ -83,37 +83,32 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
-
 col2.graphviz_chart("""
 digraph G {
+    rankdir=LR; // Left to right layout
     bgcolor=transparent;
+    splines=ortho; // Right-angle connectors
+
     node [shape=box, style="rounded,filled", fillcolor=white, fontname="Helvetica"];
     edge [arrowhead=none];
 
-    "Snížení celkové emisní náročnosti" -> {
-        "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"
-        "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"
-        "Snížení emisí budov\\n(izolace; elektrifikace vytápění)"
-        "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)"
-        "Ukládání energie"
-        "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)"
-        "Zadržování uhlíku v krajině\\n(půda a lesnictví)"
-        "Zachytávání a ukládání CO₂"
-    }
+    ROOT -> "Snížení celkové emisní náročnosti"
+    ROOT -> "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"
+    ROOT -> "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"
+    ROOT -> "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)"
+    ROOT -> "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)"
+    ROOT -> "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"
 
-    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"
-    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"
-    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)"
-    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)"
-    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)"
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)"
+    "Snížení celkové emisní náročnosti" -> "Ukládání energie"
+    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)"
+    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)"
+    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂"
 
-    "ROOT" [label="", shape=none, width=0, height=0]
-    "ROOT" -> "Snížení celkové emisní náročnosti"
-    "ROOT" -> "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"
-    "ROOT" -> "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"
-    "ROOT" -> "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)"
-    "ROOT" -> "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)"
-    "ROOT" -> "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"
+    ROOT [label="", shape=point, width=0]
 }
 """)
 # --- Key Indicators ---
