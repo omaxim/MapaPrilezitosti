@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
 
-from mapatools.chartjsbubble import chartjs_plot
-from mapatools.highchartpolararea import chart_highcharts_variable_pie
-from mapatools.variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
+from MapaPrilezitosti.mapatools.chartjsbubble import chartjs_plot
+from MapaPrilezitosti.mapatools.highchartpolararea import chart_highcharts_variable_pie
+from MapaPrilezitosti.mapatools.variable_names import get_color_discrete_map, get_plot_and_hover_display_names, get_hover_data
 import streamlit.components.v1 as components
-from mapatools.visualsetup import load_visual_identity
+from MapaPrilezitosti.mapatools.visualsetup import load_visual_identity
 
 st.set_page_config(
     page_title="Mapa Příležitostí",
