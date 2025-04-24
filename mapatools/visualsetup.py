@@ -248,7 +248,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             }}
 
             .text-logo-container img {{
-                height: auto; /* Allow height to adjust */
+                height: 200px; /* Allow height to adjust */
                 max-width: 90%; /* Prevent overflowing on small screens */
             }}
 
