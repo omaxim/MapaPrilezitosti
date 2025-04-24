@@ -92,7 +92,7 @@ digraph G {
     node [
         shape=box,
         style=filled,
-        fillcolor="#12b9de",
+        fillcolor=white,
         fontname="Helvetica",
         fontcolor=white,
         fixedsize=true,
