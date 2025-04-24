@@ -259,7 +259,6 @@ polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df
 
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
-mcol1, mcol2, mcol3, = st.columns(3)
 if HS_select == []:
     pie1,pie2 = st.columns(2)
     with pie1:
@@ -267,6 +266,7 @@ if HS_select == []:
     with pie2:
         st.components.v1.html(polar_js_kategorie, height=690)
     st.divider()
+    mcol1, mcol2, mcol3, = st.columns(3)
     selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022")
     selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
@@ -275,6 +275,7 @@ if HS_select == []:
 
 
 else:
+    mcol1, mcol2, mcol3, = st.columns(3)
     lookup_year = filtered_df['HS_Lookup'].isin(HS_select)
     lookup_22 = filtered_df_2022['HS_Lookup'].isin(HS_select)
     lookup_23 = filtered_df_2023['HS_Lookup'].isin(HS_select)
