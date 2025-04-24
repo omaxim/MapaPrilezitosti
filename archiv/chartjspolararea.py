@@ -1,6 +1,6 @@
 import json
 import itertools
-from variable_names import get_color_discrete_map
+from MapaPrilezitosti.mapatools.variable_names import get_color_discrete_map
 
 def chart_chartjs_variable_pie(filtered_df_2022, filtered_df_2023, total_export_22, total_export_23,
                                 green_total_22, green_total_23, group_field,

@@ -1,5 +1,5 @@
 import streamlit as st
-from visualsetup import load_visual_identity
+from MapaPrilezitosti.mapatools.visualsetup import load_visual_identity
 import os
 # Page config
 st.set_page_config(
