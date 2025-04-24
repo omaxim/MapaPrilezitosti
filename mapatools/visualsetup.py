@@ -197,7 +197,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         /* Main container using flexbox */
         .logo-header-container {{
             display: flex;
-            align-items: center; /* Vertically center items */
+            align-items: left; /* Vertically center items */
             gap: 200px; /* Space between text logo and partner logos */
             margin-bottom: 20px; /* Add some space below the logo section */
             flex-wrap: wrap; /* Allow wrapping if needed */
