@@ -136,12 +136,47 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
     logocol1.image('resources/logo_text.svg', use_container_width=True)
     logocol2.text("")
     logocol2.text("")
-    p1, p2, p3, p4, p5, p6, p7 = logocol2.columns(7)
-    p1.image('resources/partners/01.png',width=200)
-    p2.image('resources/partners/07.png',width=200)
-    p3.image('resources/partners/03.png',width=200)
-    p4.image('resources/partners/04.png',width=200)
-    p5.image('resources/partners/05.png',width=200)
-    p6.image('resources/partners/06.png',width=200)
-    p7.image('resources/partners/02.png',width=200)
+    #p1, p2, p3, p4, p5, p6, p7 = logocol2.columns(7)
+    #p1.image('resources/partners/01.png',width=200)
+    #p2.image('resources/partners/07.png',width=200)
+    #p3.image('resources/partners/03.png',width=200)
+    #p4.image('resources/partners/04.png',width=200)
+    #p5.image('resources/partners/05.png',width=200)
+    #p6.image('resources/partners/06.png',width=200)
+    #p7.image('resources/partners/02.png',width=200)
 
+    logocol2.markdown(
+        """
+        <style>
+        .logo-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .logo-container img {
+            max-height: 60px;
+            max-width: 100px;
+            height: auto;
+            width: auto;
+        }
+        @media (max-width: 768px) {
+            .logo-container {
+                justify-content: center;
+            }
+        }
+        </style>
+
+        <div class="logo-container">
+            <img src="resources/partners/01.png">
+            <img src="resources/partners/07.png">
+            <img src="resources/partners/03.png">
+            <img src="resources/partners/04.png">
+            <img src="resources/partners/05.png">
+            <img src="resources/partners/06.png">
+            <img src="resources/partners/02.png">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
