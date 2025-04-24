@@ -198,7 +198,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         .logo-header-container {{
             display: flex;
             align-items: center; /* Vertically center items */
-            gap: 20px; /* Space between text logo and partner logos */
+            gap: 50px; /* Space between text logo and partner logos */
             margin-bottom: 20px; /* Add some space below the logo section */
             flex-wrap: wrap; /* Allow wrapping if needed */
         }}
@@ -213,7 +213,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             height: {text_logo_height}px; /* Set height based on calculation */
             width: auto; /* Maintain aspect ratio */
             /* Optional: Limit max width on larger screens if it gets too wide */
-            /* max-width: 40%; */
+            /* max-width: 60%; */
         }}
 
         /* Container for partner logos (reusing/modifying your original styles) */
