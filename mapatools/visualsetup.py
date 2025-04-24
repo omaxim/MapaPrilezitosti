@@ -243,7 +243,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             .text-logo-container {{
                  width: 100%; /* Allow text logo container to take full width */
                  text-align: center; /* Center the image horizontally */
-                 margin-bottom: -10px; /* Add space below text logo when stacked */
+                 margin-bottom: 10px; /* Add space below text logo when stacked */
             }}
 
             .text-logo-container img {{
@@ -257,7 +257,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             }}
 
             .partner-logos-container img {{
-                 max-height: {partner_logo_max_height * 0.8}px; /* Slightly smaller on mobile */
+                 max-height: {partner_logo_max_height * 0.5}px; /* Slightly smaller on mobile */
             }}
         }}
 
