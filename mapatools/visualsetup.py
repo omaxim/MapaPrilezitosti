@@ -234,33 +234,6 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             /* max-width: {partner_logo_max_height}px; /* Optional: Set max width as well */
         }}
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {{
-            .logo-header-container {{
-                flex-direction: row; /* Stack items vertically on small screens */
-                align-items: center; /* Center items when stacked */
-            }}
-
-            .text-logo-container {{
-                 width: 100%; /* Allow text logo container to take full width */
-                 text-align: center; /* Center the image horizontally */
-                 margin-bottom: 10px; /* Add space below text logo when stacked */
-            }}
-
-            .text-logo-container img {{
-                height: 200px; /* Allow height to adjust */
-            }}
-
-            .partner-logos-container {{
-                justify-content: center; /* Center partner logos when stacked */
-                width: 100%; /* Allow partner logos container to take full width */
-            }}
-
-            .partner-logos-container img {{
-                 max-height: {partner_logo_max_height * 0.5}px; /* Slightly smaller on mobile */
-            }}
-        }}
-
     </style>
 
     <div class="logo-header-container">
