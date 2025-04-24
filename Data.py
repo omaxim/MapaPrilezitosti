@@ -260,7 +260,7 @@ with col1:
 polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
                               group_field="Skupina",
                               chart_title="Růst exportu podle skupiny",
-                              bottom_text="Šířka koláče vyjadřuje % celkového českého exportu v roce 2023\nVzdálenost dílu koláče od středu v vyjadřuje růst mezi lety 2022 a 2023",
+                              bottom_text="Šířka koláče vyjadřuje % celkového českého exportu v roce 2023<br>Vzdálenost dílu koláče od středu v vyjadřuje růst mezi lety 2022 a 2023",
                               usd_to_czk_22=USDtoCZKdefault("2022"),
                               usd_to_czk_23=USDtoCZKdefault("2023"))
 polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_23,cz_green_export_23,
