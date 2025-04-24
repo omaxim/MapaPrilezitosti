@@ -7,8 +7,6 @@ st.set_page_config(
     page_icon="resources/favicon.ico",
     layout="wide"
 )
-st.title( os.getcwd())
-
 # Load custom branding
 load_visual_identity("resources/header.jpg")
 st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
