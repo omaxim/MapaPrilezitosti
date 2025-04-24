@@ -70,6 +70,7 @@ digraph G {
         fontcolor="#666666",
         style=bold,
         fontsize=14,
+        fontstyle=bold,
         fixedsize=true,
         width=4,
         height=0.5,
