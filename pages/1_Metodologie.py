@@ -111,10 +111,13 @@ Produkty „příbuzné“ těm, které ČR už exportuje. Metrika je založená
 Vyjadřuje unikátnost výrobku – čím vyšší, tím méně zemí jej umí vyvézt. Počítáno pomocí modulu **py-ecomplexity** (Harvard CID).
 
 **Exportní objem**  
-Měříme v USD. Pro CZK převod:  
-- 2022: kurz 23,36  
-- 2023: kurz 22,21
+Měříme v USD. Pro CZK převod:  """)
 
+kurzcol1, kurzcol2 = col2.columns(2)
+kurzcol1.metric("2022",23,36)
+kurzcol2.metric("2023",22,21)
+col2.markdown(
+"""
 **Růst**  
 Výpočet růstu vývozu za 2022–23 v USD (neočištěno o inflaci).
 
