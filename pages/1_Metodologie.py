@@ -94,7 +94,7 @@ digraph G {
         style=filled,
         fillcolor=white,
         fontname="Helvetica",
-        fontcolor=white,
+        fontcolor=black,
         fixedsize=true,
         width=2,
         height=1,
