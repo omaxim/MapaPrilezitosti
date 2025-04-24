@@ -86,23 +86,37 @@ digraph G {
 
     edge [arrowhead=none];
 
-    // Top-level categories (not connected)
-    "Snížení celkové emisní náročnosti";
-    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
-    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
-    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
-    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
-    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
+    // Top-level categories
+    "Snížení emisní náročnosti";
+    "Snižení materiálové náročnosti";
+    "Ochrana životního prostředí";
+    "Adaptace na složitější klima";
+    "Měřící a diagnostické přístroje";
+    "Materiály a komponenty";
 
-    // Children for emissions strategy
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)";
-    "Snížení celkové emisní náročnosti" -> "Ukládání energie";
-    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)";
-    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)";
-    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂";
+    // Subcategories
+    "Snížení emisní náročnosti" -> "Výroba, nízkoemisní výrobní postupy";
+    "Snížení emisní náročnosti" -> "Doprava";
+    "Snížení emisní náročnosti" -> "Budovy";
+    "Snížení emisní náročnosti" -> "Výroba nízkoemisní elektřiny a paliv";
+    "Snížení emisní náročnosti" -> "Ukládání energie";
+    "Snížení emisní náročnosti" -> "Energetické sítě";
+    "Snížení emisní náročnosti" -> "Zadržování uhlíku";
+    "Snížení emisní náročnosti" -> "Zachytávání a ukládání uhlíku";
+
+    "Snižení materiálové náročnosti" -> "Materiálová efektivita, šetrné materiály";
+    "Snižení materiálové náročnosti" -> "Cirkularita";
+    "Snižení materiálové náročnosti" -> "Zacházení s odpady";
+
+    "Ochrana životního prostředí" -> "Voda a ovzduší";
+    "Ochrana životního prostředí" -> "Půda";
+    "Ochrana životního prostředí" -> "Biodiverzita";
+
+    "Adaptace na složitější klima" -> "Adaptace na dlouhodobé změny a živelné pohromy";
+
+    "Měřící a diagnostické přístroje" -> "Měřící a diagnostické přístroje; Monitoring";
+
+    "Materiály a komponenty" -> "Výroba surovin, komponent a zařízení pro nízkouhlíkové technologie";
 }
 """)
 col2.divider()
