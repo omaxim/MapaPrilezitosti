@@ -113,7 +113,7 @@ Vyjadřuje unikátnost výrobku – čím vyšší, tím méně zemí jej umí v
 **Exportní objem**  
 Měříme v USD. Pro CZK převod:  """)
 
-kurzcol1, kurzcol2,kuzcol3 = col2.columns(3)
+kurzcol1, kurzcol2,kurzcol3 = col2.columns(3)
 kurzcol1.metric("Kurz v roce 2022",23.36)
 kurzcol3.metric("Kurz v roce 2023",22.21)
 col2.markdown(
