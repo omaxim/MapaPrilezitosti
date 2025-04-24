@@ -224,7 +224,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             align-items: center;
             justify-content: right; /* Align logos to the start */
             gap: 10px; /* Space between partner logos */
-            flex-grow: 0.4; /* Allow this container to take up available space */
+            flex-grow: 1; /* Allow this container to take up available space */
             /* min-width: 0; /* Allow shrinking below content size */
         }}
 
@@ -237,7 +237,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         /* Responsive adjustments */
         @media (max-width: 768px) {{
             .logo-header-container {{
-                flex-direction: column; /* Stack items vertically on small screens */
+                flex-direction: row; /* Stack items vertically on small screens */
                 align-items: center; /* Center items when stacked */
             }}
 
