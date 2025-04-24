@@ -18,7 +18,7 @@ col2.subheader("")
 # Main Section Title
 # --- Introduction and Data Sources ---
 col2.markdown("""
-### Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
+## Odkud jsme čerpali data ohledně velikosti vývozu v jednotlivých výrobkových kategoriích
 Celá datová základna je založena na harmonizovaném datasetu světového obchodu **BACI**, který je každoročně publikován organizací **CEPII**. CEPII harmonizuje data z databáze **UN Comtrade** tak, aby každý export z jedné země odpovídal importu v zemi druhé a nedocházelo k dvojímu započítání obchodních toků.  
 Databáze **UN Comtrade** je oficiální globální databáze OSN, která obsahuje detailní statistiky o mezinárodním obchodu se zbožím mezi státy.
 """)
@@ -28,7 +28,7 @@ col2.link_button("Více o BACI datasetu", "https://www.cepii.fr/CEPII/en/bdd_mod
 col2.divider()
 # --- Product Classification ---
 col2.markdown("""
-### Klasifikace výrobků
+## Klasifikace výrobků
 Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**.  
 Analýza je prováděna na úrovni **šesticiferného členění výrobků (HS6)**, kde je celkem 5 605 typů výrobků.  
 Data jsou k dispozici za rok **2022 a 2023**.
@@ -54,7 +54,7 @@ Zahrnujeme široké spektrum změn – od energetiky přes průmyslové technolo
 col2.divider()
 
 # --- Cleantech Taxonomy Tree Placeholder ---
-col2.markdown("### Třídění zelených výrobků")
+col2.markdown("## Třídění zelených výrobků")
 col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
