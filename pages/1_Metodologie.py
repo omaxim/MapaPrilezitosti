@@ -83,7 +83,7 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
-st.latex(r"""
+col2.latex(r"""
 \begin{array}{l}
 \textbf{Snížení\ celkové\ emisní\ náročnosti} \\
 \quad \text{Snížení\ emisí\ výroby\ (ocel,\ cement,\ efektivita,\ elektrifikace\ průmyslu\ i\ zemědělství)} \\
