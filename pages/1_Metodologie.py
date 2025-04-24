@@ -30,7 +30,7 @@ col2.divider()
 col2.markdown("""
 ## Klasifikace výrobků
 Pro účely Mapy příležitostí využíváme klasifikaci **Harmonized System (HS)** ve verzi **HS 2022**.  
-Analýza je prováděna na úrovni **šesticiferného členění výrobků (HS6)**, kde je celkem 5 605 typů výrobků.  
+Analýza je prováděna na úrovni **šesticiferného členění výrobků (HS6)**, kde je celkem 5 606 typů výrobků.  
 Data jsou k dispozici za rok **2022 a 2023**.
 """)
 
