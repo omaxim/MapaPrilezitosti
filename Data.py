@@ -257,26 +257,21 @@ polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df
                               usd_to_czk_23=USDtoCZKdefault("2023"),
                               relative_to_green_only=True)
 
-pie1,pie2 = st.columns(2)
-with pie1:
-    st.components.v1.html(polar_js_skupiny, height=690)
-with pie2:
-    st.components.v1.html(polar_js_kategorie, height=690)
 
-st.divider()
 # Comparison columns - now you can compare metrics between 2022 and 2023
 mcol1, mcol2, mcol3, = st.columns(3)
 if HS_select == []:
+    pie1,pie2 = st.columns(2)
+    with pie1:
+        st.components.v1.html(polar_js_skupiny, height=690)
+    with pie2:
+        st.components.v1.html(polar_js_kategorie, height=690)
+    st.divider()
     selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022")
     selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
-    total_CZ_growth = cz_export_23/USDtoCZKdefault("2023") - cz_export_22/USDtoCZKdefault("2022")
-    total_CZ_growth_perc = total_CZ_growth/(cz_export_22/USDtoCZKdefault("2022"))
-    mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e9),'miliard CZK' )
-    mcol2.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(total_CZ_growth/1e9), "miliard USD")
-    mcol3.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(total_CZ_growth_perc), "%")
 
 
 else:
@@ -289,3 +284,8 @@ else:
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
 
+total_CZ_growth = cz_export_23/USDtoCZKdefault("2023") - cz_export_22/USDtoCZKdefault("2022")
+total_CZ_growth_perc = total_CZ_growth/(cz_export_22/USDtoCZKdefault("2022"))
+mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e9),'miliard CZK' )
+mcol2.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(total_CZ_growth/1e9), "miliard USD")
+mcol3.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(total_CZ_growth_perc), "%")
