@@ -68,7 +68,7 @@ digraph G {
         fillcolor=white,
         fontname="Montserrat, sans-serif",
         fontcolor=black,
-        fontsize=12,
+        fontsize=14,
         fixedsize=true,
         width=4,
         height=0.5,
