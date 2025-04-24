@@ -155,7 +155,7 @@ col2.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
-col2.markdown(r"""
+col2.latex(r"""
 <div style="text-align: left;">
 \[
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
