@@ -13,6 +13,8 @@ st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_no
 
 col1,col2,col3 = st.columns([1,5,1])
 col2.subheader("")
+col2.subheader("")
+
 # Main Section Title
 # --- Introduction and Data Sources ---
 col2.markdown("""
