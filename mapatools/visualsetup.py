@@ -205,6 +205,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
 
         /* Style for the text logo */
         .text-logo-container {{
+        justify-content: left;
             /* Flex properties to control text logo size and shrinking */
             /* Don't set a fixed width here, let height control it */
         }}
