@@ -197,7 +197,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         /* Main container using flexbox */
         .logo-header-container {{
             display: flex;
-            align-items: left; /* Vertically center items */
+            align-items: center; /* Vertically center items */
             gap: 200px; /* Space between text logo and partner logos */
             margin-bottom: 20px; /* Add some space below the logo section */
             flex-wrap: wrap; /* Allow wrapping if needed */
@@ -221,7 +221,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: flex-start; /* Align logos to the start */
+            justify-content: right; /* Align logos to the start */
             gap: 10px; /* Space between partner logos */
             flex-grow: 1; /* Allow this container to take up available space */
             /* min-width: 0; /* Allow shrinking below content size */
