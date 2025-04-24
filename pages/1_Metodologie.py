@@ -85,14 +85,27 @@ col2.code("""
 
 col2.graphviz_chart("""
 digraph G {
-    rankdir=LR; // Left to right
+    rankdir=LR;
     bgcolor=transparent;
     splines=ortho;
 
-    node [shape=box, style=filled, fillcolor="#12b9de", fontname="Helvetica"];
+    node [
+        shape=box,
+        style=filled,
+        fillcolor="#12b9de",
+        fontname="Helvetica",
+        fontcolor=white,
+        fixedsize=true,
+        width=4,
+        height=1,
+        margin=0.2,
+        labelloc=t,
+        justify=left
+    ];
+
     edge [arrowhead=none];
 
-    // Main categories (not connected)
+    // Top-level categories (not connected)
     "Snížení celkové emisní náročnosti";
     "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
     "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
@@ -100,7 +113,7 @@ digraph G {
     "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
     "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
 
-    // Children for "Snížení celkové emisní náročnosti"
+    // Children for emissions strategy
     "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
     "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)";
     "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)";
