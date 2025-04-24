@@ -11,7 +11,7 @@ st.title( os.getcwd())
 
 # Load custom branding
 load_visual_identity("resources/header.jpg")
-st.logo('logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
+st.logo('resources/logo_notext.svg', size='large', icon_image='resources/logo_notext.svg')
 logocol1, logocol2 = st.columns([2, 3])
 logocol1.image('logo_text.svg', use_container_width=True)
 logocol2.text("")
