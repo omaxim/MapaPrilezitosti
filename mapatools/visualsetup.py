@@ -197,6 +197,8 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         /* Main container using flexbox */
         .logo-header-container {{
             display: flex;
+            justify-content: left; 
+
             align-items: center; /* Vertically center items */
             gap: 200px; /* Space between text logo and partner logos */
             margin-bottom: 20px; /* Add some space below the logo section */
@@ -212,7 +214,6 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         .text-logo-container img {{
             height: {text_logo_height}px; /* Set height based on calculation */
             width: auto; /* Maintain aspect ratio */
-            justify-content: left; 
             /* Optional: Limit max width on larger screens if it gets too wide */
             /* max-width: 80%; */
         }}
