@@ -207,10 +207,6 @@ filtered_df = filtered_df.dropna(subset=[x_axis, y_axis, color, markersize])
 
 HS_select = topsubcol2.multiselect("Filtrovat jednotlivé produkty", filtered_df['HS_Lookup'])
 st.divider()
-# Button to clear the cached data
-if st.sidebar.button('Obnovit Data'):
-    load_data.clear()  # Clear the cache for load_data
-    st.sidebar.write("Sušenky vyčištěny!")
 
 hover_info = col2.multiselect("Co se zobrazí při najetí myší:", hover_display_data, default=['Název'])
 col2.divider()
