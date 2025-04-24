@@ -136,21 +136,29 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
     logocol1.image('resources/logo_text.svg', use_container_width=True)
     logocol2.text("")
     logocol2.text("")
-    #p1, p2, p3, p4, p5, p6, p7 = logocol2.columns(7)
-    #p1.image('resources/partners/01.png',width=200)
-    #p2.image('resources/partners/07.png',width=200)
-    #p3.image('resources/partners/03.png',width=200)
-    #p4.image('resources/partners/04.png',width=200)
-    #p5.image('resources/partners/05.png',width=200)
-    #p6.image('resources/partners/06.png',width=200)
-    #p7.image('resources/partners/02.png',width=200)
 
-    def img_to_base64(path):
-        with open(path, "rb") as f:
-            return base64.b64encode(f.read()).decode()
-
-    # Convert all logos to base64
-    logos = [
+    # Function to convert any image file to base64
+    def img_to_base64(path, file_type):
+        """Converts an image file to a base64 string."""
+        try:
+            with open(path, "rb") as f:
+                encoded_string = base64.b64encode(f.read()).decode()
+            # Determine the correct MIME type based on the file type
+            mime_type = f"image/{file_type.lower()}"
+            if file_type.lower() == 'svg':
+                 mime_type = "image/svg+xml" # Specific MIME type for SVG
+            return f"data:{mime_type};base64,{encoded_string}"
+        except FileNotFoundError:
+            st.error(f"Error: Image file not found at {path}")
+            return ""
+        except Exception as e:
+            st.error(f"Error encoding image {path}: {e}")
+            return ""
+    
+    
+    # --- Logo Configuration ---
+    text_logo_path = 'resources/logo_text.svg'
+    partner_logos_paths = [
         "resources/partners/01.png",
         "resources/partners/07.png",
         "resources/partners/03.png",
@@ -159,37 +167,111 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         "resources/partners/06.png",
         "resources/partners/02.png",
     ]
-    logo_tags = [
-        f'<img src="data:image/png;base64,{img_to_base64(path)}">' for path in logos
-    ]
-
-    # Display logos in a responsive container
-    logocol2.markdown(
-        f"""
-        <style>
-        .logo-container {{
+    
+    # --- Base64 Encoding ---
+    text_logo_base64 = img_to_base64(text_logo_path, 'svg')
+    
+    partner_logo_tags = []
+    for path in partner_logos_paths:
+        # Determine file type (assuming .png)
+        file_type = path.split('.')[-1]
+        base64_data = img_to_base64(path, file_type)
+        if base64_data: # Only add if encoding was successful
+            partner_logo_tags.append(f'<img src="{base64_data}">')
+    
+    # Join partner logo tags into a single string
+    partner_logos_html = "".join(partner_logo_tags)
+    
+    # --- HTML and CSS for layout ---
+    # We'll use flexbox for the main layout (text logo vs partners)
+    # and flexbox again for the partner logos row.
+    # We'll set a max-height for the partner logos and
+    # a calculated height (2.5x) for the text logo.
+    
+    # Define the target height for partner logos
+    partner_logo_max_height = 100 # pixels
+    text_logo_height = partner_logo_max_height * 2.5 # pixels
+    
+    html_content = f"""
+    <style>
+        /* Main container using flexbox */
+        .logo-header-container {{
+            display: flex;
+            align-items: center; /* Vertically center items */
+            gap: 20px; /* Space between text logo and partner logos */
+            margin-bottom: 20px; /* Add some space below the logo section */
+            flex-wrap: wrap; /* Allow wrapping if needed */
+        }}
+    
+        /* Style for the text logo */
+        .text-logo-container {{
+            /* Flex properties to control text logo size and shrinking */
+            /* Don't set a fixed width here, let height control it */
+        }}
+    
+        .text-logo-container img {{
+            height: {text_logo_height}px; /* Set height based on calculation */
+            width: auto; /* Maintain aspect ratio */
+            /* Optional: Limit max width on larger screens if it gets too wide */
+            /* max-width: 40%; */
+        }}
+    
+        /* Container for partner logos (reusing/modifying your original styles) */
+        .partner-logos-container {{
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            justify-content: space-between;
-            gap: 10px;
+            justify-content: flex-start; /* Align logos to the start */
+            gap: 10px; /* Space between partner logos */
+            flex-grow: 1; /* Allow this container to take up available space */
+            /* min-width: 0; /* Allow shrinking below content size */
         }}
-        .logo-container img {{
-            max-height: 100px;
-            max-width: 100px;
-            height: auto;
-            width: auto;
+    
+        .partner-logos-container img {{
+            max-height: {partner_logo_max_height}px; /* Set max height for partner logos */
+            width: auto; /* Maintain aspect ratio */
+            /* max-width: {partner_logo_max_height}px; /* Optional: Set max width as well */
         }}
+    
+        /* Responsive adjustments */
         @media (max-width: 768px) {{
-            .logo-container {{
-                justify-content: center;
+            .logo-header-container {{
+                flex-direction: column; /* Stack items vertically on small screens */
+                align-items: center; /* Center items when stacked */
+            }}
+    
+            .text-logo-container {{
+                 width: 100%; /* Allow text logo container to take full width */
+                 text-align: center; /* Center the image horizontally */
+                 margin-bottom: 10px; /* Add space below text logo when stacked */
+            }}
+    
+            .text-logo-container img {{
+                height: auto; /* Allow height to adjust */
+                max-width: 90%; /* Prevent overflowing on small screens */
+            }}
+    
+            .partner-logos-container {{
+                justify-content: center; /* Center partner logos when stacked */
+                width: 100%; /* Allow partner logos container to take full width */
+            }}
+    
+            .partner-logos-container img {{
+                 max-height: {partner_logo_max_height * 0.8}px; /* Slightly smaller on mobile */
             }}
         }}
-        </style>
-
-        <div class="logo-container">
-            {"".join(logo_tags)}
+    
+    </style>
+    
+    <div class="logo-header-container">
+        <div class="text-logo-container">
+            {'<img src="' + text_logo_base64 + '">' if text_logo_base64 else ''}
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+        <div class="partner-logos-container">
+            {partner_logos_html}
+        </div>
+    </div>
+    """
+    
+    # --- Display using Streamlit Markdown ---
+    st.markdown(html_content, unsafe_allow_html=True)
