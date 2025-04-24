@@ -92,36 +92,37 @@ digraph G {
     node [
         shape=box,
         style=filled,
-        fillcolor="#12b9de",
+        fillcolor=white,
         fontname="Helvetica",
-        fontcolor=white,
+        fontcolor=black,
         fixedsize=true,
-        width=2,
+        width=4,
         height=1,
         margin=0.2,
         labelloc=t,
-        justify=left
+        justify=left,
+        color=black // Black border
     ];
 
     edge [arrowhead=none];
 
     // Top-level categories (not connected)
-    "Snížení celkové emisní náročnosti";
-    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
-    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
-    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
-    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
-    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
+    "Snížení celkové emisní náročnosti" [label=< <b>Snížení celkové emisní náročnosti</b> >];
+    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)" [label=< <b>Snížení materiálové náročnosti</b>\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace) >];
+    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)" [label=< <b>Ochrana životního prostředí</b>\\n(distribuce vody, snížení znečištění, ochrana biodiverzity) >];
+    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)" [label=< <b>Příprava na nepříznivé klima</b>\\n(živelné pohromy, sucho, nové zdroje bílkovin) >];
+    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)" [label=< <b>Měřící a diagnostické přístroje</b>\\n(termostaty, senzory, spektrometry, chemická analýza) >];
+    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)" [label=< <b>Materiály a komponenty</b>\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje) >];
 
     // Children for emissions strategy
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)";
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)";
-    "Snížení celkové emisní náročnosti" -> "Ukládání energie";
-    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)";
-    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)";
-    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)" [label=< <b>Snížení emisí výroby</b>\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství) >];
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)" [label=< <b>Snížení emisí dopravy</b>\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura) >];
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)" [label=< <b>Snížení emisí budov</b>\\n(izolace; elektrifikace vytápění) >];
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)" [label=< <b>Snížení emisí energie</b>\\n(nízkoemisní elektřina a paliva – vítr, FVE, …) >];
+    "Snížení celkové emisní náročnosti" -> "Ukládání energie" [label=< <b>Ukládání energie</b> >];
+    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)" [label=< <b>Posílení sítí</b>\\n(elektrické a distribuční sítě, elektrifikace) >];
+    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)" [label=< <b>Zadržování uhlíku v krajině</b>\\n(půda a lesnictví) >];
+    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂" [label=< <b>Zachytávání a ukládání CO₂</b> >];
 }
 """)
 # --- Key Indicators ---
