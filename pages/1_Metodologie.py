@@ -114,8 +114,8 @@ Vyjadřuje unikátnost výrobku – čím vyšší, tím méně zemí jej umí v
 Měříme v USD. Pro CZK převod:  """)
 
 kurzcol1, kurzcol2 = col2.columns(2)
-kurzcol1.metric("2022",23,36)
-kurzcol2.metric("2023",22,21)
+kurzcol1.metric("2022",23.36)
+kurzcol2.metric("2023",22.21)
 col2.markdown(
 """
 **Růst**  
