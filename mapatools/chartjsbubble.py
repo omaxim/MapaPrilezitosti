@@ -3,7 +3,7 @@ import json
 import itertools
 import numpy as np
 # Assuming get_hover_formatting and get_color_discrete_map are defined elsewhere
-from MapaPrilezitosti.mapatools.variable_names import get_hover_formatting, get_color_discrete_map
+from mapatools.variable_names import get_hover_formatting, get_color_discrete_map
 
 def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,chart_title="Chart Title",bottom_text="Bottom Text"):
     # Min-Max scaling for markersize (normalize to range like 2-32)
