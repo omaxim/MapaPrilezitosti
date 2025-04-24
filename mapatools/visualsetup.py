@@ -172,7 +172,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 20px;
         }}
         .logo-container img {{
             max-height: 60px;
