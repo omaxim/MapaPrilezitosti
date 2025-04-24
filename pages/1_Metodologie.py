@@ -99,7 +99,7 @@ digraph G {
         width=4,
         height=0.5,
         margin=0.2,
-        labelloc=t,
+        labelloc=c,
         justify=center
     ];
 
