@@ -98,13 +98,11 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
         },
         "title": {
             "text": chart_title,
-            "floating": "true",
             "style": {"fontSize": "25px"}
         },
         "subtitle": {
             "text": bottom_text,
             "align": "center",
-            "floating": "true",
             "style": {"fontSize": "14px"}
         },
         "tooltip": {
