@@ -157,7 +157,7 @@ latexcol1.latex(r"""
 \text{příbuznost}_{cp} = \frac{\sum_{p'} M_{cp'} \, \phi_{pp'}}{\sum_{p'} \phi_{pp'}}
 """)
 
-col2.markdown("""
+latexcol2.markdown("""
 - **$$M_{cp'}$$**: 1 pokud má produkt $$p'$$ v zemi $$c$$ RCA > 1, jinak 0.  
 - **$$\phi_{pp'}$$**: Míra příbuznosti mezi produkty.  
 
