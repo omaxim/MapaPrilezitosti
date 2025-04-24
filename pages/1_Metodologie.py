@@ -108,7 +108,7 @@ digraph G {
 col2.divider()
 
 # --- Key Indicators ---
-col2.markdown("### Na jaké ukazatele se zaměřujeme")
+col2.markdown("## Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
 **Příbuznost**  
 Produkty „příbuzné“ těm, které ČR už exportuje. Metrika je založená na metodologii OEC.
