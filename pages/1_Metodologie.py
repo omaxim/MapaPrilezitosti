@@ -85,30 +85,30 @@ col2.code("""
 
 col2.graphviz_chart("""
 digraph G {
-    rankdir=LR; // Left to right layout
+    rankdir=LR; // Left to right
     bgcolor=transparent;
-    splines=ortho; // Right-angle connectors
+    splines=ortho;
 
-    node [shape=box, style="rounded,filled", fillcolor=white, fontname="Helvetica"];
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
     edge [arrowhead=none];
 
-    ROOT -> "Snížení celkové emisní náročnosti"
-    ROOT -> "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)"
-    ROOT -> "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)"
-    ROOT -> "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)"
-    ROOT -> "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)"
-    ROOT -> "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)"
+    // Main categories (not connected)
+    "Snížení celkové emisní náročnosti";
+    "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
+    "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
+    "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
+    "Měřící a diagnostické přístroje\\n(termostaty, senzory, spektrometry, chemická analýza)";
+    "Materiály a komponenty\\n(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)";
 
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)"
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)"
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)"
-    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)"
-    "Snížení celkové emisní náročnosti" -> "Ukládání energie"
-    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)"
-    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)"
-    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂"
-
-    ROOT [label="", shape=point, width=0]
+    // Children for "Snížení celkové emisní náročnosti"
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí výroby\\n(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí dopravy\\n(rozvoj vlaků; elektromobilita, vodík, infrastruktura)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí budov\\n(izolace; elektrifikace vytápění)";
+    "Snížení celkové emisní náročnosti" -> "Snížení emisí energie\\n(nízkoemisní elektřina a paliva – vítr, FVE, …)";
+    "Snížení celkové emisní náročnosti" -> "Ukládání energie";
+    "Snížení celkové emisní náročnosti" -> "Posílení sítí\\n(elektrické a distribuční sítě, elektrifikace)";
+    "Snížení celkové emisní náročnosti" -> "Zadržování uhlíku v krajině\\n(půda a lesnictví)";
+    "Snížení celkové emisní náročnosti" -> "Zachytávání a ukládání CO₂";
 }
 """)
 # --- Key Indicators ---
