@@ -79,7 +79,7 @@ digraph G {
     edge [arrowhead=none];
 
     // Top-level categories (not connected)
-    "<b>Snížení celkové emisní náročnosti</b>";
+    "Snížení celkové emisní náročnosti"[fontweight=bold];
     "Snížení materiálové náročnosti\\n(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)";
     "Ochrana životního prostředí\\n(distribuce vody, snížení znečištění, ochrana biodiverzity)";
     "Příprava na nepříznivé klima\\n(živelné pohromy, sucho, nové zdroje bílkovin)";
