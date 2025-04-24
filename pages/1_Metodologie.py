@@ -69,7 +69,7 @@ col2.markdown("""
 Zelené výrobky třídíme do **6 Taxonomických grup**, **17 Skupin**, **40 Podskupin** a **58 Kategorií**.  
 Některé kategorie zatím nejsou obsazené, ale počítáme s jejich doplněním.
 """)
-col2.code("""
+col2.text("""
 ├─ Snížení celkové emisní náročnosti  
 │   ├─ Snížení emisí výroby  
 │   │     (ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)  
@@ -97,119 +97,6 @@ col2.code("""
       (vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)  
 """)
 
-# Define the HTML structure (using nested lists)
-html_tree = """
-<style>
-/* Basic CSS for tree structure */
-.tree-view ul {
-    padding-left: 20px; /* Indentation for sub-levels */
-    list-style-type: none; /* Remove default bullets */
-    position: relative; /* Needed for positioning lines */
-}
-
-.tree-view li {
-    position: relative; /* Needed for positioning lines */
-    padding-left: 25px; /* Space for lines and text */
-    line-height: 1.5; /* Adjust spacing */
-    margin-left: -15px; /* Align text nicely after lines */
-}
-
-/* Tree lines using pseudo-elements */
-.tree-view li::before, .tree-view li::after {
-    content: '';
-    position: absolute;
-    left: 0;
-}
-
-/* Vertical line segment for all items */
-.tree-view li::before {
-    border-left: 1px solid #aaa; /* Line color and style */
-    height: 100%;
-    top: 0;
-    width: 1px;
-}
-
-/* Horizontal line segment for all items */
-.tree-view li::after {
-    border-top: 1px solid #aaa; /* Line color and style */
-    height: 1px;
-    top: 0.75em; /* Position horizontal line vertically (half of line-height) */
-    width: 20px; /* Length of the horizontal line */
-}
-
-/* Remove vertical line from the top part of the first item in any list */
-.tree-view ul > li:first-child::before {
-    top: 0.75em; /* Start vertical line at the horizontal line */
-    height: calc(100% - 0.75em);
-}
-
-/* Remove lines for the very last item in the entire tree */
-.tree-view > ul > li:last-child::before {
-    height: 0.75em; /* Only draw vertical line up to the horizontal line */
-}
-
-/* Remove horizontal line for items without children (or style differently if needed) */
-/* This basic CSS adds lines to all; more complex CSS needed to hide for leaves */
-/* A simpler approach is to manually add a class to leaf nodes if needed */
-
-/* Adjust root level indentation if necessary */
-.tree-view > ul {
-    padding-left: 0;
-}
-.tree-view > ul > li {
-     margin-left: 0;
-}
-
-
-</style>
-
-<div class="tree-view">
-<ul>
-  <li>Snížení celkové emisní náročnosti
-    <ul>
-      <li>Snížení emisí výroby
-          <ul><li>(ocel, cement, efektivita, elektrifikace průmyslu i zemědělství)</li></ul>
-      </li>
-      <li>Snížení emisí dopravy
-          <ul><li>(rozvoj vlaků; elektromobilita, vodík, infrastruktura)</li></ul>
-      </li>
-      <li>Snížení emisí budov
-          <ul><li>(izolace; elektrifikace vytápění)</li></ul>
-      </li>
-      <li>Snížení emisí energie
-          <ul><li>(nízkoemisní elektřina a paliva – vítr, FVE, …)</li></ul>
-      </li>
-      <li>Ukládání energie</li>
-      <li>Posílení sítí
-          <ul><li>(elektrické a distribuční sítě, elektrifikace)</li></ul>
-      </li>
-      <li>Zadržování uhlíku v krajině
-          <ul><li>(půda a lesnictví)</li></ul>
-      </li>
-      <li>Zachytávání a ukládání CO₂</li>
-    </ul>
-  </li>
-  <li>Snížení materiálové náročnosti
-      <ul><li>(redesign produktů a balení, sběr, třídění, přepoužití, recyklace)</li></ul>
-  </li>
-  <li>Ochrana životního prostředí
-      <ul><li>(distribuce vody, snížení znečištění, ochrana biodiverzity)</li></ul>
-  </li>
-  <li>Příprava na nepříznivé klima
-      <ul><li>(živelné pohromy, sucho, nové zdroje bílkovin)</li></ul>
-  </li>
-  <li>Měřící a diagnostické přístroje
-      <ul><li>(termostaty, senzory, spektrometry, chemická analýza)</li></ul>
-  </li>
-  <li>Materiály a komponenty
-      <ul><li>(vzácné kovy, alternativy chemických látek, alternativní pohony a stroje)</li></ul>
-  </li>
-</ul>
-</div>
-"""
-
-# Use st.markdown to render the HTML with CSS
-st.markdown(html_tree, unsafe_allow_html=True)
 # --- Key Indicators ---
 col2.markdown("### Na jaké ukazatele se zaměřujeme")
 col2.markdown("""
