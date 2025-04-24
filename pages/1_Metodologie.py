@@ -96,7 +96,7 @@ digraph G {
         fontname="Helvetica",
         fontcolor=white,
         fixedsize=true,
-        width=4,
+        width=2,
         height=1,
         margin=0.2,
         labelloc=t,
