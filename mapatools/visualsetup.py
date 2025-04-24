@@ -87,8 +87,8 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 position: absolute;
                 bottom: 0;
                 width: 100%;
-                height: 90%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
+                height: 93%;  /* Match header-image height */
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 1) 100%);
                 z-index: 1;
             }}
             
@@ -172,11 +172,11 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 10px;
         }}
         .logo-container img {{
             max-height: 60px;
-            max-width: 150px;
+            max-width: 100px;
             height: auto;
             width: auto;
         }}
