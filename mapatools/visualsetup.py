@@ -86,7 +86,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             @media only screen and (max-width: 768px) {{
                 .header-image {{
                     left: -20vw;
-                    width: 200vw;
+                    width: 150vw;
                     height: 70vh;  /* Smaller height on phones */
                 }}
                 .header-gradient {{
