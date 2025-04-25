@@ -2,8 +2,7 @@ import pandas as pd
 import json
 import itertools
 import numpy as np
-# Assuming get_hover_formatting and get_color_discrete_map are defined elsewhere
-from mapatools.variable_names import get_hover_formatting, get_color_discrete_map
+from mapatools.variable_names import get_hover_formatting
 
 def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, year,chart_title="Chart Title",bottom_text="Bottom Text"):
     # Min-Max scaling for markersize (normalize to range like 2-32)
@@ -22,12 +21,6 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
 
         # Scale the size based on the log of the values
         filtered_df["scaled_size"] = ((np.sqrt(filtered_df[markersize] + 1) - log_min) / (log_max - log_min)) * 30 + 2
-
-    color_discrete_map = get_color_discrete_map() # Assume this returns a dict
-    fallback_colors = [
-        "#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"
-    ]
-    color_cycle = itertools.cycle(fallback_colors)
 
     # --- Assume get_hover_formatting returns dictionaries like before ---
     no_decimal, two_sigfig, percentage, texthover = get_hover_formatting(year)

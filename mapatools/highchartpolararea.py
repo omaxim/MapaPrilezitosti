@@ -1,6 +1,4 @@
 import json
-import itertools
-from mapatools.variable_names import get_color_discrete_map
 
 def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
                                   total_export_22, total_export_23,
@@ -70,9 +68,6 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
 
     # Add each filtered green category
     green_cats = sorted(set(filtered_df_2022[group_field]) | set(filtered_df_2023[group_field]))
-    color_map = get_color_discrete_map()
-    fallback_colors = ["#E63946", "#F4A261", "#2A9D8F", "#264653", "#8A5AAB", "#D67D3E", "#1D3557"]
-    fallback_cycle = itertools.cycle(fallback_colors)
 
     for cat in green_cats:
         export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum() / usd_to_czk_22
