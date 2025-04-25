@@ -158,7 +158,7 @@ def apply_filters(df, year_str, x_axis, y_axis, color, markersize):
 # Ensure session state filters exist
 if 'filters' not in st.session_state:
     st.session_state.filters = []
-st.text("Barva "+color)
+st.dataframe(df["Barva "+color])
 
 # Calculate filtered data for both years
 filtered_df_2022 = apply_filters(df_2022, "2022", x_axis, y_axis, color, markersize)
