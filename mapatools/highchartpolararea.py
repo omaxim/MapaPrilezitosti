@@ -75,21 +75,25 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
     fallback_cycle = itertools.cycle(fallback_colors)
 
     for cat in green_cats:
-        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum()/usd_to_czk_22
-        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'CZ Export 2023 CZK'].sum()/usd_to_czk_23
+        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'CZ Export 2022 CZK'].sum() / usd_to_czk_22
+        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'CZ Export 2023 CZK'].sum() / usd_to_czk_23
         growth = (export_23 - export_22) / export_22 if export_22 > 0 else 0
+
+        # Get color from either dataset (prefer 2023, fallback to 2022)
+        color_2023 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, "Barva " + group_field]
+        color_2022 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, "Barva " + group_field]
+        color = color_2023.iloc[0] if not color_2023.empty else (color_2022.iloc[0] if not color_2022.empty else "#000000")
 
         data_series.append({
             "name": cat,
             "y": export_23 / denominator,
             "z": growth,
-            "color": color_map.get(cat, next(fallback_cycle)),
+            "color": color,
             "export22": export_22 / 1e9,
             "export23": export_23 / 1e9,
             "growth_abs": (export_23 - export_22) / 1e9,
             "growth_frac": 100 * growth
         })
-
     # Highcharts config
     chart_config = {
         "chart": {
