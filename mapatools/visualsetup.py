@@ -85,7 +85,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             /* Mobile styling */
             @media only screen and (max-width: 768px) {{
                 .header-image {{
-                    left: -20vw;
+                    left: 0vw;
                     width: 150vw;
                     height: 70vh;  /* Smaller height on phones */
                 }}
