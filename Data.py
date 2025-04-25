@@ -103,7 +103,6 @@ else:
     df = df_2023
     cz_total_export = cz_export_23
     cz_total_green_export = cz_export_23
-st.dataframe(df)
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
@@ -158,7 +157,6 @@ def apply_filters(df, year_str, x_axis, y_axis, color, markersize):
 # Ensure session state filters exist
 if 'filters' not in st.session_state:
     st.session_state.filters = []
-st.dataframe(df["Barva "+color])
 
 # Calculate filtered data for both years
 filtered_df_2022 = apply_filters(df_2022, "2022", x_axis, y_axis, color, markersize)
