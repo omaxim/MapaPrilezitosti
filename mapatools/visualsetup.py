@@ -185,7 +185,12 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
             height: auto;
             width: auto;
         }}
-        
+        @media (max-width: 768px) {{
+            .logo-container {{
+                top: -10vh; 
+                justify-content: center;
+            }}
+        }}
         </style>
 
         <div class="logo-container">
