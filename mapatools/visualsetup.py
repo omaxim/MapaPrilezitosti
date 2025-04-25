@@ -81,13 +81,13 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 opacity: 0.8;
                 margin: 0 ;
             }}
-            
+
             /* Mobile styling */
             @media only screen and (max-width: 768px) {{
                 .header-image {{
-                    left: -10vw;
-                    width: 110vw;
-                    height: 25vh;  /* Smaller height on phones */
+                    left: -30vw;
+                    width: 112vw;
+                    height: 60vh;  /* Smaller height on phones */
                 }}
             }}
             /* Extend the gradient to blend into content smoothly */
