@@ -88,7 +88,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Skupina',
         'Podskupina',
         'Název',
-        'CZ Celkový Export 25-30 CZK',
         'Příbuznost CZ '+year_placeholder+'',
         'Výhoda CZ '+year_placeholder+'',
         'Koncentrace světového trhu '+year_placeholder+'',
@@ -102,9 +101,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'EU Světový Podíl '+year_placeholder+' %',
         'CZ Světový Podíl '+year_placeholder+' %',
         'CZ-EU Podíl '+year_placeholder+' %',
-        'CZ 2030 Export CZK',
-        'CZ Celkový Export 25-30 CZK',
-        'EU 2030 Export CZK',
         'Percentil příbuznosti CZ '+year_placeholder+'',
         'Percentil komplexity '+year_placeholder+'',
         'Žebříček příbuznosti CZ '+year_placeholder+'',
@@ -120,13 +116,8 @@ def get_hover_formatting(year):
         'CZ Export '+year+' CZK',
         'Světový export '+year+' CZK',
         'EU Export '+year+' CZK',
-        'CZ 2030 Export CZK',
-        'CZ Celkový Export 25-30 CZK',
-        'EU 2030 Export',
-        'EU Celkový Export 25-30 CZK',
         'Žebříček příbuznosti CZ '+year+'',
         'Žebříček komplexity '+year+'',
-        'ubiquity',
         'Percentil příbuznosti CZ '+year+'',
         'Percentil komplexity '+year+'',
         'Žebříček exportu CZ '+year+''
@@ -139,7 +130,6 @@ def get_hover_formatting(year):
         'Koncentrace světového trhu '+year+'',
         'Koncentrace evropského exportu '+year+'',
         'Komplexita výrobku '+year+'',
-        'CAGR 2022-2030 Předpověď',
     ]
     
     # Columns that should show as percentages
