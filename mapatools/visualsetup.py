@@ -163,7 +163,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         "resources/partners/05.png",
         "resources/partners/06.png",
         "resources/partners/02.png",
-        "resources/partners/leithresearch_logo.png".
+        "resources/partners/leithresearch_logo.png",
     ]
     logo_tags = [
         f'<img src="data:image/png;base64,{img_to_base64(path)}">' for path in logos
