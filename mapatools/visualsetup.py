@@ -87,7 +87,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 .header-image {{
                     left: -30vw;
                     width: 150vw;
-                    height: 70vh;  /* Smaller height on phones */
+                    height: 100vh;  /* Smaller height on phones */
                 }}
                 .header-gradient {{
                     height: 60%;  /* Match header-image height */
