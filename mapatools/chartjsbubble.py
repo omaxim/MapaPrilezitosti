@@ -41,7 +41,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
         elif key in two_sigfig:
             return "{:.2f}".format(value) # 2 decimal places
         elif key in percentage:
-            return "{:.1f}%".format(value * 100) # Convert to percentage
+            return "{:.1f}%".format(value) # Convert to percentage
         elif key in texthover:
             return str(value)
         else:
