@@ -90,7 +90,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                     height: 70vh;  /* Smaller height on phones */
                 }}
                 .header-gradient {{
-                    height: 150%;  /* Match header-image height */
+                    height: 100%;  /* Match header-image height */
                     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
 
                     }}
