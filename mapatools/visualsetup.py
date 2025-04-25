@@ -89,14 +89,19 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                     width: 112vw;
                     height: 70vh;  /* Smaller height on phones */
                 }}
+                .header-gradient {{
+                    height: 150%;  /* Match header-image height */
+                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
+
+                    }}
             }}
             /* Extend the gradient to blend into content smoothly */
             .header-gradient {{
                 position: absolute;
                 bottom: 0;
                 width: 100%;
-                height: 150%;  /* Match header-image height */
-                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
+                height: 100%;  /* Match header-image height */
+                background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 45%, rgba(255, 255, 255, 1) 100%);
                 z-index: 1;
             }}
             
