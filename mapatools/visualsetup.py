@@ -187,7 +187,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
         }}
         @media (max-width: 768px) {{
             .logo-container {{
-                top: -60vh; 
+                padding-top: -60vh; 
                 justify-content: center;
             }}
         }}
