@@ -50,7 +50,7 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
     grouped_data = {}
     for _, row in filtered_df.iterrows():
         color_category = row[color]
-        assigned_color = color_discrete_map.get(color_category, next(color_cycle))
+        assigned_color = row["Barva "+color]#color_discrete_map.get(color_category, next(color_cycle))
 
         # Create the basic data point structure
         data_point = {
