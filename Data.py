@@ -103,7 +103,7 @@ else:
     df = df_2023
     cz_total_export = cz_export_23
     cz_total_green_export = cz_export_23
-
+st.dataframe(df)
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
