@@ -91,7 +91,7 @@ def load_visual_identity(header_image_path, background_image_path = 'resources/b
                 }}
                 .header-gradient {{
                     height: 60%;  /* Match header-image height */
-                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, rgba(255, 255, 255, 1) 100%);
+                    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 35%, rgba(255, 255, 255, 1) 100%);
 
                     }}
             }}
