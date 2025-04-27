@@ -37,7 +37,8 @@ Data jsou k dispozici za rok **2022 a 2023**.
 # --- Green Products ---
 col2.markdown("""
 ### Jak jsme vybírali tzv. „zelené výrobky“
-Za „zelené“ či „clean-tech“ označujeme produkty klíčové pro přechod na čistou, nízkouhlíkovou ekonomiku.  
+Za „zelené“ či „clean-tech“ označujeme produkty klíčové pro přechod na čistou, nízkouhlíkovou ekonomiku.
+              A to včetně produktů, které jsou důležité v přechodové fázi transformace. Mezi „zelené“ či „clean-tech“ tak nezahrnujeme pouze výrobky, které samy přímo přispívají ke snižování emisí nebo mají nízkoemisní provoz. Označujeme tak i takové produkty a komponenty, do nichž bude v souvislosti se zelenou transformací nutné investovat, a u nichž se v souvislosti s tlakem na přechod na šetrné technologie a s adaptací na složitější klima očekává významný růst globální poptávky.
 Výběr vychází z:
 - rešerší globálních akademických studií,
 - materiálů veřejného sektoru,
