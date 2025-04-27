@@ -153,17 +153,18 @@ Vypočítaná jako Herfindahl–Hirschmanův index (HHI):
 """,
 unsafe_allow_html=True,
 )
-
-col2.latex(r"\text{HHI} = \sum_{i=1}^N s_i^2")
-
-col2.markdown(
+hhicol1,hhicol2 = col2.columns()
+hhicol1.latex(r"\text{HHI} = \sum_{i=1}^N s_i^2")
+hhicol2.markdown(
 """
  kde $s_i$ je tržní podíl země $i$ v procentech.
-
+ """,
+unsafe_allow_html=True,)
+col2.markdown(
+"""
 **Koncentrace evropského exportu**  
 Opět HHI index, ale tentokrát přepočítaný pouze s Evropským exportem.
-""",
-unsafe_allow_html=True,
+"""
 )
 col2.divider()
 # --- Detailed Data Methodology Section ---
