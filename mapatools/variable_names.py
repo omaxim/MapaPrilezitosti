@@ -9,7 +9,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Velikost světového trhu '+year_placeholder+' CZK',
         'Velikost světového trhu '+year_placeholder+' USD',
         'Podíl Česka na světovém trhu '+year_placeholder+' %',
-        'CZ-EU Podíl '+year_placeholder+' %',
         'Koncentrace světového trhu '+year_placeholder+'',
         'Koncentrace evropského exportu '+year_placeholder+'',
     ]
@@ -29,7 +28,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Velikost světového trhu '+year_placeholder+' CZK',
         'Velikost světového trhu '+year_placeholder+' USD',
         'Podíl Česka na světovém trhu '+year_placeholder+' %',
-        'CZ-EU Podíl '+year_placeholder+' %',
         'Percentil příbuznosti CZ '+year_placeholder+'',
         'Percentil komplexity '+year_placeholder+'',
         'Koncentrace světového trhu '+year_placeholder+'',
@@ -63,7 +61,6 @@ def get_hover_formatting(year):
     # Columns that should show as percentages
     percentage = [
         'Podíl Česka na světovém trhu '+year+' %',
-        'CZ-EU Podíl '+year+' %',
     ]
     
     texthover = [
