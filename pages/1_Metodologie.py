@@ -157,9 +157,8 @@ hhicol1,hhicol2 = col2.columns(2)
 hhicol1.latex(r"\text{HHI} = \sum_{i=1}^N s_i^2")
 hhicol2.markdown(
 """
-#### 
  - $s_i$ je tržní podíl země $i$ v procentech.
- - HHI = 1 znamená, že produkt vyváží pouze jedna země. HHI je vždy větší, než 0.
+ - HHI = 1 znamená, že produkt vyváží pouze jedna země. HHI je vždy větší než 0.
 """,
 unsafe_allow_html=True,)
 col2.markdown(
