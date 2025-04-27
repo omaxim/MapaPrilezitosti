@@ -35,12 +35,7 @@ def load_data(datayear):
     taxonomy = pd.read_csv("BACI_analysis/PlnaDatabaze3.0.csv")
     CZE = pd.read_csv('BACI_analysis/outputs/CZE_' + datayear + '.csv')
     GreenProducts = taxonomy.merge(CZE, how='left', left_on='HS_ID', right_on='prod')
-    # Calculate export forecasts
-    GreenProducts['CountryExport2030'] = GreenProducts['ExportValue'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** 8
-    GreenProducts['EUExport2030'] = GreenProducts['EUExport'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** 8
-    GreenProducts['CountryExport_25_30'] = sum(GreenProducts['ExportValue'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** i for i in range(3, 9))
-    GreenProducts['EUExport_25_30'] = sum(GreenProducts['EUExport'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** i for i in range(3, 9))
-    
+       
     df = GreenProducts.rename(columns={
         'ExportValue': 'Český export ' + datayear + ' CZK',
         'export_Rank': 'Pořadí Česka na světovém trhu ' + datayear,
@@ -64,7 +59,6 @@ def load_data(datayear):
         'EUExport2030': 'EU 2030 Export CZK',
         'CountryExport_25_30': 'CZ Celkový Export 25-30 CZK',
         'EUExport_25_30': 'EU Celkový Export 25-30 CZK',
-        'CAGR_2022_30_FORECAST': 'CAGR 2022-2030 Předpověď'
     })
     df = df[df.Included == "IN"]
     df['CZ-EU Podíl ' + datayear + ' %'] = 100 * df['CZ-EU Podíl ' + datayear + ' %']
