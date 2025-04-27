@@ -55,10 +55,6 @@ def load_data(datayear):
         'rca': 'RCA ' + datayear,
         'EUTopExporter': 'EU Největší Exportér ' + datayear,
         'CZ_Nazev': 'Název',
-        'CountryExport2030': 'CZ 2030 Export CZK',
-        'EUExport2030': 'EU 2030 Export CZK',
-        'CountryExport_25_30': 'CZ Celkový Export 25-30 CZK',
-        'EUExport_25_30': 'EU Celkový Export 25-30 CZK',
     })
     df = df[df.Included == "IN"]
     df['CZ-EU Podíl ' + datayear + ' %'] = 100 * df['CZ-EU Podíl ' + datayear + ' %']
@@ -69,10 +65,6 @@ def load_data(datayear):
     df['Velikost světového trhu ' + datayear + ' USD'] = df['Velikost světového trhu ' + datayear + ' CZK']
     df['Velikost světového trhu ' + datayear + ' CZK'] = USD_to_czk * df['Velikost světového trhu ' + datayear + ' CZK']
     df['EU Export ' + datayear + ' CZK'] = USD_to_czk * df['EU Export ' + datayear + ' CZK']
-    df['EU Celkový Export 25-30 CZK'] = USD_to_czk * df['EU Celkový Export 25-30 CZK']
-    df['CZ Celkový Export 25-30 CZK'] = USD_to_czk * df['CZ Celkový Export 25-30 CZK']
-    df['EU 2030 Export CZK'] = USD_to_czk * df['EU 2030 Export CZK']
-    df['CZ 2030 Export CZK'] = USD_to_czk * df['CZ 2030 Export CZK']
     df['Kód výrobku HS6'] = df['HS_ID'].astype(str)
     df['HS_Lookup'] = df['Kód výrobku HS6'] + " - " + df['Název']
     total_cz_export = USD_to_czk * CZE['ExportValue'].sum()
