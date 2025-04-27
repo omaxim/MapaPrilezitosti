@@ -158,7 +158,7 @@ col2.latex(r"\text{HHI} = \sum_{i=1}^N s_i^2")
 
 col2.markdown(
 """
-kde \(s_i\) je tržní podíl firmy (nebo země) \(i\) v procentech.
+> kde \( s_i \) je tržní podíl firmy (nebo země) \( i \) v procentech.
 
 **Koncentrace evropského exportu**  
 Opět HHI index, ale tentokrát přepočítaný pouze s Evropským exportem.
