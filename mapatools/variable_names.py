@@ -19,7 +19,6 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Podskupina',
         'Název',
         'Příbuznost CZ '+year_placeholder+'',
-        'RCA '+year_placeholder+'',
         'EU Největší Exportér '+year_placeholder+'',
         'Komplexita výrobku (unikátnost) '+year_placeholder+'',
         'Český export '+year_placeholder+' CZK',
@@ -32,6 +31,8 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Percentil komplexity '+year_placeholder+'',
         'Koncentrace světového trhu '+year_placeholder+'',
         'Koncentrace evropského exportu '+year_placeholder+'',
+        'RCA '+year_placeholder+'',
+
     ]
     return plot_display_names, hover_display_data
 
