@@ -31,7 +31,6 @@ def USDtoCZKdefault(year):
 @st.cache_data
 def load_data(datayear):
     USD_to_czk = USDtoCZKdefault(datayear)
-    #url = 'https://docs.google.com/spreadsheets/d/1mhv7sJC5wSqJRXdfyFaWtBuEpX6ENj2c/gviz/tq?tqx=out:csv'
     taxonomy = pd.read_csv("BACI_analysis/PlnaDatabaze3.0.csv")
     CZE = pd.read_csv('BACI_analysis/outputs/CZE_' + datayear + '.csv')
     GreenProducts = taxonomy.merge(CZE, how='left', left_on='HS_ID', right_on='prod')
@@ -46,7 +45,6 @@ def load_data(datayear):
         'relatedness_Rank': 'Žebříček příbuznosti' + datayear,
         'relatedness_Percentile': 'Percentil příbuznosti' + datayear,
         'WorldExport': 'Velikost světového trhu ' + datayear + ' CZK',
-        'EUExport': 'EU Export ' + datayear + ' CZK',
         'EUWorldMarketShare': 'EU Světový Podíl ' + datayear + ' %',
         'euhhi': 'Koncentrace evropského exportu ' + datayear,
         'hhi': 'Koncentrace světového trhu ' + datayear,
@@ -64,7 +62,6 @@ def load_data(datayear):
     df['Český export ' + datayear + ' CZK'] = USD_to_czk * df['Český export ' + datayear + ' CZK']
     df['Velikost světového trhu ' + datayear + ' USD'] = df['Velikost světového trhu ' + datayear + ' CZK']
     df['Velikost světového trhu ' + datayear + ' CZK'] = USD_to_czk * df['Velikost světového trhu ' + datayear + ' CZK']
-    df['EU Export ' + datayear + ' CZK'] = USD_to_czk * df['EU Export ' + datayear + ' CZK']
     df['Kód výrobku HS6'] = df['HS_ID'].astype(str)
     df['HS_Lookup'] = df['Kód výrobku HS6'] + " - " + df['Název']
     total_cz_export = USD_to_czk * CZE['ExportValue'].sum()
