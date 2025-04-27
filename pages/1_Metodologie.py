@@ -129,6 +129,8 @@ Produkty „příbuzné“ těm, které ČR už exportuje. Metrika je založená
 
 **Komplexita**  
 Vyjadřuje unikátnost výrobku – čím vyšší, tím méně zemí jej umí vyvézt. Počítáno pomocí modulu **py-ecomplexity** (Harvard CID).
+              
+U obou těchto ukazatelů jsme zároveň spočítali percentilové rozložení jednotlivých výrobků podle Komplexity a Příbuznosti mezi nulu a stovku a ukazujeme je tak na osách, kde jsou údaje za Příbuznost a Komplexitu normalizovány na osu 0-100.
 """)
 kurzcol1, kurzcol2,kurzcol3 = col2.columns(3)
 kurzcol1.markdown("""
