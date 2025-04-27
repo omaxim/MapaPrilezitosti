@@ -42,22 +42,22 @@ def load_data(datayear):
     GreenProducts['EUExport_25_30'] = sum(GreenProducts['EUExport'] * (1 + GreenProducts['CAGR_2022_30_FORECAST']) ** i for i in range(3, 9))
     
     df = GreenProducts.rename(columns={
-        'ExportValue': 'CZ Export ' + datayear + ' CZK',
-        'export_Rank': 'Žebříček exportu CZ ' + datayear,
-        'pci': 'Komplexita výrobku ' + datayear,
+        'ExportValue': 'Český export ' + datayear + ' CZK',
+        'export_Rank': 'Pořadí Česka na světovém trhu ' + datayear,
+        'pci': 'Komplexita výrobku (unikátnost) ' + datayear,
         'relatedness': 'Příbuznost CZ ' + datayear,
         'PCI_Rank': 'Žebříček komplexity ' + datayear,
         'PCI_Percentile': 'Percentil komplexity ' + datayear,
         'relatedness_Rank': 'Žebříček příbuznosti CZ ' + datayear,
         'relatedness_Percentile': 'Percentil příbuznosti CZ ' + datayear,
-        'WorldExport': 'Světový export ' + datayear + ' CZK',
+        'WorldExport': 'Velikost světového trhu ' + datayear + ' CZK',
         'EUExport': 'EU Export ' + datayear + ' CZK',
         'EUWorldMarketShare': 'EU Světový Podíl ' + datayear + ' %',
         'euhhi': 'Koncentrace evropského exportu ' + datayear,
         'hhi': 'Koncentrace světového trhu ' + datayear,
-        'CZE_WorldMarketShare': 'CZ Světový Podíl ' + datayear + ' %',
+        'CZE_WorldMarketShare': 'Podíl Česka na světovém trhu ' + datayear + ' %',
         'CZE_EUMarketShare': 'CZ-EU Podíl ' + datayear + ' %',
-        'rca': 'Výhoda CZ ' + datayear,
+        'rca': 'RCA ' + datayear,
         'EUTopExporter': 'EU Největší Exportér ' + datayear,
         'CZ_Nazev': 'Název',
         'CountryExport2030': 'CZ 2030 Export CZK',
@@ -69,18 +69,20 @@ def load_data(datayear):
     df = df[df.Included == "IN"]
     df['CZ-EU Podíl ' + datayear + ' %'] = 100 * df['CZ-EU Podíl ' + datayear + ' %']
     df['EU Světový Podíl ' + datayear + ' %'] = 100 * df['EU Světový Podíl ' + datayear + ' %']
-    df['CZ Světový Podíl ' + datayear + ' %'] = 100 * df['CZ Světový Podíl ' + datayear + ' %']
-    df['CZ Export ' + datayear + ' CZK'] = USD_to_czk * df['CZ Export ' + datayear + ' CZK']
-    df['Světový export ' + datayear + ' CZK'] = USD_to_czk * df['Světový export ' + datayear + ' CZK']
+    df['Podíl Česka na světovém trhu ' + datayear + ' %'] = 100 * df['Podíl Česka na světovém trhu ' + datayear + ' %']
+    df['Český export ' + datayear + ' USD'] = df['Český export ' + datayear + ' CZK']
+    df['Český export ' + datayear + ' CZK'] = USD_to_czk * df['Český export ' + datayear + ' CZK']
+    df['Velikost světového trhu ' + datayear + ' USD'] = df['Velikost světového trhu ' + datayear + ' CZK']
+    df['Velikost světového trhu ' + datayear + ' CZK'] = USD_to_czk * df['Velikost světového trhu ' + datayear + ' CZK']
     df['EU Export ' + datayear + ' CZK'] = USD_to_czk * df['EU Export ' + datayear + ' CZK']
     df['EU Celkový Export 25-30 CZK'] = USD_to_czk * df['EU Celkový Export 25-30 CZK']
     df['CZ Celkový Export 25-30 CZK'] = USD_to_czk * df['CZ Celkový Export 25-30 CZK']
     df['EU 2030 Export CZK'] = USD_to_czk * df['EU 2030 Export CZK']
     df['CZ 2030 Export CZK'] = USD_to_czk * df['CZ 2030 Export CZK']
-    df['HS_ID'] = df['HS_ID'].astype(str)
-    df['HS_Lookup'] = df['HS_ID'] + " - " + df['Název']
+    df['Kód výrobku HS6'] = df['HS_ID'].astype(str)
+    df['HS_Lookup'] = df['Kód výrobku HS6'] + " - " + df['Název']
     total_cz_export = USD_to_czk * CZE['ExportValue'].sum()
-    total_cz_green_export = df['CZ Export ' + datayear + ' CZK'].sum()
+    total_cz_green_export = df['Český export ' + datayear + ' CZK'].sum()
     return df, total_cz_export, total_cz_green_export
 
 # Define the default year_placeholder and get plotting lists
@@ -260,9 +262,9 @@ if HS_select == []:
         st.components.v1.html(polar_js_kategorie, height=690)
     st.divider()
     mcol1, mcol2, mcol3, = st.columns(3)
-    selected_CZ_growth = filtered_df_2023['CZ Export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022")
-    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
-    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['CZ Export '+year+' CZK'])/1e9),'miliard CZK' )
+    selected_CZ_growth = filtered_df_2023['Český export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022")
+    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['Český export '+year+' CZK'])/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
 
@@ -272,9 +274,9 @@ else:
     lookup_year = filtered_df['HS_Lookup'].isin(HS_select)
     lookup_22 = filtered_df_2022['HS_Lookup'].isin(HS_select)
     lookup_23 = filtered_df_2023['HS_Lookup'].isin(HS_select)
-    selected_CZ_growth = filtered_df_2023[lookup_23]['CZ Export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022[lookup_22]['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022")
-    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022[lookup_22]['CZ Export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
-    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['CZ Export '+year+' CZK'])/1e6),'milionů CZK' )
+    selected_CZ_growth = filtered_df_2023[lookup_23]['Český export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022[lookup_22]['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022")
+    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022[lookup_22]['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['Český export '+year+' CZK'])/1e6),'milionů CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
     mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
 
