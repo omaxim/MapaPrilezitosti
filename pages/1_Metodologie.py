@@ -200,7 +200,7 @@ latexcol2.markdown("""
 col2.markdown("""
 Výpočet je **normalizovaný** a ukazuje příbuznost produktu $$p$$ k aktivním produktům v zemi $$c$$.
 
-Hlavním úskalím metodik ekonomické komplexity je, že absolutní hodnoty příbuznosti a komplexity nenesou nutně žádný význam. Jejich síla totiž spočívá v porovnávání hodnot mezi sebou.
+Hlavním úskalím metodik ekonomické komplexity je, že absolutní hodnoty příbuznosti a komplexity nenesou nutně žádný význam. Jejich síla totiž spočívá v porovnávání komplexity mezi jednotlivými produkty a příbuznosti mezi zeměmi.
 """, unsafe_allow_html=True)
 col2.link_button("Doporučujeme přečíst tento kritický článek", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7335174/")
 
