@@ -38,7 +38,6 @@ def get_plot_and_hover_display_names(year_placeholder):
 
 def get_hover_formatting(year):
     no_decimal = [
-        'Kód výrobku HS6',
         'CZ Celkový Export 25-30 CZK',
         'Český export '+year+' CZK',
         'Český export '+year+' USD',
@@ -67,6 +66,7 @@ def get_hover_formatting(year):
         'Skupina',
         'Podskupina',
         'Název',
+        'Kód výrobku HS6',
         'EU Největší Exportér '+year+''
     ]
     return no_decimal,two_sigfig,percentage,texthover
