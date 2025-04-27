@@ -28,7 +28,7 @@ def USDtoCZKdefault(year):
     elif year == "2023":
         return 22.21
 
-@st.cache_data
+@st.cache_resource
 def load_data(datayear):
     USD_to_czk = USDtoCZKdefault(datayear)
     taxonomy = pd.read_csv("BACI_analysis/PlnaDatabaze3.0.csv")
