@@ -1,6 +1,6 @@
 def get_plot_and_hover_display_names(year_placeholder):
     plot_display_names = [
-        'Percentil příbuznosti CZ '+year_placeholder+'',
+        'Percentil příbuznosti'+year_placeholder+'',
         'Percentil komplexity '+year_placeholder+'',
         'Pořadí Česka na světovém trhu '+year_placeholder+'',
         'Komplexita výrobku (unikátnost) '+year_placeholder+'',
@@ -28,7 +28,7 @@ def get_plot_and_hover_display_names(year_placeholder):
         'Velikost světového trhu '+year_placeholder+' CZK',
         'Velikost světového trhu '+year_placeholder+' USD',
         'Podíl Česka na světovém trhu '+year_placeholder+' %',
-        'Percentil příbuznosti CZ '+year_placeholder+'',
+        'Percentil příbuznosti'+year_placeholder+'',
         'Percentil komplexity '+year_placeholder+'',
         'Koncentrace světového trhu '+year_placeholder+'',
         'Koncentrace evropského exportu '+year_placeholder+'',
@@ -43,7 +43,7 @@ def get_hover_formatting(year):
         'Český export '+year+' USD',
         'Velikost světového trhu '+year+' CZK',
         'Velikost světového trhu '+year+' USD',
-        'Percentil příbuznosti CZ '+year+'',
+        'Percentil příbuznosti'+year+'',
         'Percentil komplexity '+year+'',
         'Pořadí Česka na světovém trhu '+year+''
     ]
