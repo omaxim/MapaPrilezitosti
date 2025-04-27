@@ -147,7 +147,17 @@ Výpočet růstu vývozu za 2022–23 v USD (neočištěno o inflaci).
 
 **Podíl a pořadí na světovém trhu**  
 V procentech a absolutní hodnotě vývozu ČR ve srovnání se světem.
-""")
+
+**Koncentrace světového trhu**
+Vypočítaná jako Herfindahl–Hirschmanův index (HHI):
+\[
+\text{HHI} = \sum_{i=1}^N s_i^2
+\]
+kde \(s_i\) je tržní podíl firmy (nebo země) \(i\) v procentech.
+
+**Koncentrace evropského exportu**
+Opět HHI index, ale tentokrát přepočítaný pouze s Evropským exportem.
+""", unsafe_allow_html=True)
 col2.divider()
 # --- Detailed Data Methodology Section ---
 col2.markdown("## Datová metodologie")
