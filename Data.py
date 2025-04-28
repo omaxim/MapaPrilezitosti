@@ -88,8 +88,8 @@ else:
     df = df_2023
     cz_total_export = cz_export_23
     cz_total_green_export = cz_export_23
-download22 = st.sidebar.download_button("2022",df_2022.to_csv())
-download23 = st.sidebar.download_button("2023",df_2023.to_csv())
+download22 = st.sidebar.download_button("2022",df_2022.to_csv(),"2022.csv")
+download23 = st.sidebar.download_button("2023",df_2023.to_csv(),"2023.csv")
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
     st.session_state.filtrovat_dle_skupin = False
