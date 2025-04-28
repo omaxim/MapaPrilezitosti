@@ -89,7 +89,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "growth_abs": (export_23 - export_22) / 1e9,
             "growth_frac": 100 * growth
         })
-    sorted_data_series = sorted(data_series, key=lambda item: item['z'], reverse=True)
+    sorted_data_series = sorted(data_series, key=lambda item: float(item['z']), reverse=True)
+
 
     # Highcharts config
     chart_config = {
