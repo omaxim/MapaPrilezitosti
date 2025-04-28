@@ -216,7 +216,7 @@ col2.markdown(
 
 ## Data-sharing
 
-Kategorizovaná data, vytvořená na základě vlastní metodologie Mapy příležitostí Česka a příslušné open-source kódy, jsou k dispozici výhradně pro nekomerční využití za podmínky správného citování a uvedení zdroje 'Mapa příležitostí Česka' . V případě zájmu o kategorizovaná data využijte kontaktní formulář na webu (Mapa příležitostí Česka)[https://mapaprilezitosticeska.cz/] 
+Kategorizovaná data, vytvořená na základě vlastní metodologie Mapy příležitostí Česka a příslušné open-source kódy, jsou k dispozici výhradně pro nekomerční využití za podmínky správného citování a uvedení zdroje 'Mapa příležitostí Česka' . V případě zájmu o kategorizovaná data využijte kontaktní formulář na webu [Mapa příležitostí Česka](https://mapaprilezitosticeska.cz/) 
 """
 )
 col2.link_button("Open-source kód na GitHub", "https://github.com/omaxim/MapaPrilezitosti")
