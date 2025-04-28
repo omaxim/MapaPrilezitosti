@@ -46,6 +46,7 @@ Výběr vychází z:
 - konzultací s experty z ČR.
 
 Zahrnujeme i komponenty důležité pro zelenou transformaci.
+              
 Jsme si vědomi, že zelená transformace povede také k růstu poptávky po nových typech služeb, například v oblasti digitálních či energetických řešení. Mapa příležitostí však aktuálně pracuje pouze s daty o vývozu výrobků, protože využívaný datový zdroj služby nepokrývá. Z důvodu zachování jednotné metodiky jsme analýzu služeb nezahrnovali.
 """)
 
