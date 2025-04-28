@@ -39,12 +39,14 @@ col2.markdown("""
 ### Jak jsme vybírali tzv. „zelené výrobky“
 Za „zelené“ či „clean-tech“ označujeme produkty klíčové pro přechod na čistou, nízkouhlíkovou ekonomiku.
               A to včetně produktů, které jsou důležité v přechodové fázi transformace. Mezi „zelené“ či „clean-tech“ tak nezahrnujeme pouze výrobky, které samy přímo přispívají ke snižování emisí nebo mají nízkoemisní provoz. Označujeme tak i takové produkty a komponenty, do nichž bude v souvislosti se zelenou transformací nutné investovat, a u nichž se v souvislosti s tlakem na přechod na šetrné technologie a s adaptací na složitější klima očekává významný růst globální poptávky.
+Do kategorie zelených výrobků jsme nezahrnuli produkty, u nichž se očekává sice změna materiálu či výrobního postupu ve prospěch vyšší energetické či výrobní šetrnosti, avšak bez dopadu na celkový objem trhu.
 Výběr vychází z:
 - rešerší globálních akademických studií,
 - materiálů veřejného sektoru,
 - konzultací s experty z ČR.
 
 Zahrnujeme i komponenty důležité pro zelenou transformaci.
+Jsme si vědomi, že zelená transformace povede také k růstu poptávky po nových typech služeb, například v oblasti digitálních či energetických řešení. Mapa příležitostí však aktuálně pracuje pouze s daty o vývozu výrobků, protože využívaný datový zdroj služby nepokrývá. Z důvodu zachování jednotné metodiky jsme analýzu služeb nezahrnovali.
 """)
 
 col2.markdown("""
