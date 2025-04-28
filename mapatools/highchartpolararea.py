@@ -118,6 +118,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "innerSize": "20%",
             "zMin": 0,
             "name": "Export",
+            "crisp": "false",
             "data": data_series
         }]
     }
