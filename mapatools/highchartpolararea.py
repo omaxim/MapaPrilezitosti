@@ -115,7 +115,7 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
         },
         "series": [{
             "minPointSize": 10,
-            "innerSize": "80%",
+            "innerSize": "50%",
             "zMin": 0,
             "name": "Export",
             "crisp": "false",
