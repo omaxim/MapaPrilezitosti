@@ -31,7 +31,7 @@ def USDtoCZKdefault(year):
 @st.cache_resource
 def load_data(datayear):
     USD_to_czk = USDtoCZKdefault(datayear)
-    taxonomy = pd.read_csv("BACI_analysis/PlnaDatabaze3.0.csv")
+    taxonomy = pd.read_csv("BACI_analysis/outputs/PlnaDatabaze3.0.csv")
     CZE = pd.read_csv('BACI_analysis/outputs/CZE_' + datayear + '.csv')
     GreenProducts = taxonomy.merge(CZE, how='left', left_on='HS_ID', right_on='prod')
        
