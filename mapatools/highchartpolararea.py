@@ -120,6 +120,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "minPointSize": 10,
             "innerSize": "35%",
             "slicedOffset": 20,
+            "zMax": 2,
+            "zMin": 0,
             "name": "Export",
             "crisp": "false",
             "data": sorted_data_series
