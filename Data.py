@@ -20,7 +20,7 @@ col2.subheader("")
 col2.subheader("Nastavení grafu")
 
 # Sidebar: Year selection
-year = col2.segmented_control("Rok", ["2022", "2023"], default="2023")
+year = col2.radio("Rok", ["2022", "2023"], index=1,horizontal=True)
 topsubcol2 = col2.container()
 def USDtoCZKdefault(year):
     if year == "2022":
