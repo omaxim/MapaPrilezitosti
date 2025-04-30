@@ -43,7 +43,7 @@ def load_data(datayear):
         'PCI_Rank': 'Žebříček komplexity ' + datayear,
         'PCI_Percentile': 'Percentil komplexity ' + datayear,
         'relatedness_Rank': 'Žebříček příbuznosti' + datayear,
-        'relatedness_Percentile': 'Percentil příbuznosti' + datayear,
+        'relatedness_Percentile': 'Percentil příbuznosti ' + datayear,
         'WorldExport': 'Velikost světového trhu ' + datayear + ' CZK',
         'EUWorldMarketShare': 'EU Světový Podíl ' + datayear + ' %',
         'euhhi': 'Koncentrace evropského exportu ' + datayear,
