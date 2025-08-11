@@ -241,9 +241,9 @@ polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df
 if HS_select == []:
     pie1,pie2 = st.columns(2)
     with pie1:
-        st.components.v1.html(polar_js_skupiny, height=690)
+        st.components.v1.html(polar_js_skupiny, height=690,width=1500)
     with pie2:
-        st.components.v1.html(polar_js_kategorie, height=690)
+        st.components.v1.html(polar_js_kategorie, height=690,width=1500)
     st.divider()
     mcol1, mcol2, mcol3, = st.columns(3)
     selected_CZ_growth = filtered_df_2023['Český export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022")
