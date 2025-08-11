@@ -95,8 +95,8 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
 
     # Generate the JavaScript chart code
     chart_js = f"""
-    <div style="width:100%; height:700px;">
-        <canvas id="myBubbleChart"></canvas>
+    <div style="width:100%; height:700px; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
+        <canvas id="myBubbleChart" style="width: 100% !important; height: 100% !important; display: block;"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -114,6 +114,10 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
             options: {{
                 responsive: true,
                 maintainAspectRatio: false,
+                resizeDelay: 0,
+                layout: {{
+                    padding: 0
+                }},
                 scales: {{
                     x: {{ title: {{ display: true, text: {x_label} }} }},
                     y: {{ title: {{ display: true, text: {y_label} }} }}
