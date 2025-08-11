@@ -14,7 +14,7 @@ st.set_page_config(
 )
 # Loading custom CSS and identity assets
 load_visual_identity("resources/header.jpg")
-col1, col2 = st.columns([10, 4])
+col1, col2 = st.columns([10, 2])
 col1.subheader("")
 col2.subheader("")
 col2.subheader("Nastavení grafu")
