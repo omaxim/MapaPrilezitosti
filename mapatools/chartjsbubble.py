@@ -95,39 +95,45 @@ def chartjs_plot(filtered_df, markersize, hover_data, color, x_axis, y_axis, yea
 
     # Generate the JavaScript chart code
     chart_js = f"""
-    <div style="width:100%; height:700px; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
-        <canvas id="myBubbleChart" style="width: 100% !important; height: 100% !important; display: block;"></canvas>
+    <div id="chartContainer" style="width:100%; height:700px; position: relative; margin: 0; padding: 0; box-sizing: border-box;">
+        <canvas id="myBubbleChart"></canvas>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        var ctx = document.getElementById('myBubbleChart').getContext('2d');
-        var datasets = {datasets_json}; // Load datasets from Python
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {{
+            var container = document.getElementById('chartContainer');
+            var ctx = document.getElementById('myBubbleChart').getContext('2d');
+            var datasets = {datasets_json}; // Load datasets from Python
 
-        // --- Optional: Add original color back if needed post-JSON parsing ---
-        // Not strictly necessary if we use the _originalBackgroundColor added above
-        Chart.defaults.font.family = 'Montserrat, sans-serif';
-        var myBubbleChart = new Chart(ctx, {{
-            type: 'bubble',
-            data: {{
-                datasets: datasets // Use the datasets variable
-            }},
-            options: {{
-                responsive: true,
-                maintainAspectRatio: false,
-                resizeDelay: 0,
-                layout: {{
-                    padding: 0
+            // Set canvas size to match container
+            var canvas = ctx.canvas;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            
+            Chart.defaults.font.family = 'Montserrat, sans-serif';
+            var myBubbleChart = new Chart(ctx, {{
+                type: 'bubble',
+                data: {{
+                    datasets: datasets // Use the datasets variable
                 }},
-                scales: {{
-                    x: {{ title: {{ display: true, text: {x_label} }} }},
-                    y: {{ title: {{ display: true, text: {y_label} }} }}
-                }},
-                animation: {{ duration: 500 }}, // Disable default animations if hover is jerky
-                transitions: {{
-                    active: {{ animation: {{ duration: 500 }} }} // Faster response on hover
-                }},
+                options: {{
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    resizeDelay: 0,
+                    layout: {{
+                        padding: 0
+                    }},
+                    scales: {{
+                        x: {{ title: {{ display: true, text: {x_label} }} }},
+                        y: {{ title: {{ display: true, text: {y_label} }} }}
+                    }},
+                    animation: {{ duration: 500 }}, // Disable default animations if hover is jerky
+                    transitions: {{
+                        active: {{ animation: {{ duration: 500 }} }} // Faster response on hover
+                    }},
 
-                onHover: (event, elements, chart) => {{
+                    onHover: (event, elements, chart) => {{
                 // 1. Reset ALL datasets to the DEFAULT transparent state first
                 chart.data.datasets.forEach(dataset => {{
                     // Use the stored default color with transparency
