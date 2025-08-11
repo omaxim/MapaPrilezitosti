@@ -219,7 +219,7 @@ elif st.session_state.filtrovat_dle_skupin is True and Skupina is not None:
 # Render chart in main area
 html_bytes = chart_js
 with col1:
-    components.html(chart_js, height=800,width=1000)
+    components.html(chart_js, height=800,width=1500)
 
 # Example: render the polar area chart in a Streamlit component
 polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_22,cz_green_export_23,
