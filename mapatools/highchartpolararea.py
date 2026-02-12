@@ -8,7 +8,9 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
                                   usd_to_czk_23=22.21,
                                   chart_title="Export růst mezi lety 2022 a 2023",
                                   bottom_text="Data: UN COMTRADE, CEPII, a další",
-                                  relative_to_green_only=False):
+                                  relative_to_green_only=False,
+                                  year_from="2022",
+                                  year_to="2023"):
     """
     Creates a Highcharts variable pie chart showing green export growth.
     Includes both filtered green categories and (optionally) non-green and unclassified green.
@@ -22,8 +24,10 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
     total_export_23 = total_export_23/usd_to_czk_23
     green_total_22 = green_total_22/usd_to_czk_22
     green_total_23 = green_total_23/usd_to_czk_23
-    green_total_22_filtered = filtered_df_2022['Český export 2022 CZK'].sum()/usd_to_czk_22
-    green_total_23_filtered = filtered_df_2023['Český export 2023 CZK'].sum()/usd_to_czk_23
+    export_col_from = 'Český export ' + year_from + ' CZK'
+    export_col_to = 'Český export ' + year_to + ' CZK'
+    green_total_22_filtered = filtered_df_2022[export_col_from].sum()/usd_to_czk_22
+    green_total_23_filtered = filtered_df_2023[export_col_to].sum()/usd_to_czk_23
 
     # Compute unfiltered other-green portion
     other_green_22 = green_total_22 - green_total_22_filtered
@@ -70,8 +74,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
     green_cats = sorted(set(filtered_df_2022[group_field]) | set(filtered_df_2023[group_field]))
 
     for cat in green_cats:
-        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, 'Český export 2022 CZK'].sum() / usd_to_czk_22
-        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, 'Český export 2023 CZK'].sum() / usd_to_czk_23
+        export_22 = filtered_df_2022.loc[filtered_df_2022[group_field] == cat, export_col_from].sum() / usd_to_czk_22
+        export_23 = filtered_df_2023.loc[filtered_df_2023[group_field] == cat, export_col_to].sum() / usd_to_czk_23
         growth = (export_23 - export_22) / export_22 if export_22 > 0 else 0
 
         # Get color from either dataset (prefer 2023, fallback to 2022)
@@ -111,8 +115,8 @@ def chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023,
             "headerFormat": "",
             "pointFormat": (
                 '<span style="color:{point.color}">\u25CF</span> <b>{point.name}</b><br/>' +
-                'Export 2022: {point.export22:,.1f} miliard USD<br/>' +
-                'Export 2023: {point.export23:,.1f} miliard USD<br/>' +
+                f'Export {year_from}: ' + '{point.export22:,.1f} miliard USD<br/>' +
+                f'Export {year_to}: ' + '{point.export23:,.1f} miliard USD<br/>' +
                 'Růst: {point.growth_abs:,.1f} miliard USD ({point.growth_frac:.2f}%)'
             )
         },

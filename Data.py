@@ -234,14 +234,16 @@ polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_prev, filtered_df_c
                               chart_title="Růst exportu dle skupiny",
                               bottom_text=f"Šířka koláče vyjadřuje % z celkového českého exportu v roce {growth_to}<br>Vzdálenost dílu koláče od středu vyjadřuje růst skupiny mezi lety {growth_from} a {growth_to}",
                               usd_to_czk_22=USDtoCZKdefault(growth_from),
-                              usd_to_czk_23=USDtoCZKdefault(growth_to))
+                              usd_to_czk_23=USDtoCZKdefault(growth_to),
+                              year_from=growth_from, year_to=growth_to)
 polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_prev, filtered_df_curr, cz_export_prev,cz_export_curr,cz_green_export_prev,cz_green_export_curr,
                               group_field="Kategorie",
                               chart_title="Růst zeleného exportu dle kategorie",
                               bottom_text=f"Šířka koláče vyjadřuje % z českého zeleného exportu v roce {growth_to}<br>Vzdálenost dílu koláče od středu vyjadřuje růst kategorie mezi lety {growth_from} a {growth_to}",
                               usd_to_czk_22=USDtoCZKdefault(growth_from),
                               usd_to_czk_23=USDtoCZKdefault(growth_to),
-                              relative_to_green_only=True)
+                              relative_to_green_only=True,
+                              year_from=growth_from, year_to=growth_to)
 
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
