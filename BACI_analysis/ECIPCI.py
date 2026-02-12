@@ -1,3 +1,5 @@
+# Standalone script version of ECIPCI.ipynb — generates CZE complexity outputs from BACI trade data.
+# Usage: python ECIPCI.py (run from the BACI_analysis directory)
 from ecomplexity import ecomplexity
 from ecomplexity import proximity
 import pandas as pd
