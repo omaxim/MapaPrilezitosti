@@ -41,7 +41,7 @@ EnglishNames = pd.read_csv(f'product_codes_HS22_{VERSION}.csv')
 EnglishNames['code'] = pd.to_numeric(EnglishNames['code'], errors="coerce")
 classed_cdata = cdata.merge(CzechNames[['HS6','POPIS']],left_on='prod',right_on='HS6',how='left').drop('HS6',axis=1)
 classed_cdata = classed_cdata.merge(EnglishNames,left_on='prod',right_on='code',how='left').drop('code',axis=1)
-classed_cdata['POPIS'][classed_cdata['POPIS'].isna()] = classed_cdata['description'][classed_cdata['POPIS'].isna()]
+classed_cdata.loc[classed_cdata['POPIS'].isna(), 'POPIS'] = classed_cdata.loc[classed_cdata['POPIS'].isna(), 'description']
 
 # --- Calculate product space values ---
 
@@ -58,14 +58,14 @@ def get_product_space(cdata):
     EU_data = cdata[cdata['loc'].isin(EU_iso3)]
 
     # Calculate HHI in the world and in the EU
-    hhi = cdata.groupby("prod").apply(calculate_hhi).reset_index()
-    euhhi = EU_data.groupby("prod").apply(calculate_hhi).reset_index()
+    hhi = cdata.groupby("prod").apply(calculate_hhi, include_groups=False).reset_index()
+    euhhi = EU_data.groupby("prod").apply(calculate_hhi, include_groups=False).reset_index()
     hhi.rename(columns={0:'hhi'}, inplace=True)
     euhhi.rename(columns={0:'euhhi'}, inplace=True)
 
     # Calculate World and EU export
-    WorldExport = cdata[['prod','val']].groupby('prod').agg(sum).reset_index()
-    EUExport  = EU_data[['prod','val']].groupby('prod').agg(sum).reset_index()
+    WorldExport = cdata[['prod','val']].groupby('prod').agg('sum').reset_index()
+    EUExport  = EU_data[['prod','val']].groupby('prod').agg('sum').reset_index()
     WorldExport.rename(columns={'val':'WorldExport'}, inplace=True)
     EUExport.rename(columns={'val':'EUExport'}, inplace=True)
 
@@ -100,7 +100,7 @@ def get_relatedness(country_iso3, year, prox_df, cdata):
         return (group['mcp'] * group['proximity']).sum() / group['proximity'].sum()
 
     # Step 5: Calculate relatedness for each prod_1
-    relatedness_results = merged_df.groupby('prod_1').apply(calculate_relatedness)
+    relatedness_results = merged_df.groupby('prod_1').apply(calculate_relatedness, include_groups=False)
     relatedness_df = relatedness_results.reset_index().rename(columns={'prod_1': 'prod', 0: 'relatedness'})
     return relatedness_df
 
@@ -108,14 +108,14 @@ def get_relatedness(country_iso3, year, prox_df, cdata):
 
 def get_country_data(country_iso3, year, prox_df, cdata):
     # Subset for year and location
-    output = cdata[cdata['time'] == year][cdata['loc']==country_iso3]
+    output = cdata[(cdata['time'] == year) & (cdata['loc'] == country_iso3)]
 
     # Calculate Relatedness and merge
     relatedness = get_relatedness(country_iso3, year, prox_df, cdata)
     output = output.merge(relatedness,left_on='prod',right_on='prod')
 
-    # Merge with ProductSpaceInfo
-    ProductSpaceInfo = get_product_space(cdata)
+    # Merge with ProductSpaceInfo (filter to year so WorldExport is per-year, not summed across all years)
+    ProductSpaceInfo = get_product_space(cdata[cdata['time'] == year])
     output = output.merge(ProductSpaceInfo,left_on='prod',right_on='prod')
 
     # Rename columns
