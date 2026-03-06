@@ -139,8 +139,14 @@ for year in YEARS:
     CZE['PCI_Percentile'] = CZE['pci'].rank(ascending=True, pct=True) * 100
     CZE['relatedness_Rank'] = CZE['relatedness'].rank(ascending=True)
     CZE['relatedness_Percentile'] = CZE['relatedness'].rank(ascending=True, pct=True) * 100
-    CZE['export_Rank'] = CZE['ExportValue'].rank(ascending=True)
-    CZE['export_Percentile'] = CZE['ExportValue'].rank(ascending=True, pct=True) * 100
+    # Compute CZE's world ranking for each product (rank 1 = top global exporter)
+    year_all = cdata[cdata['time'] == year][['prod', 'loc', 'val']]
+    world_ranks = year_all.groupby('prod')['val'].rank(ascending=False, method='min')
+    cze_world_rank = year_all.assign(WorldRank=world_ranks).query("loc == 'CZE'")[['prod', 'WorldRank']]
+    CZE = CZE.merge(cze_world_rank, on='prod', how='left')
+    CZE['export_Rank'] = CZE['WorldRank'].fillna(0).astype(int)
+    CZE = CZE.drop(columns=['WorldRank'])
+    CZE['export_Percentile'] = CZE['export_Rank'].rank(ascending=True, pct=True) * 100
 
     CZE.to_csv(f'outputs/CZE_{year}.csv')
     CZE_by_year[year] = CZE
