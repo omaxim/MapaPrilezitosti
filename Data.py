@@ -256,11 +256,12 @@ if HS_select == []:
         st.components.v1.html(polar_js_kategorie, height=690,width=1500)
     st.divider()
     mcol1, mcol2, mcol3, = st.columns(3)
+    n_years = int(growth_to) - int(growth_from)
     selected_CZ_growth = filtered_df_curr['Český export '+growth_to+' CZK'].sum() - filtered_df_prev['Český export '+growth_from+' CZK'].sum()
-    selected_CZ_growth_perc = selected_CZ_growth / filtered_df_prev['Český export '+growth_from+' CZK'].sum()
+    selected_CZ_growth_perc = (filtered_df_curr['Český export '+growth_to+' CZK'].sum() / filtered_df_prev['Český export '+growth_from+' CZK'].sum()) ** (1/n_years) - 1
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['Český export '+year+' CZK'])/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
-    mcol3.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "%")
+    mcol3.metric("CAGR vybraného českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "průměrný roční růst")
 
 
 else:
@@ -268,14 +269,15 @@ else:
     lookup_year = filtered_df['HS_Lookup'].isin(HS_select)
     lookup_prev = filtered_df_prev['HS_Lookup'].isin(HS_select)
     lookup_curr = filtered_df_curr['HS_Lookup'].isin(HS_select)
+    n_years = int(growth_to) - int(growth_from)
     selected_CZ_growth = filtered_df_curr[lookup_curr]['Český export '+growth_to+' CZK'].sum() - filtered_df_prev[lookup_prev]['Český export '+growth_from+' CZK'].sum()
-    selected_CZ_growth_perc = selected_CZ_growth / filtered_df_prev[lookup_prev]['Český export '+growth_from+' CZK'].sum()
+    selected_CZ_growth_perc = (filtered_df_curr[lookup_curr]['Český export '+growth_to+' CZK'].sum() / filtered_df_prev[lookup_prev]['Český export '+growth_from+' CZK'].sum()) ** (1/n_years) - 1
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['Český export '+year+' CZK'])/1e9),'miliard CZK' )
     mcol2.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
-    mcol3.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "%")
+    mcol3.metric("CAGR vybraného českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "průměrný roční růst")
 
 total_CZ_growth = cz_export_curr - cz_export_prev
-total_CZ_growth_perc = total_CZ_growth / cz_export_prev
+total_CZ_growth_perc = (cz_export_curr / cz_export_prev) ** (1/n_years) - 1
 mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e9),'miliard CZK' )
 mcol2.metric("Růst celkového českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(total_CZ_growth/1e9), "miliard CZK")
-mcol3.metric("Růst celkového českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.1%}".format(total_CZ_growth_perc), "%")
+mcol3.metric("CAGR celkového českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(total_CZ_growth_perc), "průměrný roční růst")
