@@ -20,13 +20,18 @@ col2.subheader("")
 col2.subheader("Nastavení grafu")
 
 # Sidebar: Year selection
-year = col2.radio("Rok", ["2022", "2023"], index=1,horizontal=True)
+year = col2.radio("Rok", ["2022", "2023", "2024"], index=2,horizontal=True)
+# growth_pair = col2.radio("Růst", ["2023/2024", "2022/2023", "2022/2024"], index=0, horizontal=True)
+# growth_from, growth_to = growth_pair.split("/")
+growth_from, growth_to = "2022", "2024"  # fixed to 2-year comparison
 topsubcol2 = col2.container()
 def USDtoCZKdefault(year):
     if year == "2022":
         return 23.360
     elif year == "2023":
         return 22.21
+    elif year == "2024":
+        return 23.208
 
 @st.cache_resource
 def load_data(datayear):
@@ -77,17 +82,16 @@ x_axis = col2.selectbox("Vyber osu X:", plot_display_names, index=0)
 y_axis = col2.selectbox("Vyber osu Y:", plot_display_names, index=1)
 markersize = col2.selectbox("Velikost dle:", plot_display_names, index=4)
 
-# Load datasets for both years
+# Load datasets for all years
 df_2022, cz_export_22, cz_green_export_22 = load_data("2022")
 df_2023, cz_export_23, cz_green_export_23 = load_data("2023")
-if year == "2022":
-    df = df_2022
-    cz_total_export = cz_export_22
-    cz_total_green_export = cz_export_22
-else:
-    df = df_2023
-    cz_total_export = cz_export_23
-    cz_total_green_export = cz_export_23
+df_2024, cz_export_24, cz_green_export_24 = load_data("2024")
+df_by_year = {"2022": (df_2022, cz_export_22, cz_green_export_22),
+              "2023": (df_2023, cz_export_23, cz_green_export_23),
+              "2024": (df_2024, cz_export_24, cz_green_export_24)}
+df, cz_total_export, cz_total_green_export = df_by_year[year]
+df_prev, cz_export_prev, cz_green_export_prev = df_by_year[growth_from]
+df_curr, cz_export_curr, cz_green_export_curr = df_by_year[growth_to]
 
 # Initialize the session state for filtering by groups
 if 'filtrovat_dle_skupin' not in st.session_state:
@@ -103,7 +107,7 @@ if st.session_state.filtrovat_dle_skupin:
     col2.markdown("**Aktuální zobrazení:** 🧩 Jednotlivé skupiny")
     color = 'Kategorie'
     # Use the current year's dataframe for group options.
-    cur_df = df_2022 if year == "2022" else df_2023
+    cur_df = df_by_year[year][0]
     skupiny = cur_df['Skupina'].unique()
     Skupina = col2.segmented_control('Skupina', skupiny, default=skupiny[5])
 else:
@@ -144,10 +148,14 @@ def apply_filters(df, year_str, x_axis, y_axis, color, markersize):
 if 'filters' not in st.session_state:
     st.session_state.filters = []
 
-# Calculate filtered data for both years
+# Calculate filtered data for all years
 filtered_df_2022 = apply_filters(df_2022, "2022", x_axis, y_axis, color, markersize)
 filtered_df_2023 = apply_filters(df_2023, "2023", x_axis, y_axis, color, markersize)
-filtered_df = filtered_df_2022 if year == "2022" else filtered_df_2023
+filtered_df_2024 = apply_filters(df_2024, "2024", x_axis, y_axis, color, markersize)
+filtered_by_year = {"2022": filtered_df_2022, "2023": filtered_df_2023, "2024": filtered_df_2024}
+filtered_df = filtered_by_year[year]
+filtered_df_prev = filtered_by_year[growth_from]
+filtered_df_curr = filtered_by_year[growth_to]
 
 # Filter control buttons
 subcol1, subcol2 = col2.columns(2)
@@ -222,19 +230,21 @@ with col1:
     components.html(chart_js, height=800,width=1500)
 
 # Example: render the polar area chart in a Streamlit component
-polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_22,cz_green_export_23,
+polar_js_skupiny = chart_highcharts_variable_pie(filtered_df_prev, filtered_df_curr, cz_export_prev,cz_export_curr,cz_green_export_prev,cz_green_export_curr,
                               group_field="Skupina",
                               chart_title="Růst exportu dle skupiny",
-                              bottom_text="Šířka koláče vyjadřuje % z celkového českého exportu v roce 2023<br>Vzdálenost dílu koláče od středu vyjadřuje růst skupiny mezi lety 2022 a 2023",
-                              usd_to_czk_22=USDtoCZKdefault("2022"),
-                              usd_to_czk_23=USDtoCZKdefault("2023"))
-polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_2022, filtered_df_2023, cz_export_22,cz_export_23,cz_green_export_22,cz_green_export_23,
+                              bottom_text=f"Šířka koláče vyjadřuje % z celkového českého exportu v roce {growth_to}<br>Vzdálenost dílu koláče od středu vyjadřuje růst skupiny mezi lety {growth_from} a {growth_to}",
+                              usd_to_czk_22=USDtoCZKdefault(growth_from),
+                              usd_to_czk_23=USDtoCZKdefault(growth_to),
+                              year_from=growth_from, year_to=growth_to)
+polar_js_kategorie = chart_highcharts_variable_pie(filtered_df_prev, filtered_df_curr, cz_export_prev,cz_export_curr,cz_green_export_prev,cz_green_export_curr,
                               group_field="Kategorie",
                               chart_title="Růst zeleného exportu dle kategorie",
-                              bottom_text="Šířka koláče vyjadřuje % z českého zeleného exportu v roce 2023<br>Vzdálenost dílu koláče od středu vyjadřuje růst kategorie mezi lety 2022 a 2023",
-                              usd_to_czk_22=USDtoCZKdefault("2022"),
-                              usd_to_czk_23=USDtoCZKdefault("2023"),
-                              relative_to_green_only=True)
+                              bottom_text=f"Šířka koláče vyjadřuje % z českého zeleného exportu v roce {growth_to}<br>Vzdálenost dílu koláče od středu vyjadřuje růst kategorie mezi lety {growth_from} a {growth_to}",
+                              usd_to_czk_22=USDtoCZKdefault(growth_from),
+                              usd_to_czk_23=USDtoCZKdefault(growth_to),
+                              relative_to_green_only=True,
+                              year_from=growth_from, year_to=growth_to)
 
 
 # Comparison columns - now you can compare metrics between 2022 and 2023
@@ -246,26 +256,28 @@ if HS_select == []:
         st.components.v1.html(polar_js_kategorie, height=690,width=1500)
     st.divider()
     mcol1, mcol2, mcol3, = st.columns(3)
-    selected_CZ_growth = filtered_df_2023['Český export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022")
-    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
+    n_years = int(growth_to) - int(growth_from)
+    selected_CZ_growth = filtered_df_curr['Český export '+growth_to+' CZK'].sum() - filtered_df_prev['Český export '+growth_from+' CZK'].sum()
+    selected_CZ_growth_perc = (filtered_df_curr['Český export '+growth_to+' CZK'].sum() / filtered_df_prev['Český export '+growth_from+' CZK'].sum()) ** (1/n_years) - 1
     mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df['Český export '+year+' CZK'])/1e9),'miliard CZK' )
-    mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
-    mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
+    mcol2.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
+    mcol3.metric("CAGR vybraného českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "průměrný roční růst")
 
 
 else:
     mcol1, mcol2, mcol3, = st.columns(3)
     lookup_year = filtered_df['HS_Lookup'].isin(HS_select)
-    lookup_22 = filtered_df_2022['HS_Lookup'].isin(HS_select)
-    lookup_23 = filtered_df_2023['HS_Lookup'].isin(HS_select)
-    selected_CZ_growth = filtered_df_2023[lookup_23]['Český export 2023 CZK'].sum()/USDtoCZKdefault("2023") - filtered_df_2022[lookup_22]['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022")
-    selected_CZ_growth_perc = selected_CZ_growth/(filtered_df_2022[lookup_22]['Český export 2022 CZK'].sum()/USDtoCZKdefault("2022"))
-    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['Český export '+year+' CZK'])/1e6),'milionů CZK' )
-    mcol2.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(selected_CZ_growth/1e6), "milionů USD")
-    mcol3.metric("Růst vybraného českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(selected_CZ_growth_perc), "%")
+    lookup_prev = filtered_df_prev['HS_Lookup'].isin(HS_select)
+    lookup_curr = filtered_df_curr['HS_Lookup'].isin(HS_select)
+    n_years = int(growth_to) - int(growth_from)
+    selected_CZ_growth = filtered_df_curr[lookup_curr]['Český export '+growth_to+' CZK'].sum() - filtered_df_prev[lookup_prev]['Český export '+growth_from+' CZK'].sum()
+    selected_CZ_growth_perc = (filtered_df_curr[lookup_curr]['Český export '+growth_to+' CZK'].sum() / filtered_df_prev[lookup_prev]['Český export '+growth_from+' CZK'].sum()) ** (1/n_years) - 1
+    mcol1.metric("Vybraný český export za rok "+year+"", "{:,.0f}".format(sum(filtered_df[lookup_year]['Český export '+year+' CZK'])/1e9),'miliard CZK' )
+    mcol2.metric("Růst vybraného českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(selected_CZ_growth/1e9), "miliard CZK")
+    mcol3.metric("CAGR vybraného českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(selected_CZ_growth_perc), "průměrný roční růst")
 
-total_CZ_growth = cz_export_23/USDtoCZKdefault("2023") - cz_export_22/USDtoCZKdefault("2022")
-total_CZ_growth_perc = total_CZ_growth/(cz_export_22/USDtoCZKdefault("2022"))
+total_CZ_growth = cz_export_curr - cz_export_prev
+total_CZ_growth_perc = (cz_export_curr / cz_export_prev) ** (1/n_years) - 1
 mcol1.metric("Celkový český export za rok "+year+"", "{:,.0f}".format(cz_total_export/1e9),'miliard CZK' )
-mcol2.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.0f}".format(total_CZ_growth/1e9), "miliard USD")
-mcol3.metric("Růst celkového českého exportu mezi lety 2022 a 2023", "{:,.1%}".format(total_CZ_growth_perc), "%")
+mcol2.metric("Růst celkového českého exportu mezi lety "+growth_from+" a "+growth_to, "{:,.0f}".format(total_CZ_growth/1e9), "miliard CZK")
+mcol3.metric("CAGR celkového českého exportu "+growth_from+"–"+growth_to, "{:,.1%}".format(total_CZ_growth_perc), "průměrný roční růst")

@@ -2,3 +2,5 @@ BACI_analysis/BACI_HS22_Y2022_V202501.csv
 BACI_analysis/BACI_HS22_Y2023_V202501.csv
 .DS_Store
 .DS_Store
+/BACI_analysis/.venv
+/BACI_analysis/__pycache__
